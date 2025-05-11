@@ -13,6 +13,7 @@ export const Layout: React.FC<Props> = ({ status, children, loading }) => {
   return (
     <SidebarProvider
       style={{
+        // @ts-ignore
         "--sidebar-width": "20rem",
         "--sidebar-width-mobile": "20rem",
       }}
