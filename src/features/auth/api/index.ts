@@ -1,5 +1,5 @@
 import { baseApi } from "@/store/api";
-import { SigninReqType, SigninResType } from "../types";
+import { SigninReqType, SigninResType, StatusResType } from "../types";
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
@@ -13,7 +13,17 @@ export const authApi = baseApi.injectEndpoints({
         data,
       }),
     }),
+
+    /**
+     * status
+     */
+    status: build.query<StatusResType, StatusResType>({
+      query: () => ({
+        url: "/auth/status",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useSigninMutation } = authApi;
+export const { useSigninMutation, useStatusQuery } = authApi;
