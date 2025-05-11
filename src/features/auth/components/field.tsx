@@ -42,14 +42,14 @@ export const FieldItem: React.FC<Props> = ({
               <PasswordInput
                 placeholder={placeholder}
                 {...field}
-                className="w-full text-base h-fit p-3 focus-visible:border-black focus-visible:ring-black focus-visible:ring-1 rounded-lg"
+                className="w-full text-base h-fit p-3 focus-visible:border-primary focus-visible:ring-primary focus-visible:ring-1 rounded-lg"
               />
             ) : (
               <Input
                 type={type}
                 placeholder={placeholder}
                 {...field}
-                className="w-full text-base h-fit p-3 focus-visible:border-black focus-visible:ring-black focus-visible:ring-1 rounded-lg"
+                className="w-full text-base h-fit p-3 focus-visible:border-primary focus-visible:ring-primary focus-visible:ring-1 rounded-lg"
               />
             )}
           </FormControl>

@@ -29,7 +29,7 @@ export const useSignin = () => {
     toast("Successfully Authenticated", {
       action: { label: "Close", onClick: () => {} },
     });
-    redirect("/dashboard", { replace: true });
+    redirect("/dashboard/users", { replace: true });
   };
 
   return { form, onSubmit, error, isError, isLoading };

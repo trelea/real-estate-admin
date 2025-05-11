@@ -7,4 +7,9 @@ export const baseApi = createApi({
   baseQuery: axiosBaseQuery(),
   endpoints: () => ({}),
   tagTypes,
+  refetchOnFocus: true,
+  refetchOnReconnect: true,
+  refetchOnMountOrArgChange: true,
+  // sec
+  keepUnusedDataFor: 60 * 30,
 });
