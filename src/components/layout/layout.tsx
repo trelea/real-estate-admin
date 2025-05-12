@@ -19,8 +19,15 @@ export const Layout: React.FC<Props> = ({ status, children, loading }) => {
       }}
     >
       <AppSidebar user={status as User} loading={loading} />
-      <main className="w-screen h-screen">
-        <SidebarTrigger />
+      <main className="w-screen h-screen bg-primary/[2.5%] relative pt-10">
+        <SidebarTrigger className="absolute top-0 left-0">
+          {/* @ts-ignore */}
+          {(open) => (
+            <span className="font-semibold text-foreground/75">
+              {open ? "Close Sidebar" : "Open Sidebar"}
+            </span>
+          )}
+        </SidebarTrigger>
         {children}
       </main>
     </SidebarProvider>
