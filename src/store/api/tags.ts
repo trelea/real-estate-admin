@@ -1,1 +1,1 @@
-export default ["status"] satisfies string[];
+export default ["status", "users"] satisfies string[];
