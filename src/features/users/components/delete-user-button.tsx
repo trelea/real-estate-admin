@@ -9,17 +9,31 @@ import {
   AlertDialogCancel,
   AlertDialogAction,
 } from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
 import React from "react";
 
 interface Props {
   action?: (data?: unknown) => void;
+  disabled?: boolean;
 }
 
-export const DeleteUserButton: React.FC<Props> = ({ action }) => (
+export const DeleteUserButton: React.FC<Props> = ({
+  action,
+  disabled = false,
+}) => (
   <AlertDialog>
-    <AlertDialogTrigger asChild>
-      <Trash2 className="size-5" />
+    <AlertDialogTrigger
+      asChild
+      className="m-0 p-0 h-fit flex justify-center items-center"
+    >
+      <Button
+        variant={"ghost"}
+        className="p-0 m-0 h-fit w-fit"
+        disabled={disabled}
+      >
+        <Trash2 className="size-5 text-destructive" />
+      </Button>
     </AlertDialogTrigger>
     <AlertDialogContent>
       <AlertDialogHeader>
