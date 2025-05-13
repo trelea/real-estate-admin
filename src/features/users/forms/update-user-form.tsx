@@ -1,14 +1,17 @@
-import { Form } from "@/components/ui/form";
 import React from "react";
-import { FieldItem, FieldItemFile } from "../components";
-import { Button } from "@/components/ui/button";
+import { useUpdateUser } from "../hooks/use-update-user";
+import { User } from "@/features/auth/types";
+import { Form } from "@/components/ui/form";
+import { FieldItem } from "../components";
 import { ROLES } from "@/consts";
-import { useCreateUser } from "../hooks";
+import { Button } from "@/components/ui/button";
 
-interface Props {}
+interface Props {
+  user: User;
+}
 
-export const CreateUserForm: React.FC<Props> = ({}) => {
-  const { form, onSubmit, isLoading } = useCreateUser();
+export const UpdateuserForm: React.FC<Props> = ({ user }) => {
+  const { form, onSubmit } = useUpdateUser({ user });
   return (
     <Form {...form}>
       <form
@@ -16,13 +19,13 @@ export const CreateUserForm: React.FC<Props> = ({}) => {
         className="flex flex-col gap-4"
       >
         <div className="grid grid-cols-2 gap-4">
-          <FieldItemFile
+          {/* <FieldItemFile
             name="thumbnail"
             control={form}
             label="Thumbnail"
             className="p-2 rounded-xl"
             displayErrorMessage
-          />
+          /> */}
 
           <FieldItem
             name="name"
@@ -52,14 +55,14 @@ export const CreateUserForm: React.FC<Props> = ({}) => {
           displayErrorMessage
         />
 
-        <FieldItem
+        {/* <FieldItem
           name="password"
           type="password"
           control={form}
           label="Password"
           placeholder="*************"
           displayErrorMessage
-        />
+        /> */}
 
         <FieldItem
           name="contact"
@@ -83,11 +86,10 @@ export const CreateUserForm: React.FC<Props> = ({}) => {
         />
 
         <Button
-          disabled={isLoading}
           type="submit"
           className="w-full font-normal text-base h-fit p-0 m-0 py-3 rounded-xl"
         >
-          Create
+          Update
         </Button>
       </form>
     </Form>

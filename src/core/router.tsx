@@ -41,6 +41,7 @@ import {
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import withAuth from "./with-auth";
+import { UsersContextLayout } from "@/pages/users/context";
 
 interface Props {}
 
@@ -55,65 +56,118 @@ export const Router: React.FC<Props> = ({}) => {
       children: [
         {
           path: "users",
-          Component: withAuth(Users),
+          Component: withAuth({
+            Context: UsersContextLayout,
+            Component: Users,
+          }),
         },
-        { path: "settings", Component: withAuth(Settings) },
+        {
+          path: "settings",
+          Component: withAuth({ Component: Settings }),
+        },
         /**
-         * Aprtments
+         * Apartments
          */
-        { path: "apartments", Component: withAuth(IndexApartments) },
-        { path: "apartments/create", Component: withAuth(CreateApartments) },
-        { path: "apartments/:id", Component: withAuth(ShowApartment) },
-        { path: "apartments/:id/edit", Component: withAuth(EditApartments) },
+        {
+          path: "apartments",
+          Component: withAuth({ Component: IndexApartments }),
+        },
+        {
+          path: "apartments/create",
+          Component: withAuth({ Component: CreateApartments }),
+        },
+        {
+          path: "apartments/:id",
+          Component: withAuth({ Component: ShowApartment }),
+        },
+        {
+          path: "apartments/:id/edit",
+          Component: withAuth({ Component: EditApartments }),
+        },
         {
           path: "apartments/features",
-          Component: withAuth(ApartmentsFeatures),
+          Component: withAuth({ Component: ApartmentsFeatures }),
         },
         /**
          * Houses
          */
-        { path: "houses", Component: withAuth(IndexHouses) },
-        { path: "houses/create", Component: withAuth(CreateHouses) },
-        { path: "houses/:id", Component: withAuth(ShowHouse) },
-        { path: "houses/:id/edit", Component: withAuth(EditHouses) },
+        {
+          path: "houses",
+          Component: withAuth({ Component: IndexHouses }),
+        },
+        {
+          path: "houses/create",
+          Component: withAuth({ Component: CreateHouses }),
+        },
+        {
+          path: "houses/:id",
+          Component: withAuth({ Component: ShowHouse }),
+        },
+        {
+          path: "houses/:id/edit",
+          Component: withAuth({ Component: EditHouses }),
+        },
         {
           path: "houses/features",
-          Component: withAuth(HousesFeatures),
+          Component: withAuth({ Component: HousesFeatures }),
         },
         /**
          * Commercials
          */
-        { path: "commercials", Component: withAuth(IndexCommercials) },
-        { path: "commercials/create", Component: withAuth(CreateCommercials) },
-        { path: "commercials/:id", Component: withAuth(ShowCommercial) },
-        { path: "commercials/:id/edit", Component: withAuth(EditCommercials) },
+        {
+          path: "commercials",
+          Component: withAuth({ Component: IndexCommercials }),
+        },
+        {
+          path: "commercials/create",
+          Component: withAuth({ Component: CreateCommercials }),
+        },
+        {
+          path: "commercials/:id",
+          Component: withAuth({ Component: ShowCommercial }),
+        },
+        {
+          path: "commercials/:id/edit",
+          Component: withAuth({ Component: EditCommercials }),
+        },
         {
           path: "commercials/features",
-          Component: withAuth(CommercialsFeatures),
+          Component: withAuth({ Component: CommercialsFeatures }),
         },
         {
           path: "commercials/destinations",
-          Component: withAuth(CommercialsDestinations),
+          Component: withAuth({ Component: CommercialsDestinations }),
         },
         {
           path: "commercials/placements",
-          Component: withAuth(CommercialsPlacements),
+          Component: withAuth({ Component: CommercialsPlacements }),
         },
-
         /**
          * Terrains
          */
-        { path: "terrains", Component: withAuth(IndexTerrains) },
-        { path: "terrains/create", Component: withAuth(CreateTerrains) },
-        { path: "terrains/:id", Component: withAuth(ShowTerrain) },
-        { path: "terrains/:id/edit", Component: withAuth(EditTerrains) },
+        {
+          path: "terrains",
+          Component: withAuth({ Component: IndexTerrains }),
+        },
+        {
+          path: "terrains/create",
+          Component: withAuth({ Component: CreateTerrains }),
+        },
+        {
+          path: "terrains/:id",
+          Component: withAuth({ Component: ShowTerrain }),
+        },
+        {
+          path: "terrains/:id/edit",
+          Component: withAuth({ Component: EditTerrains }),
+        },
         {
           path: "terrains/features",
-          Component: withAuth(TerrainsFeatures),
+          Component: withAuth({ Component: TerrainsFeatures }),
         },
         {
           path: "terrains/usabilities",
-          Component: withAuth(TerrainsUsabilities),
+          Component: withAuth({ Component: TerrainsUsabilities }),
         },
       ],
     },
