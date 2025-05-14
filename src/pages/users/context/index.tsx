@@ -48,10 +48,17 @@ export const UsersContextLayout: React.FC<Props> = ({
   /**
    * urlQueries
    */
-  const [uriQueries, setUriQueries] = useQueryStates({
-    page: parseAsInteger.withDefault(1),
-    search: parseAsString.withDefault(""),
-  });
+  const [uriQueries, setUriQueries] = useQueryStates(
+    {
+      page: parseAsInteger.withDefault(1),
+      search: parseAsString.withDefault(""),
+    },
+    { history: "push" }
+  );
+
+  React.useEffect(() => {
+    setUriQueries({ page: 1 });
+  }, [uriQueries.search]);
 
   const [openDialogCreateUser, setOpenDialogCreateUser] =
     React.useState<boolean>(false);

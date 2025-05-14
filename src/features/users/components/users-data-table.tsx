@@ -32,12 +32,12 @@ export const UsersDataTable: React.FC<Props> = ({ data }) => {
     <Table>
       <TableHeader className="m-0 p-0">
         <TableRow>
-          <TableHead className="font-medium text-xs">Name</TableHead>
-          <TableHead className="font-medium text-xs">Email</TableHead>
-          <TableHead className="font-medium text-xs">Contact</TableHead>
-          <TableHead className="font-medium text-xs">Role</TableHead>
-          <TableHead className="font-medium text-xs">Posts</TableHead>
-          <TableHead className="font-medium text-xs">Actions</TableHead>
+          <TableHead className="font-semibold text-xs">Name</TableHead>
+          <TableHead className="font-semibold text-xs">Email</TableHead>
+          <TableHead className="font-semibold text-xs">Contact</TableHead>
+          <TableHead className="font-semibold text-xs">Role</TableHead>
+          <TableHead className="font-semibold text-xs">Posts</TableHead>
+          <TableHead className="font-semibold text-xs">Actions</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>

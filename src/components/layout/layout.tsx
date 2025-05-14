@@ -19,7 +19,7 @@ export const Layout: React.FC<Props> = ({ status, children, loading }) => {
       }}
     >
       <AppSidebar user={status as User} loading={loading} />
-      <main className="w-screen h-screen bg-primary/[2.5%] relative py-9 px-4">
+      <main className="w-screen h-screen bg-primary/[2.5%] relative pt-9 pb-5 px-4 max-h-screen">
         <SidebarTrigger className="absolute top-0 left-0">
           {/* @ts-ignore */}
           {(open) => (
@@ -29,9 +29,9 @@ export const Layout: React.FC<Props> = ({ status, children, loading }) => {
           )}
         </SidebarTrigger>
         {children}
-        <footer className="fixed bg-background w-full right-0 bottom-0 border-t shadow flex justify-end px-4 py-1">
-          <h3 className="text-sm text-foreground/50 font-semibold">
-            Build By: <span>{"<Author/>"}</span>
+        <footer className="fixed bg-background w-full right-0 bottom-0 border-t shadow flex justify-end px-4">
+          <h3 className="text-xs text-foreground/50 font-semibold">
+            Build by: <span>{"<Author/>"}</span>
           </h3>
         </footer>
       </main>
