@@ -52,7 +52,9 @@ export const FieldItemFile: React.FC<Props> = ({
               multiple={false}
               maxFiles={1}
             >
-              {field.value && (field.value as File[]).length ? (
+              {field.value &&
+              typeof field.value !== "string" &&
+              (field.value as File[]).length ? (
                 <FileUploadList className="h-full w-full flex justify-center items-center">
                   {(field.value as File[]).map((file: File, _: number) => (
                     <FileUploadItem

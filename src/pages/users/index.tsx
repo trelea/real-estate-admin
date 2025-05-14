@@ -14,6 +14,7 @@ import {
 import React from "react";
 import { UsersContext, UsersContextProps } from "./context";
 import { TablePagination } from "@/components/pagination/table-pagination";
+import { DebouncedSearch } from "@/components/debounced-search/debounced-search";
 
 interface Props {
   status?: User;
@@ -24,7 +25,10 @@ export const Users: React.FC<Props> = ({ status }) => {
     data: {
       users: { data, isLoading, isFetching },
     },
-    meta: { setPage },
+    meta: {
+      uriQueries: { search },
+      setUriQueries,
+    },
   } = React.useContext<UsersContextProps>(UsersContext);
 
   return (
@@ -36,6 +40,13 @@ export const Users: React.FC<Props> = ({ status }) => {
             {data?.meta.total} users
           </Badge>
         </div>
+        {/* debounced search */}
+        <DebouncedSearch
+          defaultValue={search}
+          onChange={(data) =>
+            setUriQueries(({ search, ..._ }) => ({ search: data, ..._ }))
+          }
+        />
         <div>
           <CreateUserButton disabled={status?.role === "USER"} />
         </div>
@@ -52,9 +63,15 @@ export const Users: React.FC<Props> = ({ status }) => {
           <CardFooter className="h-full flex items-end pb-2">
             <TablePagination
               meta={data?.meta}
-              access={(p) => setPage(p)}
-              prev={() => setPage((p) => p - 1)}
-              next={() => setPage((p) => p + 1)}
+              access={(p) =>
+                setUriQueries(({ page, ..._ }) => ({ page: p, ..._ }))
+              }
+              prev={() =>
+                setUriQueries(({ page, ..._ }) => ({ page: page - 1, ..._ }))
+              }
+              next={() =>
+                setUriQueries(({ page, ..._ }) => ({ page: page + 1, ..._ }))
+              }
             />
           </CardFooter>
         </React.Fragment>

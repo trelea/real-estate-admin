@@ -10,7 +10,10 @@ import { deserializeRtkQueryError } from "@/utils";
 
 export const useCreateUser = () => {
   const {
-    meta: { page, setOpenDialogCreateUser },
+    meta: {
+      uriQueries: { page, search },
+      setOpenDialogCreateUser,
+    },
   } = React.useContext<UsersContextProps>(UsersContext);
   const [createUser, { isLoading, isError, error }] = useCreateUserMutation();
   const form = useForm<z.infer<typeof createUserSchema>>({
@@ -38,7 +41,7 @@ export const useCreateUser = () => {
 
     const response = await createUser({
       data,
-      params: { page, limit: DEFAULT_PAGINATION_LIMIT },
+      params: { page, limit: DEFAULT_PAGINATION_LIMIT, search },
     });
     if (response.error) {
       return deserializeRtkQueryError<{ message: string }>(response.error, {

@@ -21,11 +21,19 @@ export const createUserSchema = z.object({
 
 export const updateUserSchema = z.object({
   thumbnail: z
-    .array(z.custom<File>())
-    .min(1, "Please select at least one file")
-    .refine((files) => files.every((file) => file.size <= 5 * 1024 * 1024), {
-      message: "File size must be less than 5MB",
-    })
+    .union([
+      z.string().url("Thumbnail must be a valid URL").optional(),
+      z
+        .array(z.custom<File>())
+        // .min(1, "Please select at least one file")
+        .refine(
+          (files) => files.every((file) => file.size <= 5 * 1024 * 1024),
+          {
+            message: "File size must be less than 5MB",
+          }
+        )
+        .optional(),
+    ])
     .optional(),
   name: z.string().min(1).max(25).optional(),
   surname: z.string().min(1).max(25).optional(),

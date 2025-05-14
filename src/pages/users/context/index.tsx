@@ -2,21 +2,28 @@ import { User } from "@/features/auth/types";
 import { useGetUsersQuery } from "@/features/users/api";
 import { cn } from "@/lib/utils";
 import { ContextProps } from "@/types";
-import { parseAsInteger, useQueryState } from "nuqs";
+import { parseAsInteger, parseAsString, useQueryStates } from "nuqs";
 import React from "react";
+
+export type UsersContextUrlQueriesType = {
+  page: number;
+  search: string;
+};
+
+export type SetUsersContextUrlQueriesType = (
+  query:
+    | UsersContextUrlQueriesType
+    | ((query: UsersContextUrlQueriesType) => void)
+) => void;
 
 export interface UsersContextProps
   extends ContextProps<
     {
-      page: number;
-      setPage: (
-        value: number | ((old: number) => number | null) | null
-      ) => Promise<URLSearchParams>;
+      uriQueries: UsersContextUrlQueriesType;
+      setUriQueries: SetUsersContextUrlQueriesType;
       status?: User;
       openDialogCreateUser: boolean;
       setOpenDialogCreateUser: React.Dispatch<React.SetStateAction<boolean>>;
-      openDialogUpdateUser: boolean;
-      setOpenDialogUpdateUser: React.Dispatch<React.SetStateAction<boolean>>;
     },
     {
       users: ReturnType<typeof useGetUsersQuery>;
@@ -38,13 +45,19 @@ export const UsersContextLayout: React.FC<Props> = ({
   className,
   status,
 }) => {
-  const [page, setPage] = useQueryState("page", parseAsInteger.withDefault(1));
+  /**
+   * urlQueries
+   */
+  const [uriQueries, setUriQueries] = useQueryStates({
+    page: parseAsInteger.withDefault(1),
+    search: parseAsString.withDefault(""),
+  });
+
   const [openDialogCreateUser, setOpenDialogCreateUser] =
     React.useState<boolean>(false);
-  const [openDialogUpdateUser, setOpenDialogUpdateUser] =
-    React.useState<boolean>(false);
+
   const users = useGetUsersQuery(
-    { page },
+    { page: uriQueries.page, search: uriQueries.search },
     { refetchOnMountOrArgChange: false }
   );
 
@@ -52,22 +65,16 @@ export const UsersContextLayout: React.FC<Props> = ({
     <UsersContext.Provider
       value={{
         meta: {
-          page,
-          setPage,
+          uriQueries,
+          setUriQueries: setUriQueries as SetUsersContextUrlQueriesType,
           status,
           openDialogCreateUser,
           setOpenDialogCreateUser,
-          openDialogUpdateUser,
-          setOpenDialogUpdateUser,
         },
         data: { users },
       }}
     >
-      <section
-        className={cn("w-full h-full px-4 pb-4 flex flex-col gap-4", className)}
-      >
-        {children}
-      </section>
+      <section className={cn("h-full", className)}>{children}</section>
     </UsersContext.Provider>
   );
 };
