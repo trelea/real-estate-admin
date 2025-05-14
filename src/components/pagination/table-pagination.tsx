@@ -15,7 +15,7 @@ interface Props {
   prev?: () => void;
   next?: () => void;
   access?: (page: number) => void;
-  meta: PaginationMeta;
+  meta?: PaginationMeta;
 }
 
 export const TablePagination: React.FC<Props> = ({
@@ -32,62 +32,66 @@ export const TablePagination: React.FC<Props> = ({
         <PaginationItem
           className="border rounded-lg"
           onClick={() => {
-            if (meta.page !== 1 && prev) prev();
+            if (meta?.page !== 1 && prev) prev();
           }}
         >
           <PaginationPrevious className={isMobile ? "size-2" : undefined} />
         </PaginationItem>
 
-        <nav className="flex">
-          {/* Show first page if we're far from the beginning */}
-          {meta.page > 3 && (
-            <>
-              <PaginationItem onClick={() => access && access(1)}>
-                <PaginationLink>1</PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationEllipsis />
-              </PaginationItem>
-            </>
-          )}
+        {meta && (
+          <nav className="flex">
+            {/* Show first page if we're far from the beginning */}
+            {meta.page > 3 && (
+              <>
+                <PaginationItem onClick={() => access && access(1)}>
+                  <PaginationLink>1</PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationEllipsis />
+                </PaginationItem>
+              </>
+            )}
 
-          {/* Show previous page */}
-          {meta.page > 1 && (
-            <PaginationItem onClick={() => access && access(meta.page - 1)}>
-              <PaginationLink>{meta.page - 1}</PaginationLink>
+            {/* Show previous page */}
+            {meta.page > 1 && (
+              <PaginationItem onClick={() => access && access(meta.page - 1)}>
+                <PaginationLink>{meta.page - 1}</PaginationLink>
+              </PaginationItem>
+            )}
+
+            {/* Current page */}
+            <PaginationItem>
+              <PaginationLink isActive>{meta.page}</PaginationLink>
             </PaginationItem>
-          )}
 
-          {/* Current page */}
-          <PaginationItem>
-            <PaginationLink isActive>{meta.page}</PaginationLink>
-          </PaginationItem>
-
-          {/* Show next page */}
-          {meta.page < meta.last_page && (
-            <PaginationItem onClick={() => access && access(meta.page + 1)}>
-              <PaginationLink>{meta.page + 1}</PaginationLink>
-            </PaginationItem>
-          )}
-
-          {/* Show ellipsis and last page if we're far from the end */}
-          {meta.page < meta.last_page - 2 && (
-            <>
-              <PaginationItem>
-                <PaginationEllipsis />
+            {/* Show next page */}
+            {meta.page < meta.last_page && (
+              <PaginationItem onClick={() => access && access(meta.page + 1)}>
+                <PaginationLink>{meta.page + 1}</PaginationLink>
               </PaginationItem>
-              <PaginationItem onClick={() => access && access(meta.last_page)}>
-                <PaginationLink>{meta.last_page}</PaginationLink>
-              </PaginationItem>
-            </>
-          )}
-        </nav>
+            )}
+
+            {/* Show ellipsis and last page if we're far from the end */}
+            {meta.page < meta.last_page - 2 && (
+              <>
+                <PaginationItem>
+                  <PaginationEllipsis />
+                </PaginationItem>
+                <PaginationItem
+                  onClick={() => access && access(meta.last_page)}
+                >
+                  <PaginationLink>{meta.last_page}</PaginationLink>
+                </PaginationItem>
+              </>
+            )}
+          </nav>
+        )}
 
         {/* next */}
         <PaginationItem
           className="border rounded-lg"
           onClick={() => {
-            if (meta.page !== meta.last_page && next) next();
+            if (meta?.page !== meta?.last_page && next) next();
           }}
         >
           <PaginationNext className={isMobile ? "size-2" : undefined} />
