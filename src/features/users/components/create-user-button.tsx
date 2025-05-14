@@ -25,9 +25,9 @@ export const CreateUserButton: React.FC<Props> = ({ disabled = false }) => {
       <DialogTrigger asChild>
         <Button
           disabled={disabled}
-          className="flex w-fit h-fit m-0 p-0 py-2.5 px-4"
+          className="flex w-fit h-fit m-0 p-0 py-1.5 xl:py-2.5 px-4"
         >
-          <Plus className="size-5" />
+          <Plus className="size-4 xl:size-5" />
           <span className="font-medium text-sm">Create User</span>
         </Button>
       </DialogTrigger>

@@ -26,8 +26,8 @@ export const TablePagination: React.FC<Props> = ({
 }) => {
   const isMobile = useIsMobile();
   return (
-    <Pagination>
-      <PaginationContent className="flex justify-between w-full">
+    <Pagination className="m-0 p-0 w-full h-fit">
+      <PaginationContent className="flex justify-between w-full m-0 p-0 h-fit">
         {/* prev */}
         <PaginationItem
           className="border rounded-lg"
