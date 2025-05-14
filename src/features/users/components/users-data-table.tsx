@@ -21,7 +21,10 @@ interface Props {
 
 export const UsersDataTable: React.FC<Props> = ({ data }) => {
   const {
-    meta: { status, page },
+    meta: {
+      status,
+      uriQueries: { page, search },
+    },
   } = React.useContext<UsersContextProps>(UsersContext);
   const [deleteUser, { isLoading }] = useDeleteUserMutation();
 
@@ -41,7 +44,7 @@ export const UsersDataTable: React.FC<Props> = ({ data }) => {
         {data?.map((profile, _) => (
           <TableRow key={profile.id}>
             <TableCell>
-              <div className="flex items-center gap-3 py-2">
+              <div className="flex items-center gap-3 lg:py-1 xl:py-1.5">
                 <Avatar className="size-10">
                   <AvatarImage
                     src={profile.profile.thumbnail as string}
@@ -81,7 +84,7 @@ export const UsersDataTable: React.FC<Props> = ({ data }) => {
                   action={() =>
                     deleteUser({
                       id: profile.id,
-                      params: { page, limit: DEFAULT_PAGINATION_LIMIT },
+                      params: { page, limit: DEFAULT_PAGINATION_LIMIT, search },
                     })
                   }
                 />

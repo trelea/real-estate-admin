@@ -6,6 +6,8 @@ import {
   DeleteUserResType,
   GetUsersReqType,
   GetUsersResType,
+  UpdateUserReqType,
+  UpdateUserResType,
 } from "../types";
 import { DEFAULT_PAGINATION_LIMIT } from "@/consts";
 
@@ -15,10 +17,10 @@ export const usersApi = baseApi.injectEndpoints({
      * get users
      */
     getUsers: build.query<GetUsersResType, GetUsersReqType>({
-      query: ({ page, limit = DEFAULT_PAGINATION_LIMIT }) => ({
+      query: ({ page, limit = DEFAULT_PAGINATION_LIMIT, search }) => ({
         url: "/users",
         method: "GET",
-        params: { page, limit },
+        params: { page, limit, search },
       }),
       providesTags: (_, __, params) => [{ type: "users", ...params }],
     }),
@@ -30,6 +32,28 @@ export const usersApi = baseApi.injectEndpoints({
       query: ({ data }) => ({
         url: "/users",
         method: "POST",
+        data,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }),
+      invalidatesTags: (_, __, { params }) => [{ type: "users", ...params }],
+    }),
+    /**
+     * update user
+     */
+    updateUser: build.mutation<UpdateUserResType, UpdateUserReqType>({
+      query: ({ user: data, id }) => ({
+        url: `/users/${id}`,
+        method: "PATCH",
+        data,
+      }),
+      invalidatesTags: (_, __, { params }) => [{ type: "users", ...params }],
+    }),
+    updateUserThumbnail: build.mutation<UpdateUserResType, UpdateUserReqType>({
+      query: ({ thumbnail: data, id }) => ({
+        url: `/users/${id}`,
+        method: "PATCH",
         data,
         headers: {
           "Content-Type": "multipart/form-data",
@@ -55,4 +79,6 @@ export const {
   useGetUsersQuery,
   useCreateUserMutation,
   useDeleteUserMutation,
+  useUpdateUserMutation,
+  useUpdateUserThumbnailMutation,
 } = usersApi;

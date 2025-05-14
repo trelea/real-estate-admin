@@ -9,6 +9,7 @@ import {
   PaginationPrevious,
 } from "../ui/pagination";
 import { PaginationMeta } from "@/types";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface Props {
   prev?: () => void;
@@ -23,6 +24,7 @@ export const TablePagination: React.FC<Props> = ({
   next,
   access,
 }) => {
+  const isMobile = useIsMobile();
   return (
     <Pagination>
       <PaginationContent className="flex justify-between w-full">
@@ -33,7 +35,7 @@ export const TablePagination: React.FC<Props> = ({
             if (meta.page !== 1 && prev) prev();
           }}
         >
-          <PaginationPrevious />
+          <PaginationPrevious className={isMobile ? "size-2" : undefined} />
         </PaginationItem>
 
         <nav className="flex">
@@ -88,7 +90,7 @@ export const TablePagination: React.FC<Props> = ({
             if (meta.page !== meta.last_page && next) next();
           }}
         >
-          <PaginationNext />
+          <PaginationNext className={isMobile ? "size-2" : undefined} />
         </PaginationItem>
       </PaginationContent>
     </Pagination>
