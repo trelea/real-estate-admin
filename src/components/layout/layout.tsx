@@ -29,7 +29,7 @@ export const Layout: React.FC<Props> = ({ status, children, loading }) => {
           )}
         </SidebarTrigger>
         {children}
-        <footer className="fixed bg-background w-full right-0 bottom-0 border-t shadow flex justify-end px-4">
+        <footer className="fixed bg-background w-screen max-w-screen right-0 bottom-0 border-t shadow flex justify-end px-4">
           <h3 className="text-xs text-foreground/50 font-semibold">
             Build by: <span>{"<Author/>"}</span>
           </h3>

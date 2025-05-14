@@ -17,7 +17,7 @@ const withAuth = <T extends {}>({ Component, Context }: WithAuthProps<T>) => {
       data: status,
     } = useStatusQuery(null, {
       // ms
-      pollingInterval: 1000 * 60,
+      pollingInterval: 1000 * 60 * 10,
       refetchOnMountOrArgChange: false,
     });
 
