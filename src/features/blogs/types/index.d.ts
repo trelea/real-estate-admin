@@ -50,4 +50,5 @@ export type UpdateBlogReqType = {
   >;
   thumbnail?: FormData;
   params?: GetBlogsReqType;
+  // invalidate?: boolean = true;
 };

@@ -10,6 +10,7 @@ export const useChangeStatus = () => {
       blog: {
         status: value ? "PUBLIC" : "PRIVATE",
       },
+      // invalidate: false,
     });
   };
 
