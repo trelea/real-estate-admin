@@ -2,6 +2,7 @@ import {
   Settings,
   SignIn,
   Users,
+  Blogs,
   /**
    * Apartments
    */
@@ -42,6 +43,7 @@ import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import withAuth from "./with-auth";
 import { UsersContextLayout } from "@/pages/users/context";
+import { BlogsContextLayout } from "@/pages/blogs/context";
 
 interface Props {}
 
@@ -59,6 +61,13 @@ export const Router: React.FC<Props> = ({}) => {
           Component: withAuth({
             Context: UsersContextLayout,
             Component: Users,
+          }),
+        },
+        {
+          path: "blogs",
+          Component: withAuth({
+            Context: BlogsContextLayout,
+            Component: Blogs,
           }),
         },
         {

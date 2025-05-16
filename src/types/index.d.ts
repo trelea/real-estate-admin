@@ -9,3 +9,8 @@ export type PaginationMeta = {
   total: number;
   last_page: number;
 };
+
+export type UrlQueriesType = {
+  page: number;
+  search: string;
+};

@@ -1,14 +1,11 @@
 import { User } from "@/features/auth/types";
 import { useGetUsersQuery } from "@/features/users/api";
 import { cn } from "@/lib/utils";
-import { ContextProps } from "@/types";
+import { ContextProps, UrlQueriesType } from "@/types";
 import { parseAsInteger, parseAsString, useQueryStates } from "nuqs";
 import React from "react";
 
-export type UsersContextUrlQueriesType = {
-  page: number;
-  search: string;
-};
+export type UsersContextUrlQueriesType = UrlQueriesType;
 
 export type SetUsersContextUrlQueriesType = (
   query:
@@ -45,9 +42,6 @@ export const UsersContextLayout: React.FC<Props> = ({
   className,
   status,
 }) => {
-  /**
-   * urlQueries
-   */
   const [uriQueries, setUriQueries] = useQueryStates(
     {
       page: parseAsInteger.withDefault(1),
@@ -57,7 +51,7 @@ export const UsersContextLayout: React.FC<Props> = ({
   );
 
   React.useEffect(() => {
-    setUriQueries({ page: 1 });
+    if (uriQueries.page !== 1) setUriQueries({ page: 1 });
   }, [uriQueries.search]);
 
   const [openDialogCreateUser, setOpenDialogCreateUser] =
