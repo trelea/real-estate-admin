@@ -16,7 +16,7 @@ interface Props {
   blog: Blog;
 }
 
-export const UpdateBlogButton: React.FC<Props> = ({ disabled, blog }) => {
+export const UpdateBlogButton: React.FC<Props> = ({ disabled }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
