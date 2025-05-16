@@ -1,46 +1,37 @@
-import { Badge } from "@/components/ui/badge";
+import { DebouncedSearch } from "@/components/debounced-search/debounced-search";
+import { TablePagination } from "@/components/pagination/table-pagination";
+import { TableSkeleton } from "@/components/table-skeleton/table-skeleton";
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { User } from "@/features/auth/types";
-import { CreateUserButton, UsersDataTable } from "@/features/users/components";
 import React from "react";
-import { UsersContext, UsersContextProps } from "./context";
-import { TablePagination } from "@/components/pagination/table-pagination";
-import { DebouncedSearch } from "@/components/debounced-search/debounced-search";
-import { TableSkeleton } from "@/components/table-skeleton/table-skeleton";
+import { BlogsContext, BlogsContextProps } from "./context";
 
-interface Props {
-  status?: User;
-}
+interface Props {}
 
-export const Users: React.FC<Props> = ({ status }) => {
+export const Blogs: React.FC<Props> = ({}) => {
   const {
-    data: {
-      users: { data, isLoading, isFetching },
-    },
     meta: {
-      uriQueries: { search },
       setUriQueries,
+      uriQueries: { search },
     },
-  } = React.useContext<UsersContextProps>(UsersContext);
-
+  } = React.useContext<BlogsContextProps>(BlogsContext);
   return (
     <Card className="m-0 p-0 h-full gap-0 w-full">
       <CardHeader className="m-0 p-0 w-full h-fit">
         <div className="px-4 py-2 xl:p-6 grid grid-cols-2 lg:grid-cols-3 items-center border-b gap-2">
           <div className="flex items-center gap-2">
             <h1 className="font-medium text-base xl:text-lg">Manage</h1>
-            <Badge className="font-semibold text-xs text-primary bg-primary/10 h-fit w-fit py-1 px-2 rounded-2xl flex justify-center items-center">
+            {/* <Badge className="font-semibold text-xs text-primary bg-primary/10 h-fit w-fit py-1 px-2 rounded-2xl flex justify-center items-center">
               {data?.meta.total} users
-            </Badge>
+            </Badge> */}
           </div>
 
           <div className="flex justify-end lg:hidden">
-            <CreateUserButton disabled={status?.role === "USER"} />
+            {/* <CreateUserButton disabled={status?.role === "USER"} /> */}
           </div>
 
           {/* debounced search */}
@@ -53,23 +44,24 @@ export const Users: React.FC<Props> = ({ status }) => {
           />
 
           <div className="hidden lg:flex justify-end">
-            <CreateUserButton disabled={status?.role === "USER"} />
+            {/* <CreateUserButton disabled={status?.role === "USER"} /> */}
           </div>
         </div>
       </CardHeader>
 
       <CardContent className="h-full w-full">
-        {isLoading || isFetching ? (
-          <TableSkeleton previewThumbSkeleton />
+        {/* {isLoading || isFetching ? (
+          <TableSkeleton />
         ) : (
           <UsersDataTable data={data?.data} />
-        )}
+        )} */}
+        <TableSkeleton />
       </CardContent>
 
       <CardFooter className="h-fit flex items-end w-full m-0 p-0">
         <div className="border-t w-full px-6 py-2">
           <TablePagination
-            meta={data?.meta}
+            // meta={data?.meta}
             access={(p) =>
               setUriQueries(({ page, ..._ }) => ({ page: p, ..._ }))
             }
