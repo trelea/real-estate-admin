@@ -13,4 +13,5 @@ export type PaginationMeta = {
 export type UrlQueriesType = {
   page: number;
   search: string;
+  limit?: number = 10;
 };

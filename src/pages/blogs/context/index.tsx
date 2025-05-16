@@ -1,4 +1,5 @@
 import { User } from "@/features/auth/types";
+import { useGetBlogsQuery } from "@/features/blogs/api";
 import { cn } from "@/lib/utils";
 import { ContextProps, UrlQueriesType } from "@/types";
 import { parseAsInteger, parseAsString, useQueryStates } from "nuqs";
@@ -17,8 +18,14 @@ export interface BlogsContextProps
       uriQueries: BlogsContextUrlQueriesType;
       setUriQueries: SetBlogsContextUrlQueriesType;
       status?: User;
+      openDialogCreateBlog: boolean;
+      setOpenDialogCreateBlog: React.Dispatch<React.SetStateAction<boolean>>;
+      stepCreateBlogForm: number;
+      setStepCreateBlogForm: React.Dispatch<React.SetStateAction<number>>;
     },
-    {}
+    {
+      blogs: ReturnType<typeof useGetBlogsQuery>;
+    }
   > {}
 
 export const BlogsContext = React.createContext<BlogsContextProps>(
@@ -48,6 +55,16 @@ export const BlogsContextLayout: React.FC<Props> = ({
     if (uriQueries.page !== 1) setUriQueries({ page: 1 });
   }, [uriQueries.search]);
 
+  const [openDialogCreateBlog, setOpenDialogCreateBlog] =
+    React.useState<boolean>(false);
+
+  const [stepCreateBlogForm, setStepCreateBlogForm] = React.useState<number>(1);
+
+  const blogs = useGetBlogsQuery(
+    { page: uriQueries.page, search: uriQueries.search },
+    { refetchOnMountOrArgChange: false }
+  );
+
   return (
     <BlogsContext.Provider
       value={{
@@ -55,8 +72,14 @@ export const BlogsContextLayout: React.FC<Props> = ({
           uriQueries,
           setUriQueries: setUriQueries as SetBlogsContextUrlQueriesType,
           status,
+          openDialogCreateBlog,
+          setOpenDialogCreateBlog,
+          stepCreateBlogForm,
+          setStepCreateBlogForm,
         },
-        data: {},
+        data: {
+          blogs,
+        },
       }}
     >
       <section className={cn("h-full", className)}>{children}</section>
