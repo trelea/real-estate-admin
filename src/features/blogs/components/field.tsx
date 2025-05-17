@@ -22,7 +22,6 @@ import { ROLES } from "@/consts";
 import { cn } from "@/lib/utils";
 import React, { HTMLInputTypeAttribute } from "react";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
-import { BlogStatus } from "../types";
 
 interface Props {
   control: UseFormReturn<any>;
