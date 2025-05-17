@@ -1,18 +1,20 @@
-import { Form, FormDescription, FormLabel } from "@/components/ui/form";
 import React from "react";
+import { type Blog } from "../types";
+import { useUpdateBlog } from "../hooks";
+import { Form, FormDescription, FormLabel } from "@/components/ui/form";
 import { FieldItem, FieldItemFile } from "../components";
-import { Button } from "@/components/ui/button";
 import { DialogClose, DialogFooter } from "@/components/ui/dialog";
-import { useCreateBlog } from "../hooks";
+import { Button } from "@/components/ui/button";
 
 interface Props {
+  blog: Blog;
   step: number;
   prev?: () => void;
   next?: () => void;
 }
 
-export const CreateBlogForm: React.FC<Props> = ({ step, next, prev }) => {
-  const { form, onSubmit, isLoading } = useCreateBlog();
+export const UpdateBlogForm: React.FC<Props> = ({ step, blog, next, prev }) => {
+  const { form, onSubmit, isLoading, isSuccess } = useUpdateBlog({ blog });
 
   return (
     <Form {...form}>
@@ -29,7 +31,6 @@ export const CreateBlogForm: React.FC<Props> = ({ step, next, prev }) => {
             displayErrorMessage
           />
         )}
-
         {step === 2 && (
           <React.Fragment>
             <FieldItem
@@ -50,7 +51,6 @@ export const CreateBlogForm: React.FC<Props> = ({ step, next, prev }) => {
             />
           </React.Fragment>
         )}
-
         {step === 3 && (
           <React.Fragment>
             <FieldItem
@@ -71,7 +71,6 @@ export const CreateBlogForm: React.FC<Props> = ({ step, next, prev }) => {
             />
           </React.Fragment>
         )}
-
         {step === 4 && (
           <React.Fragment>
             <FieldItem
@@ -111,7 +110,6 @@ export const CreateBlogForm: React.FC<Props> = ({ step, next, prev }) => {
             </div>
           </React.Fragment>
         )}
-
         <DialogFooter className="w-full h-fit m-0 p-0">
           <div className="flex justify-between items-center w-full">
             {step === 1 && (
@@ -179,11 +177,11 @@ export const CreateBlogForm: React.FC<Props> = ({ step, next, prev }) => {
 
             {step === 4 && (
               <Button
-                disabled={isLoading}
+                disabled={isLoading && isSuccess}
                 className="text-base font-medium px-6 py-2 h-fit w-fit rounded-lg"
                 type="submit"
               >
-                Create
+                Update
               </Button>
             )}
           </div>

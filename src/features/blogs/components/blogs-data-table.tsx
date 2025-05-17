@@ -1,5 +1,4 @@
 import React from "react";
-import { Blog } from "../types";
 import {
   Table,
   TableBody,
@@ -16,6 +15,8 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { useChangeStatus } from "../hooks";
 import { UpdateBlogButton } from "./update-blog-button";
+import { type Blog } from "../types";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface Props {
   data?: Blog[];
@@ -46,9 +47,18 @@ export const BlogsDataTable: React.FC<Props> = ({ data }) => {
         {data?.map((blog) => (
           <TableRow key={blog.id}>
             <TableCell>
-              <span className="font-medium text-sm">
-                {blog.content.title_en}
-              </span>
+              <div className="flex items-center gap-3 lg:py-1 xl:py-1.5">
+                <Avatar className="size-10">
+                  <AvatarImage
+                    src={blog.thumbnail as string}
+                    className="object"
+                  />
+                  <AvatarFallback>N</AvatarFallback>
+                </Avatar>
+                <span className="font-medium text-sm">
+                  {blog.content.title_en}
+                </span>
+              </div>
             </TableCell>
             <TableCell>
               <div

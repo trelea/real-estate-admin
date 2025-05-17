@@ -1,0 +1,64 @@
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { createBlogSchema } from "../validation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useCreateBlogMutation } from "../api";
+import { deserializeRtkQueryError } from "@/utils";
+import React from "react";
+import { BlogsContext, BlogsContextProps } from "@/pages/blogs/context";
+import { DEFAULT_PAGINATION_LIMIT } from "@/consts";
+import { BlogStatus } from "../types";
+
+export const useCreateBlog = () => {
+  const {
+    meta: {
+      uriQueries: { page, search },
+      setOpenDialogCreateBlog,
+    },
+  } = React.useContext<BlogsContextProps>(BlogsContext);
+
+  const [createBlog, { isError, isLoading, isSuccess }] =
+    useCreateBlogMutation();
+  const form = useForm<z.infer<typeof createBlogSchema>>({
+    resolver: zodResolver(createBlogSchema),
+    defaultValues: {
+      thumbnail: undefined,
+      status: undefined,
+      title_en: undefined,
+      title_ro: undefined,
+      title_ru: undefined,
+      desc_en: undefined,
+      desc_ro: undefined,
+      desc_ru: undefined,
+    },
+  });
+
+  const onSubmit = async (values: z.infer<typeof createBlogSchema>) => {
+    const data = new FormData();
+    values.thumbnail && data.append("thumbnail", values.thumbnail[0]);
+    values.status &&
+      data.append(
+        "status",
+        values.status ? ("PUBLIC" as BlogStatus) : ("PRIVATE" as BlogStatus)
+      );
+    data.append("title_en", values.title_en);
+    data.append("title_ro", values.title_ro);
+    data.append("title_ru", values.title_ru);
+    data.append("desc_en", values.desc_en);
+    data.append("desc_ro", values.desc_ro);
+    data.append("desc_ru", values.desc_ru);
+
+    const response = await createBlog({
+      data,
+      params: { page, limit: DEFAULT_PAGINATION_LIMIT, search },
+    });
+    if (response.error) {
+      return deserializeRtkQueryError<{ message: string }>(response.error, {
+        toasts: [(err) => err.data.message, (err) => err.message],
+      });
+    }
+    setOpenDialogCreateBlog(false);
+  };
+
+  return { form, onSubmit, isError, isLoading, isSuccess };
+};
