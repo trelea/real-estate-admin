@@ -1,3 +1,4 @@
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   FormControl,
   FormDescription,
@@ -16,23 +17,30 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
 import { ROLES } from "@/consts";
+import { cn } from "@/lib/utils";
 import React, { HTMLInputTypeAttribute } from "react";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
+import { BlogStatus } from "../types";
 
 interface Props {
   control: UseFormReturn<any>;
   name: string;
-  label?: string;
+  label?: React.ReactNode;
   description?: string;
   displayErrorMessage?: boolean;
   placeholder?: string;
-  type?: HTMLInputTypeAttribute | Partial<"select" | "contact">;
+  type?:
+    | HTMLInputTypeAttribute
+    | Partial<"select" | "contact" | "textarea" | "check">;
   select?: {
     defaultValue?: string;
     values: ROLES[];
   };
   defaultValue?: unknown;
+  className?: string;
+  onCheck?: (_?: boolean) => void;
 }
 
 export const FieldItem: React.FC<Props> = ({
@@ -45,23 +53,27 @@ export const FieldItem: React.FC<Props> = ({
   type = "text",
   select,
   defaultValue,
+  className,
+  onCheck,
 }) => {
   return (
     <FormField
       control={control.control}
       name={name}
       render={({ field }) => (
-        <FormItem className="flex flex-col gap-1">
+        <FormItem className={cn(`flex flex-col gap-1`, className)}>
           {label && <FormLabel className="text-sm">{label}</FormLabel>}
-          <FormControl>
-            <RenderFieldBsedOnType
-              type={type as HTMLInputTypeAttribute & "select"}
-              placeholder={placeholder}
-              field={field}
-              select={select ? select : undefined}
-              defaultValue={defaultValue}
-            />
-          </FormControl>
+          <RenderFieldBsedOnType
+            type={type as HTMLInputTypeAttribute & "select"}
+            placeholder={placeholder}
+            field={field}
+            select={select ? select : undefined}
+            defaultValue={defaultValue}
+            /**
+             * only for checkbox
+             */
+            onCheck={onCheck}
+          />
           {description && <FormDescription>{description}</FormDescription>}
           {displayErrorMessage && <FormMessage className="text-xs" />}
         </FormItem>
@@ -76,8 +88,11 @@ function RenderFieldBsedOnType({
   field,
   select,
   defaultValue,
+  onCheck,
 }: {
-  type: HTMLInputTypeAttribute | Partial<"select" | "contact">;
+  type:
+    | HTMLInputTypeAttribute
+    | Partial<"select" | "contact" | "textarea" | "check">;
   placeholder?: string;
   field: ControllerRenderProps;
   select?: {
@@ -85,6 +100,7 @@ function RenderFieldBsedOnType({
     values: ROLES[];
   };
   defaultValue: unknown;
+  onCheck?: (_: boolean) => void;
 }) {
   if (type === "select" && select)
     return (
@@ -108,6 +124,35 @@ function RenderFieldBsedOnType({
           ))}
         </SelectContent>
       </Select>
+    );
+
+  if (type === "check")
+    return (
+      <FormControl>
+        <Checkbox
+          {...field}
+          // defaultChecked={defaultValue as boolean}
+          checked={field.value}
+          onCheckedChange={(checked: boolean) => {
+            field.onChange(checked);
+            onCheck && onCheck(checked);
+          }}
+          className="size-5"
+        />
+      </FormControl>
+    );
+
+  if (type === "textarea")
+    return (
+      <FormControl>
+        <Textarea
+          placeholder={placeholder}
+          {...field}
+          className="ring-0 focus-visible:ring-0 font-normal text-base w-full h-fit p-3 rounded-xl"
+          rows={10}
+          defaultValue={defaultValue as string}
+        />
+      </FormControl>
     );
 
   if (type === "contact")

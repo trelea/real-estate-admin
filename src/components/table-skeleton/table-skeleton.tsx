@@ -1,21 +1,28 @@
 import React from "react";
 import { Skeleton } from "../ui/skeleton";
+import { Table, TableBody, TableCell, TableRow } from "../ui/table";
 
 interface Props {
   previewThumbSkeleton?: boolean;
 }
 
 export const TableSkeleton: React.FC<Props> = ({ previewThumbSkeleton }) => (
-  <div className="w-full h-full flex flex-col gap-2">
-    {Array(11)
-      .fill(null)
-      .map((_, __) => (
-        <div className="flex gap-2" key={__}>
-          {previewThumbSkeleton && (
-            <Skeleton className="aspect-square rounded-full h-12 w-12 xl:h-14 xl:w-14" />
-          )}
-          <Skeleton className="h-12 xl:h-14 w-full" />
-        </div>
-      ))}
-  </div>
+  <Table className="w-full h-full">
+    <TableBody>
+      {Array(11)
+        .fill(null)
+        .map((_, __) => (
+          <TableRow key={__}>
+            <TableCell>
+              <div className="flex items-center w-full gap-2">
+                {previewThumbSkeleton && (
+                  <Skeleton className="h-10 w-10 xl:h-12 xl:w-12 rounded-full" />
+                )}
+                <Skeleton className="w-full h-10 xl:h-12" />
+              </div>
+            </TableCell>
+          </TableRow>
+        ))}
+    </TableBody>
+  </Table>
 );

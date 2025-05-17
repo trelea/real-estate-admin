@@ -18,10 +18,20 @@ export interface BlogsContextProps
       uriQueries: BlogsContextUrlQueriesType;
       setUriQueries: SetBlogsContextUrlQueriesType;
       status?: User;
+      /**
+       * create
+       */
       openDialogCreateBlog: boolean;
       setOpenDialogCreateBlog: React.Dispatch<React.SetStateAction<boolean>>;
       stepCreateBlogForm: number;
       setStepCreateBlogForm: React.Dispatch<React.SetStateAction<number>>;
+      /**
+       * update
+       */
+      openDialogUpdateBlog: boolean;
+      setOpenDialogUpdateBlog: React.Dispatch<React.SetStateAction<boolean>>;
+      stepUpdateBlogForm: number;
+      setStepUpdateBlogForm: React.Dispatch<React.SetStateAction<number>>;
     },
     {
       blogs: ReturnType<typeof useGetBlogsQuery>;
@@ -55,10 +65,19 @@ export const BlogsContextLayout: React.FC<Props> = ({
     if (uriQueries.page !== 1) setUriQueries({ page: 1 });
   }, [uriQueries.search]);
 
+  /**
+   * for create
+   */
   const [openDialogCreateBlog, setOpenDialogCreateBlog] =
     React.useState<boolean>(false);
-
   const [stepCreateBlogForm, setStepCreateBlogForm] = React.useState<number>(1);
+
+  /**
+   * for update
+   */
+  const [openDialogUpdateBlog, setOpenDialogUpdateBlog] =
+    React.useState<boolean>(false);
+  const [stepUpdateBlogForm, setStepUpdateBlogForm] = React.useState<number>(1);
 
   const blogs = useGetBlogsQuery(
     { page: uriQueries.page, search: uriQueries.search },
@@ -72,10 +91,20 @@ export const BlogsContextLayout: React.FC<Props> = ({
           uriQueries,
           setUriQueries: setUriQueries as SetBlogsContextUrlQueriesType,
           status,
+          /**
+           * create
+           */
           openDialogCreateBlog,
           setOpenDialogCreateBlog,
           stepCreateBlogForm,
           setStepCreateBlogForm,
+          /**
+           * update
+           */
+          openDialogUpdateBlog,
+          setOpenDialogUpdateBlog,
+          stepUpdateBlogForm,
+          setStepUpdateBlogForm,
         },
         data: {
           blogs,

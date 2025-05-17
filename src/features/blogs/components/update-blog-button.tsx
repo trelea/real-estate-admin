@@ -10,15 +10,29 @@ import {
 import React from "react";
 import { Blog } from "../types";
 import { Pencil } from "lucide-react";
+import { UpdateBlogForm } from "../forms";
+import { BlogsContext, BlogsContextProps } from "@/pages/blogs/context";
 
 interface Props {
   disabled?: boolean;
   blog: Blog;
 }
 
-export const UpdateBlogButton: React.FC<Props> = ({ disabled }) => {
+export const UpdateBlogButton: React.FC<Props> = ({ disabled, blog }) => {
+  const {
+    meta: {
+      stepUpdateBlogForm,
+      setStepUpdateBlogForm,
+      // openDialogUpdateBlog,
+      // setOpenDialogUpdateBlog,
+    },
+  } = React.useContext<BlogsContextProps>(BlogsContext);
   return (
-    <Dialog>
+    <Dialog
+      onOpenChange={(open) => {
+        if (!open) setStepUpdateBlogForm(1);
+      }}
+    >
       <DialogTrigger asChild>
         <Button
           variant={"ghost"}
@@ -37,11 +51,23 @@ export const UpdateBlogButton: React.FC<Props> = ({ disabled }) => {
             Update Blog
           </DialogTitle>
           <DialogDescription className="text-base">
-            Edit the details of the blog post below. Once you're done, click
-            save to apply the changes.
+            {stepUpdateBlogForm === 1 &&
+              "Update the image thumbnail for your blog post. This is the main preview image."}
+            {stepUpdateBlogForm === 2 &&
+              "Edit the Romanian title and description for your blog post."}
+            {stepUpdateBlogForm === 3 &&
+              "Edit the Russian title and description for your blog post."}
+            {stepUpdateBlogForm === 4 &&
+              "Edit the English title and description for your blog post. Adjust the visibility of your blog post. If checked, it will be public and visible to anyone. If unchecked, it will remain private and only accessible to admins and dashboard users."}
           </DialogDescription>
         </DialogHeader>
-        {/* <UpdateuserForm user={user} /> */}
+
+        <UpdateBlogForm
+          blog={blog}
+          step={stepUpdateBlogForm}
+          next={() => setStepUpdateBlogForm((_) => _ + 1)}
+          prev={() => setStepUpdateBlogForm((_) => _ - 1)}
+        />
       </DialogContent>
     </Dialog>
   );

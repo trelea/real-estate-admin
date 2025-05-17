@@ -6,6 +6,8 @@ import {
   DeleteBlogResType,
   GetBlogsReqType,
   GetBlogsResType,
+  RemoveBlogThumbReqType,
+  RemoveBlogThumbResType,
   UpdateBlogReqType,
   UpdateBlogResType,
 } from "../types";
@@ -54,10 +56,31 @@ export const blogsApi = baseApi.injectEndpoints({
      * update blog
      */
     updateBlog: build.mutation<UpdateBlogResType, UpdateBlogReqType>({
-      query: ({ id, blog: data }) => ({
+      query: ({ id, blog: data, thumbnail }) => ({
         url: `/blogs/${id}`,
         method: "PATCH",
-        data,
+        data: (() => {
+          return thumbnail ? thumbnail : data;
+        })(),
+        headers: {
+          "Content-Type": thumbnail
+            ? "multipart/form-data"
+            : "application/json",
+        },
+      }),
+      invalidatesTags: (_, __, { params }) => [{ type: "blogs", ...params }],
+    }),
+
+    /**
+     * remove thumbnail
+     */
+    removeBlogThumb: build.mutation<
+      RemoveBlogThumbResType,
+      RemoveBlogThumbReqType
+    >({
+      query: ({ id }) => ({
+        url: `/blogs/${id}/rm-thumb`,
+        method: "DELETE",
       }),
       invalidatesTags: (_, __, { params }) => [{ type: "blogs", ...params }],
     }),
@@ -69,4 +92,5 @@ export const {
   useDeleteBlogMutation,
   useGetBlogsQuery,
   useUpdateBlogMutation,
+  useRemoveBlogThumbMutation,
 } = blogsApi;

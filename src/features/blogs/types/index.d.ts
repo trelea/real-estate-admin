@@ -1,11 +1,13 @@
 import { PaginationMeta, UrlQueriesType } from "@/types";
 
+export type BlogStatus = "PUBLIC" | "PRIVATE" | (string & {});
+
 export type Blog = {
   id: string;
   created_at: string;
   updated_at: string;
   thumbnail: string;
-  status: "PUBLIC" | "PRIVATE";
+  status: BlogStatus;
   views: number;
   content: Content;
 };
@@ -40,13 +42,14 @@ export type DeleteBlogReqType = {
   params?: GetBlogsReqType;
 };
 
+export type RemoveBlogThumbResType = unknown;
+export type RemoveBlogThumbReqType = DeleteBlogReqType;
+
 export type UpdateBlogResType = unknown;
 export type UpdateBlogReqType = {
   id: string;
   blog?: Partial<
-    Omit<Content, "id" | "created_at" | "updated_at"> & {
-      status: Blog["status"];
-    }
+    Omit<Content, "id" | "created_at" | "updated_at"> & Pick<Blog, "status">
   >;
   thumbnail?: FormData;
   params?: GetBlogsReqType;
