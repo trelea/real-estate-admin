@@ -1,3 +1,4 @@
+import React from "react";
 import {
   AlertDialog,
   AlertDialogTrigger,
@@ -8,20 +9,26 @@ import {
   AlertDialogFooter,
   AlertDialogCancel,
   AlertDialogAction,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
+} from "../ui/alert-dialog";
+import { Button } from "../ui/button";
 import { Trash2 } from "lucide-react";
+import { DialogState } from "./types";
 
 interface Props {
-  action?: (data?: unknown) => void;
   disabled?: boolean;
+  onDelete?: () => void;
+  dialogState?: DialogState;
 }
 
-export const DeleteBlogButton: React.FC<Props> = ({
-  action,
-  disabled = false,
-}) => (
-  <AlertDialog>
+export const DeleteItem: React.FC<Props> = ({
+  disabled = true,
+  onDelete,
+  dialogState,
+}: Props) => (
+  <AlertDialog
+    onOpenChange={dialogState?.onOpenChange}
+    open={dialogState?.open}
+  >
     <AlertDialogTrigger
       asChild
       className="m-0 p-0 h-fit flex justify-center items-center"
@@ -44,7 +51,7 @@ export const DeleteBlogButton: React.FC<Props> = ({
       </AlertDialogHeader>
       <AlertDialogFooter>
         <AlertDialogCancel>Cancel</AlertDialogCancel>
-        <AlertDialogAction className="bg-destructive" onClick={action}>
+        <AlertDialogAction className="bg-destructive" onClick={onDelete}>
           Continue
         </AlertDialogAction>
       </AlertDialogFooter>
