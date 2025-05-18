@@ -1,84 +1,169 @@
-import { DebouncedSearch } from "@/components/debounced-search/debounced-search";
-import { TablePagination } from "@/components/pagination/table-pagination";
 import { TableSkeleton } from "@/components/table-skeleton/table-skeleton";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
 import React from "react";
 import { BlogsContext, BlogsContextProps } from "./context";
-import { Badge } from "@/components/ui/badge";
-import { BlogsDataTable, CreateBlogButton } from "@/features/blogs/components";
+import { ManageData } from "@/components/manage-data-table/manage-data";
+import { CreateBlogForm, UpdateBlogForm } from "@/features/blogs/forms";
+import { type Blog } from "@/features/blogs/types";
+import { User } from "@/features/auth/types";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { SetStatus } from "@/features/blogs/components/set-status";
+import { useDeleteBlog } from "@/features/blogs/hooks";
 
-interface Props {}
+interface Props {
+  status?: User;
+}
 
-export const Blogs: React.FC<Props> = ({}) => {
+export const Blogs: React.FC<Props> = ({ status }) => {
   const {
     meta: {
-      status,
       setUriQueries,
       uriQueries: { search },
+      //
+      stepCreateBlogForm,
+      setStepCreateBlogForm,
+      //
+      stepUpdateBlogForm,
+      setStepUpdateBlogForm,
     },
     data: {
       blogs: { data, isLoading, isFetching },
     },
   } = React.useContext<BlogsContextProps>(BlogsContext);
+  const [deleteBlog, deleteBlogLoading] = useDeleteBlog();
+
   return (
-    <Card className="m-0 p-0 h-full gap-0 w-full">
-      <CardHeader className="m-0 p-0 w-full h-fit">
-        <div className="px-4 py-2 xl:p-6 grid grid-cols-2 lg:grid-cols-3 items-center border-b gap-2">
-          <div className="flex items-center gap-2">
-            <h1 className="font-medium text-base xl:text-lg">Manage</h1>
-            <Badge className="font-semibold text-xs text-primary bg-primary/10 h-fit w-fit py-1 px-2 rounded-2xl flex justify-center items-center">
-              {data?.meta.total} blogs
-            </Badge>
-          </div>
-
-          <div className="flex justify-end lg:hidden">
-            <CreateBlogButton disabled={status?.role === "USER"} />
-          </div>
-
-          {/* debounced search */}
-          <DebouncedSearch
-            className="py-1 col-span-2 xl:py-2 lg:col-span-1 w-full"
-            defaultValue={search}
-            onChange={(data) =>
-              setUriQueries(({ search, ..._ }) => ({ search: data, ..._ }))
-            }
-          />
-
-          <div className="hidden lg:flex justify-end">
-            <CreateBlogButton disabled={status?.role === "USER"} />
-          </div>
-        </div>
-      </CardHeader>
-
-      <CardContent className="h-full w-full">
-        {isLoading || isFetching ? (
-          <TableSkeleton />
-        ) : (
-          <BlogsDataTable data={data?.data} />
-        )}
-      </CardContent>
-
-      <CardFooter className="h-fit flex items-end w-full m-0 p-0">
-        <div className="border-t w-full px-6 py-2">
-          <TablePagination
-            meta={data?.meta}
-            access={(p) =>
-              setUriQueries(({ page, ..._ }) => ({ page: p, ..._ }))
-            }
-            prev={() =>
-              setUriQueries(({ page, ..._ }) => ({ page: page - 1, ..._ }))
-            }
-            next={() =>
-              setUriQueries(({ page, ..._ }) => ({ page: page + 1, ..._ }))
-            }
-          />
-        </div>
-      </CardFooter>
-    </Card>
+    <ManageData<Blog>
+      loading={{
+        state: isLoading || isFetching,
+        component: <TableSkeleton previewThumbSkeleton />,
+      }}
+      header={{
+        title: "Blogs",
+        badge: `${data?.meta.total} blogs`,
+        search: {
+          defaultValue: search,
+          onValueChange: (value) =>
+            setUriQueries(({ search, ...rest }) => ({
+              search: value,
+              ...rest,
+            })),
+        },
+        create: {
+          trigger: { label: "Create blog", disabled: status?.role !== "ADMIN" },
+          content: {
+            title: "Create blog",
+            description:
+              "Enter the required information to create a new user. After submission, the user will be added to the system.",
+            children: (
+              <CreateBlogForm
+                step={stepCreateBlogForm}
+                prev={() => setStepCreateBlogForm((_) => _ - 1)}
+                next={() => setStepCreateBlogForm((_) => _ + 1)}
+              />
+            ),
+          },
+          dialogState: {
+            onOpenChange: (open) => {
+              if (!open) setStepCreateBlogForm(1);
+            },
+          },
+        },
+      }}
+      content={{
+        table: {
+          data: data?.data as Blog[],
+          headers: ["Title", "Status", "Published", "Views"],
+          rows: ({
+            thumbnail,
+            content,
+            created_at,
+            views,
+            id,
+            status: _status,
+          }) => [
+            <div className="flex items-center gap-3 lg:py-1 xl:py-1.5">
+              <Avatar className="size-10">
+                <AvatarImage src={thumbnail as string} className="object" />
+                <AvatarFallback>N</AvatarFallback>
+              </Avatar>
+              <span className="font-medium text-sm">{content.title_en}</span>
+            </div>,
+            <SetStatus
+              id={id}
+              disabled={status?.role !== "ADMIN"}
+              status={_status}
+            />,
+            <span className="font-medium text-sm">
+              {new Intl.DateTimeFormat("ro", {
+                year: "numeric",
+                month: "long",
+                day: "2-digit",
+              }).format(new Date(created_at))}
+            </span>,
+            <span className="font-medium text-sm">{views}</span>,
+          ],
+          /**
+           * delete action
+           */
+          delete: {
+            disabled: status?.role !== "ADMIN" || deleteBlogLoading,
+            // @ts-ignore
+            onDeleteAction: (id) => deleteBlog(id),
+          },
+          /**
+           * update action
+           */
+          update: {
+            disabled: status?.role !== "ADMIN",
+            title: "Update User",
+            description: (
+              <React.Fragment>
+                {stepUpdateBlogForm === 1 &&
+                  "Update the image thumbnail for your blog post. This is the main preview image."}
+                {stepUpdateBlogForm === 2 &&
+                  "Edit the Romanian title and description for your blog post."}
+                {stepUpdateBlogForm === 3 &&
+                  "Edit the Russian title and description for your blog post."}
+                {stepUpdateBlogForm === 4 &&
+                  "Edit the English title and description for your blog post. Adjust the visibility of your blog post. If checked, it will be public and visible to anyone. If unchecked, it will remain private and only accessible to admins and dashboard users."}
+              </React.Fragment>
+            ),
+            children: (blog) => (
+              <UpdateBlogForm
+                blog={blog}
+                step={stepUpdateBlogForm}
+                next={() => setStepUpdateBlogForm((_) => _ + 1)}
+                prev={() => setStepUpdateBlogForm((_) => _ - 1)}
+              />
+            ),
+            dialogState: {
+              onOpenChange: (open) => {
+                if (!open) setStepUpdateBlogForm(1);
+              },
+            },
+          },
+        },
+      }}
+      footer={{
+        pagination: {
+          meta: data?.meta,
+          next: () =>
+            setUriQueries(({ page, ...rest }) => ({
+              page: page + 1,
+              ...rest,
+            })),
+          prev: () =>
+            setUriQueries(({ page, ...rest }) => ({
+              page: page - 1,
+              ...rest,
+            })),
+          current: (_) =>
+            setUriQueries(({ page, ...rest }) => ({
+              page: _,
+              ...rest,
+            })),
+        },
+      }}
+    />
   );
 };

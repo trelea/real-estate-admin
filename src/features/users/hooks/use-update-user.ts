@@ -72,7 +72,6 @@ export const useUpdateUser = ({ user }: Props) => {
     }
 
     if (thumbnail) {
-      console.log(thumbnail);
       const data = new FormData();
       data.append("thumbnail", thumbnail[0]);
       const response = await updateUserThumbnail({

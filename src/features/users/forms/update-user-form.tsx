@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import { useUpdateUser } from "../hooks/use-update-user";
 import { User } from "@/features/auth/types";
@@ -11,7 +10,7 @@ interface Props {
   user: User;
 }
 
-export const UpdateuserForm: React.FC<Props> = ({ user }) => {
+export const UpdateUserForm: React.FC<Props> = ({ user }) => {
   const { form, onSubmit, isLoading } = useUpdateUser({ user });
 
   return (
