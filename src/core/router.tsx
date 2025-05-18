@@ -38,12 +38,14 @@ import {
   EditTerrains,
   TerrainsFeatures,
   TerrainsUsabilities,
+  Services,
 } from "@/pages";
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import withAuth from "./with-auth";
 import { UsersContextLayout } from "@/pages/users/context";
 import { BlogsContextLayout } from "@/pages/blogs/context";
+import { ServicesContextLayout } from "@/pages/services/context";
 
 interface Props {}
 
@@ -68,6 +70,13 @@ export const Router: React.FC<Props> = ({}) => {
           Component: withAuth({
             Context: BlogsContextLayout,
             Component: Blogs,
+          }),
+        },
+        {
+          path: "services",
+          Component: withAuth({
+            Context: ServicesContextLayout,
+            Component: Services,
           }),
         },
         {
