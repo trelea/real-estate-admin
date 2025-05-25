@@ -15,3 +15,9 @@ export type UrlQueriesType = {
   search: string;
   limit?: number = 10;
 };
+
+export type LanguagesFieldsType = {
+  ro: string;
+  ru: string;
+  en: string;
+};

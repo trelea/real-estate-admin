@@ -3,5 +3,5 @@ export * from "./edit/index";
 export * from "./index/index";
 export * from "./show/index";
 export * from "./features/index";
-export * from "./destinations";
-export * from "./placements";
+export * from "./destinations/index";
+export * from "./placings/index";

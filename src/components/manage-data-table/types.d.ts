@@ -44,7 +44,7 @@ export interface ContentProps<T extends {}> {
 
     delete: Partial<{
       disabled: boolean;
-      onDeleteAction: (id: string) => Promise<void>;
+      onDeleteAction: (id: string | number) => Promise<void>;
       dialogState: DialogState;
     }>;
 

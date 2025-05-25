@@ -8,44 +8,55 @@ import {
    */
   IndexApartments,
   ShowApartment,
-  CreateApartments,
-  EditApartments,
-  ApartmentsFeatures,
+  CreateApartment,
+  EditApartment,
+  ApartmentFeatures,
   /**
    * Houses
    */
   IndexHouses,
   ShowHouse,
-  CreateHouses,
-  EditHouses,
-  HousesFeatures,
+  CreateHouse,
+  EditHouse,
+  HouseFeatures,
   /**
    * Commercials
    */
   IndexCommercials,
   ShowCommercial,
-  CreateCommercials,
-  EditCommercials,
-  CommercialsDestinations,
-  CommercialsFeatures,
-  CommercialsPlacements,
+  CreateCommercial,
+  EditCommercial,
+  CommercialDestinations,
+  CommercialFeatures,
+  CommercialPlacings,
   /**
    * Terrains
    */
   IndexTerrains,
   ShowTerrain,
-  CreateTerrains,
-  EditTerrains,
-  TerrainsFeatures,
-  TerrainsUsabilities,
+  CreateTerrain,
+  EditTerrain,
+  TerrainFeatures,
+  TerrainUsabilities,
   Services,
+  HousingStocks,
+  Conditions,
 } from "@/pages";
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import withAuth from "./with-auth";
-import { UsersContextLayout } from "@/pages/users/context";
-import { BlogsContextLayout } from "@/pages/blogs/context";
-import { ServicesContextLayout } from "@/pages/services/context";
+import { UsersContextProvider } from "@/pages/users/context";
+import { BlogsContextProvider } from "@/pages/blogs/context";
+import { ServicesContextProvider } from "@/pages/services/context";
+import { HousingStocksContextProvider } from "@/pages/housing-stocks/context";
+import { ConditionsContextProvider } from "@/pages/conditions/context";
+import { ApartmentFeaturesContextProvider } from "@/pages/apartments/features/context";
+import { HouseFeaturesContextProvider } from "@/pages/houses/features/context";
+import { CommercialDestinationsContextProvider } from "@/pages/commercials/destinations/context";
+import { CommercialFeaturesContextProvider } from "@/pages/commercials/features/context";
+import { CommercialPlacingsContextProvider } from "@/pages/commercials/placings/context";
+import { TerrainFeaturesContextProvider } from "@/pages/terrains/features/context";
+import { TerrainUsabilitiesContextProvider } from "@/pages/terrains/usabilites/context";
 
 interface Props {}
 
@@ -61,131 +72,192 @@ export const Router: React.FC<Props> = ({}) => {
         {
           path: "users",
           Component: withAuth({
-            Context: UsersContextLayout,
+            Context: UsersContextProvider,
             Component: Users,
           }),
         },
         {
           path: "blogs",
           Component: withAuth({
-            Context: BlogsContextLayout,
+            Context: BlogsContextProvider,
             Component: Blogs,
           }),
         },
         {
           path: "services",
           Component: withAuth({
-            Context: ServicesContextLayout,
+            Context: ServicesContextProvider,
             Component: Services,
           }),
         },
         {
+          path: "housing-stocks",
+          Component: withAuth({
+            Context: HousingStocksContextProvider,
+            Component: HousingStocks,
+          }),
+        },
+        {
+          path: "conditions",
+          Component: withAuth({
+            Component: Conditions,
+            Context: ConditionsContextProvider,
+          }),
+        },
+
+        /**
+         * settings optional
+         */
+        {
           path: "settings",
           Component: withAuth({ Component: Settings }),
         },
+
         /**
          * Apartments
          */
         {
           path: "apartments",
-          Component: withAuth({ Component: IndexApartments }),
+          children: [
+            {
+              index: true,
+              Component: withAuth({ Component: IndexApartments }),
+            },
+            {
+              path: "features",
+              Component: withAuth({
+                Component: ApartmentFeatures,
+                Context: ApartmentFeaturesContextProvider,
+              }),
+            },
+            {
+              path: "create",
+              Component: withAuth({ Component: CreateApartment }),
+            },
+            {
+              path: ":id",
+              Component: withAuth({ Component: ShowApartment }),
+            },
+            {
+              path: ":id/edit",
+              Component: withAuth({ Component: EditApartment }),
+            },
+          ],
         },
-        {
-          path: "apartments/create",
-          Component: withAuth({ Component: CreateApartments }),
-        },
-        {
-          path: "apartments/:id",
-          Component: withAuth({ Component: ShowApartment }),
-        },
-        {
-          path: "apartments/:id/edit",
-          Component: withAuth({ Component: EditApartments }),
-        },
-        {
-          path: "apartments/features",
-          Component: withAuth({ Component: ApartmentsFeatures }),
-        },
+
         /**
          * Houses
          */
         {
           path: "houses",
-          Component: withAuth({ Component: IndexHouses }),
+          children: [
+            { index: true, Component: withAuth({ Component: IndexHouses }) },
+            {
+              path: "features",
+              Component: withAuth({
+                Component: HouseFeatures,
+                Context: HouseFeaturesContextProvider,
+              }),
+            },
+            {
+              path: "create",
+              Component: withAuth({ Component: CreateHouse }),
+            },
+            {
+              path: ":id",
+              Component: withAuth({ Component: ShowHouse }),
+            },
+            {
+              path: ":id/edit",
+              Component: withAuth({ Component: EditHouse }),
+            },
+          ],
         },
-        {
-          path: "houses/create",
-          Component: withAuth({ Component: CreateHouses }),
-        },
-        {
-          path: "houses/:id",
-          Component: withAuth({ Component: ShowHouse }),
-        },
-        {
-          path: "houses/:id/edit",
-          Component: withAuth({ Component: EditHouses }),
-        },
-        {
-          path: "houses/features",
-          Component: withAuth({ Component: HousesFeatures }),
-        },
+
         /**
          * Commercials
          */
         {
           path: "commercials",
-          Component: withAuth({ Component: IndexCommercials }),
+
+          children: [
+            {
+              index: true,
+              Component: withAuth({ Component: IndexCommercials }),
+            },
+            {
+              path: "features",
+              Component: withAuth({
+                Component: CommercialFeatures,
+                Context: CommercialFeaturesContextProvider,
+              }),
+            },
+            {
+              path: "destinations",
+              Component: withAuth({
+                Component: CommercialDestinations,
+                Context: CommercialDestinationsContextProvider,
+              }),
+            },
+            {
+              path: "placings",
+              Component: withAuth({
+                Component: CommercialPlacings,
+                Context: CommercialPlacingsContextProvider,
+              }),
+            },
+            {
+              path: "create",
+              Component: withAuth({ Component: CreateCommercial }),
+            },
+            {
+              path: ":id",
+              Component: withAuth({ Component: ShowCommercial }),
+            },
+            {
+              path: ":id/edit",
+              Component: withAuth({ Component: EditCommercial }),
+            },
+          ],
         },
-        {
-          path: "commercials/create",
-          Component: withAuth({ Component: CreateCommercials }),
-        },
-        {
-          path: "commercials/:id",
-          Component: withAuth({ Component: ShowCommercial }),
-        },
-        {
-          path: "commercials/:id/edit",
-          Component: withAuth({ Component: EditCommercials }),
-        },
-        {
-          path: "commercials/features",
-          Component: withAuth({ Component: CommercialsFeatures }),
-        },
-        {
-          path: "commercials/destinations",
-          Component: withAuth({ Component: CommercialsDestinations }),
-        },
-        {
-          path: "commercials/placements",
-          Component: withAuth({ Component: CommercialsPlacements }),
-        },
+
         /**
          * Terrains
          */
         {
           path: "terrains",
-          Component: withAuth({ Component: IndexTerrains }),
-        },
-        {
-          path: "terrains/create",
-          Component: withAuth({ Component: CreateTerrains }),
-        },
-        {
-          path: "terrains/:id",
-          Component: withAuth({ Component: ShowTerrain }),
-        },
-        {
-          path: "terrains/:id/edit",
-          Component: withAuth({ Component: EditTerrains }),
-        },
-        {
-          path: "terrains/features",
-          Component: withAuth({ Component: TerrainsFeatures }),
-        },
-        {
-          path: "terrains/usabilities",
-          Component: withAuth({ Component: TerrainsUsabilities }),
+          children: [
+            {
+              index: true,
+              Component: withAuth({ Component: IndexTerrains }),
+            },
+            {
+              path: "features",
+              Component: withAuth({
+                Component: TerrainFeatures,
+                Context: TerrainFeaturesContextProvider,
+              }),
+            },
+            {
+              path: "usabilities",
+              Component: withAuth({
+                Component: TerrainUsabilities,
+                Context: TerrainUsabilitiesContextProvider,
+              }),
+            },
+            {
+              path: "create",
+              Component: withAuth({ Component: CreateTerrain }),
+            },
+            {
+              path: ":id",
+              Component: withAuth({ Component: ShowTerrain }),
+            },
+            {
+              path: ":id/edit",
+              Component: withAuth({ Component: EditTerrain }),
+            },
+          ],
         },
       ],
     },

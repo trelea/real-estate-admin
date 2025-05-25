@@ -29,7 +29,6 @@ export const AppSidebarContent: React.FC<Props> = ({
       className={state !== "collapsed" ? `m-0 p-0 px-6` : undefined}
     >
       {/* content */}
-
       <AppSidebarContentGroup
         state={state}
         toggleSidebar={toggleSidebar}
@@ -79,8 +78,8 @@ export const AppSidebarContent: React.FC<Props> = ({
                 url: { pathname: "/dashboard/commercials/destinations" },
               },
               {
-                title: "Placements",
-                url: { pathname: "/dashboard/commercials/placements" },
+                title: "Placings",
+                url: { pathname: "/dashboard/commercials/placings" },
               },
               {
                 title: "Features",
@@ -106,18 +105,26 @@ export const AppSidebarContent: React.FC<Props> = ({
           },
         ]}
       />
+      {/* filters */}
       <AppSidebarContentGroup
         state={state}
         toggleSidebar={toggleSidebar}
-        label="Access"
+        label="Filters"
         items={[
           {
-            title: "Users",
-            icon: Users,
-            url: { pathname: "/dashboard/users" },
+            title: "Housing Types",
+            icon: UnfoldVertical,
+            url: { pathname: "/dashboard/housing-stocks" },
           },
+          {
+            title: "Conditions",
+            icon: ReceiptText,
+            url: { pathname: "/dashboard/conditions" },
+          },
+          { title: "Locations", icon: MapPinned, collapsible: [] },
         ]}
       />
+      {/* blogs and services */}
       <AppSidebarContentGroup
         state={state}
         toggleSidebar={toggleSidebar}
@@ -133,19 +140,23 @@ export const AppSidebarContent: React.FC<Props> = ({
             icon: Newspaper,
             url: { pathname: "/dashboard/blogs" },
           },
-          {
-            title: "Housing Stock",
-            icon: UnfoldVertical,
-            url: { pathname: "/dashboard/housing-stock" },
-          },
-          {
-            title: "Conditions",
-            icon: ReceiptText,
-            url: { pathname: "/dashboard/conditions" },
-          },
-          { title: "Locations", icon: MapPinned, collapsible: [] },
         ]}
       />
+      {/* users */}
+      <AppSidebarContentGroup
+        state={state}
+        toggleSidebar={toggleSidebar}
+        label="Access"
+        items={[
+          {
+            title: "Users",
+            icon: Users,
+            url: { pathname: "/dashboard/users" },
+          },
+        ]}
+      />
+
+      {/* settings */}
       <AppSidebarContentGroup
         state={state}
         toggleSidebar={toggleSidebar}
