@@ -77,7 +77,7 @@ export const ManageData = <T extends {}>({
                     onDeleteAction: ((id) =>
                       content.table?.delete?.onDeleteAction &&
                       content.table?.delete?.onDeleteAction(id)) as (
-                      id: string
+                      id: string | number
                     ) => Promise<void>,
                     dialogState: {
                       open: content.table.delete?.dialogState?.open,
