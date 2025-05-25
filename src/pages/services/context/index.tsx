@@ -48,7 +48,7 @@ interface Props {
   status?: User;
 }
 
-export const ServicesContextLayout: React.FC<Props> = ({
+export const ServicesContextProvider: React.FC<Props> = ({
   children,
   className,
   status,
