@@ -24,6 +24,9 @@ export const Blogs: React.FC<Props> = ({ status }) => {
       //
       stepUpdateBlogForm,
       setStepUpdateBlogForm,
+      //
+      openDialogCreateBlog,
+      setOpenDialogCreateBlog,
     },
     data: {
       blogs: { data, isLoading, isFetching },
@@ -52,8 +55,20 @@ export const Blogs: React.FC<Props> = ({ status }) => {
           trigger: { label: "Create blog", disabled: status?.role !== "ADMIN" },
           content: {
             title: "Create blog",
-            description:
-              "Enter the required information to create a new user. After submission, the user will be added to the system.",
+            description: (
+              <React.Fragment>
+                {stepCreateBlogForm === 1 &&
+                  "Choose a thumbnail for your blog post. This image will be displayed as the preview on the blog list."}
+                {stepCreateBlogForm === 2 &&
+                  "Write the Romanian title, description, and content for your blog post. Please make sure everything is well-formed."}
+                {stepCreateBlogForm === 3 &&
+                  "Write the Russian title, description, and content for your blog post. This will be the Russian version of your content."}
+                {stepCreateBlogForm === 4 &&
+                  "Write the English title, description, and content for your blog post. Ensure the content is accurate and clear."}
+                {stepCreateBlogForm === 5 &&
+                  "Choose whether to make the blog post public or private. If public, it will be visible to everyone. If private, only admins and users with proper access can view it."}
+              </React.Fragment>
+            ),
             children: (
               <CreateBlogForm
                 step={stepCreateBlogForm}
@@ -64,8 +79,15 @@ export const Blogs: React.FC<Props> = ({ status }) => {
           },
           dialogState: {
             onOpenChange: (open) => {
-              if (!open) setStepCreateBlogForm(1);
+              if (open && stepCreateBlogForm === 1)
+                setOpenDialogCreateBlog(true);
+
+              if (!open) {
+                setStepCreateBlogForm(1);
+                setOpenDialogCreateBlog(false);
+              }
             },
+            open: openDialogCreateBlog,
           },
         },
       }}

@@ -22,6 +22,9 @@ export type Content = {
   desc_ro: string;
   desc_ru: string;
   desc_en: string;
+  content_ro: string;
+  content_ru: string;
+  content_en: string;
 };
 
 export type GetBlogsResType = {

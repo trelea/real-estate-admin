@@ -26,6 +26,9 @@ export const useCreateUser = () => {
       password: undefined,
       contact: undefined,
       role: undefined,
+      viber: undefined,
+      whatsapp: undefined,
+      telegram: undefined,
     },
   });
 
@@ -38,6 +41,12 @@ export const useCreateUser = () => {
     data.append("password", values.password);
     data.append("contact", values.contact);
     values.role && data.append("role", values.role);
+    /**
+     * socials contacts
+     */
+    values.viber && data.append("viber", values.viber);
+    values.whatsapp && data.append("whatsapp", values.whatsapp);
+    values.telegram && data.append("telegram", values.telegram);
 
     const response = await createUser({
       data,

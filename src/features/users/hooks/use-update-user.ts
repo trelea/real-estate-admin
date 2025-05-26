@@ -45,6 +45,12 @@ export const useUpdateUser = ({ user }: Props) => {
       contact: user.profile.contact || "",
       role: user.role,
       thumbnail: user.profile.thumbnail || undefined,
+      /**
+       * social contacts
+       */
+      viber: user.profile?.viber || undefined,
+      whatsapp: user.profile?.whatsapp || undefined,
+      telegram: user.profile?.telegram || undefined,
     },
   });
 

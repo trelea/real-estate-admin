@@ -30,6 +30,9 @@ export const useCreateBlog = () => {
       desc_en: undefined,
       desc_ro: undefined,
       desc_ru: undefined,
+      content_en: undefined,
+      content_ro: undefined,
+      content_ru: undefined,
     },
   });
 
@@ -47,6 +50,9 @@ export const useCreateBlog = () => {
     data.append("desc_en", values.desc_en);
     data.append("desc_ro", values.desc_ro);
     data.append("desc_ru", values.desc_ru);
+    data.append("content_en", values.content_en);
+    data.append("content_ro", values.content_ro);
+    data.append("content_ru", values.content_ru);
 
     const response = await createBlog({
       data,

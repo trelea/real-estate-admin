@@ -1,3 +1,4 @@
+import TipTapKit from "@/components/tip-tap/tip-tap";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   FormControl,
@@ -32,7 +33,7 @@ interface Props {
   placeholder?: string;
   type?:
     | HTMLInputTypeAttribute
-    | Partial<"select" | "contact" | "textarea" | "check">;
+    | Partial<"select" | "contact" | "textarea" | "check" | "tip-tap">;
   select?: {
     defaultValue?: string;
     values: ROLES[];
@@ -91,7 +92,7 @@ function RenderFieldBsedOnType({
 }: {
   type:
     | HTMLInputTypeAttribute
-    | Partial<"select" | "contact" | "textarea" | "check">;
+    | Partial<"select" | "contact" | "textarea" | "check" | "tip-tap">;
   placeholder?: string;
   field: ControllerRenderProps;
   select?: {
@@ -125,6 +126,13 @@ function RenderFieldBsedOnType({
       </Select>
     );
 
+  if (type === "tip-tap")
+    return (
+      <FormControl>
+        <TipTapKit placeholder={placeholder} onValueChange={field.onChange} />
+      </FormControl>
+    );
+
   if (type === "check")
     return (
       <FormControl>
@@ -148,7 +156,7 @@ function RenderFieldBsedOnType({
           placeholder={placeholder}
           {...field}
           className="ring-0 focus-visible:ring-0 font-normal text-base w-full h-fit p-3 rounded-xl"
-          rows={10}
+          rows={2}
           defaultValue={defaultValue as string}
         />
       </FormControl>

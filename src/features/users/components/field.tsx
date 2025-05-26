@@ -17,6 +17,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ROLES } from "@/consts";
+import { cn } from "@/lib/utils";
 import React, { HTMLInputTypeAttribute } from "react";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
 
@@ -33,6 +34,7 @@ interface Props {
     values: ROLES[];
   };
   defaultValue?: unknown;
+  clasName?: string;
 }
 
 export const FieldItem: React.FC<Props> = ({
@@ -45,13 +47,14 @@ export const FieldItem: React.FC<Props> = ({
   type = "text",
   select,
   defaultValue,
+  clasName,
 }) => {
   return (
     <FormField
       control={control.control}
       name={name}
       render={({ field }) => (
-        <FormItem className="flex flex-col gap-1">
+        <FormItem className={cn("flex flex-col gap-1", clasName)}>
           {label && <FormLabel className="text-sm">{label}</FormLabel>}
           <FormControl>
             <RenderFieldBsedOnType
@@ -60,6 +63,7 @@ export const FieldItem: React.FC<Props> = ({
               field={field}
               select={select ? select : undefined}
               defaultValue={defaultValue}
+              clasName={clasName}
             />
           </FormControl>
           {description && <FormDescription>{description}</FormDescription>}
@@ -76,6 +80,7 @@ function RenderFieldBsedOnType({
   field,
   select,
   defaultValue,
+  clasName,
 }: {
   type: HTMLInputTypeAttribute | Partial<"select" | "contact">;
   placeholder?: string;
@@ -85,6 +90,7 @@ function RenderFieldBsedOnType({
     values: ROLES[];
   };
   defaultValue: unknown;
+  clasName?: string;
 }) {
   if (type === "select" && select)
     return (
@@ -93,7 +99,12 @@ function RenderFieldBsedOnType({
         defaultValue={field.value || defaultValue}
       >
         <FormControl>
-          <SelectTrigger className="ring-0 focus-visible:ring-0 font-normal text-base w-full h-fit p-3 rounded-xl py-[22px]">
+          <SelectTrigger
+            className={cn(
+              "ring-0 focus-visible:ring-0 font-normal text-base w-full h-fit p-3 rounded-xl py-[22px]",
+              clasName
+            )}
+          >
             <SelectValue
               placeholder={field.value || select.defaultValue}
               className="m-0 p-0 h-fit w-full flex-none"
@@ -116,7 +127,10 @@ function RenderFieldBsedOnType({
         <PhoneInput
           placeholder={placeholder}
           {...field}
-          className="ring-0 focus-visible:ring-0 font-normal text-base w-full h-fit p-3 rounded-r-xl"
+          className={cn(
+            "ring-0 focus-visible:ring-0 font-normal text-base w-full h-fit p-3 rounded-r-xl",
+            clasName
+          )}
           defaultValue={defaultValue as string}
         />
       </FormControl>
@@ -128,7 +142,10 @@ function RenderFieldBsedOnType({
         <PasswordInput
           placeholder={placeholder}
           {...field}
-          className="ring-0 focus-visible:ring-0 font-normal text-base w-full h-fit p-3 rounded-xl"
+          className={cn(
+            "ring-0 focus-visible:ring-0 font-normal text-base w-full h-fit p-3 rounded-xl",
+            clasName
+          )}
           defaultValue={defaultValue as string}
         />
       </FormControl>
@@ -140,7 +157,10 @@ function RenderFieldBsedOnType({
         type={type}
         placeholder={placeholder}
         {...field}
-        className="ring-0 focus-visible:ring-0 font-normal text-base w-full h-fit p-3 rounded-xl"
+        className={cn(
+          "ring-0 focus-visible:ring-0 font-normal text-base w-full h-fit p-3 rounded-xl",
+          clasName
+        )}
         defaultValue={defaultValue as string}
       />
     </FormControl>
