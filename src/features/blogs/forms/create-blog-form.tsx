@@ -40,12 +40,21 @@ export const CreateBlogForm: React.FC<Props> = ({ step, next, prev }) => {
               placeholder="Titlu"
               displayErrorMessage
             />
+
             <FieldItem
               name="desc_ro"
               type="textarea"
               control={form}
               label="Descriere"
               placeholder="Descriere"
+              displayErrorMessage
+            />
+
+            <FieldItem
+              name="content_ro"
+              type="tip-tap"
+              control={form}
+              label="Content"
               displayErrorMessage
             />
           </React.Fragment>
@@ -61,12 +70,21 @@ export const CreateBlogForm: React.FC<Props> = ({ step, next, prev }) => {
               placeholder="Введите заголовок"
               displayErrorMessage
             />
+
             <FieldItem
               name="desc_ru"
               type="textarea"
               control={form}
               label="Описание"
               placeholder="Введите описание"
+              displayErrorMessage
+            />
+
+            <FieldItem
+              name="content_ru"
+              type="tip-tap"
+              control={form}
+              label="Контент"
               displayErrorMessage
             />
           </React.Fragment>
@@ -82,6 +100,7 @@ export const CreateBlogForm: React.FC<Props> = ({ step, next, prev }) => {
               placeholder="Title"
               displayErrorMessage
             />
+
             <FieldItem
               name="desc_en"
               type="textarea"
@@ -91,25 +110,35 @@ export const CreateBlogForm: React.FC<Props> = ({ step, next, prev }) => {
               displayErrorMessage
             />
 
-            <div className="border p-4 rounded-xl shadow-xs">
-              <FieldItem
-                name="status"
-                type="check"
-                control={form}
-                label={
-                  <div className="space-y-1">
-                    <FormLabel>Make this blog post public</FormLabel>
-                    <FormDescription>
-                      If checked, the blog post will be visible to everyone. If
-                      unchecked, it will be private and only accessible by
-                      admins and dashboard users.
-                    </FormDescription>
-                  </div>
-                }
-                className="flex-row-reverse w-fit items-start gap-4"
-              />
-            </div>
+            <FieldItem
+              name="content_en"
+              type="tip-tap"
+              control={form}
+              label="Content"
+              displayErrorMessage
+            />
           </React.Fragment>
+        )}
+
+        {step === 5 && (
+          <div className="border p-4 rounded-xl shadow-xs">
+            <FieldItem
+              name="status"
+              type="check"
+              control={form}
+              label={
+                <div className="space-y-1">
+                  <FormLabel>Make this blog post public</FormLabel>
+                  <FormDescription>
+                    If checked, the blog post will be visible to everyone. If
+                    unchecked, it will be private and only accessible by admins
+                    and dashboard users.
+                  </FormDescription>
+                </div>
+              }
+              className="flex-row-reverse w-fit items-start gap-4"
+            />
+          </div>
         )}
 
         <DialogFooter className="w-full h-fit m-0 p-0">
@@ -136,10 +165,10 @@ export const CreateBlogForm: React.FC<Props> = ({ step, next, prev }) => {
             )}
 
             <span className="font-semibold text-base text-foreground">
-              {step}/4
+              {step}/5
             </span>
 
-            {step !== 4 && (
+            {step !== 5 && (
               <Button
                 className="text-base font-medium px-6 py-2 h-fit w-fit rounded-lg"
                 onClick={async () => {
@@ -152,18 +181,32 @@ export const CreateBlogForm: React.FC<Props> = ({ step, next, prev }) => {
                     if (
                       !(
                         (await form.trigger("title_ro")) &&
-                        (await form.trigger("desc_ro"))
+                        (await form.trigger("desc_ro")) &&
+                        (await form.trigger("content_ro"))
                       )
                     )
                       return;
                   }
 
-                  // setp two
+                  // setp three
                   if (step === 3) {
                     if (
                       !(
                         (await form.trigger("title_ru")) &&
-                        (await form.trigger("desc_ru"))
+                        (await form.trigger("desc_ru")) &&
+                        (await form.trigger("content_ru"))
+                      )
+                    )
+                      return;
+                  }
+
+                  // setp four
+                  if (step === 4) {
+                    if (
+                      !(
+                        (await form.trigger("title_en")) &&
+                        (await form.trigger("desc_en")) &&
+                        (await form.trigger("content_en"))
                       )
                     )
                       return;
@@ -177,7 +220,7 @@ export const CreateBlogForm: React.FC<Props> = ({ step, next, prev }) => {
               </Button>
             )}
 
-            {step === 4 && (
+            {step === 5 && (
               <Button
                 disabled={isLoading}
                 className="text-base font-medium px-6 py-2 h-fit w-fit rounded-lg"

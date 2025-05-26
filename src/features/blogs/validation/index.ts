@@ -18,6 +18,10 @@ export const createBlogSchema = z.object({
   desc_ro: z.string(),
   desc_ru: z.string(),
   desc_en: z.string(),
+
+  content_ro: z.string(),
+  content_ru: z.string(),
+  content_en: z.string(),
 });
 
 export const updateBlogSchema = z.object({
@@ -42,4 +46,8 @@ export const updateBlogSchema = z.object({
   desc_ro: z.string().optional(),
   desc_ru: z.string().optional(),
   desc_en: z.string().optional(),
+
+  content_ro: z.string().optional(),
+  content_ru: z.string().optional(),
+  content_en: z.string().optional(),
 });

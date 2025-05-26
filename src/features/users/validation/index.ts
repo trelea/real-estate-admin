@@ -18,6 +18,24 @@ export const createUserSchema = z.object({
     .string()
     .refine(isValidPhoneNumber, { message: "Invalid phone number" }),
   role: z.string().optional(),
+  /**
+   * social contacts
+   */
+  viber: z
+    .string()
+    .refine(isValidPhoneNumber, { message: "Invalid Viber phone number" })
+    .optional(),
+  whatsapp: z
+    .string()
+    .refine(isValidPhoneNumber, { message: "Invalid Viber phone number" })
+    .optional(),
+  telegram: z
+    .string()
+    .regex(/^https:\/\/t\.me\/[\w-]+$/, {
+      message:
+        "Telegram link must be in the format: https://t.me/username or just username",
+    })
+    .optional(),
 });
 
 export const updateUserSchema = z.object({
@@ -42,4 +60,22 @@ export const updateUserSchema = z.object({
     .refine(isValidPhoneNumber, { message: "Invalid phone number" })
     .optional(),
   role: z.string().optional(),
+  /**
+   * social contacts
+   */
+  viber: z
+    .string()
+    .refine(isValidPhoneNumber, { message: "Invalid Viber phone number" })
+    .optional(),
+  whatsapp: z
+    .string()
+    .refine(isValidPhoneNumber, { message: "Invalid Viber phone number" })
+    .optional(),
+  telegram: z
+    .string()
+    .regex(/^https:\/\/t\.me\/[\w-]+$/, {
+      message:
+        "Telegram link must be in the format: https://t.me/username or just username",
+    })
+    .optional(),
 });

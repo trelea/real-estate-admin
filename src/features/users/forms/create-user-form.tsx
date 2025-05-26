@@ -4,6 +4,12 @@ import { FieldItem, FieldItemFile } from "../components";
 import { Button } from "@/components/ui/button";
 import { ROLES } from "@/consts";
 import { useCreateUser } from "../hooks";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 interface Props {}
 
@@ -81,6 +87,38 @@ export const CreateUserForm: React.FC<Props> = ({}) => {
           }}
           displayErrorMessage
         />
+        <Accordion type="single" collapsible>
+          <AccordionItem value="social-contacts">
+            <AccordionTrigger>Social Contacts</AccordionTrigger>
+            <AccordionContent className="grid grid-cols-2 gap-4">
+              <FieldItem
+                name="viber"
+                type="contact"
+                control={form}
+                label="Viber"
+                placeholder="Viber phone number"
+                displayErrorMessage
+              />
+              <FieldItem
+                name="whatsapp"
+                type="contact"
+                control={form}
+                label="WhatsApp"
+                placeholder="WhatsApp phone number"
+                displayErrorMessage
+              />
+              <FieldItem
+                clasName="col-span-2"
+                name="telegram"
+                type="text"
+                control={form}
+                label="Telegram"
+                placeholder="Enter Telegram username or URL (e.g., https://t.me/username)"
+                displayErrorMessage
+              />
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
 
         <Button
           disabled={isLoading}

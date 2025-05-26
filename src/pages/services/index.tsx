@@ -27,6 +27,9 @@ export const Services: React.FC<Props> = ({ status }) => {
       //
       stepUpdateServiceForm,
       setStepUpdateServiceForm,
+      //
+      openDialogCreateService,
+      setOpenDialogCreateService,
     },
   } = React.useContext<ServicesContextProps>(ServicesContext);
   const [deleteService, deleteServiceLoading] = useDeleteService();
@@ -67,8 +70,15 @@ export const Services: React.FC<Props> = ({ status }) => {
 
           dialogState: {
             onOpenChange: (open) => {
-              if (!open) setStepCreateServiceForm(1);
+              if (open && stepCreateServiceForm === 1)
+                setOpenDialogCreateService(true);
+
+              if (!open) {
+                setStepCreateServiceForm(1);
+                setOpenDialogCreateService(false);
+              }
             },
+            open: openDialogCreateService,
           },
         },
       }}
