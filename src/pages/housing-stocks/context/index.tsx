@@ -57,10 +57,10 @@ export const HousingStocksContextProvider: React.FC<Props> = ({
   const [openDialogCreateHousingStock, setOpenDialogCreateHousingStock] =
     React.useState<boolean>(false);
 
-  const housingStocks = useGetHousingStocksQuery(
-    { page: uriQueries.page, search: uriQueries.search },
-    { refetchOnMountOrArgChange: false }
-  );
+  const housingStocks = useGetHousingStocksQuery({
+    page: uriQueries.page,
+    search: uriQueries.search,
+  });
 
   return (
     <HousingStocksContext.Provider

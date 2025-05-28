@@ -70,13 +70,11 @@ export const Services: React.FC<Props> = ({ status }) => {
 
           dialogState: {
             onOpenChange: (open) => {
-              if (open && stepCreateServiceForm === 1)
-                setOpenDialogCreateService(true);
+              open
+                ? setOpenDialogCreateService(true)
+                : setOpenDialogCreateService(false);
 
-              if (!open) {
-                setStepCreateServiceForm(1);
-                setOpenDialogCreateService(false);
-              }
+              setStepCreateServiceForm(1);
             },
             open: openDialogCreateService,
           },

@@ -57,10 +57,10 @@ export const HouseFeaturesContextProvider: React.FC<Props> = ({
   const [openDialogCreateHouseFeature, setOpenDialogCreateHouseFeature] =
     React.useState<boolean>(false);
 
-  const houseFeatures = useGetHouseFeaturesQuery(
-    { page: uriQueries.page, search: uriQueries.search },
-    { refetchOnMountOrArgChange: false }
-  );
+  const houseFeatures = useGetHouseFeaturesQuery({
+    page: uriQueries.page,
+    search: uriQueries.search,
+  });
 
   return (
     <HouseFeaturesContext.Provider

@@ -2,8 +2,11 @@ import React from "react";
 import { SidebarContent } from "../ui/sidebar";
 import { AppSidebarContentGroup } from "./app-sidebar-content-group";
 import {
+  BookType,
   Building,
+  EarthLock,
   HandPlatter,
+  Handshake,
   House,
   MapPinned,
   Newspaper,
@@ -139,6 +142,21 @@ export const AppSidebarContent: React.FC<Props> = ({
             title: "Blogs",
             icon: Newspaper,
             url: { pathname: "/dashboard/blogs" },
+          },
+          {
+            title: "Privacy Policy",
+            icon: EarthLock,
+            url: { pathname: "/dashboard/privacy-policy" },
+          },
+          {
+            title: "Terms and Conditions",
+            icon: Handshake,
+            url: { pathname: "/dashboard/terms-and-conditions" },
+          },
+          {
+            title: "About Us",
+            icon: BookType,
+            url: { pathname: "/dashboard/about-us" },
           },
         ]}
       />

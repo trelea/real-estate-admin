@@ -81,10 +81,10 @@ export const ServicesContextProvider: React.FC<Props> = ({
   const [stepUpdateServiceForm, setStepUpdateServiceForm] =
     React.useState<number>(1);
 
-  const services = useGetServicesQuery(
-    { page: uriQueries.page, search: uriQueries.search },
-    { refetchOnMountOrArgChange: false }
-  );
+  const services = useGetServicesQuery({
+    page: uriQueries.page,
+    search: uriQueries.search,
+  });
 
   return (
     <ServicesContext.Provider

@@ -79,13 +79,11 @@ export const Blogs: React.FC<Props> = ({ status }) => {
           },
           dialogState: {
             onOpenChange: (open) => {
-              if (open && stepCreateBlogForm === 1)
-                setOpenDialogCreateBlog(true);
+              open
+                ? setOpenDialogCreateBlog(true)
+                : setOpenDialogCreateBlog(false);
 
-              if (!open) {
-                setStepCreateBlogForm(1);
-                setOpenDialogCreateBlog(false);
-              }
+              setStepCreateBlogForm(1);
             },
             open: openDialogCreateBlog,
           },

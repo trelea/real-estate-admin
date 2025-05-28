@@ -25,3 +25,10 @@ export * from "./commercials";
  * Terrains
  */
 export * from "./terrains";
+
+/**
+ * costumizable stuff
+ */
+export * from "./privacy-policy";
+export * from "./about-us";
+export * from "./terms-and-conditions";

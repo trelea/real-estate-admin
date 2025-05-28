@@ -128,8 +128,12 @@ function RenderFieldBsedOnType({
 
   if (type === "tip-tap")
     return (
-      <FormControl>
-        <TipTapKit placeholder={placeholder} onValueChange={field.onChange} />
+      <FormControl className="w-full">
+        <TipTapKit
+          className="h-72"
+          placeholder={placeholder}
+          onValueChange={field.onChange}
+        />
       </FormControl>
     );
 
