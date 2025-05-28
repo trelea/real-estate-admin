@@ -41,6 +41,9 @@ import {
   Services,
   HousingStocks,
   Conditions,
+  AboutUs,
+  TermsAndConditions,
+  PrivacyPolicy,
 } from "@/pages";
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router";
@@ -103,6 +106,19 @@ export const Router: React.FC<Props> = ({}) => {
             Component: Conditions,
             Context: ConditionsContextProvider,
           }),
+        },
+
+        /**
+         * costumizable about us, terms and conditions and privacy content
+         */
+        { path: "about-us", Component: withAuth({ Component: AboutUs }) },
+        {
+          path: "terms-and-conditions",
+          Component: withAuth({ Component: TermsAndConditions }),
+        },
+        {
+          path: "privacy-policy",
+          Component: withAuth({ Component: PrivacyPolicy }),
         },
 
         /**

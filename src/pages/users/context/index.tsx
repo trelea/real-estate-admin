@@ -57,10 +57,10 @@ export const UsersContextProvider: React.FC<Props> = ({
   const [openDialogCreateUser, setOpenDialogCreateUser] =
     React.useState<boolean>(false);
 
-  const users = useGetUsersQuery(
-    { page: uriQueries.page, search: uriQueries.search },
-    { refetchOnMountOrArgChange: false }
-  );
+  const users = useGetUsersQuery({
+    page: uriQueries.page,
+    search: uriQueries.search,
+  });
 
   return (
     <UsersContext.Provider

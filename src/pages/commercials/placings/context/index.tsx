@@ -61,10 +61,10 @@ export const CommercialPlacingsContextProvider: React.FC<Props> = ({
     setOpenDialogCreateCommercialPlacing,
   ] = React.useState<boolean>(false);
 
-  const commercialPlacings = useGetCommercialPlacingsQuery(
-    { page: uriQueries.page, search: uriQueries.search },
-    { refetchOnMountOrArgChange: false }
-  );
+  const commercialPlacings = useGetCommercialPlacingsQuery({
+    page: uriQueries.page,
+    search: uriQueries.search,
+  });
 
   return (
     <CommercialPlacingsContext.Provider

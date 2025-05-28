@@ -15,4 +15,10 @@ export default [
   "commercials-placings",
   "terrains-usabilities",
   "terrains-features",
+  /**
+   * costumizable stuff
+   */
+  "about-us",
+  "privacy-policy",
+  "terms-and-conditions",
 ] satisfies string[];

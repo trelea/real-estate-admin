@@ -59,10 +59,10 @@ export const TerrainFeaturesContextProvider: React.FC<Props> = ({
   const [openDialogCreateTerrainFeature, setOpenDialogCreateTerrainFeature] =
     React.useState<boolean>(false);
 
-  const terrainFeatures = useGetTerrainFeaturesQuery(
-    { page: uriQueries.page, search: uriQueries.search },
-    { refetchOnMountOrArgChange: false }
-  );
+  const terrainFeatures = useGetTerrainFeaturesQuery({
+    page: uriQueries.page,
+    search: uriQueries.search,
+  });
 
   return (
     <TerrainFeaturesContext.Provider

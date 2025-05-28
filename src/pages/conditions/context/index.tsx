@@ -54,10 +54,10 @@ export const ConditionsContextProvider: React.FC<Props> = ({
   const [openDialogCreateCondition, setOpenDialogCreateCondition] =
     React.useState<boolean>(false);
 
-  const conditions = useGetConditionsQuery(
-    { page: uriQueries.page, search: uriQueries.search },
-    { refetchOnMountOrArgChange: false }
-  );
+  const conditions = useGetConditionsQuery({
+    page: uriQueries.page,
+    search: uriQueries.search,
+  });
 
   return (
     <ConditionsContext.Provider

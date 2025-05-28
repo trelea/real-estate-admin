@@ -20,7 +20,8 @@ import React from "react";
 const HeadingToolbar = React.forwardRef<
   HTMLButtonElement,
   React.HTMLAttributes<HTMLButtonElement>
->(({ className, onClick, children, ...props }) => {
+  // @ts-ignore
+>(({ className, onClick, children, ...props }, ref) => {
   const { editor } = useToolbar();
 
   if (!editor) {

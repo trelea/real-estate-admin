@@ -79,10 +79,10 @@ export const BlogsContextProvider: React.FC<Props> = ({
     React.useState<boolean>(false);
   const [stepUpdateBlogForm, setStepUpdateBlogForm] = React.useState<number>(1);
 
-  const blogs = useGetBlogsQuery(
-    { page: uriQueries.page, search: uriQueries.search },
-    { refetchOnMountOrArgChange: false }
-  );
+  const blogs = useGetBlogsQuery({
+    page: uriQueries.page,
+    search: uriQueries.search,
+  });
 
   return (
     <BlogsContext.Provider

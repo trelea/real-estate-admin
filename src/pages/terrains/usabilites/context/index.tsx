@@ -61,10 +61,10 @@ export const TerrainUsabilitiesContextProvider: React.FC<Props> = ({
     setOpenDialogCreateTerrainUsability,
   ] = React.useState<boolean>(false);
 
-  const terrainUsabilities = useGetTerrainUsabilitiesQuery(
-    { page: uriQueries.page, search: uriQueries.search },
-    { refetchOnMountOrArgChange: false }
-  );
+  const terrainUsabilities = useGetTerrainUsabilitiesQuery({
+    page: uriQueries.page,
+    search: uriQueries.search,
+  });
 
   return (
     <TerrainUsabilitiesContext.Provider

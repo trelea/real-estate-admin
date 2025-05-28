@@ -61,10 +61,10 @@ export const CommercialFeaturesContextProvider: React.FC<Props> = ({
     setOpenDialogCreateCommercialFeature,
   ] = React.useState<boolean>(false);
 
-  const commercialFeatures = useGetCommercialFeaturesQuery(
-    { page: uriQueries.page, search: uriQueries.search },
-    { refetchOnMountOrArgChange: false }
-  );
+  const commercialFeatures = useGetCommercialFeaturesQuery({
+    page: uriQueries.page,
+    search: uriQueries.search,
+  });
 
   return (
     <CommercialFeaturesContext.Provider

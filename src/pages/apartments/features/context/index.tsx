@@ -59,10 +59,10 @@ export const ApartmentFeaturesContextProvider: React.FC<Props> = ({
     setOpenDialogCreateApartmentFeature,
   ] = React.useState<boolean>(false);
 
-  const apartmentFeatures = useGetApartmentFeaturesQuery(
-    { page: uriQueries.page, search: uriQueries.search },
-    { refetchOnMountOrArgChange: false }
-  );
+  const apartmentFeatures = useGetApartmentFeaturesQuery({
+    page: uriQueries.page,
+    search: uriQueries.search,
+  });
 
   return (
     <ApartmentFeaturesContext.Provider

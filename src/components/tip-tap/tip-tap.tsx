@@ -12,10 +12,85 @@ import { RedoToolbar } from "@/components/toolbars/redo";
 import { StrikeThroughToolbar } from "@/components/toolbars/strikethrough";
 import { ToolbarProvider } from "@/components/toolbars/toolbar-provider";
 import { UndoToolbar } from "@/components/toolbars/undo";
-import { EditorContent, type Extension, useEditor } from "@tiptap/react";
+import {
+  EditorContent,
+  type Extension as ExtensionType,
+  useEditor,
+} from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { HeadingToolbar } from "../toolbars/heading";
 import React from "react";
+import { cn } from "@/lib/utils";
+import TextStyle from "@tiptap/extension-text-style";
+import { FontSizeToolbar } from "../toolbars/font-size";
+import { Extension } from "@tiptap/react";
+
+declare module "@tiptap/core" {
+  interface Commands<ReturnType> {
+    fontSize: {
+      /**
+       * Set the font size
+       */
+      setFontSize: (size: string) => ReturnType;
+      /**
+       * Unset the font size
+       */
+      unsetFontSize: () => ReturnType;
+    };
+  }
+}
+
+export const FontSize = Extension.create({
+  name: "fontSize",
+
+  addOptions() {
+    return {
+      types: ["textStyle"],
+    };
+  },
+
+  addGlobalAttributes() {
+    return [
+      {
+        types: this.options.types,
+        attributes: {
+          fontSize: {
+            default: null,
+            parseHTML: (element) =>
+              element.style.fontSize.replace(/['"]+/g, ""),
+            renderHTML: (attributes) => {
+              if (!attributes.fontSize) {
+                return {};
+              }
+
+              return {
+                style: `font-size: ${attributes.fontSize}`,
+              };
+            },
+          },
+        },
+      },
+    ];
+  },
+
+  addCommands() {
+    return {
+      setFontSize:
+        (fontSize) =>
+        ({ chain }) => {
+          return chain().setMark("textStyle", { fontSize }).run();
+        },
+      unsetFontSize:
+        () =>
+        ({ chain }) => {
+          return chain()
+            .setMark("textStyle", { fontSize: null })
+            .removeEmptyTextStyle()
+            .run();
+        },
+    };
+  },
+});
 
 const extensions = [
   StarterKit.configure({
@@ -51,16 +126,25 @@ const extensions = [
       },
     },
   }),
+  FontSize,
+  TextStyle.configure({ mergeNestedSpanStyles: true }),
 ];
 
 interface Props {
   placeholder?: string;
   onValueChange?: (data?: string) => void;
+  className?: string;
+  withSubmitButton?: React.ReactNode;
 }
 
-const TipTapKit: React.FC<Props> = ({ placeholder, onValueChange }) => {
+const TipTapKit: React.FC<Props> = ({
+  placeholder,
+  onValueChange,
+  className = false,
+  withSubmitButton,
+}) => {
   const editor = useEditor({
-    extensions: extensions as Extension[],
+    extensions: extensions as ExtensionType[],
     content: placeholder,
     immediatelyRender: false,
     editable: true,
@@ -71,35 +155,40 @@ const TipTapKit: React.FC<Props> = ({ placeholder, onValueChange }) => {
     return null;
   }
   return (
-    <div className="border w-full relative rounded-md overflow-hidden pb-3">
-      <div className="flex w-full items-center py-2 px-2 justify-between border-b  sticky top-0 left-0 bg-background z-20">
+    <div className="border w-full relative rounded-md overflow-hidden">
+      <div className="flex p-2 justify-between items-center w-full border-b sticky top-0 left-0 bg-background z-20">
         <ToolbarProvider editor={editor}>
-          <div className="flex items-center w-full justify-between">
+          <div className="flex items-center p-1 gap-2 max-w-full overflow-x-scroll">
             <UndoToolbar />
             <RedoToolbar />
+            {/* font size */}
+            <FontSizeToolbar />
             <HeadingToolbar />
-            {/* <Separator orientation="vertical" className="h-7" /> */}
             <BoldToolbar />
             <ItalicToolbar />
             <StrikeThroughToolbar />
             <BulletListToolbar />
             <OrderedListToolbar />
-            {/* <CodeToolbar />
-            <CodeBlockToolbar /> */}
             <HorizontalRuleToolbar />
             <BlockquoteToolbar />
             <HardBreakToolbar />
           </div>
         </ToolbarProvider>
+        {withSubmitButton}
       </div>
+
       <div
         onClick={() => {
           editor?.chain().focus().run();
         }}
-        className="cursor-text min-h-[18rem] bg-background"
+        className="cursor-text bg-background"
       >
+        {/* min-h-72 || h-[84vh] */}
         <EditorContent
-          className="outline-none overflow-y-auto max-h-72 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100"
+          className={cn(
+            "tiptap outline-none overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 pb-10",
+            className
+          )}
           editor={editor}
         />
       </div>
