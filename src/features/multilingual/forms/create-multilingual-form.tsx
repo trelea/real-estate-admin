@@ -8,7 +8,7 @@ import { z } from "zod";
 import { createMultilingualSchema } from "../validation";
 
 interface Props {
-  form: UseFormReturn<LanguagesFieldsType>;
+  form: UseFormReturn<LanguagesFieldsType<{}>>;
   onSubmit: (
     _: z.infer<typeof createMultilingualSchema>
   ) => void | unknown | undefined;
