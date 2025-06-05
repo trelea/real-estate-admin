@@ -44,6 +44,8 @@ import {
   AboutUs,
   TermsAndConditions,
   PrivacyPolicy,
+  Locations,
+  Location,
 } from "@/pages";
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router";
@@ -60,6 +62,7 @@ import { CommercialFeaturesContextProvider } from "@/pages/commercials/features/
 import { CommercialPlacingsContextProvider } from "@/pages/commercials/placings/context";
 import { TerrainFeaturesContextProvider } from "@/pages/terrains/features/context";
 import { TerrainUsabilitiesContextProvider } from "@/pages/terrains/usabilites/context";
+import { LocationsContextProvider } from "@/pages/locations/context";
 
 interface Props {}
 
@@ -127,6 +130,23 @@ export const Router: React.FC<Props> = ({}) => {
         {
           path: "settings",
           Component: withAuth({ Component: Settings }),
+        },
+        /**
+         * locations
+         */
+        {
+          path: "locations",
+          Component: withAuth({
+            Component: Locations,
+            Context: LocationsContextProvider,
+          }),
+        },
+        {
+          path: "locations/:id",
+          Component: withAuth({
+            Component: Location,
+            Context: LocationsContextProvider,
+          }),
         },
 
         /**

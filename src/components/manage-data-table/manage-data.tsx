@@ -99,6 +99,10 @@ export const ManageData = <T extends {}>({
                         content.table.update?.dialogState?.onOpenChange,
                     },
                   },
+                  /**
+                   * access
+                   */
+                  access: content.table.access,
                 }}
               />
             )}

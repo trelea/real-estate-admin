@@ -16,7 +16,7 @@ export type UrlQueriesType = {
   limit?: number = 10;
 };
 
-export type LanguagesFieldsType = {
+export type LanguagesFieldsType<T extends {}> = T & {
   ro: string;
   ru: string;
   en: string;

@@ -21,4 +21,9 @@ export default [
   "about-us",
   "privacy-policy",
   "terms-and-conditions",
+  /**
+   * locations
+   */
+  "locations-categories",
+  "locations-subcategories",
 ] satisfies string[];
