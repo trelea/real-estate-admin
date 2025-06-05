@@ -1,4 +1,5 @@
 import React from "react";
+import { LinkProps } from "react-router";
 
 export interface DialogState {
   open?: boolean;
@@ -49,6 +50,10 @@ export interface ContentProps<T extends {}> {
     }>;
 
     update: Partial<ContentUpdateProps<T>>;
+
+    access: Partial<{
+      href: (data: T) => LinkProps["to"];
+    }>;
   }>;
 }
 

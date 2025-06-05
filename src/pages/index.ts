@@ -32,3 +32,8 @@ export * from "./terrains";
 export * from "./privacy-policy";
 export * from "./about-us";
 export * from "./terms-and-conditions";
+/**
+ * locations
+ */
+export * from "./locations";
+export * from "./locations/id";

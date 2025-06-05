@@ -124,7 +124,7 @@ export const AppSidebarContent: React.FC<Props> = ({
             icon: ReceiptText,
             url: { pathname: "/dashboard/conditions" },
           },
-          { title: "Locations", icon: MapPinned, collapsible: [] },
+          { title: "Locations", icon: MapPinned, url: "/dashboard/locations" },
         ]}
       />
       {/* blogs and services */}
