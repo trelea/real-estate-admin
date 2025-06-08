@@ -5,6 +5,7 @@ import {
   BookType,
   Building,
   EarthLock,
+  GalleryVerticalEnd,
   HandPlatter,
   Handshake,
   House,
@@ -157,6 +158,11 @@ export const AppSidebarContent: React.FC<Props> = ({
             title: "About Us",
             icon: BookType,
             url: { pathname: "/dashboard/about-us" },
+          },
+          {
+            title: "Landing",
+            icon: GalleryVerticalEnd,
+            url: { pathname: "/dashboard/landing" },
           },
         ]}
       />

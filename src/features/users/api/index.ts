@@ -1,13 +1,17 @@
 import { baseApi } from "@/store/api";
 import {
-  CreateUserReqType,
-  CreateUserResType,
-  DeleteUserReqType,
-  DeleteUserResType,
-  GetUsersReqType,
-  GetUsersResType,
-  UpdateUserReqType,
-  UpdateUserResType,
+  type CreateUserReqType,
+  type CreateUserResType,
+  type DeleteUserReqType,
+  type DeleteUserResType,
+  type GetUsersReqType,
+  type GetUsersResType,
+  type UpdateUserReqType,
+  type UpdateUserResType,
+  type CreateUserCarouselReqType,
+  type DeleteUserCarouselReqType,
+  type GetUsersCarouselResType,
+  type UpdateUserCarouselReqType,
 } from "../types";
 import { DEFAULT_PAGINATION_LIMIT } from "@/consts";
 
@@ -72,6 +76,55 @@ export const usersApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: (_, __, { params }) => [{ type: "users", ...params }],
     }),
+
+    /**
+     * carousel data
+     */
+    /**
+     * GET carousel users
+     */
+    getUsersCarousel: build.query<GetUsersCarouselResType, void>({
+      query: () => ({
+        url: "/users-carousel",
+        method: "GET",
+      }),
+      providesTags: ["users-carousel"],
+    }),
+
+    /**
+     * Add user to carousel
+     */
+    createUserCarousel: build.mutation<unknown, CreateUserCarouselReqType>({
+      query: (data) => ({
+        url: "/users-carousel",
+        method: "POST",
+        data,
+      }),
+      invalidatesTags: ["users-carousel"],
+    }),
+
+    /**
+     * Update carousel entry
+     */
+    updateUserCarousel: build.mutation<unknown, UpdateUserCarouselReqType>({
+      query: ({ id, ...data }) => ({
+        url: `/users-carousel/${id}`,
+        method: "PATCH",
+        data,
+      }),
+      invalidatesTags: ["users-carousel"],
+    }),
+
+    /**
+     * Remove user from carousel
+     */
+    deleteUserCarousel: build.mutation<unknown, DeleteUserCarouselReqType>({
+      query: ({ id }) => ({
+        url: `/users-carousel/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["users-carousel"],
+    }),
   }),
 });
 
@@ -81,4 +134,11 @@ export const {
   useDeleteUserMutation,
   useUpdateUserMutation,
   useUpdateUserThumbnailMutation,
+  /**
+   * users carousel
+   */
+  useGetUsersCarouselQuery,
+  useCreateUserCarouselMutation,
+  useUpdateUserCarouselMutation,
+  useDeleteUserCarouselMutation,
 } = usersApi;

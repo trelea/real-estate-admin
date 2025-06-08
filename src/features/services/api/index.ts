@@ -11,6 +11,10 @@ import {
   type CreateServiceResType,
   type GetServicesReqType,
   type GetServicesResType,
+  type GetServicesOnLandingReqType,
+  type GetServicesOnLandingResType,
+  type PatchServiceOnLandingResType,
+  type PatchServiceOnLandingReqType,
 } from "../types";
 
 export const servicesApi = baseApi.injectEndpoints({
@@ -84,6 +88,46 @@ export const servicesApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: (_, __, { params }) => [{ type: "services", ...params }],
     }),
+
+    /**
+     * get services on landing
+     */
+    getServicesOnLanding: build.query<
+      GetServicesOnLandingResType,
+      GetServicesOnLandingReqType
+    >({
+      query: () => ({
+        url: "/services/landing",
+        method: "GET",
+      }),
+      providesTags: [{ type: "services-landing" }],
+    }),
+
+    /**
+     * patch service landing
+     */
+    patchServiceOnLanding: build.mutation<
+      PatchServiceOnLandingResType,
+      PatchServiceOnLandingReqType
+    >({
+      query: ({ id, data }) => ({
+        url: `/services/landing/${id}`,
+        method: "PATCH",
+        data,
+      }),
+      invalidatesTags: [{ type: "services-landing" }],
+    }),
+
+    /**
+     * remove service from landing
+     */
+    removeServiceFromLanding: build.mutation<void, { id: number }>({
+      query: ({ id }) => ({
+        url: `/services/landing/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: [{ type: "services-landing" }],
+    }),
   }),
 });
 
@@ -93,4 +137,7 @@ export const {
   useGetServicesQuery,
   useRemoveServiceThumbMutation,
   useUpdateServiceMutation,
+  useGetServicesOnLandingQuery,
+  usePatchServiceOnLandingMutation,
+  useRemoveServiceFromLandingMutation,
 } = servicesApi;

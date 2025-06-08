@@ -37,3 +37,7 @@ export * from "./terms-and-conditions";
  */
 export * from "./locations";
 export * from "./locations/id";
+/**
+ * landing stuff
+ */
+export * from "./landing";
