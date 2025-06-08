@@ -31,3 +31,21 @@ export type UpdateUserReqType = {
   thumbnail?: FormData;
   params?: GetUsersReqType;
 };
+
+export type GetUsersCarouselResType = {
+  data: { id: string; priority: number; user: User }[];
+};
+
+export type CreateUserCarouselReqType = {
+  user: string;
+  priority?: number;
+};
+
+export type UpdateUserCarouselReqType = {
+  id: string;
+  priority?: number;
+};
+
+export type DeleteUserCarouselReqType = {
+  id: string;
+};

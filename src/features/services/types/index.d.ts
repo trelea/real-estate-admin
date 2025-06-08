@@ -20,6 +20,13 @@ export type Service = Blog;
 export type GetServicesResType = GetBlogsResType;
 export type GetServicesReqType = GetBlogsReqType;
 
+export type GetServicesOnLandingResType = {
+  id: number;
+  service: Service;
+  position: number;
+}[];
+export type GetServicesOnLandingReqType = unknown;
+
 export type CreateServiceResType = CreateBlogResType;
 export type CreateServiceReqType = CreateBlogReqType;
 
@@ -31,3 +38,11 @@ export type UpdateServiceReqType = UpdateBlogReqType;
 
 export type RemoveServiceThumbResType = RemoveBlogThumbResType;
 export type RemoveServiceThumbReqType = RemoveBlogThumbReqType;
+
+export type PatchServiceOnLandingResType = unknown;
+export type PatchServiceOnLandingReqType = {
+  id: number;
+  data: {
+    service: string;
+  };
+};
