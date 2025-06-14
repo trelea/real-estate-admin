@@ -20,12 +20,16 @@ import { ChevronDown, LucideProps } from "lucide-react";
 interface Props {
   label: string;
   items?: {
-    title: string;
+    title: React.ReactNode;
     icon: React.ForwardRefExoticComponent<
       Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
     >;
     url?: LinkProps["to"];
-    collapsible?: { title: string; icon?: any; url?: LinkProps["to"] }[];
+    collapsible?: {
+      title: React.ReactNode;
+      icon?: any;
+      url?: LinkProps["to"];
+    }[];
   }[];
   state?: "expanded" | "collapsed";
   toggleSidebar?: () => void;
