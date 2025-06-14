@@ -2,16 +2,16 @@ import { User } from "@/features/auth/types";
 import React from "react";
 import { SidebarProvider, SidebarTrigger } from "../ui/sidebar";
 import { AppSidebar } from "../sidebar/app-sidebar";
-import { HoverCard, HoverCardContent } from "../ui/hover-card";
-import { HoverCardTrigger } from "@radix-ui/react-hover-card";
+// import { HoverCard, HoverCardContent } from "../ui/hover-card";
+// import { HoverCardTrigger } from "@radix-ui/react-hover-card";
 
 interface Props {
   status?: User;
-  children: React.ReactNode;
   loading?: boolean;
+  children: React.ReactNode;
 }
 
-export const Layout: React.FC<Props> = ({ status, children, loading }) => {
+export const Layout: React.FC<Props> = ({ status, loading, children }) => {
   return (
     <SidebarProvider
       style={{
@@ -32,7 +32,7 @@ export const Layout: React.FC<Props> = ({ status, children, loading }) => {
         </SidebarTrigger>
         {children}
         <footer className="fixed bg-background w-screen max-w-screen right-0 bottom-0 border-t shadow flex justify-end px-4">
-          <HoverCard>
+          {/* <HoverCard>
             <HoverCardTrigger asChild className="p-0 m-0 h-fit w-fit">
               <h3 className="text-sm text-foreground/75 font-semibold py-0.5">
                 Built by: <span>DevCompare</span>
@@ -55,7 +55,7 @@ export const Layout: React.FC<Props> = ({ status, children, loading }) => {
                 </a>
               </div>
             </HoverCardContent>
-          </HoverCard>
+          </HoverCard> */}
         </footer>
       </main>
     </SidebarProvider>

@@ -66,248 +66,265 @@ import { TerrainUsabilitiesContextProvider } from "@/pages/terrains/usabilites/c
 import { LocationsContextProvider } from "@/pages/locations/context";
 import { LandingContextProvider } from "@/pages/landing/context";
 
+
 interface Props {}
 
 export const Router: React.FC<Props> = ({}) => {
-  const router = createBrowserRouter([
+  const dashboardChildren = [
+    {
+      path: "users",
+      Component: withAuth({
+        Context: UsersContextProvider,
+        Component: Users,
+      }),
+    },
+    {
+      path: "blogs",
+      Component: withAuth({
+        Context: BlogsContextProvider,
+        Component: Blogs,
+      }),
+    },
+    {
+      path: "services",
+      Component: withAuth({
+        Context: ServicesContextProvider,
+        Component: Services,
+      }),
+    },
+    {
+      path: "housing-stocks",
+      Component: withAuth({
+        Context: HousingStocksContextProvider,
+        Component: HousingStocks,
+      }),
+    },
+    {
+      path: "conditions",
+      Component: withAuth({
+        Component: Conditions,
+        Context: ConditionsContextProvider,
+      }),
+    },
+
+    /**
+     * costumizable about us, terms and conditions and privacy content
+     */
+    { path: "about-us", Component: withAuth({ Component: AboutUs }) },
+    {
+      path: "terms-and-conditions",
+      Component: withAuth({ Component: TermsAndConditions }),
+    },
+    {
+      path: "privacy-policy",
+      Component: withAuth({ Component: PrivacyPolicy }),
+    },
+
+    /**
+     * settings optional
+     */
+    {
+      path: "settings",
+      Component: withAuth({ Component: Settings }),
+    },
+    /**
+     * locations
+     */
+    {
+      path: "locations",
+      Component: withAuth({
+        Component: Locations,
+        Context: LocationsContextProvider,
+      }),
+    },
+    {
+      path: "locations/:id",
+      Component: withAuth({
+        Component: Location,
+        Context: LocationsContextProvider,
+      }),
+    },
+    /**
+     * landing
+     */
+    {
+      path: "landing",
+      Component: withAuth({
+        Component: Landing,
+        Context: LandingContextProvider,
+      }),
+    },
+
+    /**
+     * Apartments
+     */
+    {
+      path: "apartments",
+      children: [
+        {
+          index: true,
+          Component: withAuth({ Component: IndexApartments }),
+        },
+        {
+          path: "features",
+          Component: withAuth({
+            Component: ApartmentFeatures,
+            Context: ApartmentFeaturesContextProvider,
+          }),
+        },
+        {
+          path: "create",
+          Component: withAuth({ Component: CreateApartment }),
+        },
+        {
+          path: ":id",
+          Component: withAuth({ Component: ShowApartment }),
+        },
+        {
+          path: ":id/edit",
+          Component: withAuth({ Component: EditApartment }),
+        },
+      ],
+    },
+
+    /**
+     * Houses
+     */
+    {
+      path: "houses",
+      children: [
+        { index: true, Component: withAuth({ Component: IndexHouses }) },
+        {
+          path: "features",
+          Component: withAuth({
+            Component: HouseFeatures,
+            Context: HouseFeaturesContextProvider,
+          }),
+        },
+        {
+          path: "create",
+          Component: withAuth({ Component: CreateHouse }),
+        },
+        {
+          path: ":id",
+          Component: withAuth({ Component: ShowHouse }),
+        },
+        {
+          path: ":id/edit",
+          Component: withAuth({ Component: EditHouse }),
+        },
+      ],
+    },
+
+    /**
+     * Commercials
+     */
+    {
+      path: "commercials",
+
+      children: [
+        {
+          index: true,
+          Component: withAuth({ Component: IndexCommercials }),
+        },
+        {
+          path: "features",
+          Component: withAuth({
+            Component: CommercialFeatures,
+            Context: CommercialFeaturesContextProvider,
+          }),
+        },
+        {
+          path: "destinations",
+          Component: withAuth({
+            Component: CommercialDestinations,
+            Context: CommercialDestinationsContextProvider,
+          }),
+        },
+        {
+          path: "placings",
+          Component: withAuth({
+            Component: CommercialPlacings,
+            Context: CommercialPlacingsContextProvider,
+          }),
+        },
+        {
+          path: "create",
+          Component: withAuth({ Component: CreateCommercial }),
+        },
+        {
+          path: ":id",
+          Component: withAuth({ Component: ShowCommercial }),
+        },
+        {
+          path: ":id/edit",
+          Component: withAuth({ Component: EditCommercial }),
+        },
+      ],
+    },
+
+    /**
+     * Terrains
+     */
+    {
+      path: "terrains",
+      children: [
+        {
+          index: true,
+          Component: withAuth({ Component: IndexTerrains }),
+        },
+        {
+          path: "features",
+          Component: withAuth({
+            Component: TerrainFeatures,
+            Context: TerrainFeaturesContextProvider,
+          }),
+        },
+        {
+          path: "usabilities",
+          Component: withAuth({
+            Component: TerrainUsabilities,
+            Context: TerrainUsabilitiesContextProvider,
+          }),
+        },
+        {
+          path: "create",
+          Component: withAuth({ Component: CreateTerrain }),
+        },
+        {
+          path: ":id",
+          Component: withAuth({ Component: ShowTerrain }),
+        },
+        {
+          path: ":id/edit",
+          Component: withAuth({ Component: EditTerrain }),
+        },
+      ],
+    },
+  ];
+  const baseRoutes = [
     {
       path: "signin",
       Component: SignIn,
     },
     {
       path: "dashboard",
-      children: [
-        {
-          path: "users",
-          Component: withAuth({
-            Context: UsersContextProvider,
-            Component: Users,
-          }),
-        },
-        {
-          path: "blogs",
-          Component: withAuth({
-            Context: BlogsContextProvider,
-            Component: Blogs,
-          }),
-        },
-        {
-          path: "services",
-          Component: withAuth({
-            Context: ServicesContextProvider,
-            Component: Services,
-          }),
-        },
-        {
-          path: "housing-stocks",
-          Component: withAuth({
-            Context: HousingStocksContextProvider,
-            Component: HousingStocks,
-          }),
-        },
-        {
-          path: "conditions",
-          Component: withAuth({
-            Component: Conditions,
-            Context: ConditionsContextProvider,
-          }),
-        },
-
-        /**
-         * costumizable about us, terms and conditions and privacy content
-         */
-        { path: "about-us", Component: withAuth({ Component: AboutUs }) },
-        {
-          path: "terms-and-conditions",
-          Component: withAuth({ Component: TermsAndConditions }),
-        },
-        {
-          path: "privacy-policy",
-          Component: withAuth({ Component: PrivacyPolicy }),
-        },
-
-        /**
-         * settings optional
-         */
-        {
-          path: "settings",
-          Component: withAuth({ Component: Settings }),
-        },
-        /**
-         * locations
-         */
-        {
-          path: "locations",
-          Component: withAuth({
-            Component: Locations,
-            Context: LocationsContextProvider,
-          }),
-        },
-        {
-          path: "locations/:id",
-          Component: withAuth({
-            Component: Location,
-            Context: LocationsContextProvider,
-          }),
-        },
-        /**
-         * landing
-         */
-        {
-          path: "landing",
-          Component: withAuth({
-            Component: Landing,
-            Context: LandingContextProvider,
-          }),
-        },
-
-        /**
-         * Apartments
-         */
-        {
-          path: "apartments",
-          children: [
-            {
-              index: true,
-              Component: withAuth({ Component: IndexApartments }),
-            },
-            {
-              path: "features",
-              Component: withAuth({
-                Component: ApartmentFeatures,
-                Context: ApartmentFeaturesContextProvider,
-              }),
-            },
-            {
-              path: "create",
-              Component: withAuth({ Component: CreateApartment }),
-            },
-            {
-              path: ":id",
-              Component: withAuth({ Component: ShowApartment }),
-            },
-            {
-              path: ":id/edit",
-              Component: withAuth({ Component: EditApartment }),
-            },
-          ],
-        },
-
-        /**
-         * Houses
-         */
-        {
-          path: "houses",
-          children: [
-            { index: true, Component: withAuth({ Component: IndexHouses }) },
-            {
-              path: "features",
-              Component: withAuth({
-                Component: HouseFeatures,
-                Context: HouseFeaturesContextProvider,
-              }),
-            },
-            {
-              path: "create",
-              Component: withAuth({ Component: CreateHouse }),
-            },
-            {
-              path: ":id",
-              Component: withAuth({ Component: ShowHouse }),
-            },
-            {
-              path: ":id/edit",
-              Component: withAuth({ Component: EditHouse }),
-            },
-          ],
-        },
-
-        /**
-         * Commercials
-         */
-        {
-          path: "commercials",
-
-          children: [
-            {
-              index: true,
-              Component: withAuth({ Component: IndexCommercials }),
-            },
-            {
-              path: "features",
-              Component: withAuth({
-                Component: CommercialFeatures,
-                Context: CommercialFeaturesContextProvider,
-              }),
-            },
-            {
-              path: "destinations",
-              Component: withAuth({
-                Component: CommercialDestinations,
-                Context: CommercialDestinationsContextProvider,
-              }),
-            },
-            {
-              path: "placings",
-              Component: withAuth({
-                Component: CommercialPlacings,
-                Context: CommercialPlacingsContextProvider,
-              }),
-            },
-            {
-              path: "create",
-              Component: withAuth({ Component: CreateCommercial }),
-            },
-            {
-              path: ":id",
-              Component: withAuth({ Component: ShowCommercial }),
-            },
-            {
-              path: ":id/edit",
-              Component: withAuth({ Component: EditCommercial }),
-            },
-          ],
-        },
-
-        /**
-         * Terrains
-         */
-        {
-          path: "terrains",
-          children: [
-            {
-              index: true,
-              Component: withAuth({ Component: IndexTerrains }),
-            },
-            {
-              path: "features",
-              Component: withAuth({
-                Component: TerrainFeatures,
-                Context: TerrainFeaturesContextProvider,
-              }),
-            },
-            {
-              path: "usabilities",
-              Component: withAuth({
-                Component: TerrainUsabilities,
-                Context: TerrainUsabilitiesContextProvider,
-              }),
-            },
-            {
-              path: "create",
-              Component: withAuth({ Component: CreateTerrain }),
-            },
-            {
-              path: ":id",
-              Component: withAuth({ Component: ShowTerrain }),
-            },
-            {
-              path: ":id/edit",
-              Component: withAuth({ Component: EditTerrain }),
-            },
-          ],
-        },
-      ],
+      children: dashboardChildren,
+    },
+  ];
+  const router = createBrowserRouter([
+    ...baseRoutes,
+    {
+      path: "en",
+      children: baseRoutes,
+    },
+    {
+      path: "ro",
+      children: baseRoutes,
+    },
+    {
+      path: "ru",
+      children: baseRoutes,
     },
   ]);
   return <RouterProvider router={router} />;

@@ -5,6 +5,8 @@ import { Skeleton } from "../ui/skeleton";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Button } from "../ui/button";
 import { LogOut } from "lucide-react";
+import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
+import { useChangeLanguage } from "../../hooks/useChangeLanguage";
 
 interface Props {
   user: User;
@@ -21,6 +23,8 @@ export const AppSidebarFooter: React.FC<Props> = ({
   state,
   toggleSidebar,
 }) => {
+  const { languages, changeLanguage, currentLang } = useChangeLanguage();
+
   return (
     <SidebarFooter className={state !== "collapsed" ? "m-0 p-6" : undefined}>
       <SidebarMenu>
@@ -34,43 +38,76 @@ export const AppSidebarFooter: React.FC<Props> = ({
             </div>
           </div>
         ) : (
-          <div
-            className="w-full flex justify-between"
-            onClick={() =>
-              state === "collapsed" && toggleSidebar && toggleSidebar()
-            }
-          >
-            <div className="flex items-center gap-3">
-              <Avatar
-                className={`${
-                  state !== "collapsed" ? "h-10 w-10" : "h-8 w-8"
-                } border`}
-              >
-                <AvatarFallback className="flex justify-center items-center">
-                  <span className="text-center">
-                    {user?.profile?.surname?.at(0)?.toUpperCase()}
-                  </span>
-                </AvatarFallback>
-                <AvatarImage
-                  className="h-10 w-10"
-                  src={user?.profile?.thumbnail as string}
-                />
-              </Avatar>
-              {state !== "collapsed" && (
-                <ul className="flex flex-col gap-1 justify-center">
-                  <li className="text-sm font-medium">
-                    {user?.profile?.surname} {user?.profile?.name}
-                  </li>
-                  <li className="text-xs">{user?.email}</li>
-                </ul>
+          <>
+            <div className="w-full mb-4">
+              {state !== "collapsed" ? (
+                <Tabs onValueChange={changeLanguage} defaultValue={currentLang}>
+                  <TabsList>
+                    {languages.map((lang) => (
+                      <TabsTrigger key={lang} value={lang} className="text-xs">
+                        <span className="text-xs">{lang.toUpperCase()}</span>
+                      </TabsTrigger>
+                    ))}
+                  </TabsList>
+                </Tabs>
+              ) : (
+                <Tabs defaultValue={currentLang}>
+                  <TabsList>
+                    <TabsTrigger
+                      value={currentLang}
+                      className="text-xs m-0 p-0"
+                      onClick={() =>
+                        state === "collapsed" &&
+                        toggleSidebar &&
+                        toggleSidebar()
+                      }
+                    >
+                      <span className="text-xs">
+                        {currentLang.toUpperCase()}
+                      </span>
+                    </TabsTrigger>
+                  </TabsList>
+                </Tabs>
               )}
             </div>
-            {state !== "collapsed" && (
-              <Button variant={"ghost"} onClick={onClick}>
-                <LogOut className="text-destructive size-5" />
-              </Button>
-            )}
-          </div>
+            <div
+              className="w-full flex justify-between"
+              onClick={() =>
+                state === "collapsed" && toggleSidebar && toggleSidebar()
+              }
+            >
+              <div className="flex items-center gap-3">
+                <Avatar
+                  className={`${
+                    state !== "collapsed" ? "h-10 w-10" : "h-8 w-8"
+                  } border`}
+                >
+                  <AvatarFallback className="flex justify-center items-center">
+                    <span className="text-center">
+                      {user?.profile?.surname?.at(0)?.toUpperCase()}
+                    </span>
+                  </AvatarFallback>
+                  <AvatarImage
+                    className="h-10 w-10"
+                    src={user?.profile?.thumbnail as string}
+                  />
+                </Avatar>
+                {state !== "collapsed" && (
+                  <ul className="flex flex-col gap-1 justify-center">
+                    <li className="text-sm font-medium">
+                      {user?.profile?.surname} {user?.profile?.name}
+                    </li>
+                    <li className="text-xs">{user?.email}</li>
+                  </ul>
+                )}
+              </div>
+              {state !== "collapsed" && (
+                <Button variant={"ghost"} onClick={onClick}>
+                  <LogOut className="text-destructive size-5" />
+                </Button>
+              )}
+            </div>
+          </>
         )}
       </SidebarMenu>
     </SidebarFooter>
