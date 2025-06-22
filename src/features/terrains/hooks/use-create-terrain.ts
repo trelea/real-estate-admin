@@ -1,8 +1,13 @@
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { createTerrainSchema } from "../validation";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { User } from "@/features/auth/types";
+import {
+  useCreateTerrainMutation,
+  useUploadTerrainMediaMutation,
+} from "../api";
+import { deserializeRtkQueryError } from "@/utils";
 
 interface Props {
   user: {
@@ -12,6 +17,11 @@ interface Props {
 }
 
 export const useCreateTerrain = ({ user }: Props) => {
+  const [createTerrain, { isLoading: isLoadingCreateTerrain }] =
+    useCreateTerrainMutation();
+  const [uploadTerrainMedia, { isLoading: isLoadingUploadTerrainMedia }] =
+    useUploadTerrainMediaMutation();
+
   const form = useForm<z.infer<typeof createTerrainSchema>>({
     resolver: zodResolver(createTerrainSchema),
     defaultValues: {
@@ -31,22 +41,55 @@ export const useCreateTerrain = ({ user }: Props) => {
       street_en: undefined,
       street_ro: undefined,
       street_ru: undefined,
-      features: undefined,
-      media: undefined,
-      /** caracteristics */
+      /** terrain characteristics */
       area: undefined,
       usability: undefined,
+      features: undefined,
+      /** media */
+      media: undefined,
     },
     mode: "onChange",
     reValidateMode: "onChange",
   });
 
-  const onSubmit = ({
+  const onSubmit = async ({
     place,
+    media,
     ...values
   }: z.infer<typeof createTerrainSchema>) => {
-    console.log(values);
+    const { error, data } = await createTerrain({
+      ...values,
+      // @ts-ignore convert boolean checkbox to enum string
+      status: values.status ? "PUBLIC" : "PRIVATE",
+    });
+    if (error) {
+      return deserializeRtkQueryError<{ message: string }>(error, {
+        toasts: [(err) => err.data.message, (err) => err.message],
+      });
+    }
+
+    if (media && media.length) {
+      for (const file of media) {
+        const { error } = await uploadTerrainMedia({
+          id: data.id,
+          data: (() => {
+            const fd = new FormData();
+            fd.append("media", file);
+            return fd;
+          })(),
+        });
+        if (error) {
+          return deserializeRtkQueryError<{ message: string }>(error, {
+            toasts: [(err) => err.data.message, (err) => err.message],
+          });
+        }
+      }
+    }
   };
 
-  return { form, onSubmit };
+  return {
+    form,
+    onSubmit,
+    isLoading: isLoadingCreateTerrain || isLoadingUploadTerrainMedia,
+  };
 };

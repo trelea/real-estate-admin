@@ -1,11 +1,13 @@
 import React from "react";
 import { useCreateHousingStock } from "../hooks";
 import { CreateMultilingualForm } from "@/features/multilingual/forms";
+import { useTranslation } from "react-i18next";
 
 interface Props {}
 
 export const CreateHousingStockForm: React.FC<Props> = ({}) => {
   const { form, onSubmit, isLoading } = useCreateHousingStock();
+  const { t } = useTranslation();
 
   return (
     <CreateMultilingualForm
@@ -14,16 +16,34 @@ export const CreateHousingStockForm: React.FC<Props> = ({}) => {
       isLoading={isLoading}
       fields={{
         ro: {
-          label: "Tip locuință (română)",
-          placeholder: "Ex: Bloc, Casă, Vilă",
+          label: t(
+            "housingStocks.form.housingStock.ro.label",
+            "Tip locuință (română)"
+          ),
+          placeholder: t(
+            "housingStocks.form.housingStock.ro.placeholder",
+            "Ex: Bloc, Casă, Vilă"
+          ),
         },
         ru: {
-          label: "Тип жилья (русский)",
-          placeholder: "Напр: Квартира, Дом, Особняк",
+          label: t(
+            "housingStocks.form.housingStock.ru.label",
+            "Тип жилья (русский)"
+          ),
+          placeholder: t(
+            "housingStocks.form.housingStock.ru.placeholder",
+            "Напр: Квартира, Дом, Особняк"
+          ),
         },
         en: {
-          label: "Housing stock type (English)",
-          placeholder: "e.g. Apartment, House, Villa",
+          label: t(
+            "housingStocks.form.housingStock.en.label",
+            "Housing stock type (English)"
+          ),
+          placeholder: t(
+            "housingStocks.form.housingStock.en.placeholder",
+            "e.g. Apartment, House, Villa"
+          ),
         },
       }}
     />

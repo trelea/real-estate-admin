@@ -9,6 +9,7 @@ import {
   UpdateLocationCategoryForm,
 } from "@/features/locations/forms";
 import { useDeleteLocationCategory } from "@/features/locations/hooks";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   status?: User;
@@ -28,6 +29,7 @@ export const Locations: React.FC<Props> = ({ status }) => {
   } = React.useContext<LocationsContextProps>(LocationsContext);
   const [deleteLocationCategory, deleteLocationCategoryLoading] =
     useDeleteLocationCategory();
+  const { t } = useTranslation();
   return (
     <ManageData<LocationCategoryType>
       /**
@@ -41,8 +43,11 @@ export const Locations: React.FC<Props> = ({ status }) => {
        * header
        */
       header={{
-        title: "Locations",
-        badge: `${data?.meta.total} locations`,
+        title: t("locations.manageTitle", "Locations"),
+        badge: t("locations.badge", {
+          count: data?.meta.total ?? 0,
+          defaultValue: "{{count}} locations",
+        }),
         search: {
           defaultValue: search,
           onValueChange: (value) =>
@@ -53,13 +58,15 @@ export const Locations: React.FC<Props> = ({ status }) => {
         },
         create: {
           trigger: {
-            label: "Create location category",
+            label: t("locations.create.trigger", "Create location category"),
             disabled: status?.role !== "ADMIN",
           },
           content: {
-            title: "Create Location Category",
-            description:
-              "Enter the required multilingual information to create a new location category. After submission, the category will be available in the system.",
+            title: t("locations.create.title", "Create Location Category"),
+            description: t(
+              "locations.create.description",
+              "Enter the required multilingual information to create a new location category. After submission, the category will be available in the system."
+            ),
             children: <CreateLocationCategoryForm />,
           },
           dialogState: {
@@ -74,7 +81,12 @@ export const Locations: React.FC<Props> = ({ status }) => {
       content={{
         table: {
           data: data?.data as LocationCategoryType[],
-          headers: ["ID", "Romanian", "Russian", "English"],
+          headers: [
+            t("locations.tableHeaders.id", "ID"),
+            t("locations.tableHeaders.ro", "Romanian"),
+            t("locations.tableHeaders.ru", "Russian"),
+            t("locations.tableHeaders.en", "English"),
+          ],
           rows: ({ ro, ru, en, id }) => [
             <div className="py-2 sm:py-4">
               <span className="font-bold text-sm">{id}</span>
@@ -96,9 +108,11 @@ export const Locations: React.FC<Props> = ({ status }) => {
            */
           update: {
             disabled: status?.role !== "ADMIN",
-            title: "Update Location Category",
-            description:
-              "Modify the multilingual details for this location category.",
+            title: t("locations.update.title", "Update Location Category"),
+            description: t(
+              "locations.update.description",
+              "Modify the multilingual details for this location category."
+            ),
             children: (category) => (
               <UpdateLocationCategoryForm category={category} />
             ),

@@ -28,4 +28,11 @@ export default [
    */
   "locations-categories",
   "locations-subcategories",
+  /**
+   *
+   */
+  "apartments",
+  "houses",
+  "terrains",
+  "commercials",
 ] satisfies string[];

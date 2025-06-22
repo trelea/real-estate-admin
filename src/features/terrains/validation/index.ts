@@ -37,8 +37,40 @@ export const createTerrainSchema = z.object({
   /**
    * caracteristics
    */
-  area: z.number().int().positive(),
+  area: z.coerce.number().int().positive(),
   usability: z.array(z.number().int().positive()).nonempty(),
 });
 
-export * from "./index";
+/* ------------------------------------------------------------------
+ * UPDATE TERRAIN FORM SCHEMA (all fields optional)
+ * ------------------------------------------------------------------*/
+export const updateTerrainSchema = z.object({
+  offert: z.array(z.enum(["SALE", "RENT"])).optional(),
+  user: z.string().uuid().optional(),
+  price: z.coerce.number().positive().optional(),
+  hot: z.boolean().optional(),
+  status: z.boolean().optional(),
+  desc_ro: z.string().optional(),
+  desc_ru: z.string().optional(),
+  desc_en: z.string().optional(),
+  location_category: z.number().int().positive().optional(),
+  location_subcategory: z.number().int().positive().optional(),
+  street_ro: z.string().optional(),
+  street_ru: z.string().optional(),
+  street_en: z.string().optional(),
+  lat: z.number().min(-90).max(90).optional(),
+  lng: z.number().min(-180).max(180).optional(),
+  place: z.string().optional(),
+  features: z.array(z.number().int().positive()).optional(),
+  media: z
+    .array(z.custom<File>())
+    .min(1, "Please select at least one file")
+    .max(10, "Please select up to 10 files")
+    .refine((files) => files.every((file) => file.size <= 5 * 1024 * 1024), {
+      message: "File size must be less than 5MB",
+      path: ["files"],
+    }),
+  // characteristics
+  area: z.coerce.number().int().positive().optional(),
+  usability: z.array(z.number().int().positive()).optional(),
+});

@@ -11,6 +11,7 @@ import {
   CreateServiceForm,
   UpdateServiceForm,
 } from "@/features/services/forms";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   status?: User;
@@ -33,6 +34,7 @@ export const Services: React.FC<Props> = ({ status }) => {
     },
   } = React.useContext<ServicesContextProps>(ServicesContext);
   const [deleteService, deleteServiceLoading] = useDeleteService();
+  const { t } = useTranslation();
   return (
     <ManageData<Service>
       loading={{
@@ -40,8 +42,11 @@ export const Services: React.FC<Props> = ({ status }) => {
         component: <TableSkeleton previewThumbSkeleton />,
       }}
       header={{
-        title: "Services",
-        badge: `${services.data?.meta.total} services`,
+        title: t("services.manageTitle", "Services"),
+        badge: t("services.badge", {
+          count: services.data?.meta.total ?? 0,
+          defaultValue: "{{count}} services",
+        }),
         search: {
           defaultValue: search,
           onValueChange: (value) =>
@@ -52,13 +57,15 @@ export const Services: React.FC<Props> = ({ status }) => {
         },
         create: {
           trigger: {
-            label: "Create service",
+            label: t("services.create.trigger", "Create service"),
             disabled: status?.role !== "ADMIN",
           },
           content: {
-            title: "Create Service",
-            description:
-              "Provide the necessary details to create a new service. Once submitted, the service will be added to the system and made available for use.",
+            title: t("services.create.title", "Create Service"),
+            description: t(
+              "services.create.description",
+              "Provide the necessary details to create a new service. Once submitted, the service will be added to the system and made available for use."
+            ),
             children: (
               <CreateServiceForm
                 step={stepCreateServiceForm}
@@ -83,7 +90,12 @@ export const Services: React.FC<Props> = ({ status }) => {
       content={{
         table: {
           data: services?.data?.data as Service[],
-          headers: ["Title", "Status", "Published", "Views"],
+          headers: [
+            t("services.tableHeaders.title", "Title"),
+            t("services.tableHeaders.status", "Status"),
+            t("services.tableHeaders.published", "Published"),
+            t("services.tableHeaders.views", "Views"),
+          ],
           rows: ({
             thumbnail,
             content,
@@ -126,17 +138,29 @@ export const Services: React.FC<Props> = ({ status }) => {
            */
           update: {
             disabled: status?.role !== "ADMIN",
-            title: "Update Service",
+            title: t("services.update.title", "Update Service"),
             description: (
               <React.Fragment>
                 {stepUpdateServiceForm === 1 &&
-                  "Update the image thumbnail for your blog post. This is the main preview image."}
+                  t(
+                    "services.update.description.step1",
+                    "Update the image thumbnail for your blog post. This is the main preview image."
+                  )}
                 {stepUpdateServiceForm === 2 &&
-                  "Edit the Romanian title and description for your blog post."}
+                  t(
+                    "services.update.description.step2",
+                    "Edit the Romanian title and description for your blog post."
+                  )}
                 {stepUpdateServiceForm === 3 &&
-                  "Edit the Russian title and description for your blog post."}
+                  t(
+                    "services.update.description.step3",
+                    "Edit the Russian title and description for your blog post."
+                  )}
                 {stepUpdateServiceForm === 4 &&
-                  "Edit the English title and description for your blog post. Adjust the visibility of your blog post. If checked, it will be public and visible to anyone. If unchecked, it will remain private and only accessible to admins and dashboard users."}
+                  t(
+                    "services.update.description.step4",
+                    "Edit the English title and description for your blog post. Adjust the visibility of your blog post. If checked, it will be public and visible to anyone. If unchecked, it will remain private and only accessible to admins and dashboard users."
+                  )}
               </React.Fragment>
             ),
             children: (service) => (

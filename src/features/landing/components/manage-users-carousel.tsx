@@ -41,6 +41,7 @@ import {
 } from "@dnd-kit/modifiers";
 import { SortableUserLink } from "./sortable-user-link";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   loading?: boolean;
@@ -64,6 +65,8 @@ export const ManageUsersCarousel: React.FC<Props> = ({
   const [usersOnCarousel, setUsersOnCarousel] = React.useState<
     GetUsersCarouselResType["data"]
   >([]);
+
+  const { t } = useTranslation();
 
   React.useEffect(
     () => setUsersOnCarousel(users_on_carousel),
@@ -102,14 +105,14 @@ export const ManageUsersCarousel: React.FC<Props> = ({
       <Card className="m-0">
         <CardHeader className="m-0 flex justify-between items-center">
           <CardTitle className="font-semibold text-xl m-0 p-0">
-            Agents Carousel
+            {t("landing.agentsCarousel")}
           </CardTitle>
 
           <Button
             className="w-fit"
             onClick={() => reorder({ carousel: usersOnCarousel })}
           >
-            Update
+            {t("landing.update")}
           </Button>
         </CardHeader>
         <CardContent className="m-0 h-full">
@@ -150,7 +153,7 @@ export const ManageUsersCarousel: React.FC<Props> = ({
             }}
           >
             <Plus />
-            <span> Add New Agent </span>
+            <span>{t("landing.addNewAgent")}</span>
           </Button>
         </CardFooter>
       </Card>

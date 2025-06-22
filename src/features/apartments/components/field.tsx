@@ -138,7 +138,7 @@ function RenderFieldBsedOnType({
       <FormControl>
         <TipTapKit
           className="h-72"
-          placeholder={placeholder}
+          value={field.value}
           onValueChange={field.onChange}
         />
       </FormControl>

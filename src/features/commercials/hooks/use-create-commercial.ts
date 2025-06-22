@@ -1,8 +1,13 @@
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { createCommercialSchema } from "../validation";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { User } from "@/features/auth/types";
+import {
+  useCreateCommercialMutation,
+  useUploadCommercialMediaMutation,
+} from "../api";
+import { deserializeRtkQueryError } from "@/utils";
 
 interface Props {
   user: {
@@ -12,6 +17,11 @@ interface Props {
 }
 
 export const useCreateCommercial = ({ user }: Props) => {
+  const [createCommercial, { isLoading: isLoadingCreateCommercial }] =
+    useCreateCommercialMutation();
+  const [uploadCommercialMedia, { isLoading: isLoadingUploadCommercialMedia }] =
+    useUploadCommercialMediaMutation();
+
   const form = useForm<z.infer<typeof createCommercialSchema>>({
     resolver: zodResolver(createCommercialSchema),
     defaultValues: {
@@ -31,26 +41,63 @@ export const useCreateCommercial = ({ user }: Props) => {
       street_en: undefined,
       street_ro: undefined,
       street_ru: undefined,
-      features: undefined,
-      media: undefined,
-      /** caracteristics */
-      floors: undefined,
-      first_line: false,
+
+      /**
+       * commercial characteristics
+       */
       area: undefined,
-      housing_conditions: undefined,
+      floors: undefined,
+      first_line: undefined,
       commercial_destinations: undefined,
       commercial_placings: undefined,
+      features: undefined,
+      housing_conditions: undefined,
+
+      /**
+       * media
+       */
+      media: undefined,
     },
     mode: "onChange",
     reValidateMode: "onChange",
   });
 
-  const onSubmit = ({
+  const onSubmit = async ({
     place,
+    media,
     ...values
   }: z.infer<typeof createCommercialSchema>) => {
-    console.log(values);
+    // console.log(values);
+    const { error, data } = await createCommercial({
+      ...values,
+      // @ts-ignore
+      status: values.status ? "PUBLIC" : "PRIVATE",
+    });
+    if (error) {
+      return deserializeRtkQueryError<{ message: string }>(error, {
+        toasts: [(err) => err.data.message, (err) => err.message],
+      });
+    }
+    media.forEach(async (image) => {
+      const { error } = await uploadCommercialMedia({
+        id: data.id,
+        data: (() => {
+          const media = new FormData();
+          media.append("media", image);
+          return media;
+        })(),
+      });
+      if (error) {
+        return deserializeRtkQueryError<{ message: string }>(error, {
+          toasts: [(err) => err.data.message, (err) => err.message],
+        });
+      }
+    });
   };
 
-  return { form, onSubmit };
+  return {
+    form,
+    onSubmit,
+    isLoading: isLoadingCreateCommercial || isLoadingUploadCommercialMedia,
+  };
 };

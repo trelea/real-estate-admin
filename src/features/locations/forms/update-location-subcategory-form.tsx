@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { LocationSubCategoryType } from "../types";
 import { UpdateMultilingualForm } from "@/features/multilingual/forms";
 import { useUpdateLocationSubCategory } from "../hooks";
@@ -16,6 +17,7 @@ export const UpdateLocationSubCategoryForm: React.FC<Props> = ({
     subcategory,
     category,
   });
+  const { t } = useTranslation();
 
   return (
     <UpdateMultilingualForm
@@ -24,16 +26,34 @@ export const UpdateLocationSubCategoryForm: React.FC<Props> = ({
       isLoading={isLoading}
       fields={{
         ro: {
-          label: "Subcategorie locație (română)",
-          placeholder: "Ex: Centru, Cartier rezidențial, Zonă industrială",
+          label: t(
+            "locations.form.subcategory.ro.label",
+            "Subcategorie locație (română)"
+          ),
+          placeholder: t(
+            "locations.form.subcategory.ro.placeholder",
+            "Ex: Centru, Cartier rezidențial, Zonă industrială"
+          ),
         },
         ru: {
-          label: "Подкатегория местоположения (русский)",
-          placeholder: "Напр: Центр, Жилой район, Промзона",
+          label: t(
+            "locations.form.subcategory.ru.label",
+            "Подкатегория местоположения (русский)"
+          ),
+          placeholder: t(
+            "locations.form.subcategory.ru.placeholder",
+            "Напр: Центр, Жилой район, Промзона"
+          ),
         },
         en: {
-          label: "Location Subcategory (English)",
-          placeholder: "e.g. Downtown, Residential area, Industrial zone",
+          label: t(
+            "locations.form.subcategory.en.label",
+            "Location Subcategory (English)"
+          ),
+          placeholder: t(
+            "locations.form.subcategory.en.placeholder",
+            "e.g. Downtown, Residential area, Industrial zone"
+          ),
         },
       }}
     />

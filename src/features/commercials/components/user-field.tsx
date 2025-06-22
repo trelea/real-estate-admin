@@ -21,14 +21,14 @@ import React from "react";
 import { Control } from "react-hook-form";
 
 interface Props {
-  controll: Control<any>;
+  control: Control<any>;
   name: string;
   label?: string;
   disabled?: boolean;
 }
 
 export const UserField: React.FC<Props> = ({
-  controll,
+  control,
   name,
   label,
   disabled,
@@ -36,60 +36,78 @@ export const UserField: React.FC<Props> = ({
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [openSelect, setOpenSelect] = React.useState<boolean>(false);
   const [search, setSearch] = React.useState<string>("");
-  const debounce = useDebounce(setSearch, 1000);
+  const [debouncedSearch, setDebouncedSearch] = React.useState<string>("");
+
+  const debouncedSetSearch = useDebounce(setDebouncedSearch, 1000);
+
+  React.useEffect(() => {
+    debouncedSetSearch(search);
+  }, [search, debouncedSetSearch]);
 
   React.useEffect(() => {
     let timer: NodeJS.Timeout;
-    if (openSelect) timer = setTimeout(() => inputRef.current?.focus(), 100);
+    if (openSelect) {
+      timer = setTimeout(() => inputRef.current?.focus(), 100);
+    }
     return () => clearTimeout(timer);
-  }, [openSelect, search]);
+  }, [openSelect]);
 
   const { data, isLoading, isFetching } = useGetUsersQuery(
     {
       page: 1,
       limit: 10,
-      search,
+      search: debouncedSearch,
     },
-    { refetchOnMountOrArgChange: false, refetchOnFocus: false }
+    {
+      refetchOnMountOrArgChange: false,
+      refetchOnFocus: false,
+      skip: !openSelect,
+    }
   );
 
   return (
     <FormField
-      control={controll}
+      control={control}
       name={name}
-      render={({ field }) => {
-        return isFetching || isLoading ? (
-          <LoadingSpinner />
-        ) : (
-          <FormItem>
-            <FormLabel>{label}</FormLabel>
-            <Select
-              onValueChange={field.onChange}
-              defaultValue={field.value}
-              open={openSelect}
-              onOpenChange={setOpenSelect}
-              disabled={disabled}
-            >
-              <FormControl>
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select Agent" className="w-full" />
-                </SelectTrigger>
-              </FormControl>
-              <SelectContent>
+      render={({ field }) => (
+        <FormItem>
+          <FormLabel>{label}</FormLabel>
+          <Select
+            onValueChange={field.onChange}
+            defaultValue={field.value}
+            open={openSelect}
+            onOpenChange={setOpenSelect}
+            disabled={disabled}
+          >
+            <FormControl>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Select Agent" className="w-full" />
+              </SelectTrigger>
+            </FormControl>
+            <SelectContent>
+              <div className="p-2">
                 <Input
                   ref={inputRef}
                   placeholder="Search Agent"
-                  onChange={({ target: { value } }) => debounce(value)}
-                  defaultValue={search}
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="mb-2"
                 />
-                {data &&
-                  data.data?.map(
+              </div>
+
+              {(isFetching || isLoading) && debouncedSearch !== search ? (
+                <div className="flex justify-center items-center py-4">
+                  <LoadingSpinner />
+                </div>
+              ) : (
+                <>
+                  {data?.data?.map(
                     ({ id, profile: { name, surname, thumbnail }, role }) => (
                       <SelectItem key={id} value={id}>
                         <div className="flex items-center gap-2">
-                          <Avatar>
+                          <Avatar className="h-6 w-6">
                             <AvatarImage src={thumbnail as string} />
-                            <AvatarFallback>
+                            <AvatarFallback className="text-xs">
                               {surname?.at(0)?.toUpperCase()}
                             </AvatarFallback>
                           </Avatar>
@@ -100,17 +118,21 @@ export const UserField: React.FC<Props> = ({
                       </SelectItem>
                     )
                   )}
-                {data?.meta.total === 0 && (
-                  <div className="flex justify-center items-center py-10">
-                    <span className="text-center w-full">No Agents Found.</span>
-                  </div>
-                )}
-              </SelectContent>
-            </Select>
-            <FormMessage className="text-xs" />
-          </FormItem>
-        );
-      }}
+
+                  {data?.meta?.total === 0 && (
+                    <div className="flex justify-center items-center py-6">
+                      <span className="text-center w-full text-sm text-muted-foreground">
+                        No Agents Found.
+                      </span>
+                    </div>
+                  )}
+                </>
+              )}
+            </SelectContent>
+          </Select>
+          <FormMessage className="text-xs" />
+        </FormItem>
+      )}
     />
   );
 };

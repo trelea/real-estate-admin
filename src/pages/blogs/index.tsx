@@ -8,6 +8,7 @@ import { User } from "@/features/auth/types";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { SetStatus } from "@/features/blogs/components/set-status";
 import { useDeleteBlog } from "@/features/blogs/hooks";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   status?: User;
@@ -33,6 +34,7 @@ export const Blogs: React.FC<Props> = ({ status }) => {
     },
   } = React.useContext<BlogsContextProps>(BlogsContext);
   const [deleteBlog, deleteBlogLoading] = useDeleteBlog();
+  const { t } = useTranslation();
 
   return (
     <ManageData<Blog>
@@ -41,8 +43,11 @@ export const Blogs: React.FC<Props> = ({ status }) => {
         component: <TableSkeleton previewThumbSkeleton />,
       }}
       header={{
-        title: "Blogs",
-        badge: `${data?.meta.total} blogs`,
+        title: t("blogs.manageTitle", "Blogs"),
+        badge: t("blogs.badge", {
+          count: data?.meta.total ?? 0,
+          defaultValue: "{{count}} blogs",
+        }),
         search: {
           defaultValue: search,
           onValueChange: (value) =>
@@ -52,21 +57,39 @@ export const Blogs: React.FC<Props> = ({ status }) => {
             })),
         },
         create: {
-          trigger: { label: "Create blog", disabled: status?.role !== "ADMIN" },
+          trigger: {
+            label: t("blogs.create.trigger", "Create blog"),
+            disabled: status?.role !== "ADMIN",
+          },
           content: {
-            title: "Create blog",
+            title: t("blogs.create.title", "Create blog"),
             description: (
               <React.Fragment>
                 {stepCreateBlogForm === 1 &&
-                  "Choose a thumbnail for your blog post. This image will be displayed as the preview on the blog list."}
+                  t(
+                    "blogs.create.description.step1",
+                    "Choose a thumbnail for your blog post. This image will be displayed as the preview on the blog list."
+                  )}
                 {stepCreateBlogForm === 2 &&
-                  "Write the Romanian title, description, and content for your blog post. Please make sure everything is well-formed."}
+                  t(
+                    "blogs.create.description.step2",
+                    "Write the Romanian title, description, and content for your blog post. Please make sure everything is well-formed."
+                  )}
                 {stepCreateBlogForm === 3 &&
-                  "Write the Russian title, description, and content for your blog post. This will be the Russian version of your content."}
+                  t(
+                    "blogs.create.description.step3",
+                    "Write the Russian title, description, and content for your blog post. This will be the Russian version of your content."
+                  )}
                 {stepCreateBlogForm === 4 &&
-                  "Write the English title, description, and content for your blog post. Ensure the content is accurate and clear."}
+                  t(
+                    "blogs.create.description.step4",
+                    "Write the English title, description, and content for your blog post. Ensure the content is accurate and clear."
+                  )}
                 {stepCreateBlogForm === 5 &&
-                  "Choose whether to make the blog post public or private. If public, it will be visible to everyone. If private, only admins and users with proper access can view it."}
+                  t(
+                    "blogs.create.description.step5",
+                    "Choose whether to make the blog post public or private. If public, it will be visible to everyone. If private, only admins and users with proper access can view it."
+                  )}
               </React.Fragment>
             ),
             children: (
@@ -92,7 +115,12 @@ export const Blogs: React.FC<Props> = ({ status }) => {
       content={{
         table: {
           data: data?.data as Blog[],
-          headers: ["Title", "Status", "Published", "Views"],
+          headers: [
+            t("blogs.tableHeaders.title", "Title"),
+            t("blogs.tableHeaders.status", "Status"),
+            t("blogs.tableHeaders.published", "Published"),
+            t("blogs.tableHeaders.views", "Views"),
+          ],
           rows: ({
             thumbnail,
             content,
@@ -135,17 +163,29 @@ export const Blogs: React.FC<Props> = ({ status }) => {
            */
           update: {
             disabled: status?.role !== "ADMIN",
-            title: "Update User",
+            title: t("blogs.update.title", "Update Blog"),
             description: (
               <React.Fragment>
                 {stepUpdateBlogForm === 1 &&
-                  "Update the image thumbnail for your blog post. This is the main preview image."}
+                  t(
+                    "blogs.update.description.step1",
+                    "Update the image thumbnail for your blog post. This is the main preview image."
+                  )}
                 {stepUpdateBlogForm === 2 &&
-                  "Edit the Romanian title and description for your blog post."}
+                  t(
+                    "blogs.update.description.step2",
+                    "Edit the Romanian title and description for your blog post."
+                  )}
                 {stepUpdateBlogForm === 3 &&
-                  "Edit the Russian title and description for your blog post."}
+                  t(
+                    "blogs.update.description.step3",
+                    "Edit the Russian title and description for your blog post."
+                  )}
                 {stepUpdateBlogForm === 4 &&
-                  "Edit the English title and description for your blog post. Adjust the visibility of your blog post. If checked, it will be public and visible to anyone. If unchecked, it will remain private and only accessible to admins and dashboard users."}
+                  t(
+                    "blogs.update.description.step4",
+                    "Edit the English title and description for your blog post. Adjust the visibility of your blog post. If checked, it will be public and visible to anyone. If unchecked, it will remain private and only accessible to admins and dashboard users."
+                  )}
               </React.Fragment>
             ),
             children: (blog) => (

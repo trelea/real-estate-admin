@@ -6,12 +6,14 @@ import { PatchTermsAndConditionsContentForm } from "@/features/terms-and-conditi
 import { TermsAndConditionsType } from "@/features/terms-and-conditions/types";
 import { User } from "@/features/auth/types";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   status?: User;
 }
 
 export const TermsAndConditions: React.FC<Props> = ({ status }) => {
+  const { t } = useTranslation();
   const { data, isLoading, isFetching } =
     useGetTermsAndConditionsContentQuery(null);
 
@@ -24,25 +26,25 @@ export const TermsAndConditions: React.FC<Props> = ({ status }) => {
             defaultValue="romanian"
           >
             <div className="flex w-full justify-between items-center mb-4">
-              <h1 className="text-xl font-medium">Edit Terms and Conditions</h1>
+              <h1 className="text-xl font-medium">{t("terms.edit")}</h1>
               <TabsList className="flex space-x-4">
                 <TabsTrigger
                   value="romanian"
                   className="text-xs xl:text-sm w-fit"
                 >
-                  Română
+                  {t("terms.romanian")}
                 </TabsTrigger>
                 <TabsTrigger
                   value="russian"
                   className="text-xs xl:text-sm w-fit"
                 >
-                  Русский
+                  {t("terms.russian")}
                 </TabsTrigger>
                 <TabsTrigger
                   value="english"
                   className="text-xs xl:text-sm w-fit"
                 >
-                  English
+                  {t("terms.english")}
                 </TabsTrigger>
               </TabsList>
             </div>

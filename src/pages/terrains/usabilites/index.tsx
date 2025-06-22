@@ -12,6 +12,7 @@ import {
   CreateTerrainUsabilityForm,
 } from "@/features/terrain-usabilities/forms";
 import { User } from "@/features/auth/types";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   status?: User;
@@ -33,6 +34,7 @@ export const TerrainUsabilities: React.FC<Props> = ({ status }) => {
   );
 
   const [deleteTerrainUsability, deleteLoading] = useDeleteTerrainUsability();
+  const { t } = useTranslation();
 
   return (
     <ManageData<TerrainUsabilityType>
@@ -41,8 +43,11 @@ export const TerrainUsabilities: React.FC<Props> = ({ status }) => {
         component: <TableSkeleton />,
       }}
       header={{
-        title: "Terrain Usabilities",
-        badge: `${data?.meta.total ?? 0} usabilities`,
+        title: t("terrainUsabilities.manageTitle", "Terrain Usabilities"),
+        badge: t("terrainUsabilities.badge", {
+          count: data?.meta.total ?? 0,
+          defaultValue: `${data?.meta.total} usabilities`,
+        }),
         search: {
           defaultValue: search,
           onValueChange: (value) =>
@@ -53,13 +58,18 @@ export const TerrainUsabilities: React.FC<Props> = ({ status }) => {
         },
         create: {
           trigger: {
-            label: "Create usability",
+            label: t("terrainUsabilities.create.trigger", "Create usability"),
             disabled: status?.role !== "ADMIN",
           },
           content: {
-            title: "Create Terrain Usability",
-            description:
-              "Fill in the terrain usability details in all supported languages. Once submitted, the usability will be added to the system and available for use in relevant modules.",
+            title: t(
+              "terrainUsabilities.create.title",
+              "Create Terrain Usability"
+            ),
+            description: t(
+              "terrainUsabilities.create.description",
+              "Fill in the terrain usability details in all supported languages. Once submitted, the usability will be added to the system and available for use in relevant modules."
+            ),
             children: <CreateTerrainUsabilityForm />,
           },
           dialogState: {
@@ -71,7 +81,12 @@ export const TerrainUsabilities: React.FC<Props> = ({ status }) => {
       content={{
         table: {
           data: data?.data as TerrainUsabilityType[],
-          headers: ["ID", "Romanian", "Russian", "English"],
+          headers: [
+            t("terrainUsabilities.tableHeaders.id", "ID"),
+            t("terrainUsabilities.tableHeaders.ro", "Romanian"),
+            t("terrainUsabilities.tableHeaders.ru", "Russian"),
+            t("terrainUsabilities.tableHeaders.en", "English"),
+          ],
           rows: ({ ro, ru, en, id }) => [
             <div className="py-2 sm:py-4">
               <span className="font-bold text-sm">{id}</span>
@@ -85,10 +100,15 @@ export const TerrainUsabilities: React.FC<Props> = ({ status }) => {
             onDeleteAction: (id) => deleteTerrainUsability(Number(id)),
           },
           update: {
-            title: "Update Terrain Usability",
+            title: t(
+              "terrainUsabilities.update.title",
+              "Update Terrain Usability"
+            ),
             disabled: status?.role !== "ADMIN" || deleteLoading,
-            description:
-              "Edit the details of an existing terrain usability. Update the multilingual names or other relevant fields to ensure the information remains accurate and current.",
+            description: t(
+              "terrainUsabilities.update.description",
+              "Edit the details of an existing terrain usability. Update the multilingual names or other relevant fields to ensure the information remains accurate and current."
+            ),
             children: (usability) => (
               <UpdateTerrainUsabilityForm terrainUsability={usability} />
             ),

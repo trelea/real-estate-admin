@@ -1,5 +1,5 @@
 import { Form } from "@/components/ui/form";
-import React from "react";
+import React, { useState } from "react";
 import { AccordionCard } from "@/components/accordion-card";
 import {
   Field,
@@ -19,6 +19,7 @@ import { User } from "@/features/auth/types";
 import { MediaField } from "@/components/media-field";
 import { CommercialFeaturesField } from "../components/commercial-features-field";
 import { MultilingualItemType } from "@/features/multilingual/types";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
 interface Props {
   user: {
@@ -28,7 +29,15 @@ interface Props {
 }
 
 export const CreateCommercialOffertForm: React.FC<Props> = ({ user }) => {
-  const { form, onSubmit } = useCreateCommercial({ user });
+  const { form, onSubmit, isLoading } = useCreateCommercial({ user });
+  const [activeTab, setActiveTab] = useState(
+    (() => {
+      if (form.formState.errors.desc_en) return "en";
+      if (form.formState.errors.desc_ro) return "ro";
+      if (form.formState.errors.desc_ru) return "ru";
+      return "ro";
+    })()
+  );
 
   return (
     <Form {...form}>
@@ -46,7 +55,7 @@ export const CreateCommercialOffertForm: React.FC<Props> = ({ user }) => {
             />
 
             <UserField
-              controll={form.control}
+              control={form.control}
               name="user"
               label="Select Agent"
               disabled={user.role !== "ADMIN"}
@@ -90,12 +99,9 @@ export const CreateCommercialOffertForm: React.FC<Props> = ({ user }) => {
             <div className="w-full col-span-1 md:col-span-2 lg:col-span-3 row-start-3">
               <Tabs
                 className="w-full"
-                defaultValue={(() => {
-                  if (form.formState.errors.desc_en) return "en";
-                  if (form.formState.errors.desc_ro) return "ro";
-                  if (form.formState.errors.desc_ru) return "ru";
-                  return "ro";
-                })()}
+                value={activeTab}
+                onValueChange={setActiveTab}
+                defaultValue="ro"
               >
                 <TabsList className="w-full">
                   <TabsTrigger value="ro">Ro</TabsTrigger>
@@ -108,8 +114,7 @@ export const CreateCommercialOffertForm: React.FC<Props> = ({ user }) => {
                     name="desc_ro"
                     type="tip-tap"
                     className="w-full"
-                    placeholder="Description Romanian"
-                    label={"Description"}
+                    label="Description"
                     displayErrorMessage
                   />
                 </TabsContent>
@@ -119,8 +124,7 @@ export const CreateCommercialOffertForm: React.FC<Props> = ({ user }) => {
                     name="desc_ru"
                     type="tip-tap"
                     className="w-full"
-                    placeholder="Description Russian"
-                    label={"Description"}
+                    label="Description"
                     displayErrorMessage
                   />
                 </TabsContent>
@@ -130,8 +134,7 @@ export const CreateCommercialOffertForm: React.FC<Props> = ({ user }) => {
                     name="desc_en"
                     type="tip-tap"
                     className="w-full"
-                    placeholder="Description English"
-                    label={"Description"}
+                    label="Description"
                     displayErrorMessage
                   />
                 </TabsContent>
@@ -201,8 +204,8 @@ export const CreateCommercialOffertForm: React.FC<Props> = ({ user }) => {
             <Field
               control={form.control}
               name="floors"
-              label="Floors"
-              placeholder="3"
+              label="Total Floors"
+              placeholder="5"
               type="number"
               className="w-full"
               displayErrorMessage
@@ -216,14 +219,6 @@ export const CreateCommercialOffertForm: React.FC<Props> = ({ user }) => {
               type="number"
               className="w-full"
               displayErrorMessage
-            />
-
-            <Field
-              control={form.control}
-              name="first_line"
-              label="First Line"
-              type="check"
-              className="flex flex-row-reverse justify-end items-center w-full"
             />
 
             <HousingConditionsField
@@ -249,6 +244,14 @@ export const CreateCommercialOffertForm: React.FC<Props> = ({ user }) => {
               name="features"
               label="Commercial Features"
             />
+
+            <Field
+              control={form.control}
+              name="first_line"
+              label="First Line"
+              type="check"
+              className="flex flex-row-reverse justify-end items-center w-full"
+            />
           </div>
         </AccordionCard>
 
@@ -262,6 +265,11 @@ export const CreateCommercialOffertForm: React.FC<Props> = ({ user }) => {
         </AccordionCard>
         <Button type="submit">Submit</Button>
       </form>
+      {isLoading && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-black/20">
+          <LoadingSpinner className="h-10 w-10 text-white" />
+        </div>
+      )}
     </Form>
   );
 };

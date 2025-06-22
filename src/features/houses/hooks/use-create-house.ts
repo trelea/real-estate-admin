@@ -3,6 +3,8 @@ import { z } from "zod";
 import { createHouseSchema } from "../validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { User } from "@/features/auth/types";
+import { useCreateHouseMutation, useUploadHouseMediaMutation } from "../api";
+import { deserializeRtkQueryError } from "@/utils";
 
 interface Props {
   user: {
@@ -12,6 +14,11 @@ interface Props {
 }
 
 export const useCreateHouse = ({ user }: Props) => {
+  const [createHouse, { isLoading: isLoadingCreate }] =
+    useCreateHouseMutation();
+  const [uploadHouseMedia, { isLoading: isLoadingUpload }] =
+    useUploadHouseMediaMutation();
+
   const form = useForm<z.infer<typeof createHouseSchema>>({
     resolver: zodResolver(createHouseSchema),
     defaultValues: {
@@ -35,7 +42,7 @@ export const useCreateHouse = ({ user }: Props) => {
       media: undefined,
 
       /**
-       * house caracteristics
+       * house characteristics
        */
       rooms: undefined,
       bathrooms: undefined,
@@ -49,12 +56,45 @@ export const useCreateHouse = ({ user }: Props) => {
     reValidateMode: "onChange",
   });
 
-  const onSubmit = ({
+  const onSubmit = async ({
     place,
+    media,
     ...values
   }: z.infer<typeof createHouseSchema>) => {
-    console.log(values);
+    const { error, data } = await createHouse({
+      ...values,
+      // @ts-ignore convert boolean checkbox to enum
+      status: values.status ? "PUBLIC" : "PRIVATE",
+    });
+
+    if (error) {
+      return deserializeRtkQueryError<{ message: string }>(error, {
+        toasts: [(err) => err.data.message, (err) => err.message],
+      });
+    }
+
+    if (media && media.length) {
+      for (const file of media) {
+        const { error } = await uploadHouseMedia({
+          id: data.id,
+          data: (() => {
+            const formData = new FormData();
+            formData.append("media", file);
+            return formData;
+          })(),
+        });
+        if (error) {
+          return deserializeRtkQueryError<{ message: string }>(error, {
+            toasts: [(err) => err.data.message, (err) => err.message],
+          });
+        }
+      }
+    }
   };
 
-  return { form, onSubmit };
+  return {
+    form,
+    onSubmit,
+    isLoading: isLoadingCreate || isLoadingUpload,
+  };
 };

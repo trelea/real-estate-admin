@@ -10,10 +10,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useTranslation } from "react-i18next";
 
 interface Props {}
 
 export const CreateUserForm: React.FC<Props> = ({}) => {
+  const { t } = useTranslation();
   const { form, onSubmit, isLoading } = useCreateUser();
   return (
     <Form {...form}>
@@ -25,7 +27,7 @@ export const CreateUserForm: React.FC<Props> = ({}) => {
           <FieldItemFile
             name="thumbnail"
             control={form}
-            label="Thumbnail"
+            label={t("users.thumbnail")}
             className="p-2 rounded-xl"
             displayErrorMessage
           />
@@ -34,8 +36,8 @@ export const CreateUserForm: React.FC<Props> = ({}) => {
             name="name"
             type="text"
             control={form}
-            label="Name"
-            placeholder="John"
+            label={t("users.name")}
+            placeholder={t("users.namePlaceholder")}
             displayErrorMessage
           />
 
@@ -43,8 +45,8 @@ export const CreateUserForm: React.FC<Props> = ({}) => {
             name="surname"
             type="text"
             control={form}
-            label="Surname"
-            placeholder="Michael"
+            label={t("users.surname")}
+            placeholder={t("users.surnamePlaceholder")}
             displayErrorMessage
           />
         </div>
@@ -53,8 +55,8 @@ export const CreateUserForm: React.FC<Props> = ({}) => {
           name="email"
           type="email"
           control={form}
-          label="Email"
-          placeholder="name@email.com"
+          label={t("users.email")}
+          placeholder={t("users.emailPlaceholder")}
           displayErrorMessage
         />
 
@@ -62,8 +64,8 @@ export const CreateUserForm: React.FC<Props> = ({}) => {
           name="password"
           type="password"
           control={form}
-          label="Password"
-          placeholder="*************"
+          label={t("users.password")}
+          placeholder={t("users.passwordPlaceholder")}
           displayErrorMessage
         />
 
@@ -71,8 +73,8 @@ export const CreateUserForm: React.FC<Props> = ({}) => {
           name="contact"
           type="contact"
           control={form}
-          label="Contact"
-          placeholder="699 89 120"
+          label={t("users.contact")}
+          placeholder={t("users.contactPlaceholder")}
           displayErrorMessage
         />
 
@@ -80,7 +82,7 @@ export const CreateUserForm: React.FC<Props> = ({}) => {
           name="role"
           type="select"
           control={form}
-          label="Role"
+          label={t("users.role")}
           select={{
             defaultValue: ROLES.USER,
             values: [ROLES.USER, ROLES.ADMIN],
@@ -89,22 +91,22 @@ export const CreateUserForm: React.FC<Props> = ({}) => {
         />
         <Accordion type="single" collapsible>
           <AccordionItem value="social-contacts">
-            <AccordionTrigger>Social Contacts</AccordionTrigger>
+            <AccordionTrigger>{t("users.socialContacts")}</AccordionTrigger>
             <AccordionContent className="grid grid-cols-2 gap-4">
               <FieldItem
                 name="viber"
                 type="contact"
                 control={form}
-                label="Viber"
-                placeholder="Viber phone number"
+                label={t("users.viber")}
+                placeholder={t("users.viberPlaceholder")}
                 displayErrorMessage
               />
               <FieldItem
                 name="whatsapp"
                 type="contact"
                 control={form}
-                label="WhatsApp"
-                placeholder="WhatsApp phone number"
+                label={t("users.whatsapp")}
+                placeholder={t("users.whatsappPlaceholder")}
                 displayErrorMessage
               />
               <FieldItem
@@ -112,8 +114,8 @@ export const CreateUserForm: React.FC<Props> = ({}) => {
                 name="telegram"
                 type="text"
                 control={form}
-                label="Telegram"
-                placeholder="Enter Telegram username or URL (e.g., https://t.me/username)"
+                label={t("users.telegram")}
+                placeholder={t("users.telegramPlaceholder")}
                 displayErrorMessage
               />
             </AccordionContent>
@@ -125,7 +127,7 @@ export const CreateUserForm: React.FC<Props> = ({}) => {
           type="submit"
           className="w-full font-normal text-base h-fit p-0 m-0 py-3 rounded-xl"
         >
-          Create
+          {t("users.create")}
         </Button>
       </form>
     </Form>

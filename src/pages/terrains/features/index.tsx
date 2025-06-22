@@ -9,6 +9,7 @@ import {
   CreateTerrainFeatureForm,
 } from "@/features/terrain-features/forms";
 import { User } from "@/features/auth/types";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   status?: User;
@@ -28,6 +29,7 @@ export const TerrainFeatures: React.FC<Props> = ({ status }) => {
   } = React.useContext<TerrainFeaturesContextProps>(TerrainFeaturesContext);
 
   const [deleteTerrainFeature, deleteLoading] = useDeleteTerrainFeature();
+  const { t } = useTranslation();
 
   return (
     <ManageData<TerrainFeatureType>
@@ -42,8 +44,11 @@ export const TerrainFeatures: React.FC<Props> = ({ status }) => {
        * header
        */
       header={{
-        title: "Terrain Features",
-        badge: `${data?.meta.total ?? 0} features`,
+        title: t("terrainFeatures.manageTitle", "Terrain Features"),
+        badge: t("terrainFeatures.badge", {
+          count: data?.meta.total ?? 0,
+          defaultValue: `${data?.meta.total} features`,
+        }),
         search: {
           defaultValue: search,
           onValueChange: (value) =>
@@ -54,13 +59,15 @@ export const TerrainFeatures: React.FC<Props> = ({ status }) => {
         },
         create: {
           trigger: {
-            label: "Create feature",
+            label: t("terrainFeatures.create.trigger", "Create feature"),
             disabled: status?.role !== "ADMIN",
           },
           content: {
-            title: "Create Terrain Feature",
-            description:
-              "Fill in the terrain feature details in all supported languages. Once submitted, the feature will be added to the system and available for use in relevant modules.",
+            title: t("terrainFeatures.create.title", "Create Terrain Feature"),
+            description: t(
+              "terrainFeatures.create.description",
+              "Fill in the terrain feature details in all supported languages. Once submitted, the feature will be added to the system and available for use in relevant modules."
+            ),
             children: <CreateTerrainFeatureForm />,
           },
           dialogState: {
@@ -75,7 +82,12 @@ export const TerrainFeatures: React.FC<Props> = ({ status }) => {
       content={{
         table: {
           data: data?.data as TerrainFeatureType[],
-          headers: ["ID", "Romanian", "Russian", "English"],
+          headers: [
+            t("terrainFeatures.tableHeaders.id", "ID"),
+            t("terrainFeatures.tableHeaders.ro", "Romanian"),
+            t("terrainFeatures.tableHeaders.ru", "Russian"),
+            t("terrainFeatures.tableHeaders.en", "English"),
+          ],
           rows: ({ ro, ru, en, id }) => [
             <div className="py-2 sm:py-4">
               <span className="font-bold text-sm">{id}</span>
@@ -89,10 +101,12 @@ export const TerrainFeatures: React.FC<Props> = ({ status }) => {
             onDeleteAction: (id) => deleteTerrainFeature(Number(id)),
           },
           update: {
-            title: "Update Terrain Feature",
+            title: t("terrainFeatures.update.title", "Update Terrain Feature"),
             disabled: status?.role !== "ADMIN" || deleteLoading,
-            description:
-              "Edit the details of an existing terrain feature. Update the multilingual names or other relevant fields to ensure the information remains accurate and current.",
+            description: t(
+              "terrainFeatures.update.description",
+              "Edit the details of an existing terrain feature. Update the multilingual names or other relevant fields to ensure the information remains accurate and current."
+            ),
             children: (feature) => (
               <UpdateTerrainFeatureForm terrainFeature={feature} />
             ),

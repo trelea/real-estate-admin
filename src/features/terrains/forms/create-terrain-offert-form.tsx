@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { User } from "@/features/auth/types";
 import { MediaField } from "@/components/media-field";
 import { MultilingualItemType } from "@/features/multilingual/types";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
 interface Props {
   user: {
@@ -26,7 +27,7 @@ interface Props {
 }
 
 export const CreateTerrainOffertForm: React.FC<Props> = ({ user }) => {
-  const { form, onSubmit } = useCreateTerrain({ user });
+  const { form, onSubmit, isLoading } = useCreateTerrain({ user });
 
   return (
     <Form {...form}>
@@ -44,7 +45,7 @@ export const CreateTerrainOffertForm: React.FC<Props> = ({ user }) => {
             />
 
             <UserField
-              controll={form.control}
+              control={form.control}
               name="user"
               label="Select Agent"
               disabled={user.role !== "ADMIN"}
@@ -230,6 +231,11 @@ export const CreateTerrainOffertForm: React.FC<Props> = ({ user }) => {
         </AccordionCard>
         <Button type="submit">Submit</Button>
       </form>
+      {isLoading && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-black/20">
+          <LoadingSpinner className="h-10 w-10 text-white" />
+        </div>
+      )}
     </Form>
   );
 };

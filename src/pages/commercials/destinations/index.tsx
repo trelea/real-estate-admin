@@ -12,6 +12,7 @@ import {
   CreateCommercialDestinationForm,
   UpdateCommercialDestinationForm,
 } from "@/features/commercial-destinations/forms";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   status?: User;
@@ -34,6 +35,7 @@ export const CommercialDestinations: React.FC<Props> = ({ status }) => {
 
   const [deleteCommercialDestination, deleteLoading] =
     useDeleteCommercialDestination();
+  const { t } = useTranslation();
 
   return (
     <ManageData<CommercialDestinationType>
@@ -48,8 +50,14 @@ export const CommercialDestinations: React.FC<Props> = ({ status }) => {
        * header
        */
       header={{
-        title: "Commercial Destinations",
-        badge: `${data?.meta.total} destinations`,
+        title: t(
+          "commercialDestinations.manageTitle",
+          "Commercial Destinations"
+        ),
+        badge: t("commercialDestinations.badge", {
+          count: data?.meta.total ?? 0,
+          defaultValue: `${data?.meta.total} destinations`,
+        }),
         search: {
           defaultValue: search,
           onValueChange: (value) =>
@@ -60,13 +68,21 @@ export const CommercialDestinations: React.FC<Props> = ({ status }) => {
         },
         create: {
           trigger: {
-            label: "Create destination",
+            label: t(
+              "commercialDestinations.create.trigger",
+              "Create destination"
+            ),
             disabled: status?.role !== "ADMIN",
           },
           content: {
-            title: "Create Commercial Destination",
-            description:
-              "Fill in the commercial destination details in all supported languages. Once submitted, the destination will be added to the system and available for use in relevant modules.",
+            title: t(
+              "commercialDestinations.create.title",
+              "Create Commercial Destination"
+            ),
+            description: t(
+              "commercialDestinations.create.description",
+              "Fill in the commercial destination details in all supported languages. Once submitted, the destination will be added to the system and available for use in relevant modules."
+            ),
             children: <CreateCommercialDestinationForm />,
           },
           dialogState: {
@@ -81,7 +97,12 @@ export const CommercialDestinations: React.FC<Props> = ({ status }) => {
       content={{
         table: {
           data: data?.data as CommercialDestinationType[],
-          headers: ["ID", "Romanian", "Russian", "English"],
+          headers: [
+            t("commercialDestinations.tableHeaders.id", "ID"),
+            t("commercialDestinations.tableHeaders.ro", "Romanian"),
+            t("commercialDestinations.tableHeaders.ru", "Russian"),
+            t("commercialDestinations.tableHeaders.en", "English"),
+          ],
           rows: ({ ro, ru, en, id }) => [
             <div className="py-2 sm:py-4">
               <span className="font-bold text-sm">{id}</span>
@@ -96,9 +117,14 @@ export const CommercialDestinations: React.FC<Props> = ({ status }) => {
           },
           update: {
             disabled: status?.role !== "ADMIN",
-            title: "Update Commercial Destination",
-            description:
-              "Edit the details of an existing commercial destination. Update the multilingual names or other relevant fields to ensure the information remains accurate and current.",
+            title: t(
+              "commercialDestinations.update.title",
+              "Update Commercial Destination"
+            ),
+            description: t(
+              "commercialDestinations.update.description",
+              "Edit the details of an existing commercial destination. Update the multilingual names or other relevant fields to ensure the information remains accurate and current."
+            ),
             children: (destination) => (
               <UpdateCommercialDestinationForm
                 commercialDestination={destination}

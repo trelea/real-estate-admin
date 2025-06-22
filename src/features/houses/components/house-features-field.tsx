@@ -67,12 +67,16 @@ export const HouseFeaturesField: React.FC<Props> = ({
                   )}
                 >
                   {field.value?.length
-                    ? data?.data
-                        ?.filter((d: MultilingualItemType<{}>) =>
-                          field.value.includes(d.id)
-                        )
-                        .map((d: MultilingualItemType<{}>) => d.en)
-                        .join(", ")
+                    ? (
+                        data?.data
+                          ?.filter((d: MultilingualItemType<{}>) =>
+                            field.value.includes(d.id)
+                          )
+                          .map((d: MultilingualItemType<{}>) => d.en)
+                          .join(", ") as string
+                      )
+                        .slice(0, 25)
+                        .concat("...")
                     : "Select House Features"}
                   <ChevronsUpDown className="opacity-50" />
                 </Button>
@@ -85,35 +89,20 @@ export const HouseFeaturesField: React.FC<Props> = ({
                   <CommandEmpty>No house feature found.</CommandEmpty>
                   <CommandGroup>
                     {data?.data?.map((item: MultilingualItemType<{}>) => (
-                      <CommandItem
-                        value={item.id.toString()}
-                        key={item.id}
-                        onSelect={() => {
-                          const exists = field.value?.includes(item.id);
-                          if (exists) {
-                            field.onChange(
-                              field.value.filter((id: number) => id !== item.id)
-                            );
-                          } else {
-                            field.onChange([...(field.value || []), item.id]);
-                          }
-                        }}
-                      >
+                      <CommandItem value={item.id.toString()} key={item.id}>
                         <Checkbox
                           checked={field.value?.includes(item.id)}
                           className="mr-2"
                           tabIndex={-1}
                           onCheckedChange={() => {
                             const exists = field.value?.includes(item.id);
-                            if (exists) {
-                              field.onChange(
-                                field.value.filter(
-                                  (id: number) => id !== item.id
-                                )
-                              );
-                            } else {
-                              field.onChange([...(field.value || []), item.id]);
-                            }
+                            field.onChange(
+                              exists
+                                ? field.value.filter(
+                                    (id: number) => id !== item.id
+                                  )
+                                : [...(field.value || []), item.id]
+                            );
                           }}
                         />
                         {item.en}

@@ -7,6 +7,7 @@ import { CSS } from "@dnd-kit/utilities";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   id: string | number;
@@ -16,6 +17,7 @@ interface Props {
 
 export const SortableUserLink: React.FC<Props> = ({ id, user, onDelete }) => {
   const uniqueId = id;
+  const { t } = useTranslation();
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: uniqueId });
 
@@ -49,7 +51,11 @@ export const SortableUserLink: React.FC<Props> = ({ id, user, onDelete }) => {
         </div>
 
         <div className="flex justify-center items-center gap-1">
-          <Button variant={"ghost"} onClick={onDelete}>
+          <Button
+            variant={"ghost"}
+            onClick={onDelete}
+            aria-label={t("landing.delete")}
+          >
             <Trash2 className="text-destructive" />
           </Button>
           <Button

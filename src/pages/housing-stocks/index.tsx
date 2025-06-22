@@ -9,6 +9,7 @@ import {
   UpdateHousingStockForm,
 } from "@/features/housing-stocks/forms";
 import { useDeleteHousingStock } from "@/features/housing-stocks/hooks";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   status?: User;
@@ -28,6 +29,7 @@ export const HousingStocks: React.FC<Props> = ({ status }) => {
   } = React.useContext<HousingStocksContextProps>(HousingStocksContext);
   const [deleteHousingStock, deleteHousingStockLoading] =
     useDeleteHousingStock();
+  const { t } = useTranslation();
 
   return (
     <ManageData<HousingStockType>
@@ -42,8 +44,11 @@ export const HousingStocks: React.FC<Props> = ({ status }) => {
        * header
        */
       header={{
-        title: "Housing Types",
-        badge: `${data?.meta.total} housing types`,
+        title: t("housingStocks.manageTitle", "Housing Types"),
+        badge: t("housingStocks.badge", {
+          count: data?.meta.total ?? 0,
+          defaultValue: `${data?.meta.total} housing types`,
+        }),
         search: {
           defaultValue: search,
           onValueChange: (value) =>
@@ -54,13 +59,15 @@ export const HousingStocks: React.FC<Props> = ({ status }) => {
         },
         create: {
           trigger: {
-            label: "Create housing type",
+            label: t("housingStocks.create.trigger", "Create housing type"),
             disabled: status?.role !== "ADMIN",
           },
           content: {
-            title: "Create Housing Stock",
-            description:
-              "Enter the required information to add a new housing stock entry. After submission, the record will be saved and available in the system.",
+            title: t("housingStocks.create.title", "Create Housing Stock"),
+            description: t(
+              "housingStocks.create.description",
+              "Enter the required information to add a new housing stock entry. After submission, the record will be saved and available in the system."
+            ),
             children: <CreateHousingStockForm />,
           },
           dialogState: {
@@ -75,7 +82,12 @@ export const HousingStocks: React.FC<Props> = ({ status }) => {
       content={{
         table: {
           data: data?.data as HousingStockType[],
-          headers: ["ID", "Romanian", "Russian", "English"],
+          headers: [
+            t("housingStocks.tableHeaders.id", "ID"),
+            t("housingStocks.tableHeaders.ro", "Romanian"),
+            t("housingStocks.tableHeaders.ru", "Russian"),
+            t("housingStocks.tableHeaders.en", "English"),
+          ],
           rows: ({ ro, ru, en, id }) => [
             <div className="py-2 sm:py-4">
               <span className="font-bold text-sm">{id}</span>
@@ -91,9 +103,11 @@ export const HousingStocks: React.FC<Props> = ({ status }) => {
           },
           update: {
             disabled: status?.role !== "ADMIN",
-            title: "Update Housing Stock",
-            description:
-              "Modify the details of an existing housing stock entry. You can update the name, description, and other relevant fields to reflect the most accurate and up-to-date information.",
+            title: t("housingStocks.update.title", "Update Housing Stock"),
+            description: t(
+              "housingStocks.update.description",
+              "Modify the details of an existing housing stock entry. You can update the name, description, and other relevant fields to reflect the most accurate and up-to-date information."
+            ),
             children: (housingStock) => (
               <UpdateHousingStockForm housingStock={housingStock} />
             ),
