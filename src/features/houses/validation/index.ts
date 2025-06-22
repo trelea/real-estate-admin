@@ -37,11 +37,11 @@ export const createHouseSchema = z.object({
   /**
    * caracteristics
    */
-  floors: z.number().int().positive(),
-  rooms: z.number().int().positive(),
-  bathrooms: z.number().int().positive(),
-  area: z.number().int().positive(),
+  floors: z.coerce.number().int().positive(),
+  rooms: z.coerce.number().int().positive(),
+  bathrooms: z.coerce.number().int().positive(),
+  area: z.coerce.number().int().positive(),
   balcony: z.coerce.number().min(0).default(0).optional(),
-  housing_stock: z.number().int().positive(),
+  housing_stock: z.coerce.number().int().positive(),
   housing_conditions: z.array(z.number().int().positive()).nonempty(),
 });

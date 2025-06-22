@@ -2,6 +2,7 @@ import React from "react";
 import { HouseFeatureType } from "../types";
 import { useUpdateHouseFeature } from "../hooks";
 import { UpdateMultilingualForm } from "@/features/multilingual/forms";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   houseFeature: HouseFeatureType;
@@ -11,6 +12,7 @@ export const UpdateHouseFeatureForm: React.FC<Props> = ({ houseFeature }) => {
   const { form, onSubmit, isLoading } = useUpdateHouseFeature({
     houseFeature,
   });
+  const { t } = useTranslation();
 
   return (
     <UpdateMultilingualForm
@@ -19,16 +21,34 @@ export const UpdateHouseFeatureForm: React.FC<Props> = ({ houseFeature }) => {
       isLoading={isLoading}
       fields={{
         ro: {
-          label: "Caracteristică casă (română)",
-          placeholder: "Ex: Grădină, Garaj, Terasă",
+          label: t(
+            "houseFeatures.form.feature.ro.label",
+            "Caracteristică casă (română)"
+          ),
+          placeholder: t(
+            "houseFeatures.form.feature.ro.placeholder",
+            "Ex: Grădină, Garaj, Terasă"
+          ),
         },
         ru: {
-          label: "Особенность дома (русский)",
-          placeholder: "Напр: Сад, Гараж, Терраса",
+          label: t(
+            "houseFeatures.form.feature.ru.label",
+            "Особенность дома (русский)"
+          ),
+          placeholder: t(
+            "houseFeatures.form.feature.ru.placeholder",
+            "Напр: Сад, Гараж, Терраса"
+          ),
         },
         en: {
-          label: "House feature (English)",
-          placeholder: "e.g. Garden, Garage, Terrace",
+          label: t(
+            "houseFeatures.form.feature.en.label",
+            "House feature (English)"
+          ),
+          placeholder: t(
+            "houseFeatures.form.feature.en.placeholder",
+            "e.g. Garden, Garage, Terrace"
+          ),
         },
       }}
     />

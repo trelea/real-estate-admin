@@ -23,6 +23,7 @@ import { ROLES } from "@/consts";
 import { cn } from "@/lib/utils";
 import React, { HTMLInputTypeAttribute } from "react";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   control: UseFormReturn<any>;
@@ -56,6 +57,7 @@ export const FieldItem: React.FC<Props> = ({
   className,
   onCheck,
 }) => {
+  const { t } = useTranslation();
   return (
     <FormField
       control={control.control}
@@ -65,7 +67,7 @@ export const FieldItem: React.FC<Props> = ({
           {label && <FormLabel className="text-sm">{label}</FormLabel>}
           <RenderFieldBsedOnType
             type={type as HTMLInputTypeAttribute & "select"}
-            placeholder={placeholder}
+            placeholder={placeholder && t(placeholder, placeholder)}
             field={field}
             select={select ? select : undefined}
             defaultValue={defaultValue}
@@ -102,6 +104,7 @@ function RenderFieldBsedOnType({
   defaultValue: unknown;
   onCheck?: (_: boolean) => void;
 }) {
+  const { t } = useTranslation();
   if (type === "select" && select)
     return (
       <Select
@@ -157,7 +160,7 @@ function RenderFieldBsedOnType({
     return (
       <FormControl>
         <Textarea
-          placeholder={placeholder}
+          placeholder={placeholder && t(placeholder, placeholder)}
           {...field}
           className="ring-0 focus-visible:ring-0 font-normal text-base w-full h-fit p-3 rounded-xl"
           rows={2}
@@ -170,7 +173,7 @@ function RenderFieldBsedOnType({
     return (
       <FormControl>
         <PhoneInput
-          placeholder={placeholder}
+          placeholder={placeholder && t(placeholder, placeholder)}
           {...field}
           className="ring-0 focus-visible:ring-0 font-normal text-base w-full h-fit p-3 rounded-r-xl"
           defaultValue={defaultValue as string}
@@ -182,7 +185,7 @@ function RenderFieldBsedOnType({
     return (
       <FormControl>
         <PasswordInput
-          placeholder={placeholder}
+          placeholder={placeholder && t(placeholder, placeholder)}
           {...field}
           className="ring-0 focus-visible:ring-0 font-normal text-base w-full h-fit p-3 rounded-xl"
           defaultValue={defaultValue as string}
@@ -194,7 +197,7 @@ function RenderFieldBsedOnType({
     <FormControl>
       <Input
         type={type}
-        placeholder={placeholder}
+        placeholder={placeholder && t(placeholder, placeholder)}
         {...field}
         className="ring-0 focus-visible:ring-0 font-normal text-base w-full h-fit p-3 rounded-xl"
         defaultValue={defaultValue as string}

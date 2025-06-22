@@ -6,6 +6,7 @@ import { CreateUserForm, UpdateUserForm } from "@/features/users/forms";
 import { TableSkeleton } from "@/components/table-skeleton/table-skeleton";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useDeleteUser } from "@/features/users/hooks";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   status?: User;
@@ -25,6 +26,7 @@ export const Users: React.FC<Props> = ({ status }) => {
     },
   } = React.useContext<UsersContextProps>(UsersContext);
   const [deleteUser, deleteUserLoading] = useDeleteUser();
+  const { t } = useTranslation();
 
   return (
     <ManageData<User & { posts?: number }>
@@ -39,8 +41,8 @@ export const Users: React.FC<Props> = ({ status }) => {
        * header
        */
       header={{
-        title: "Users",
-        badge: `${data?.meta.total} users`,
+        title: t("users.title"),
+        badge: `${data?.meta.total} ${t("users.badge")}`,
         search: {
           defaultValue: search,
           onValueChange: (value) =>
@@ -50,11 +52,13 @@ export const Users: React.FC<Props> = ({ status }) => {
             })),
         },
         create: {
-          trigger: { label: "Create user", disabled: status?.role !== "ADMIN" },
+          trigger: {
+            label: t("users.createUser"),
+            disabled: status?.role !== "ADMIN",
+          },
           content: {
-            title: "Create User",
-            description:
-              "Enter the required information to create a new user. After submission, the user will be added to the system.",
+            title: t("users.createUserTitle"),
+            description: t("users.createUserDescription"),
             children: <CreateUserForm />,
           },
           dialogState: {
@@ -69,7 +73,13 @@ export const Users: React.FC<Props> = ({ status }) => {
       content={{
         table: {
           data: data?.data as (User & { posts?: number })[],
-          headers: ["Name", "Email", "Contact", "Role", "Posts"],
+          headers: [
+            t("users.name"),
+            t("users.email"),
+            t("users.contact"),
+            t("users.role"),
+            t("users.posts"),
+          ],
           rows: ({
             profile: { contact, name, surname, thumbnail },
             email,
@@ -103,8 +113,8 @@ export const Users: React.FC<Props> = ({ status }) => {
            */
           update: {
             disabled: status?.role !== "ADMIN",
-            title: "Update User",
-            description: "Update User",
+            title: t("users.updateUserTitle"),
+            description: t("users.updateUserDescription"),
             children: (user) => <UpdateUserForm user={user} />,
           },
         },

@@ -1,9 +1,10 @@
 export * from "./commercial-features-field";
-export * from "./field";
-export * from "./offert-field";
-export * from "./user-field";
-export * from "./location-field";
-export * from "./place-field";
-export * from "./housing-conditions-field";
-export * from "./commercial-destinations-field";
-export * from "./commercial-placings-field";
+export { Field } from "./field";
+export { OffertField } from "./offert-field";
+export { UserField } from "./user-field";
+export { LocationField } from "./location-field";
+export { PlaceField } from "./place-field";
+export { HousingConditionsField } from "./housing-conditions-field";
+export { CommercialDestinationsField } from "./commercial-destinations-field";
+export { CommercialPlacingsField } from "./commercial-placings-field";
+export { StockField } from "./stock-field";

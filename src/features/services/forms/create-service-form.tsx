@@ -4,6 +4,7 @@ import { FieldItem, FieldItemFile } from "../components";
 import { Button } from "@/components/ui/button";
 import { DialogClose, DialogFooter } from "@/components/ui/dialog";
 import { useCreateService } from "../hooks";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   step: number;
@@ -13,6 +14,7 @@ interface Props {
 
 export const CreateServiceForm: React.FC<Props> = ({ step, next, prev }) => {
   const { form, onSubmit, isLoading } = useCreateService();
+  const { t } = useTranslation();
 
   return (
     <Form {...form}>
@@ -24,7 +26,7 @@ export const CreateServiceForm: React.FC<Props> = ({ step, next, prev }) => {
           <FieldItemFile
             name="thumbnail"
             control={form}
-            label="Thumbnail"
+            label={t("services.create.thumbnail", "Thumbnail")}
             className="h-96 rounded-xl"
             displayErrorMessage
           />
@@ -36,8 +38,8 @@ export const CreateServiceForm: React.FC<Props> = ({ step, next, prev }) => {
               name="title_ro"
               type="text"
               control={form}
-              label="Titu"
-              placeholder="Titlu"
+              label={t("services.create.title_ro", "Title (RO)")}
+              placeholder={t("services.create.title_ro_placeholder", "Titlu")}
               displayErrorMessage
             />
 
@@ -45,8 +47,11 @@ export const CreateServiceForm: React.FC<Props> = ({ step, next, prev }) => {
               name="desc_ro"
               type="textarea"
               control={form}
-              label="Descriere"
-              placeholder="Descriere"
+              label={t("services.create.desc_ro", "Description (RO)")}
+              placeholder={t(
+                "services.create.desc_ro_placeholder",
+                "Descriere"
+              )}
               displayErrorMessage
             />
 
@@ -54,7 +59,7 @@ export const CreateServiceForm: React.FC<Props> = ({ step, next, prev }) => {
               name="content_ro"
               type="tip-tap"
               control={form}
-              label="Content"
+              label={t("services.create.content_ro", "Content (RO)")}
               displayErrorMessage
             />
           </React.Fragment>
@@ -66,8 +71,11 @@ export const CreateServiceForm: React.FC<Props> = ({ step, next, prev }) => {
               name="title_ru"
               type="text"
               control={form}
-              label="Заголовок"
-              placeholder="Введите заголовок"
+              label={t("services.create.title_ru", "Заголовок (RU)")}
+              placeholder={t(
+                "services.create.title_ru_placeholder",
+                "Введите заголовок"
+              )}
               displayErrorMessage
             />
 
@@ -75,8 +83,11 @@ export const CreateServiceForm: React.FC<Props> = ({ step, next, prev }) => {
               name="desc_ru"
               type="textarea"
               control={form}
-              label="Описание"
-              placeholder="Введите описание"
+              label={t("services.create.desc_ru", "Описание (RU)")}
+              placeholder={t(
+                "services.create.desc_ru_placeholder",
+                "Введите описание"
+              )}
               displayErrorMessage
             />
 
@@ -84,7 +95,7 @@ export const CreateServiceForm: React.FC<Props> = ({ step, next, prev }) => {
               name="content_ru"
               type="tip-tap"
               control={form}
-              label="Контент"
+              label={t("services.create.content_ru", "Контент (RU)")}
               displayErrorMessage
             />
           </React.Fragment>
@@ -96,8 +107,8 @@ export const CreateServiceForm: React.FC<Props> = ({ step, next, prev }) => {
               name="title_en"
               type="text"
               control={form}
-              label="Title"
-              placeholder="Title"
+              label={t("services.create.title_en", "Title (EN)")}
+              placeholder={t("services.create.title_en_placeholder", "Title")}
               displayErrorMessage
             />
 
@@ -105,8 +116,11 @@ export const CreateServiceForm: React.FC<Props> = ({ step, next, prev }) => {
               name="desc_en"
               type="textarea"
               control={form}
-              label="Description"
-              placeholder="Description"
+              label={t("services.create.desc_en", "Description (EN)")}
+              placeholder={t(
+                "services.create.desc_en_placeholder",
+                "Description"
+              )}
               displayErrorMessage
             />
 
@@ -114,7 +128,7 @@ export const CreateServiceForm: React.FC<Props> = ({ step, next, prev }) => {
               name="content_en"
               type="tip-tap"
               control={form}
-              label="Content"
+              label={t("services.create.content_en", "Content (EN)")}
               displayErrorMessage
             />
           </React.Fragment>
@@ -129,12 +143,16 @@ export const CreateServiceForm: React.FC<Props> = ({ step, next, prev }) => {
               label={
                 <div className="space-y-1">
                   <FormLabel>
-                    Make this service available to the public
+                    {t(
+                      "services.create.makePublic",
+                      "Make this service available to the public"
+                    )}
                   </FormLabel>
                   <FormDescription>
-                    If checked, the service will be available to all users. If
-                    unchecked, the service will be private and only accessible
-                    by admins and authorized users.
+                    {t(
+                      "services.create.publicDescription",
+                      "If checked, the service will be available to all users. If unchecked, the service will be private and only accessible by admins and authorized users."
+                    )}
                   </FormDescription>
                 </div>
               }
@@ -151,7 +169,7 @@ export const CreateServiceForm: React.FC<Props> = ({ step, next, prev }) => {
                   className="text-base font-medium px-6 py-2 h-fit w-fit rounded-lg"
                   variant={"outline"}
                 >
-                  Close
+                  {t("common.close", "Close")}
                 </Button>
               </DialogClose>
             )}
@@ -162,7 +180,7 @@ export const CreateServiceForm: React.FC<Props> = ({ step, next, prev }) => {
                 onClick={prev}
                 type="button"
               >
-                Back
+                {t("common.back", "Back")}
               </Button>
             )}
 
@@ -218,7 +236,7 @@ export const CreateServiceForm: React.FC<Props> = ({ step, next, prev }) => {
                 }}
                 type={"button"}
               >
-                Next
+                {t("common.next", "Next")}
               </Button>
             )}
 
@@ -228,7 +246,7 @@ export const CreateServiceForm: React.FC<Props> = ({ step, next, prev }) => {
                 className="text-base font-medium px-6 py-2 h-fit w-fit rounded-lg"
                 type="submit"
               >
-                Create
+                {t("common.create", "Create")}
               </Button>
             )}
           </div>

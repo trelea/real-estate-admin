@@ -132,6 +132,7 @@ const extensions = [
 
 interface Props {
   placeholder?: string;
+  value?: string;
   onValueChange?: (data?: string) => void;
   className?: string;
   withSubmitButton?: React.ReactNode;
@@ -139,17 +140,24 @@ interface Props {
 
 const TipTapKit: React.FC<Props> = ({
   placeholder,
+  value,
   onValueChange,
   className = false,
   withSubmitButton,
 }) => {
   const editor = useEditor({
     extensions: extensions as ExtensionType[],
-    content: placeholder,
+    content: value || placeholder,
     immediatelyRender: false,
     editable: true,
     onUpdate: ({ editor }) => onValueChange && onValueChange(editor.getHTML()),
   });
+
+  React.useEffect(() => {
+    if (editor && value !== undefined && value !== editor.getHTML()) {
+      editor.commands.setContent(value);
+    }
+  }, [value, editor]);
 
   if (!editor) {
     return null;

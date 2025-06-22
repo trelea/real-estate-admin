@@ -5,6 +5,7 @@ import { Form, FormDescription, FormLabel } from "@/components/ui/form";
 import { FieldItem, FieldItemFile } from "../components";
 import { DialogClose, DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   service: Service;
@@ -22,6 +23,7 @@ export const UpdateServiceForm: React.FC<Props> = ({
   const { form, onSubmit, isLoading } = useUpdateService({
     service,
   });
+  const { t } = useTranslation();
 
   return (
     <Form {...form}>
@@ -33,7 +35,7 @@ export const UpdateServiceForm: React.FC<Props> = ({
           <FieldItemFile
             name="thumbnail"
             control={form}
-            label="Thumbnail"
+            label={t("services.update.thumbnail", "Thumbnail")}
             className="h-96 rounded-xl"
             displayErrorMessage
           />
@@ -45,8 +47,8 @@ export const UpdateServiceForm: React.FC<Props> = ({
               name="title_ro"
               type="text"
               control={form}
-              label="Titu"
-              placeholder="Titlu"
+              label={t("services.update.title_ro", "Title (RO)")}
+              placeholder={t("services.update.title_ro_placeholder", "Titlu")}
               displayErrorMessage
             />
 
@@ -54,8 +56,11 @@ export const UpdateServiceForm: React.FC<Props> = ({
               name="desc_ro"
               type="textarea"
               control={form}
-              label="Descriere"
-              placeholder="Descriere"
+              label={t("services.update.desc_ro", "Description (RO)")}
+              placeholder={t(
+                "services.update.desc_ro_placeholder",
+                "Descriere"
+              )}
               displayErrorMessage
             />
 
@@ -63,7 +68,7 @@ export const UpdateServiceForm: React.FC<Props> = ({
               name="content_ro"
               type="tip-tap"
               control={form}
-              label="Content"
+              label={t("services.update.content_ro", "Content (RO)")}
               displayErrorMessage
               placeholder={service.content.content_ro}
             />
@@ -76,8 +81,11 @@ export const UpdateServiceForm: React.FC<Props> = ({
               name="title_ru"
               type="text"
               control={form}
-              label="Заголовок"
-              placeholder="Введите заголовок"
+              label={t("services.update.title_ru", "Заголовок (RU)")}
+              placeholder={t(
+                "services.update.title_ru_placeholder",
+                "Введите заголовок"
+              )}
               displayErrorMessage
             />
 
@@ -85,8 +93,11 @@ export const UpdateServiceForm: React.FC<Props> = ({
               name="desc_ru"
               type="textarea"
               control={form}
-              label="Описание"
-              placeholder="Введите описание"
+              label={t("services.update.desc_ru", "Описание (RU)")}
+              placeholder={t(
+                "services.update.desc_ru_placeholder",
+                "Введите описание"
+              )}
               displayErrorMessage
             />
 
@@ -94,7 +105,7 @@ export const UpdateServiceForm: React.FC<Props> = ({
               name="content_ru"
               type="tip-tap"
               control={form}
-              label="Контент"
+              label={t("services.update.content_ru", "Контент (RU)")}
               displayErrorMessage
               placeholder={service.content.content_ru}
             />
@@ -107,8 +118,8 @@ export const UpdateServiceForm: React.FC<Props> = ({
               name="title_en"
               type="text"
               control={form}
-              label="Title"
-              placeholder="Title"
+              label={t("services.update.title_en", "Title (EN)")}
+              placeholder={t("services.update.title_en_placeholder", "Title")}
               displayErrorMessage
             />
 
@@ -116,8 +127,11 @@ export const UpdateServiceForm: React.FC<Props> = ({
               name="desc_en"
               type="textarea"
               control={form}
-              label="Description"
-              placeholder="Description"
+              label={t("services.update.desc_en", "Description (EN)")}
+              placeholder={t(
+                "services.update.desc_en_placeholder",
+                "Description"
+              )}
               displayErrorMessage
             />
 
@@ -125,7 +139,7 @@ export const UpdateServiceForm: React.FC<Props> = ({
               name="content_en"
               type="tip-tap"
               control={form}
-              label="Content"
+              label={t("services.update.content_en", "Content (EN)")}
               displayErrorMessage
               placeholder={service.content.content_en}
             />
@@ -141,12 +155,16 @@ export const UpdateServiceForm: React.FC<Props> = ({
               label={
                 <div className="space-y-1">
                   <FormLabel>
-                    Make this service available to the public
+                    {t(
+                      "services.update.makePublic",
+                      "Make this service available to the public"
+                    )}
                   </FormLabel>
                   <FormDescription>
-                    If checked, the service will be available to all users. If
-                    unchecked, the service will be private and only accessible
-                    by admins and authorized users.
+                    {t(
+                      "services.update.publicDescription",
+                      "If checked, the service will be available to all users. If unchecked, the service will be private and only accessible by admins and authorized users."
+                    )}
                   </FormDescription>
                 </div>
               }
@@ -163,7 +181,7 @@ export const UpdateServiceForm: React.FC<Props> = ({
                   className="text-base font-medium px-6 py-2 h-fit w-fit rounded-lg"
                   variant={"outline"}
                 >
-                  Close
+                  {t("common.close", "Close")}
                 </Button>
               </DialogClose>
             )}
@@ -174,7 +192,7 @@ export const UpdateServiceForm: React.FC<Props> = ({
                 onClick={prev}
                 type="button"
               >
-                Back
+                {t("common.back", "Back")}
               </Button>
             )}
 
@@ -230,7 +248,7 @@ export const UpdateServiceForm: React.FC<Props> = ({
                 }}
                 type={"button"}
               >
-                Next
+                {t("common.next", "Next")}
               </Button>
             )}
 
@@ -240,7 +258,7 @@ export const UpdateServiceForm: React.FC<Props> = ({
                 className="text-base font-medium px-6 py-2 h-fit w-fit rounded-lg"
                 type="submit"
               >
-                Create
+                {t("common.update", "Update")}
               </Button>
             )}
           </div>

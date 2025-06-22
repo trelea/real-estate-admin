@@ -3,6 +3,11 @@ import { z } from "zod";
 import { createApartmentSchema } from "../validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { User } from "@/features/auth/types";
+import {
+  useCreateApartmentMutation,
+  useUploadApartmentMediaMutation,
+} from "../api";
+import { deserializeRtkQueryError } from "@/utils";
 
 interface Props {
   user: {
@@ -12,6 +17,11 @@ interface Props {
 }
 
 export const useCreateApartment = ({ user }: Props) => {
+  const [createApartment, { isLoading: isLoadingCreateApartment }] =
+    useCreateApartmentMutation();
+  const [uploadApartmentMedia, { isLoading: isLoadingUploadApartmentMedia }] =
+    useUploadApartmentMediaMutation();
+
   const form = useForm<z.infer<typeof createApartmentSchema>>({
     resolver: zodResolver(createApartmentSchema),
     defaultValues: {
@@ -53,12 +63,41 @@ export const useCreateApartment = ({ user }: Props) => {
     reValidateMode: "onChange",
   });
 
-  const onSubmit = ({
+  const onSubmit = async ({
     place,
+    media,
     ...values
   }: z.infer<typeof createApartmentSchema>) => {
-    console.log(values);
+    const { error, data } = await createApartment({
+      ...values,
+      // @ts-ignore
+      status: values.status ? "PUBLIC" : "PRIVATE",
+    });
+    if (error) {
+      return deserializeRtkQueryError<{ message: string }>(error, {
+        toasts: [(err) => err.data.message, (err) => err.message],
+      });
+    }
+    media.forEach(async (image) => {
+      const { error } = await uploadApartmentMedia({
+        id: data.id,
+        data: (() => {
+          const media = new FormData();
+          media.append("media", image);
+          return media;
+        })(),
+      });
+      if (error) {
+        return deserializeRtkQueryError<{ message: string }>(error, {
+          toasts: [(err) => err.data.message, (err) => err.message],
+        });
+      }
+    });
   };
 
-  return { form, onSubmit };
+  return {
+    form,
+    onSubmit,
+    isLoading: isLoadingCreateApartment || isLoadingUploadApartmentMedia,
+  };
 };

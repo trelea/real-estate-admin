@@ -13,6 +13,7 @@ import {
 import { Button } from "../ui/button";
 import { Trash2 } from "lucide-react";
 import { DialogState } from "./types";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   disabled?: boolean;
@@ -24,37 +25,39 @@ export const DeleteItem: React.FC<Props> = ({
   disabled = true,
   onDelete,
   dialogState,
-}: Props) => (
-  <AlertDialog
-    onOpenChange={dialogState?.onOpenChange}
-    open={dialogState?.open}
-  >
-    <AlertDialogTrigger
-      asChild
-      className="m-0 p-0 h-fit flex justify-center items-center"
+}: Props) => {
+  const { t } = useTranslation();
+  return (
+    <AlertDialog
+      onOpenChange={dialogState?.onOpenChange}
+      open={dialogState?.open}
     >
-      <Button
-        variant={"ghost"}
-        className="p-0 m-0 h-fit w-fit"
-        disabled={disabled}
+      <AlertDialogTrigger
+        asChild
+        className="m-0 p-0 h-fit flex justify-center items-center"
       >
-        <Trash2 className="size-5 text-destructive" />
-      </Button>
-    </AlertDialogTrigger>
-    <AlertDialogContent>
-      <AlertDialogHeader>
-        <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-        <AlertDialogDescription>
-          This action cannot be undone. This will permanently delete your
-          account and remove your data from our servers.
-        </AlertDialogDescription>
-      </AlertDialogHeader>
-      <AlertDialogFooter>
-        <AlertDialogCancel>Cancel</AlertDialogCancel>
-        <AlertDialogAction className="bg-destructive" onClick={onDelete}>
-          Continue
-        </AlertDialogAction>
-      </AlertDialogFooter>
-    </AlertDialogContent>
-  </AlertDialog>
-);
+        <Button
+          variant={"ghost"}
+          className="p-0 m-0 h-fit w-fit"
+          disabled={disabled}
+        >
+          <Trash2 className="size-5 text-destructive" />
+        </Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>{t("delete.title")}</AlertDialogTitle>
+          <AlertDialogDescription>
+            {t("delete.description")}
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>{t("delete.cancel")}</AlertDialogCancel>
+          <AlertDialogAction className="bg-destructive" onClick={onDelete}>
+            {t("delete.continue")}
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  );
+};

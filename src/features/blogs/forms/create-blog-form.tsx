@@ -4,6 +4,7 @@ import { FieldItem, FieldItemFile } from "../components";
 import { Button } from "@/components/ui/button";
 import { DialogClose, DialogFooter } from "@/components/ui/dialog";
 import { useCreateBlog } from "../hooks";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   step: number;
@@ -13,6 +14,7 @@ interface Props {
 
 export const CreateBlogForm: React.FC<Props> = ({ step, next, prev }) => {
   const { form, onSubmit, isLoading } = useCreateBlog();
+  const { t } = useTranslation();
 
   return (
     <Form {...form}>
@@ -24,7 +26,7 @@ export const CreateBlogForm: React.FC<Props> = ({ step, next, prev }) => {
           <FieldItemFile
             name="thumbnail"
             control={form}
-            label="Thumbnail"
+            label={t("blogs.create.thumbnail", "Thumbnail")}
             className="h-96 rounded-xl"
             displayErrorMessage
           />
@@ -36,8 +38,8 @@ export const CreateBlogForm: React.FC<Props> = ({ step, next, prev }) => {
               name="title_ro"
               type="text"
               control={form}
-              label="Titu"
-              placeholder="Titlu"
+              label={t("blogs.create.title_ro", "Title (RO)")}
+              placeholder={t("blogs.create.title_ro_placeholder", "Titlu")}
               displayErrorMessage
             />
 
@@ -45,8 +47,8 @@ export const CreateBlogForm: React.FC<Props> = ({ step, next, prev }) => {
               name="desc_ro"
               type="textarea"
               control={form}
-              label="Descriere"
-              placeholder="Descriere"
+              label={t("blogs.create.desc_ro", "Description (RO)")}
+              placeholder={t("blogs.create.desc_ro_placeholder", "Descriere")}
               displayErrorMessage
             />
 
@@ -54,7 +56,7 @@ export const CreateBlogForm: React.FC<Props> = ({ step, next, prev }) => {
               name="content_ro"
               type="tip-tap"
               control={form}
-              label="Content"
+              label={t("blogs.create.content_ro", "Content (RO)")}
               displayErrorMessage
             />
           </React.Fragment>
@@ -66,8 +68,11 @@ export const CreateBlogForm: React.FC<Props> = ({ step, next, prev }) => {
               name="title_ru"
               type="text"
               control={form}
-              label="Заголовок"
-              placeholder="Введите заголовок"
+              label={t("blogs.create.title_ru", "Заголовок (RU)")}
+              placeholder={t(
+                "blogs.create.title_ru_placeholder",
+                "Введите заголовок"
+              )}
               displayErrorMessage
             />
 
@@ -75,8 +80,11 @@ export const CreateBlogForm: React.FC<Props> = ({ step, next, prev }) => {
               name="desc_ru"
               type="textarea"
               control={form}
-              label="Описание"
-              placeholder="Введите описание"
+              label={t("blogs.create.desc_ru", "Описание (RU)")}
+              placeholder={t(
+                "blogs.create.desc_ru_placeholder",
+                "Введите описание"
+              )}
               displayErrorMessage
             />
 
@@ -84,7 +92,7 @@ export const CreateBlogForm: React.FC<Props> = ({ step, next, prev }) => {
               name="content_ru"
               type="tip-tap"
               control={form}
-              label="Контент"
+              label={t("blogs.create.content_ru", "Контент (RU)")}
               displayErrorMessage
             />
           </React.Fragment>
@@ -96,8 +104,8 @@ export const CreateBlogForm: React.FC<Props> = ({ step, next, prev }) => {
               name="title_en"
               type="text"
               control={form}
-              label="Title"
-              placeholder="Title"
+              label={t("blogs.create.title_en", "Title (EN)")}
+              placeholder={t("blogs.create.title_en_placeholder", "Title")}
               displayErrorMessage
             />
 
@@ -105,8 +113,8 @@ export const CreateBlogForm: React.FC<Props> = ({ step, next, prev }) => {
               name="desc_en"
               type="textarea"
               control={form}
-              label="Description"
-              placeholder="Description"
+              label={t("blogs.create.desc_en", "Description (EN)")}
+              placeholder={t("blogs.create.desc_en_placeholder", "Description")}
               displayErrorMessage
             />
 
@@ -114,7 +122,7 @@ export const CreateBlogForm: React.FC<Props> = ({ step, next, prev }) => {
               name="content_en"
               type="tip-tap"
               control={form}
-              label="Content"
+              label={t("blogs.create.content_en", "Content (EN)")}
               displayErrorMessage
             />
           </React.Fragment>
@@ -128,11 +136,14 @@ export const CreateBlogForm: React.FC<Props> = ({ step, next, prev }) => {
               control={form}
               label={
                 <div className="space-y-1">
-                  <FormLabel>Make this blog post public</FormLabel>
+                  <FormLabel>
+                    {t("blogs.create.makePublic", "Make this blog post public")}
+                  </FormLabel>
                   <FormDescription>
-                    If checked, the blog post will be visible to everyone. If
-                    unchecked, it will be private and only accessible by admins
-                    and dashboard users.
+                    {t(
+                      "blogs.create.publicDescription",
+                      "If checked, the blog post will be visible to everyone. If unchecked, it will be private and only accessible by admins and dashboard users."
+                    )}
                   </FormDescription>
                 </div>
               }
@@ -149,7 +160,7 @@ export const CreateBlogForm: React.FC<Props> = ({ step, next, prev }) => {
                   className="text-base font-medium px-6 py-2 h-fit w-fit rounded-lg"
                   variant={"outline"}
                 >
-                  Close
+                  {t("common.close", "Close")}
                 </Button>
               </DialogClose>
             )}
@@ -160,7 +171,7 @@ export const CreateBlogForm: React.FC<Props> = ({ step, next, prev }) => {
                 onClick={prev}
                 type="button"
               >
-                Back
+                {t("common.back", "Back")}
               </Button>
             )}
 
@@ -216,7 +227,7 @@ export const CreateBlogForm: React.FC<Props> = ({ step, next, prev }) => {
                 }}
                 type={"button"}
               >
-                Next
+                {t("common.next", "Next")}
               </Button>
             )}
 
@@ -226,7 +237,7 @@ export const CreateBlogForm: React.FC<Props> = ({ step, next, prev }) => {
                 className="text-base font-medium px-6 py-2 h-fit w-fit rounded-lg"
                 type="submit"
               >
-                Create
+                {t("common.create", "Create")}
               </Button>
             )}
           </div>

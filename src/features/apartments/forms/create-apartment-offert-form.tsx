@@ -13,6 +13,7 @@ import { StockField } from "../components/stock-field";
 import { HousingConditionsField } from "../components";
 import { ApartmentFeaturesField } from "../components";
 import { MediaField } from "@/components/media-field";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
 interface Props {
   user: {
@@ -22,7 +23,7 @@ interface Props {
 }
 
 export const CreateApartmentOffertForm: React.FC<Props> = ({ user }) => {
-  const { form, onSubmit } = useCreateApartment({ user });
+  const { form, onSubmit, isLoading } = useCreateApartment({ user });
 
   return (
     <Form {...form}>
@@ -40,7 +41,7 @@ export const CreateApartmentOffertForm: React.FC<Props> = ({ user }) => {
             />
 
             <UserField
-              controll={form.control}
+              control={form.control}
               name="user"
               label="Select Agent"
               disabled={user.role !== "ADMIN"}
@@ -263,6 +264,11 @@ export const CreateApartmentOffertForm: React.FC<Props> = ({ user }) => {
         </AccordionCard>
         <Button type="submit">Submit</Button>
       </form>
+      {isLoading && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-black/20">
+          <LoadingSpinner className="h-10 w-10 text-white" />
+        </div>
+      )}
     </Form>
   );
 };

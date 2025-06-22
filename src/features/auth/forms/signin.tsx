@@ -3,11 +3,14 @@ import React from "react";
 import { FieldItem } from "../components";
 import { Button } from "@/components/ui/button";
 import { useSignin } from "../hooks";
+import { useTranslation } from "react-i18next";
 
 interface Props {}
 
 export const SigninForm: React.FC<Props> = ({}) => {
   const { form, onSubmit, isLoading } = useSignin();
+  const { t } = useTranslation();
+
   return (
     <Form {...form}>
       <form
@@ -19,7 +22,7 @@ export const SigninForm: React.FC<Props> = ({}) => {
           type="email"
           name="email"
           placeholder="name@email.com"
-          label="Email"
+          label={t("signin.email")}
           displayErrorMessage
         />
 
@@ -28,7 +31,7 @@ export const SigninForm: React.FC<Props> = ({}) => {
           type="password"
           name="password"
           placeholder="password"
-          label="Password"
+          label={t("signin.password")}
           displayErrorMessage
         />
 
@@ -37,7 +40,7 @@ export const SigninForm: React.FC<Props> = ({}) => {
           type="submit"
           className="text-base font-medium h-fit py-3 rounded-lg mt-2 disabled:cursor-not-allowed w-full"
         >
-          Log In
+          {t("signin.login")}
         </Button>
       </form>
     </Form>

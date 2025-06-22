@@ -5,6 +5,7 @@ import { type TermsAndConditionsType } from "../types";
 import { TipTapField } from "../components";
 import { Button } from "@/components/ui/button";
 import { usePatchTermsAndConditionsContent } from "../hooks";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   content: TermsAndConditionsType;
@@ -15,6 +16,7 @@ export const PatchTermsAndConditionsContentForm: React.FC<Props> = ({
   content,
   disabled,
 }) => {
+  const { t } = useTranslation();
   const { form, onSubmit, isLoading } = usePatchTermsAndConditionsContent({
     content,
   });
@@ -26,7 +28,7 @@ export const PatchTermsAndConditionsContentForm: React.FC<Props> = ({
           <TipTapField
             withSubmitButton={
               <Button disabled={isLoading || disabled} type="submit">
-                Save Content
+                {t("terms.saveContent")}
               </Button>
             }
             control={form}
@@ -39,7 +41,7 @@ export const PatchTermsAndConditionsContentForm: React.FC<Props> = ({
           <TipTapField
             withSubmitButton={
               <Button disabled={isLoading || disabled} type="submit">
-                Save Content
+                {t("terms.saveContent")}
               </Button>
             }
             control={form}
@@ -52,7 +54,7 @@ export const PatchTermsAndConditionsContentForm: React.FC<Props> = ({
           <TipTapField
             withSubmitButton={
               <Button disabled={isLoading || disabled} type="submit">
-                Save Content
+                {t("terms.saveContent")}
               </Button>
             }
             control={form}

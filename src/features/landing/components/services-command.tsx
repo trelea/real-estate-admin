@@ -6,6 +6,7 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   open: boolean;
@@ -18,12 +19,13 @@ export const ServicesCommand: React.FC<Props> = ({
   setOpenServicesCommand,
   children,
 }) => {
+  const { t } = useTranslation();
   return (
     <CommandDialog open={open} onOpenChange={setOpenServicesCommand}>
-      <CommandInput placeholder="Search Services" />
+      <CommandInput placeholder={t("landing.searchServices")} />
       <CommandList>
-        <CommandEmpty>No results found.</CommandEmpty>
-        <CommandGroup heading="Services">{children}</CommandGroup>
+        <CommandEmpty>{t("landing.noResultsFound")}</CommandEmpty>
+        <CommandGroup heading={t("landing.services")}>{children}</CommandGroup>
       </CommandList>
     </CommandDialog>
   );

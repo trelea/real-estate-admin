@@ -6,12 +6,14 @@ import { PatchAboutUsContentForm } from "@/features/about-us/forms";
 import { AboutUsType } from "@/features/about-us/types";
 import { User } from "@/features/auth/types";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   status?: User;
 }
 
 export const AboutUs: React.FC<Props> = ({ status }) => {
+  const { t } = useTranslation();
   const { data, isLoading, isFetching } = useGetAboutUsContentQuery(null);
 
   return (
@@ -23,25 +25,25 @@ export const AboutUs: React.FC<Props> = ({ status }) => {
             defaultValue="romanian"
           >
             <div className="flex w-full justify-between items-center mb-4">
-              <h1 className="text-xl font-medium">Edit About Us</h1>
+              <h1 className="text-xl font-medium">{t("about.editAboutUs")}</h1>
               <TabsList className="flex space-x-4">
                 <TabsTrigger
                   value="romanian"
                   className="text-xs xl:text-sm w-fit"
                 >
-                  Română
+                  {t("about.romanian")}
                 </TabsTrigger>
                 <TabsTrigger
                   value="russian"
                   className="text-xs xl:text-sm w-fit"
                 >
-                  Русский
+                  {t("about.russian")}
                 </TabsTrigger>
                 <TabsTrigger
                   value="english"
                   className="text-xs xl:text-sm w-fit"
                 >
-                  English
+                  {t("about.english")}
                 </TabsTrigger>
               </TabsList>
             </div>

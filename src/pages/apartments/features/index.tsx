@@ -12,6 +12,7 @@ import {
   CreateApartmentFeatureForm,
   UpdateApartmentFeatureForm,
 } from "@/features/apartment-features/forms";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   status?: User;
@@ -29,6 +30,7 @@ export const ApartmentFeatures: React.FC<Props> = ({ status }) => {
       setOpenDialogCreateApartmentFeature,
     },
   } = React.useContext<ApartmentFeaturesContextProps>(ApartmentFeaturesContext);
+  const { t } = useTranslation();
 
   const [deleteApartmentFeature, deleteLoading] = useDeleteApartmentFeature();
 
@@ -45,8 +47,11 @@ export const ApartmentFeatures: React.FC<Props> = ({ status }) => {
        * header
        */
       header={{
-        title: "Apartment Features",
-        badge: `${data?.meta.total} features`,
+        title: t("apartmentFeatures.manageTitle", "Apartment Features"),
+        badge: t("apartmentFeatures.badge", {
+          count: data?.meta.total ?? 0,
+          defaultValue: `${data?.meta.total} features`,
+        }),
         search: {
           defaultValue: search,
           onValueChange: (value) =>
@@ -57,13 +62,18 @@ export const ApartmentFeatures: React.FC<Props> = ({ status }) => {
         },
         create: {
           trigger: {
-            label: "Create feature",
+            label: t("apartmentFeatures.create.trigger", "Create feature"),
             disabled: status?.role !== "ADMIN",
           },
           content: {
-            title: "Create Apartment Feature",
-            description:
-              "Fill in the apartment feature details in all supported languages. Once submitted, the feature will be added to the system and available for use in relevant modules.",
+            title: t(
+              "apartmentFeatures.create.title",
+              "Create Apartment Feature"
+            ),
+            description: t(
+              "apartmentFeatures.create.description",
+              "Fill in the apartment feature details in all supported languages. Once submitted, the feature will be added to the system and available for use in relevant modules."
+            ),
             children: <CreateApartmentFeatureForm />,
           },
           dialogState: {
@@ -78,7 +88,12 @@ export const ApartmentFeatures: React.FC<Props> = ({ status }) => {
       content={{
         table: {
           data: data?.data as ApartmentFeatureType[],
-          headers: ["ID", "Romanian", "Russian", "English"],
+          headers: [
+            t("apartmentFeatures.tableHeaders.id", "ID"),
+            t("apartmentFeatures.tableHeaders.ro", "Romanian"),
+            t("apartmentFeatures.tableHeaders.ru", "Russian"),
+            t("apartmentFeatures.tableHeaders.en", "English"),
+          ],
           rows: ({ ro, ru, en, id }) => [
             <div className="py-2 sm:py-4">
               <span className="font-bold text-sm">{id}</span>
@@ -93,9 +108,14 @@ export const ApartmentFeatures: React.FC<Props> = ({ status }) => {
           },
           update: {
             disabled: status?.role !== "ADMIN",
-            title: "Update Apartment Feature",
-            description:
-              "Edit the details of an existing apartment feature. Update the multilingual names or other relevant fields to ensure the information remains accurate and current.",
+            title: t(
+              "apartmentFeatures.update.title",
+              "Update Apartment Feature"
+            ),
+            description: t(
+              "apartmentFeatures.update.description",
+              "Edit the details of an existing apartment feature. Update the multilingual names or other relevant fields to ensure the information remains accurate and current."
+            ),
             children: (feature) => (
               <UpdateApartmentFeatureForm apartmentFeature={feature} />
             ),

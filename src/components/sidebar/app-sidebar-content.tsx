@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import { Badge } from "../ui/badge";
 import { useChangeLanguage } from "@/hooks/useChangeLanguage";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   state?: "expanded" | "collapsed";
@@ -48,6 +49,7 @@ export const AppSidebarContent: React.FC<Props> = ({
 }) => {
   const { currentLang } = useChangeLanguage();
   const langPrefix = currentLang ? `/${currentLang}` : "";
+  const { t } = useTranslation();
 
   return (
     <SidebarContent
@@ -57,18 +59,17 @@ export const AppSidebarContent: React.FC<Props> = ({
       <AppSidebarContentGroup
         state={state}
         toggleSidebar={toggleSidebar}
-        label="Content"
+        label={t("sidebar.content")}
         items={[
-          // Aprtments
           {
-            title: "Apartments",
+            title: t("sidebar.apartments"),
             icon: Building,
             collapsible: [
               {
                 title: (
                   <Badge>
                     <Plus />
-                    Create New
+                    {t("sidebar.createNew")}
                   </Badge>
                 ),
                 url: withLangPrefix(
@@ -77,14 +78,14 @@ export const AppSidebarContent: React.FC<Props> = ({
                 ),
               },
               {
-                title: "Posts",
+                title: t("sidebar.posts"),
                 url: withLangPrefix(
                   { pathname: "/dashboard/apartments" },
                   langPrefix
                 ),
               },
               {
-                title: "Features",
+                title: t("sidebar.features"),
                 url: withLangPrefix(
                   { pathname: "/dashboard/apartments/features" },
                   langPrefix
@@ -92,16 +93,15 @@ export const AppSidebarContent: React.FC<Props> = ({
               },
             ],
           },
-          // Houses
           {
-            title: "Hoses",
+            title: t("sidebar.houses"),
             icon: House,
             collapsible: [
               {
                 title: (
                   <Badge>
                     <Plus />
-                    Create New
+                    {t("sidebar.createNew")}
                   </Badge>
                 ),
                 url: withLangPrefix(
@@ -110,14 +110,14 @@ export const AppSidebarContent: React.FC<Props> = ({
                 ),
               },
               {
-                title: "Posts",
+                title: t("sidebar.posts"),
                 url: withLangPrefix(
                   { pathname: "/dashboard/houses" },
                   langPrefix
                 ),
               },
               {
-                title: "Features",
+                title: t("sidebar.features"),
                 url: withLangPrefix(
                   { pathname: "/dashboard/houses/features" },
                   langPrefix
@@ -125,16 +125,15 @@ export const AppSidebarContent: React.FC<Props> = ({
               },
             ],
           },
-          // Commercials
           {
-            title: "Commercials",
+            title: t("sidebar.commercials"),
             icon: ShoppingBag,
             collapsible: [
               {
                 title: (
                   <Badge>
                     <Plus />
-                    Create New
+                    {t("sidebar.createNew")}
                   </Badge>
                 ),
                 url: withLangPrefix(
@@ -143,28 +142,28 @@ export const AppSidebarContent: React.FC<Props> = ({
                 ),
               },
               {
-                title: "Posts",
+                title: t("sidebar.posts"),
                 url: withLangPrefix(
                   { pathname: "/dashboard/commercials" },
                   langPrefix
                 ),
               },
               {
-                title: "Destinations",
+                title: t("sidebar.destinations"),
                 url: withLangPrefix(
                   { pathname: "/dashboard/commercials/destinations" },
                   langPrefix
                 ),
               },
               {
-                title: "Placings",
+                title: t("sidebar.placings"),
                 url: withLangPrefix(
                   { pathname: "/dashboard/commercials/placings" },
                   langPrefix
                 ),
               },
               {
-                title: "Features",
+                title: t("sidebar.features"),
                 url: withLangPrefix(
                   { pathname: "/dashboard/commercials/features" },
                   langPrefix
@@ -172,16 +171,15 @@ export const AppSidebarContent: React.FC<Props> = ({
               },
             ],
           },
-          // Terrains
           {
-            title: "Terrains",
+            title: t("sidebar.terrains"),
             icon: Trees,
             collapsible: [
               {
                 title: (
                   <Badge>
                     <Plus />
-                    Create New
+                    {t("sidebar.createNew")}
                   </Badge>
                 ),
                 url: withLangPrefix(
@@ -190,21 +188,21 @@ export const AppSidebarContent: React.FC<Props> = ({
                 ),
               },
               {
-                title: "Posts",
+                title: t("sidebar.posts"),
                 url: withLangPrefix(
                   { pathname: "/dashboard/terrains" },
                   langPrefix
                 ),
               },
               {
-                title: "Usability",
+                title: t("sidebar.usability"),
                 url: withLangPrefix(
                   { pathname: "/dashboard/terrains/usabilities" },
                   langPrefix
                 ),
               },
               {
-                title: "Features",
+                title: t("sidebar.features"),
                 url: withLangPrefix(
                   { pathname: "/dashboard/terrains/features" },
                   langPrefix
@@ -218,10 +216,10 @@ export const AppSidebarContent: React.FC<Props> = ({
       <AppSidebarContentGroup
         state={state}
         toggleSidebar={toggleSidebar}
-        label="Filters"
+        label={t("sidebar.filters")}
         items={[
           {
-            title: "Housing Types",
+            title: t("sidebar.housingTypes"),
             icon: UnfoldVertical,
             url: withLangPrefix(
               { pathname: "/dashboard/housing-stocks" },
@@ -229,7 +227,7 @@ export const AppSidebarContent: React.FC<Props> = ({
             ),
           },
           {
-            title: "Conditions",
+            title: t("sidebar.conditions"),
             icon: ReceiptText,
             url: withLangPrefix(
               { pathname: "/dashboard/conditions" },
@@ -237,7 +235,7 @@ export const AppSidebarContent: React.FC<Props> = ({
             ),
           },
           {
-            title: "Locations",
+            title: t("sidebar.locations"),
             icon: MapPinned,
             url: withLangPrefix("/dashboard/locations", langPrefix),
           },
@@ -247,10 +245,10 @@ export const AppSidebarContent: React.FC<Props> = ({
       <AppSidebarContentGroup
         state={state}
         toggleSidebar={toggleSidebar}
-        label="Utils"
+        label={t("sidebar.utils")}
         items={[
           {
-            title: "Services",
+            title: t("sidebar.services"),
             icon: HandPlatter,
             url: withLangPrefix(
               { pathname: "/dashboard/services" },
@@ -258,12 +256,12 @@ export const AppSidebarContent: React.FC<Props> = ({
             ),
           },
           {
-            title: "Blogs",
+            title: t("sidebar.blogs"),
             icon: Newspaper,
             url: withLangPrefix({ pathname: "/dashboard/blogs" }, langPrefix),
           },
           {
-            title: "Privacy Policy",
+            title: t("sidebar.privacyPolicy"),
             icon: EarthLock,
             url: withLangPrefix(
               { pathname: "/dashboard/privacy-policy" },
@@ -271,7 +269,7 @@ export const AppSidebarContent: React.FC<Props> = ({
             ),
           },
           {
-            title: "Terms and Conditions",
+            title: t("sidebar.termsAndConditions"),
             icon: Handshake,
             url: withLangPrefix(
               { pathname: "/dashboard/terms-and-conditions" },
@@ -279,7 +277,7 @@ export const AppSidebarContent: React.FC<Props> = ({
             ),
           },
           {
-            title: "About Us",
+            title: t("sidebar.aboutUs"),
             icon: BookType,
             url: withLangPrefix(
               { pathname: "/dashboard/about-us" },
@@ -287,7 +285,7 @@ export const AppSidebarContent: React.FC<Props> = ({
             ),
           },
           {
-            title: "Landing",
+            title: t("sidebar.landing"),
             icon: GalleryVerticalEnd,
             url: withLangPrefix({ pathname: "/dashboard/landing" }, langPrefix),
           },
@@ -297,10 +295,10 @@ export const AppSidebarContent: React.FC<Props> = ({
       <AppSidebarContentGroup
         state={state}
         toggleSidebar={toggleSidebar}
-        label="Access"
+        label={t("sidebar.access")}
         items={[
           {
-            title: "Users",
+            title: t("sidebar.users"),
             icon: Users,
             url: withLangPrefix({ pathname: "/dashboard/users" }, langPrefix),
           },
@@ -311,10 +309,10 @@ export const AppSidebarContent: React.FC<Props> = ({
       <AppSidebarContentGroup
         state={state}
         toggleSidebar={toggleSidebar}
-        label="Settings"
+        label={t("sidebar.settings")}
         items={[
           {
-            title: "Configure",
+            title: t("sidebar.configure"),
             icon: Settings,
             url: withLangPrefix(
               { pathname: "/dashboard/settings" },

@@ -12,6 +12,7 @@ import {
   UpdateCommercialFeatureForm,
 } from "@/features/commercial-features/forms";
 import { User } from "@/features/auth/types";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   status?: User;
@@ -33,6 +34,7 @@ export const CommercialFeatures: React.FC<Props> = ({ status }) => {
   );
 
   const [deleteCommercialFeature, deleteLoading] = useDeleteCommercialFeature();
+  const { t } = useTranslation();
 
   return (
     <ManageData<CommercialFeatureType>
@@ -47,8 +49,11 @@ export const CommercialFeatures: React.FC<Props> = ({ status }) => {
        * header
        */
       header={{
-        title: "Commercial Features",
-        badge: `${data?.meta.total ?? 0} features`,
+        title: t("commercialFeatures.manageTitle", "Commercial Features"),
+        badge: t("commercialFeatures.badge", {
+          count: data?.meta.total ?? 0,
+          defaultValue: `${data?.meta.total} features`,
+        }),
         search: {
           defaultValue: search,
           onValueChange: (value) =>
@@ -59,13 +64,18 @@ export const CommercialFeatures: React.FC<Props> = ({ status }) => {
         },
         create: {
           trigger: {
-            label: "Create feature",
+            label: t("commercialFeatures.create.trigger", "Create feature"),
             disabled: status?.role !== "ADMIN",
           },
           content: {
-            title: "Create Commercial Feature",
-            description:
-              "Fill in the commercial feature details in all supported languages. Once submitted, the feature will be added to the system and available for use in relevant modules.",
+            title: t(
+              "commercialFeatures.create.title",
+              "Create Commercial Feature"
+            ),
+            description: t(
+              "commercialFeatures.create.description",
+              "Fill in the commercial feature details in all supported languages. Once submitted, the feature will be added to the system and available for use in relevant modules."
+            ),
             children: <CreateCommercialFeatureForm />,
           },
           dialogState: {
@@ -80,7 +90,12 @@ export const CommercialFeatures: React.FC<Props> = ({ status }) => {
       content={{
         table: {
           data: data?.data as CommercialFeatureType[],
-          headers: ["ID", "Romanian", "Russian", "English"],
+          headers: [
+            t("commercialFeatures.tableHeaders.id", "ID"),
+            t("commercialFeatures.tableHeaders.ro", "Romanian"),
+            t("commercialFeatures.tableHeaders.ru", "Russian"),
+            t("commercialFeatures.tableHeaders.en", "English"),
+          ],
           rows: ({ ro, ru, en, id }) => [
             <div className="py-2 sm:py-4">
               <span className="font-bold text-sm">{id}</span>
@@ -94,10 +109,15 @@ export const CommercialFeatures: React.FC<Props> = ({ status }) => {
             onDeleteAction: (id) => deleteCommercialFeature(Number(id)),
           },
           update: {
-            title: "Update Commercial Feature",
+            title: t(
+              "commercialFeatures.update.title",
+              "Update Commercial Feature"
+            ),
             disabled: status?.role !== "ADMIN" || deleteLoading,
-            description:
-              "Edit the details of an existing commercial feature. Update the multilingual names or other relevant fields to ensure the information remains accurate and current.",
+            description: t(
+              "commercialFeatures.update.description",
+              "Edit the details of an existing commercial feature. Update the multilingual names or other relevant fields to ensure the information remains accurate and current."
+            ),
             children: (feature) => (
               <UpdateCommercialFeatureForm commercialFeature={feature} />
             ),

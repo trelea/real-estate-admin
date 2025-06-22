@@ -5,6 +5,7 @@ import { type PrivacyPolicyType } from "../types";
 import { TipTapField } from "../components";
 import { Button } from "@/components/ui/button";
 import { usePatchPrivacyPolicyContent } from "../hooks";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   content: PrivacyPolicyType;
@@ -15,6 +16,7 @@ export const PatchPrivacyPolicyContentForm: React.FC<Props> = ({
   content,
   disabled,
 }) => {
+  const { t } = useTranslation();
   const { form, onSubmit, isLoading } = usePatchPrivacyPolicyContent({
     content,
   });
@@ -25,7 +27,7 @@ export const PatchPrivacyPolicyContentForm: React.FC<Props> = ({
           <TipTapField
             withSubmitButton={
               <Button disabled={isLoading || disabled} type="submit">
-                Save Content
+                {t("privacy.saveContent")}
               </Button>
             }
             control={form}
@@ -37,7 +39,7 @@ export const PatchPrivacyPolicyContentForm: React.FC<Props> = ({
           <TipTapField
             withSubmitButton={
               <Button disabled={isLoading || disabled} type="submit">
-                Save Content
+                {t("privacy.saveContent")}
               </Button>
             }
             control={form}
@@ -49,7 +51,7 @@ export const PatchPrivacyPolicyContentForm: React.FC<Props> = ({
           <TipTapField
             withSubmitButton={
               <Button disabled={isLoading || disabled} type="submit">
-                Save Content
+                {t("privacy.saveContent")}
               </Button>
             }
             control={form}

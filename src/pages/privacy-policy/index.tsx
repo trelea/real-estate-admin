@@ -6,12 +6,14 @@ import { useGetPrivacyPolicyContentQuery } from "@/features/privacy-policy/api";
 import { PatchPrivacyPolicyContentForm } from "@/features/privacy-policy/forms";
 import { PrivacyPolicyType } from "@/features/privacy-policy/types";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   status?: User;
 }
 
 export const PrivacyPolicy: React.FC<Props> = ({ status }) => {
+  const { t } = useTranslation();
   const { data, isLoading, isFetching } = useGetPrivacyPolicyContentQuery(null);
   return (
     <section className="h-full">
@@ -22,25 +24,25 @@ export const PrivacyPolicy: React.FC<Props> = ({ status }) => {
             defaultValue="romanian"
           >
             <div className="flex w-full justify-between items-center mb-4">
-              <h1 className="text-xl font-medium">Edit Privacy Policy</h1>
+              <h1 className="text-xl font-medium">{t("privacy.edit")}</h1>
               <TabsList className="flex space-x-4">
                 <TabsTrigger
                   value="romanian"
                   className="text-xs xl:text-sm w-fit"
                 >
-                  Română
+                  {t("privacy.romanian")}
                 </TabsTrigger>
                 <TabsTrigger
                   value="russian"
                   className="text-xs xl:text-sm w-fit"
                 >
-                  Русский
+                  {t("privacy.russian")}
                 </TabsTrigger>
                 <TabsTrigger
                   value="english"
                   className="text-xs xl:text-sm w-fit"
                 >
-                  English
+                  {t("privacy.english")}
                 </TabsTrigger>
               </TabsList>
             </div>

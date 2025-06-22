@@ -14,6 +14,7 @@ import {
 } from "../hooks";
 import { Button } from "@/components/ui/button";
 import { Plus, X } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   loading?: boolean;
@@ -38,6 +39,7 @@ export const ManageServices: React.FC<Props> = ({
   const [servicesOnLanding, setServicesOnLanding] =
     React.useState<GetServicesOnLandingResType>([]);
   const [currentCard, setCurrentCard] = React.useState<number>(0);
+  const { t } = useTranslation();
 
   React.useEffect(
     () => setServicesOnLanding(services_on_landing),
@@ -72,7 +74,7 @@ export const ManageServices: React.FC<Props> = ({
       <Card className="m-0">
         <CardHeader className="m-0">
           <CardTitle className="font-semibold text-xl m-0 p-0">
-            Servicii
+            {t("landing.services")}
           </CardTitle>
         </CardHeader>
         <CardContent className="m-0">
@@ -92,7 +94,7 @@ export const ManageServices: React.FC<Props> = ({
                     aria-disabled={isLoading}
                   >
                     <div className="flex flex-col gap-2">
-                      <Label>Card {index + 1}</Label>
+                      <Label>{t("landing.card", { number: index + 1 })}</Label>
                       <div
                         className={`flex justify-between items-center 
                           ${
@@ -116,7 +118,7 @@ export const ManageServices: React.FC<Props> = ({
                               }
                             </h1>
                           ) : (
-                            <h1>Click To Add Service</h1>
+                            <h1>{t("landing.clickToAddService")}</h1>
                           )}
 
                           {services_on_landing?.find(
@@ -156,7 +158,7 @@ export const ManageServices: React.FC<Props> = ({
                   onClick={() => patchServices(servicesOnLanding)}
                   disabled={isLoading || disabled}
                 >
-                  Update
+                  {t("landing.update")}
                 </Button>
               </div>
             </>
