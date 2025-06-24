@@ -75,8 +75,8 @@ export const HousingConditionsField: React.FC<Props> = ({
                           .map((d: MultilingualItemType<{}>) => d.en)
                           .join(", ") as string
                       )
-                        .slice(0, 25)
-                        .concat("...")
+                        ?.slice(0, 25)
+                        ?.concat("...")
                     : "Select Housing Conditions"}
                   <ChevronsUpDown className="opacity-50" />
                 </Button>
