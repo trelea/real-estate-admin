@@ -26,6 +26,8 @@ import { cn } from "@/lib/utils";
 import { Check, ChevronsUpDown } from "lucide-react";
 import React from "react";
 import { Control } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { useChangeLanguage } from "@/hooks/useChangeLanguage";
 
 interface Props {
   control: Control<any>;
@@ -44,6 +46,8 @@ export const CommercialPlacingsField: React.FC<Props> = ({
   label,
   params = { page: 1, limit: 1000, search: "" },
 }) => {
+  const { currentLang: language } = useChangeLanguage();
+  const { t } = useTranslation();
   const { data } = useGetCommercialPlacingsQuery(params, {
     refetchOnMountOrArgChange: false,
   });
@@ -77,16 +81,20 @@ export const CommercialPlacingsField: React.FC<Props> = ({
                       )
                         ?.slice(0, 25)
                         ?.concat("...")
-                    : "Select Placings"}
+                    : t("createCommercial.selectPlacings")}
                   <ChevronsUpDown className="opacity-50" />
                 </Button>
               </FormControl>
             </PopoverTrigger>
             <PopoverContent className="w-[300px] max-h-96 overflow-auto">
               <Command>
-                <CommandInput placeholder="Search placing" />
+                <CommandInput
+                  placeholder={t("createCommercial.searchPlacings")}
+                />
                 <CommandList>
-                  <CommandEmpty>No placing found.</CommandEmpty>
+                  <CommandEmpty>
+                    {t("createCommercial.noPlacingsFound")}
+                  </CommandEmpty>
                   <CommandGroup>
                     {data?.data?.map((item: MultilingualItemType<{}>) => (
                       <CommandItem value={item.id.toString()} key={item.id}>
@@ -105,7 +113,8 @@ export const CommercialPlacingsField: React.FC<Props> = ({
                             );
                           }}
                         />
-                        {item.en}
+                        {/* @ts-ignore */}
+                        {item[language]}
                         <Check
                           className={cn(
                             "ml-auto",

@@ -26,6 +26,7 @@ import { cn } from "@/lib/utils";
 import { Check, ChevronsUpDown } from "lucide-react";
 import React from "react";
 import { Control } from "react-hook-form";
+import { useChangeLanguage } from "@/hooks/useChangeLanguage";
 
 interface Props {
   control: Control<any>;
@@ -44,6 +45,8 @@ export const HousingConditionsField: React.FC<Props> = ({
   label,
   params = { page: 1, limit: 1000, search: "" },
 }) => {
+  const { currentLang: language } = useChangeLanguage();
+
   const { data } = useGetConditionsQuery(params, {
     refetchOnMountOrArgChange: false,
   });
@@ -105,7 +108,8 @@ export const HousingConditionsField: React.FC<Props> = ({
                             );
                           }}
                         />
-                        {item.en}
+                        {/* @ts-ignore */}
+                        {item[language]}
                         <Check
                           className={cn(
                             "ml-auto",

@@ -14,6 +14,7 @@ import { HousingConditionsField } from "../components";
 import { ApartmentFeaturesField } from "../components";
 import { MediaField } from "@/components/media-field";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   user: {
@@ -24,6 +25,7 @@ interface Props {
 
 export const CreateApartmentOffertForm: React.FC<Props> = ({ user }) => {
   const { form, onSubmit, isLoading } = useCreateApartment({ user });
+  const { t } = useTranslation();
 
   return (
     <Form {...form}>
@@ -32,25 +34,25 @@ export const CreateApartmentOffertForm: React.FC<Props> = ({ user }) => {
         onSubmit={form.handleSubmit(onSubmit)}
       >
         {/* accordion generals */}
-        <AccordionCard trigger="General Info">
+        <AccordionCard trigger={t("createApartment.general_info")}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-6 gap-6 w-full justify-between items-center">
             <OffertField
               controll={form.control}
               name="offert"
-              label="Offert Type"
+              label={t("createApartment.offert_type")}
             />
 
             <UserField
               control={form.control}
               name="user"
-              label="Select Agent"
+              label={t("createApartment.select_agent")}
               disabled={user.role !== "ADMIN"}
             />
 
             <Field
               control={form.control}
               name="price"
-              label="Price"
+              label={t("createApartment.price")}
               placeholder="24 000$"
               type="number"
               className="w-full"
@@ -62,7 +64,8 @@ export const CreateApartmentOffertForm: React.FC<Props> = ({ user }) => {
               name="hot"
               label={
                 <span className="flex items-center gap-1">
-                  Hot Offert <Flame className="size-5 text-destructive" />
+                  {t("createApartment.hot_offert")}{" "}
+                  <Flame className="size-5 text-destructive" />
                 </span>
               }
               type="check"
@@ -76,7 +79,10 @@ export const CreateApartmentOffertForm: React.FC<Props> = ({ user }) => {
               className="flex flex-row-reverse justify-end items-center w-full"
               label={
                 <span className="flex items-center gap-1">
-                  Status: {form.watch("status") ? "Public" : "Private"}{" "}
+                  {t("createApartment.status")}:{" "}
+                  {form.watch("status")
+                    ? t("createApartment.public")
+                    : t("createApartment.private")}{" "}
                   <Eye className="size-5" />
                 </span>
               }
@@ -103,8 +109,8 @@ export const CreateApartmentOffertForm: React.FC<Props> = ({ user }) => {
                     name="desc_ro"
                     type="tip-tap"
                     className="w-full"
-                    placeholder="Description Romanian"
-                    label={"Description"}
+                    placeholder={t("createApartment.description_ro")}
+                    label={t("createApartment.description")}
                     displayErrorMessage
                   />
                 </TabsContent>
@@ -114,8 +120,8 @@ export const CreateApartmentOffertForm: React.FC<Props> = ({ user }) => {
                     name="desc_ru"
                     type="tip-tap"
                     className="w-full"
-                    placeholder="Description Russian"
-                    label={"Description"}
+                    placeholder={t("createApartment.description_ru")}
+                    label={t("createApartment.description")}
                     displayErrorMessage
                   />
                 </TabsContent>
@@ -125,8 +131,8 @@ export const CreateApartmentOffertForm: React.FC<Props> = ({ user }) => {
                     name="desc_en"
                     type="tip-tap"
                     className="w-full"
-                    placeholder="Description English"
-                    label={"Description"}
+                    placeholder={t("createApartment.description_en")}
+                    label={t("createApartment.description")}
                     displayErrorMessage
                   />
                 </TabsContent>
@@ -136,19 +142,19 @@ export const CreateApartmentOffertForm: React.FC<Props> = ({ user }) => {
         </AccordionCard>
 
         {/* acordion location */}
-        <AccordionCard trigger="Location">
+        <AccordionCard trigger={t("createApartment.location")}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-6 gap-6 w-full justify-between items-start">
             <LocationField
               category={{
                 controll: form.control,
                 name: "location_category",
-                label: "Location Category",
+                label: t("createApartment.location_category"),
                 onSelect: (data) => form.setValue("location_category", data.id),
               }}
               subcategory={{
                 controll: form.control,
                 name: "location_subcategory",
-                label: "Location Subcategory",
+                label: t("createApartment.location_subcategory"),
                 onSelect: (data) =>
                   form.setValue("location_subcategory", data.id),
                 category: form.watch().location_category,
@@ -156,9 +162,9 @@ export const CreateApartmentOffertForm: React.FC<Props> = ({ user }) => {
             />
             <PlaceField
               control={form.control}
-              label="Street"
+              label={t("createApartment.street")}
               name="place"
-              placeholder="Street"
+              placeholder={t("createApartment.street")}
               map={{
                 className: "w-full h-[500px] md:col-span-2 lg:col-span-3",
                 mapId: "49ae42fed52588c3",
@@ -183,12 +189,12 @@ export const CreateApartmentOffertForm: React.FC<Props> = ({ user }) => {
         </AccordionCard>
 
         {/* acordion caracteristics */}
-        <AccordionCard trigger="Caracteristics">
+        <AccordionCard trigger={t("createApartment.caracteristics")}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-6 gap-6 w-full justify-between items-start">
             <Field
               control={form.control}
               name="rooms"
-              label="Rooms"
+              label={t("createApartment.rooms")}
               placeholder="3"
               type="number"
               className="w-full"
@@ -197,7 +203,7 @@ export const CreateApartmentOffertForm: React.FC<Props> = ({ user }) => {
             <Field
               control={form.control}
               name="sanitaries"
-              label="Sanitaries"
+              label={t("createApartment.sanitaries")}
               placeholder="1"
               type="number"
               className="w-full"
@@ -206,7 +212,7 @@ export const CreateApartmentOffertForm: React.FC<Props> = ({ user }) => {
             <Field
               control={form.control}
               name="surface"
-              label="Surface"
+              label={t("createApartment.surface")}
               placeholder="54mp2"
               type="number"
               className="w-full"
@@ -215,7 +221,7 @@ export const CreateApartmentOffertForm: React.FC<Props> = ({ user }) => {
             <Field
               control={form.control}
               name="floor"
-              label="Floor"
+              label={t("createApartment.floor")}
               placeholder="12"
               type="number"
               className="w-full"
@@ -224,7 +230,7 @@ export const CreateApartmentOffertForm: React.FC<Props> = ({ user }) => {
             <Field
               control={form.control}
               name="floors"
-              label="Total Floors"
+              label={t("createApartment.total_floors")}
               placeholder="20"
               type="number"
               className="w-full"
@@ -234,20 +240,20 @@ export const CreateApartmentOffertForm: React.FC<Props> = ({ user }) => {
             <StockField
               control={form.control}
               name="housing_stock"
-              label="Housing Type"
+              label={t("createApartment.housing_type")}
               onSelect={({ id }) => form.setValue("housing_stock", id)}
             />
 
             <HousingConditionsField
               control={form.control}
               name="housing_conditions"
-              label="Housing Conditions"
+              label={t("createApartment.housing_conditions")}
             />
 
             <ApartmentFeaturesField
               control={form.control}
               name="features"
-              label="Apartment Features"
+              label={t("createApartment.apartment_features")}
             />
 
             {/* conditions and features */}
@@ -255,14 +261,14 @@ export const CreateApartmentOffertForm: React.FC<Props> = ({ user }) => {
         </AccordionCard>
 
         {/* acordion media */}
-        <AccordionCard trigger="Media">
+        <AccordionCard trigger={t("createApartment.media")}>
           <MediaField
             control={form.control}
             name="media"
-            label="Apartment Images"
+            label={t("createApartment.apartment_images")}
           />
         </AccordionCard>
-        <Button type="submit">Submit</Button>
+        <Button type="submit">{t("createApartment.submit")}</Button>
       </form>
       {isLoading && (
         <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-black/20">

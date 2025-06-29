@@ -26,6 +26,8 @@ import {
   fetchPlaceDetails,
   PlaceDeletailRes,
 } from "@/utils/fetch-place-details";
+import { useChangeLanguage } from "@/hooks/useChangeLanguage";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   control: Control<any>;
@@ -56,6 +58,8 @@ export const PlaceField: React.FC<Props> = ({
   onSelectStreet,
   defaultCoordinates,
 }) => {
+  const { t } = useTranslation();
+  const { currentLang: language } = useChangeLanguage();
   const [place, setPlace] = React.useState<undefined | PlaceDeletailRes>(
     undefined
   );
@@ -75,7 +79,8 @@ export const PlaceField: React.FC<Props> = ({
       setSearch("");
       // @ts-ignore
       setPlace(details);
-      field.onChange(details.translations.en.address);
+      // @ts-ignore
+      field.onChange(details.translations[language].address);
       onSelectStreet &&
         onSelectStreet({
           location: details.location,
@@ -101,7 +106,7 @@ export const PlaceField: React.FC<Props> = ({
             >
               <CommandInput
                 value={field.value || search}
-                placeholder={placeholder}
+                placeholder={placeholder || t("createTerrain.search_place")}
                 onValueChange={(value) => {
                   setSearch(value);
                   field.onChange(value);
@@ -152,11 +157,11 @@ export const PlaceField: React.FC<Props> = ({
             <div className="bg-white p-2 m-2 rounded shadow-md max-w-xs">
               <h3 className="font-medium text-sm">
                 {/* @ts-ignore */}
-                {place.translations.en.name}
+                {place.translations[language].name}
               </h3>
               <p className="text-xs text-gray-600">
                 {/* @ts-ignore */}
-                {place.translations.en.address}
+                {place.translations[language].address}
               </p>
               <p className="text-xs text-gray-400 mt-1">
                 {place.location.lat.toFixed(6)}, {place.location.lng.toFixed(6)}

@@ -19,6 +19,7 @@ import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { useUpdateTerrain } from "../hooks/use-update-terrain";
 import { Terrain } from "../types";
 import { MultilingualItemType } from "@/features/multilingual/types";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   user: { id: string; role: User["role"] };
@@ -26,6 +27,7 @@ interface Props {
 }
 
 export const UpdateTerrainOffertForm: React.FC<Props> = ({ user, terrain }) => {
+  const { t } = useTranslation();
   const { form, onSubmit, isLoading } = useUpdateTerrain({ terrain });
   return (
     <Form {...form}>
@@ -34,23 +36,23 @@ export const UpdateTerrainOffertForm: React.FC<Props> = ({ user, terrain }) => {
         onSubmit={form.handleSubmit(onSubmit)}
       >
         {/* General */}
-        <AccordionCard trigger="General Info">
+        <AccordionCard trigger={t("updateTerrain.general_info")}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-6 gap-6 w-full justify-between items-center">
             <OffertField
               controll={form.control}
               name="offert"
-              label="Offert Type"
+              label={t("updateTerrain.offert_type")}
             />
             <UserField
               control={form.control}
               name="user"
-              label="Select Agent"
+              label={t("updateTerrain.select_agent")}
               disabled={user.role !== "ADMIN"}
             />
             <Field
               control={form.control}
               name="price"
-              label="Price"
+              label={t("updateTerrain.price")}
               placeholder="24000$"
               type="number"
               className="w-full"
@@ -61,7 +63,8 @@ export const UpdateTerrainOffertForm: React.FC<Props> = ({ user, terrain }) => {
               name="hot"
               label={
                 <span className="flex items-center gap-1">
-                  Hot Offert <Flame className="size-5 text-destructive" />
+                  {t("updateTerrain.hot_offert")}{" "}
+                  <Flame className="size-5 text-destructive" />
                 </span>
               }
               type="check"
@@ -74,7 +77,10 @@ export const UpdateTerrainOffertForm: React.FC<Props> = ({ user, terrain }) => {
               className="flex flex-row-reverse justify-end items-center w-full"
               label={
                 <span className="flex items-center gap-1">
-                  Status: {form.watch("status") ? "Public" : "Private"}{" "}
+                  {t("updateTerrain.status")}:{" "}
+                  {form.watch("status")
+                    ? t("updateTerrain.public")
+                    : t("updateTerrain.private")}{" "}
                   <Eye className="size-5" />
                 </span>
               }
@@ -90,9 +96,9 @@ export const UpdateTerrainOffertForm: React.FC<Props> = ({ user, terrain }) => {
                 })()}
               >
                 <TabsList className="w-full">
-                  <TabsTrigger value="ro">Ro</TabsTrigger>
-                  <TabsTrigger value="ru">Ru</TabsTrigger>
-                  <TabsTrigger value="en">En</TabsTrigger>
+                  <TabsTrigger value="ro">{t("updateTerrain.ro")}</TabsTrigger>
+                  <TabsTrigger value="ru">{t("updateTerrain.ru")}</TabsTrigger>
+                  <TabsTrigger value="en">{t("updateTerrain.en")}</TabsTrigger>
                 </TabsList>
                 <TabsContent value="ro">
                   <Field
@@ -101,7 +107,7 @@ export const UpdateTerrainOffertForm: React.FC<Props> = ({ user, terrain }) => {
                     type="tip-tap"
                     className="w-full"
                     placeholder={form.getValues("desc_ro")}
-                    label="Description"
+                    label={t("updateTerrain.description")}
                     displayErrorMessage
                   />
                 </TabsContent>
@@ -112,7 +118,7 @@ export const UpdateTerrainOffertForm: React.FC<Props> = ({ user, terrain }) => {
                     type="tip-tap"
                     className="w-full"
                     placeholder={form.getValues("desc_ru")}
-                    label="Description"
+                    label={t("updateTerrain.description")}
                     displayErrorMessage
                   />
                 </TabsContent>
@@ -123,7 +129,7 @@ export const UpdateTerrainOffertForm: React.FC<Props> = ({ user, terrain }) => {
                     type="tip-tap"
                     className="w-full"
                     placeholder={form.getValues("desc_en")}
-                    label="Description"
+                    label={t("updateTerrain.description")}
                     displayErrorMessage
                   />
                 </TabsContent>
@@ -133,20 +139,20 @@ export const UpdateTerrainOffertForm: React.FC<Props> = ({ user, terrain }) => {
         </AccordionCard>
 
         {/* Location */}
-        <AccordionCard trigger="Location">
+        <AccordionCard trigger={t("updateTerrain.location")}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-6 gap-6 w-full justify-between items-start">
             <LocationField
               category={{
                 controll: form.control,
                 name: "location_category",
-                label: "Location Category",
+                label: t("updateTerrain.location_category"),
                 onSelect: (d: MultilingualItemType<{}>) =>
                   form.setValue("location_category", d.id),
               }}
               subcategory={{
                 controll: form.control,
                 name: "location_subcategory",
-                label: "Location Subcategory",
+                label: t("updateTerrain.location_subcategory"),
                 onSelect: (d: MultilingualItemType<{}>) =>
                   form.setValue("location_subcategory", d.id),
                 category: form.watch().location_category,
@@ -154,9 +160,9 @@ export const UpdateTerrainOffertForm: React.FC<Props> = ({ user, terrain }) => {
             />
             <PlaceField
               control={form.control}
-              label="Street"
+              label={t("updateTerrain.street")}
               name="place"
-              placeholder="Street"
+              placeholder={t("updateTerrain.street")}
               map={{
                 className: "w-full h-[500px] md:col-span-2 lg:col-span-3",
                 mapId: "49ae42fed52588c3",
@@ -186,8 +192,8 @@ export const UpdateTerrainOffertForm: React.FC<Props> = ({ user, terrain }) => {
             <Field
               control={form.control}
               name="area"
-              label="Area (m²)"
-              placeholder="500"
+              label={t("updateTerrain.area")}
+              placeholder={t("updateTerrain.area")}
               type="number"
               className="w-full"
               displayErrorMessage
@@ -195,25 +201,25 @@ export const UpdateTerrainOffertForm: React.FC<Props> = ({ user, terrain }) => {
             <TerrainUsabilitiesField
               control={form.control}
               name="usability"
-              label="Terrain Usabilities"
+              label={t("updateTerrain.terrain_usabilities")}
             />
             <TerrainFeaturesField
               control={form.control}
               name="features"
-              label="Terrain Features"
+              label={t("updateTerrain.terrain_features")}
             />
           </div>
         </AccordionCard>
 
         {/* Media */}
-        <AccordionCard trigger="Media">
+        <AccordionCard trigger={t("updateTerrain.media")}>
           <MediaField
             control={form.control}
             name="media"
-            label="Terrain Images"
+            label={t("updateTerrain.terrain_images")}
           />
         </AccordionCard>
-        <Button type="submit">Update Terrain</Button>
+        <Button type="submit">{t("updateTerrain.submit")}</Button>
       </form>
       {isLoading && (
         <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-black/20">

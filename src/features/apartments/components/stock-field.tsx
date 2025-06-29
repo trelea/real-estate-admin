@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/popover";
 import { useGetHousingStocksQuery } from "@/features/housing-stocks/api";
 import { MultilingualItemType } from "@/features/multilingual/types";
+import { useChangeLanguage } from "@/hooks/useChangeLanguage";
 import { cn } from "@/lib/utils";
 import { Check, ChevronsUpDown } from "lucide-react";
 import React from "react";
@@ -45,6 +46,7 @@ export const StockField: React.FC<Props> = ({
   onSelect,
   params = { page: 1, limit: 1000, search: "" },
 }) => {
+  const { currentLang: language } = useChangeLanguage();
   const { data } = useGetHousingStocksQuery(params, {
     refetchOnMountOrArgChange: false,
   });
@@ -88,7 +90,8 @@ export const StockField: React.FC<Props> = ({
                         key={item.id}
                         onSelect={() => onSelect && onSelect(item)}
                       >
-                        {item.en}
+                        {/* @ts-ignore */}
+                        {item[language]}
                         <Check
                           className={cn(
                             "ml-auto",

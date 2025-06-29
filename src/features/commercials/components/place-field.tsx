@@ -26,6 +26,8 @@ import {
   fetchPlaceDetails,
   PlaceDeletailRes,
 } from "@/utils/fetch-place-details";
+import { useTranslation } from "react-i18next";
+import { useChangeLanguage } from "@/hooks/useChangeLanguage";
 
 interface Props {
   control: Control<any>;
@@ -56,6 +58,8 @@ export const PlaceField: React.FC<Props> = ({
   onSelectStreet,
   defaultCoordinates,
 }) => {
+  const { currentLang: language } = useChangeLanguage();
+  const { t } = useTranslation();
   const [place, setPlace] = React.useState<undefined | PlaceDeletailRes>(
     undefined
   );
@@ -75,7 +79,8 @@ export const PlaceField: React.FC<Props> = ({
       setSearch("");
       // @ts-ignore
       setPlace(details);
-      field.onChange(details.translations.en.address);
+      // @ts-ignore
+      field.onChange(details.translations[language].address);
       onSelectStreet &&
         onSelectStreet({
           location: details.location,
@@ -100,7 +105,7 @@ export const PlaceField: React.FC<Props> = ({
             >
               <CommandInput
                 value={field.value || search}
-                placeholder={placeholder}
+                placeholder={placeholder || t("place.search")}
                 onValueChange={(value) => {
                   setSearch(value);
                   field.onChange(value);
@@ -115,8 +120,10 @@ export const PlaceField: React.FC<Props> = ({
                         value={place.placePrediction?.placeId}
                         onSelect={() => handleSelect(place, field)}
                       >
+                        {/* @ts-ignore */}
                         {place.placePrediction?.mainText?.text}
                         {", "}
+                        {/* @ts-ignore */}
                         {place.placePrediction?.secondaryText?.text}
                       </CommandItem>
                     ))}

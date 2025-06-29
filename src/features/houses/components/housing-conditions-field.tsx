@@ -26,6 +26,8 @@ import { cn } from "@/lib/utils";
 import { Check, ChevronsUpDown } from "lucide-react";
 import React from "react";
 import { Control } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { useChangeLanguage } from "@/hooks/useChangeLanguage";
 
 interface Props {
   control: Control<any>;
@@ -44,6 +46,8 @@ export const HousingConditionsField: React.FC<Props> = ({
   label,
   params = { page: 1, limit: 1000, search: "" },
 }) => {
+  const { currentLang: language } = useChangeLanguage();
+  const { t } = useTranslation();
   const { data } = useGetConditionsQuery(params, {
     refetchOnMountOrArgChange: false,
   });
@@ -72,21 +76,26 @@ export const HousingConditionsField: React.FC<Props> = ({
                           ?.filter((d: MultilingualItemType<{}>) =>
                             field.value.includes(d.id)
                           )
-                          .map((d: MultilingualItemType<{}>) => d.en)
+                          // @ts-ignore
+                          .map((d: MultilingualItemType<{}>) => d[language])
                           .join(", ") as string
                       )
                         ?.slice(0, 25)
                         ?.concat("...")
-                    : "Select Housing Conditions"}
+                    : t("createHouse.select_housing_conditions")}
                   <ChevronsUpDown className="opacity-50" />
                 </Button>
               </FormControl>
             </PopoverTrigger>
             <PopoverContent className="w-[300px] max-h-96 overflow-auto">
               <Command>
-                <CommandInput placeholder="Search housing condition" />
+                <CommandInput
+                  placeholder={t("createHouse.search_housing_condition")}
+                />
                 <CommandList>
-                  <CommandEmpty>No housing condition found.</CommandEmpty>
+                  <CommandEmpty>
+                    {t("createHouse.no_housing_condition_found")}
+                  </CommandEmpty>
                   <CommandGroup>
                     {data?.data?.map((item: MultilingualItemType<{}>) => (
                       <CommandItem value={item.id.toString()} key={item.id}>
@@ -105,7 +114,8 @@ export const HousingConditionsField: React.FC<Props> = ({
                             );
                           }}
                         />
-                        {item.en}
+                        {/* @ts-ignore */}
+                        {item[language]}
                         <Check
                           className={cn(
                             "ml-auto",

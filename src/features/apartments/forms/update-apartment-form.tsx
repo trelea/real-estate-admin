@@ -15,6 +15,7 @@ import { MediaField } from "@/components/media-field";
 import { useUpdateApartment } from "../hooks/use-update-apartment";
 import { Apartment } from "../types/index.d";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   user: {
@@ -26,7 +27,7 @@ interface Props {
 
 export const UpdateApartmentForm: React.FC<Props> = ({ user, apartment }) => {
   const { form, onSubmit } = useUpdateApartment({ apartment });
-
+  const { t } = useTranslation();
   return (
     <Form {...form}>
       <form
@@ -34,25 +35,25 @@ export const UpdateApartmentForm: React.FC<Props> = ({ user, apartment }) => {
         onSubmit={form.handleSubmit(onSubmit)}
       >
         {/* accordion generals */}
-        <AccordionCard trigger="General Info">
+        <AccordionCard trigger={t("updateApartment.general_info")}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-6 gap-6 w-full justify-between items-center">
             <OffertField
               controll={form.control}
               name="offert"
-              label="Offert Type"
+              label={t("updateApartment.offert_type")}
             />
 
             <UserField
               control={form.control}
               name="user"
-              label="Select Agent"
+              label={t("updateApartment.select_agent")}
               disabled={user.role !== "ADMIN"}
             />
 
             <Field
               control={form.control}
               name="price"
-              label="Price"
+              label={t("updateApartment.price")}
               placeholder="24 000$"
               type="number"
               className="w-full"
@@ -64,7 +65,8 @@ export const UpdateApartmentForm: React.FC<Props> = ({ user, apartment }) => {
               name="hot"
               label={
                 <span className="flex items-center gap-1">
-                  Hot Offert <Flame className="size-5 text-destructive" />
+                  {t("updateApartment.hot_offert")}{" "}
+                  <Flame className="size-5 text-destructive" />
                 </span>
               }
               type="check"
@@ -78,7 +80,10 @@ export const UpdateApartmentForm: React.FC<Props> = ({ user, apartment }) => {
               className="flex flex-row-reverse justify-end items-center w-full"
               label={
                 <span className="flex items-center gap-1">
-                  Status: {form.watch("status") ? "Public" : "Private"}{" "}
+                  {t("updateApartment.status")}:{" "}
+                  {form.watch("status")
+                    ? t("updateApartment.public")
+                    : t("updateApartment.private")}{" "}
                   <Eye className="size-5" />
                 </span>
               }
@@ -106,7 +111,7 @@ export const UpdateApartmentForm: React.FC<Props> = ({ user, apartment }) => {
                     type="tip-tap"
                     className="w-full"
                     placeholder={form.getValues("desc_ro")}
-                    label={"Description"}
+                    label={t("updateApartment.description")}
                     displayErrorMessage
                   />
                 </TabsContent>
@@ -117,7 +122,7 @@ export const UpdateApartmentForm: React.FC<Props> = ({ user, apartment }) => {
                     type="tip-tap"
                     className="w-full"
                     placeholder={form.getValues("desc_ru")}
-                    label={"Description"}
+                    label={t("updateApartment.description")}
                     displayErrorMessage
                   />
                 </TabsContent>
@@ -128,7 +133,7 @@ export const UpdateApartmentForm: React.FC<Props> = ({ user, apartment }) => {
                     type="tip-tap"
                     className="w-full"
                     placeholder={form.getValues("desc_en")}
-                    label={"Description"}
+                    label={t("updateApartment.description")}
                     displayErrorMessage
                   />
                 </TabsContent>
@@ -138,19 +143,19 @@ export const UpdateApartmentForm: React.FC<Props> = ({ user, apartment }) => {
         </AccordionCard>
 
         {/* acordion location */}
-        <AccordionCard trigger="Location">
+        <AccordionCard trigger={t("updateApartment.location")}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-6 gap-6 w-full justify-between items-start">
             <LocationField
               category={{
                 controll: form.control,
                 name: "location_category",
-                label: "Location Category",
+                label: t("updateApartment.location_category"),
                 onSelect: (data) => form.setValue("location_category", data.id),
               }}
               subcategory={{
                 controll: form.control,
                 name: "location_subcategory",
-                label: "Location Subcategory",
+                label: t("updateApartment.location_subcategory"),
                 onSelect: (data) =>
                   form.setValue("location_subcategory", data.id),
                 category: form.watch().location_category,
@@ -158,9 +163,9 @@ export const UpdateApartmentForm: React.FC<Props> = ({ user, apartment }) => {
             />
             <PlaceField
               control={form.control}
-              label="Street"
+              label={t("updateApartment.street")}
               name="place"
-              placeholder="Street"
+              placeholder={t("updateApartment.street")}
               map={{
                 className: "w-full h-[500px] md:col-span-2 lg:col-span-3",
                 mapId: "49ae42fed52588c3",
@@ -185,12 +190,12 @@ export const UpdateApartmentForm: React.FC<Props> = ({ user, apartment }) => {
         </AccordionCard>
 
         {/* acordion caracteristics */}
-        <AccordionCard trigger="Caracteristics">
+        <AccordionCard trigger={t("updateApartment.caracteristics")}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-6 gap-6 w-full justify-between items-start">
             <Field
               control={form.control}
               name="rooms"
-              label="Rooms"
+              label={t("updateApartment.rooms")}
               placeholder="3"
               type="number"
               className="w-full"
@@ -199,7 +204,7 @@ export const UpdateApartmentForm: React.FC<Props> = ({ user, apartment }) => {
             <Field
               control={form.control}
               name="sanitaries"
-              label="Sanitaries"
+              label={t("updateApartment.sanitaries")}
               placeholder="1"
               type="number"
               className="w-full"
@@ -208,7 +213,7 @@ export const UpdateApartmentForm: React.FC<Props> = ({ user, apartment }) => {
             <Field
               control={form.control}
               name="surface"
-              label="Surface"
+              label={t("updateApartment.surface")}
               placeholder="54mp2"
               type="number"
               className="w-full"
@@ -217,7 +222,7 @@ export const UpdateApartmentForm: React.FC<Props> = ({ user, apartment }) => {
             <Field
               control={form.control}
               name="floor"
-              label="Floor"
+              label={t("updateApartment.floor")}
               placeholder="12"
               type="number"
               className="w-full"
@@ -226,7 +231,7 @@ export const UpdateApartmentForm: React.FC<Props> = ({ user, apartment }) => {
             <Field
               control={form.control}
               name="floors"
-              label="Total Floors"
+              label={t("updateApartment.total_floors")}
               placeholder="20"
               type="number"
               className="w-full"
@@ -236,33 +241,33 @@ export const UpdateApartmentForm: React.FC<Props> = ({ user, apartment }) => {
             <StockField
               control={form.control}
               name="housing_stock"
-              label="Housing Type"
+              label={t("updateApartment.housing_type")}
               onSelect={({ id }) => form.setValue("housing_stock", id)}
             />
 
             <HousingConditionsField
               control={form.control}
               name="housing_conditions"
-              label="Housing Conditions"
+              label={t("updateApartment.housing_conditions")}
             />
 
             <ApartmentFeaturesField
               control={form.control}
               name="features"
-              label="Apartment Features"
+              label={t("updateApartment.apartment_features")}
             />
           </div>
         </AccordionCard>
 
         {/* acordion media */}
-        <AccordionCard trigger="Media">
+        <AccordionCard trigger={t("updateApartment.media")}>
           <MediaField
             control={form.control}
             name="media"
-            label="Apartment Images"
+            label={t("updateApartment.apartment_images")}
           />
         </AccordionCard>
-        <Button type="submit">Update Apartment</Button>
+        <Button type="submit">{t("updateApartment.submit")}</Button>
       </form>
       {form.formState.isSubmitting && (
         <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-black/20">

@@ -24,10 +24,12 @@ import {
   useGetLocationSubCategoriesQuery,
 } from "@/features/locations/api";
 import { MultilingualItemType } from "@/features/multilingual/types";
+import { useChangeLanguage } from "@/hooks/useChangeLanguage";
 import { cn } from "@/lib/utils";
 import { Check, ChevronsUpDown } from "lucide-react";
 import React from "react";
 import { Control } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   category: {
@@ -56,6 +58,8 @@ export const LocationField: React.FC<Props> = ({
   subcategory,
   params = { page: 1, limit: 1000, search: "", id: subcategory.category },
 }) => {
+  const { currentLang: language } = useChangeLanguage();
+  const { t } = useTranslation();
   const { data } = useGetLocationCategoriesQuery(params);
   const { data: subcategories } = useGetLocationSubCategoriesQuery(params, {
     skip: !subcategory.category,
@@ -84,16 +88,20 @@ export const LocationField: React.FC<Props> = ({
                       ? data?.data?.find(
                           (d: MultilingualItemType<{}>) => d?.id === field.value
                         )?.en
-                      : "Select Category"}
+                      : t("createCommercial.selectCategory")}
                     <ChevronsUpDown className="opacity-50" />
                   </Button>
                 </FormControl>
               </PopoverTrigger>
               <PopoverContent>
                 <Command>
-                  <CommandInput placeholder="Search location category..." />
+                  <CommandInput
+                    placeholder={t("createCommercial.searchCategory")}
+                  />
                   <CommandList>
-                    <CommandEmpty>No category found.</CommandEmpty>
+                    <CommandEmpty>
+                      {t("createCommercial.noCategoryFound")}
+                    </CommandEmpty>
                     <CommandGroup>
                       {data?.data?.map((data: MultilingualItemType<{}>) => (
                         <CommandItem
@@ -105,7 +113,8 @@ export const LocationField: React.FC<Props> = ({
                             }
                           }}
                         >
-                          {data.en}
+                          {/* @ts-ignore */}
+                          {data[language]}
                           <Check
                             className={cn(
                               "ml-auto",
@@ -147,16 +156,20 @@ export const LocationField: React.FC<Props> = ({
                       ? subcategories?.data?.find(
                           (d: MultilingualItemType<{}>) => d?.id === field.value
                         )?.en
-                      : "Select Subcategory"}
+                      : t("createCommercial.select_subcategory")}
                     <ChevronsUpDown className="opacity-50" />
                   </Button>
                 </FormControl>
               </PopoverTrigger>
               <PopoverContent>
                 <Command>
-                  <CommandInput placeholder="Search location subcategory..." />
+                  <CommandInput
+                    placeholder={t("createCommercial.searchSubcategory")}
+                  />
                   <CommandList>
-                    <CommandEmpty>No subcategory found.</CommandEmpty>
+                    <CommandEmpty>
+                      {t("createCommercial.noSubcategoryFound")}
+                    </CommandEmpty>
                     <CommandGroup>
                       {subcategories?.data?.map(
                         (data: MultilingualItemType<{}>) => (
@@ -169,7 +182,8 @@ export const LocationField: React.FC<Props> = ({
                               }
                             }}
                           >
-                            {data.en}
+                            {/* @ts-ignore */}
+                            {data[language]}
                             <Check
                               className={cn(
                                 "ml-auto",

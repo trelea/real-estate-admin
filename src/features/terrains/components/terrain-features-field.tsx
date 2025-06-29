@@ -26,6 +26,8 @@ import { cn } from "@/lib/utils";
 import { Check, ChevronsUpDown } from "lucide-react";
 import React from "react";
 import { Control } from "react-hook-form";
+import { useChangeLanguage } from "@/hooks/useChangeLanguage";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   control: Control<any>;
@@ -44,6 +46,8 @@ export const TerrainFeaturesField: React.FC<Props> = ({
   label,
   params = { page: 1, limit: 1000, search: "" },
 }) => {
+  const { currentLang: language } = useChangeLanguage();
+  const { t } = useTranslation();
   const { data } = useGetTerrainFeaturesQuery(params, {
     refetchOnMountOrArgChange: false,
   });
@@ -67,26 +71,32 @@ export const TerrainFeaturesField: React.FC<Props> = ({
                   )}
                 >
                   {field.value?.length
-                    ? (
+                    ? // @ts-ignore
+                      (
                         data?.data
                           ?.filter((d: MultilingualItemType<{}>) =>
                             field.value.includes(d.id)
                           )
-                          .map((d: MultilingualItemType<{}>) => d.en)
+                          // @ts-ignore
+                          .map((d: MultilingualItemType<{}>) => d[language])
                           .join(", ") as string
                       )
                         ?.slice(0, 25)
                         ?.concat("...")
-                    : "Select Terrain Features"}
+                    : t("createTerrain.select_features")}
                   <ChevronsUpDown className="opacity-50" />
                 </Button>
               </FormControl>
             </PopoverTrigger>
             <PopoverContent className="w-[300px] max-h-96 overflow-auto">
               <Command>
-                <CommandInput placeholder="Search terrain feature" />
+                <CommandInput
+                  placeholder={t("createTerrain.search_features")}
+                />
                 <CommandList>
-                  <CommandEmpty>No terrain feature found.</CommandEmpty>
+                  <CommandEmpty>
+                    {t("createTerrain.no_features_found")}
+                  </CommandEmpty>
                   <CommandGroup>
                     {data?.data?.map((item: MultilingualItemType<{}>) => (
                       <CommandItem value={item.id.toString()} key={item.id}>
@@ -107,7 +117,8 @@ export const TerrainFeaturesField: React.FC<Props> = ({
                             }
                           }}
                         />
-                        {item.en}
+                        {/* @ts-ignore */}
+                        {item[language]}
                         <Check
                           className={cn(
                             "ml-auto",

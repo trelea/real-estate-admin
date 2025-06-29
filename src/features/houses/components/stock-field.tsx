@@ -21,10 +21,12 @@ import {
 } from "@/components/ui/popover";
 import { useGetHousingStocksQuery } from "@/features/housing-stocks/api";
 import { MultilingualItemType } from "@/features/multilingual/types";
+import { useChangeLanguage } from "@/hooks/useChangeLanguage";
 import { cn } from "@/lib/utils";
 import { Check, ChevronsUpDown } from "lucide-react";
 import React from "react";
 import { Control } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   control: Control<any>;
@@ -45,6 +47,8 @@ export const StockField: React.FC<Props> = ({
   onSelect,
   params = { page: 1, limit: 1000, search: "" },
 }) => {
+  const { t } = useTranslation();
+  const { currentLang: language } = useChangeLanguage();
   const { data } = useGetHousingStocksQuery(params, {
     refetchOnMountOrArgChange: false,
   });
@@ -70,17 +74,21 @@ export const StockField: React.FC<Props> = ({
                   {field.value
                     ? data?.data?.find(
                         (d: MultilingualItemType<{}>) => d?.id === field.value
-                      )?.en
-                    : "Select Housing Stock"}
+                      )?.[language]
+                    : t("createHouse.select_housing_stock")}
                   <ChevronsUpDown className="opacity-50" />
                 </Button>
               </FormControl>
             </PopoverTrigger>
             <PopoverContent>
               <Command>
-                <CommandInput placeholder="Search housing stock"></CommandInput>
+                <CommandInput
+                  placeholder={t("createHouse.search_housing_stock")}
+                />
                 <CommandList>
-                  <CommandEmpty>No housing stock found.</CommandEmpty>
+                  <CommandEmpty>
+                    {t("createHouse.no_housing_stock_found")}
+                  </CommandEmpty>
                   <CommandGroup>
                     {data?.data?.map((item: MultilingualItemType<{}>) => (
                       <CommandItem
@@ -91,7 +99,8 @@ export const StockField: React.FC<Props> = ({
                           onSelect && onSelect(item);
                         }}
                       >
-                        {item.en}
+                        {/* @ts-ignore */}
+                        {item[language]}
                         <Check
                           className={cn(
                             "ml-auto",

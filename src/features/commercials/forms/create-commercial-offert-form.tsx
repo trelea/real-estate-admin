@@ -20,6 +20,7 @@ import { MediaField } from "@/components/media-field";
 import { CommercialFeaturesField } from "../components/commercial-features-field";
 import { MultilingualItemType } from "@/features/multilingual/types";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   user: {
@@ -29,6 +30,7 @@ interface Props {
 }
 
 export const CreateCommercialOffertForm: React.FC<Props> = ({ user }) => {
+  const { t } = useTranslation();
   const { form, onSubmit, isLoading } = useCreateCommercial({ user });
   const [activeTab, setActiveTab] = useState(
     (() => {
@@ -46,25 +48,25 @@ export const CreateCommercialOffertForm: React.FC<Props> = ({ user }) => {
         onSubmit={form.handleSubmit(onSubmit)}
       >
         {/* accordion generals */}
-        <AccordionCard trigger="General Info">
+        <AccordionCard trigger={t("createCommercial.general_info")}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-6 gap-6 w-full justify-between items-center">
             <OffertField
               controll={form.control}
               name="offert"
-              label="Offert Type"
+              label={t("createCommercial.offert_type")}
             />
 
             <UserField
               control={form.control}
               name="user"
-              label="Select Agent"
+              label={t("createCommercial.select_agent")}
               disabled={user.role !== "ADMIN"}
             />
 
             <Field
               control={form.control}
               name="price"
-              label="Price"
+              label={t("createCommercial.price")}
               placeholder="24 000$"
               type="number"
               className="w-full"
@@ -76,7 +78,8 @@ export const CreateCommercialOffertForm: React.FC<Props> = ({ user }) => {
               name="hot"
               label={
                 <span className="flex items-center gap-1">
-                  Hot Offert <Flame className="size-5 text-destructive" />
+                  {t("createCommercial.hot_offert")}{" "}
+                  <Flame className="size-5 text-destructive" />
                 </span>
               }
               type="check"
@@ -90,7 +93,10 @@ export const CreateCommercialOffertForm: React.FC<Props> = ({ user }) => {
               className="flex flex-row-reverse justify-end items-center w-full"
               label={
                 <span className="flex items-center gap-1">
-                  Status: {form.watch("status") ? "Public" : "Private"}{" "}
+                  {t("createCommercial.status")}:{" "}
+                  {form.watch("status")
+                    ? t("createCommercial.public")
+                    : t("createCommercial.private")}{" "}
                   <Eye className="size-5" />
                 </span>
               }
@@ -114,7 +120,7 @@ export const CreateCommercialOffertForm: React.FC<Props> = ({ user }) => {
                     name="desc_ro"
                     type="tip-tap"
                     className="w-full"
-                    label="Description"
+                    label={t("createCommercial.description")}
                     displayErrorMessage
                   />
                 </TabsContent>
@@ -124,7 +130,7 @@ export const CreateCommercialOffertForm: React.FC<Props> = ({ user }) => {
                     name="desc_ru"
                     type="tip-tap"
                     className="w-full"
-                    label="Description"
+                    label={t("createCommercial.description")}
                     displayErrorMessage
                   />
                 </TabsContent>
@@ -134,7 +140,7 @@ export const CreateCommercialOffertForm: React.FC<Props> = ({ user }) => {
                     name="desc_en"
                     type="tip-tap"
                     className="w-full"
-                    label="Description"
+                    label={t("createCommercial.description")}
                     displayErrorMessage
                   />
                 </TabsContent>
@@ -144,20 +150,20 @@ export const CreateCommercialOffertForm: React.FC<Props> = ({ user }) => {
         </AccordionCard>
 
         {/* accordion location */}
-        <AccordionCard trigger="Location">
+        <AccordionCard trigger={t("createCommercial.location")}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-6 gap-6 w-full justify-between items-start">
             <LocationField
               category={{
                 controll: form.control,
                 name: "location_category",
-                label: "Location Category",
+                label: t("createCommercial.location_category"),
                 onSelect: (data: MultilingualItemType<{}>) =>
                   form.setValue("location_category", data.id),
               }}
               subcategory={{
                 controll: form.control,
                 name: "location_subcategory",
-                label: "Location Subcategory",
+                label: t("createCommercial.location_subcategory"),
                 onSelect: (data: MultilingualItemType<{}>) =>
                   form.setValue("location_subcategory", data.id),
                 category: form.watch().location_category,
@@ -165,9 +171,9 @@ export const CreateCommercialOffertForm: React.FC<Props> = ({ user }) => {
             />
             <PlaceField
               control={form.control}
-              label="Street"
+              label={t("createCommercial.street")}
               name="place"
-              placeholder="Street"
+              placeholder={t("createCommercial.street")}
               map={{
                 className: "w-full h-[500px] md:col-span-2 lg:col-span-3",
                 mapId: "49ae42fed52588c3",
@@ -199,12 +205,12 @@ export const CreateCommercialOffertForm: React.FC<Props> = ({ user }) => {
         </AccordionCard>
 
         {/* caracteristics */}
-        <AccordionCard trigger="Caracteristics">
+        <AccordionCard trigger={t("createCommercial.caracteristics")}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-6 gap-6 w-full justify-between items-start">
             <Field
               control={form.control}
               name="floors"
-              label="Total Floors"
+              label={t("createCommercial.total_floors")}
               placeholder="5"
               type="number"
               className="w-full"
@@ -214,7 +220,7 @@ export const CreateCommercialOffertForm: React.FC<Props> = ({ user }) => {
             <Field
               control={form.control}
               name="area"
-              label="Area (m²)"
+              label={t("createCommercial.area")}
               placeholder="120"
               type="number"
               className="w-full"
@@ -224,31 +230,31 @@ export const CreateCommercialOffertForm: React.FC<Props> = ({ user }) => {
             <HousingConditionsField
               control={form.control}
               name="housing_conditions"
-              label="Housing Conditions"
+              label={t("createCommercial.housing_conditions")}
             />
 
             <CommercialDestinationsField
               control={form.control}
               name="commercial_destinations"
-              label="Commercial Destinations"
+              label={t("createCommercial.commercial_destinations")}
             />
 
             <CommercialPlacingsField
               control={form.control}
               name="commercial_placings"
-              label="Commercial Placings"
+              label={t("createCommercial.commercial_placings")}
             />
 
             <CommercialFeaturesField
               control={form.control}
               name="features"
-              label="Commercial Features"
+              label={t("createCommercial.commercial_features")}
             />
 
             <Field
               control={form.control}
               name="first_line"
-              label="First Line"
+              label={t("createCommercial.first_line")}
               type="check"
               className="flex flex-row-reverse justify-end items-center w-full"
             />
@@ -256,14 +262,14 @@ export const CreateCommercialOffertForm: React.FC<Props> = ({ user }) => {
         </AccordionCard>
 
         {/* media */}
-        <AccordionCard trigger="Media">
+        <AccordionCard trigger={t("createCommercial.media")}>
           <MediaField
             control={form.control}
             name="media"
-            label="Commercial Images"
+            label={t("createCommercial.commercial_images")}
           />
         </AccordionCard>
-        <Button type="submit">Submit</Button>
+        <Button type="submit">{t("createCommercial.submit")}</Button>
       </form>
       {isLoading && (
         <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-black/20">

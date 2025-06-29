@@ -24,6 +24,7 @@ import {
   useGetLocationSubCategoriesQuery,
 } from "@/features/locations/api";
 import { MultilingualItemType } from "@/features/multilingual/types";
+import { useChangeLanguage } from "@/hooks/useChangeLanguage";
 import { cn } from "@/lib/utils";
 import { Check, ChevronsUpDown } from "lucide-react";
 import React from "react";
@@ -56,6 +57,8 @@ export const LocationField: React.FC<Props> = ({
   subcategory,
   params = { page: 1, limit: 1000, search: "", id: subcategory.category },
 }) => {
+  const { currentLang: language } = useChangeLanguage();
+
   const { data } = useGetLocationCategoriesQuery(params);
   const { data: subcategories } = useGetLocationSubCategoriesQuery(params, {
     skip: !subcategory.category,
@@ -105,7 +108,8 @@ export const LocationField: React.FC<Props> = ({
                             }
                           }}
                         >
-                          {data.en}
+                          {/* @ts-ignore */}
+                          {data[language]}
                           <Check
                             className={cn(
                               "ml-auto",

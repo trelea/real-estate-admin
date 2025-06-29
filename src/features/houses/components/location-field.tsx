@@ -27,10 +27,12 @@ import {
   useGetLocationSubCategoriesQuery,
 } from "@/features/locations/api";
 import { MultilingualItemType } from "@/features/multilingual/types";
+import { useChangeLanguage } from "@/hooks/useChangeLanguage";
 import { cn } from "@/lib/utils";
 import { Check, ChevronsUpDown } from "lucide-react";
 import React from "react";
 import { Control } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   category: {
@@ -59,6 +61,8 @@ export const LocationField: React.FC<Props> = ({
   subcategory,
   params = { page: 1, limit: 1000, search: "", id: subcategory.category },
 }) => {
+  const { t } = useTranslation();
+  const { currentLang: language } = useChangeLanguage();
   const { data } = useGetLocationCategoriesQuery(params);
   const { data: subcategories } = useGetLocationSubCategoriesQuery(params, {
     skip: !subcategory.category,
@@ -86,17 +90,21 @@ export const LocationField: React.FC<Props> = ({
                     {field.value
                       ? data?.data?.find(
                           (d: MultilingualItemType<{}>) => d?.id === field.value
-                        )?.en
-                      : "Select Category"}
+                        )?.[language]
+                      : t("createHouse.select_category")}
                     <ChevronsUpDown className="opacity-50" />
                   </Button>
                 </FormControl>
               </PopoverTrigger>
               <PopoverContent>
                 <Command>
-                  <CommandInput placeholder="Search location category..." />
+                  <CommandInput
+                    placeholder={t("createHouse.search_location_category")}
+                  />
                   <CommandList>
-                    <CommandEmpty>No category found.</CommandEmpty>
+                    <CommandEmpty>
+                      {t("createHouse.no_category_found")}
+                    </CommandEmpty>
                     <CommandGroup>
                       {data?.data?.map((data: MultilingualItemType<{}>) => (
                         <CommandItem
@@ -108,7 +116,8 @@ export const LocationField: React.FC<Props> = ({
                             }
                           }}
                         >
-                          {data.en}
+                          {/* @ts-ignore */}
+                          {data[language]}
                           <Check
                             className={cn(
                               "ml-auto",
@@ -149,17 +158,21 @@ export const LocationField: React.FC<Props> = ({
                     {field.value
                       ? subcategories?.data?.find(
                           (d: MultilingualItemType<{}>) => d?.id === field.value
-                        )?.en
-                      : "Select Subcategory"}
+                        )?.[language]
+                      : t("createHouse.select_subcategory")}
                     <ChevronsUpDown className="opacity-50" />
                   </Button>
                 </FormControl>
               </PopoverTrigger>
               <PopoverContent>
                 <Command>
-                  <CommandInput placeholder="Search location subcategory..." />
+                  <CommandInput
+                    placeholder={t("createHouse.search_location_subcategory")}
+                  />
                   <CommandList>
-                    <CommandEmpty>No subcategory found.</CommandEmpty>
+                    <CommandEmpty>
+                      {t("createHouse.no_subcategory_found")}
+                    </CommandEmpty>
                     <CommandGroup>
                       {subcategories?.data?.map(
                         (data: MultilingualItemType<{}>) => (
@@ -172,7 +185,8 @@ export const LocationField: React.FC<Props> = ({
                               }
                             }}
                           >
-                            {data.en}
+                            {/* @ts-ignore */}
+                            {data[language]}
                             <Check
                               className={cn(
                                 "ml-auto",

@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/form";
 import React from "react";
 import { Control } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   controll: Control<any>;
@@ -15,12 +16,13 @@ interface Props {
   label?: string;
 }
 
-const items = [
-  { id: "SALE", label: "Sale" },
-  { id: "RENT", label: "Rent" },
-];
-
 export const OffertField: React.FC<Props> = ({ controll, name, label }) => {
+  const { t } = useTranslation();
+  const items = [
+    { id: "SALE", label: t("createCommercial.sale") },
+    { id: "RENT", label: t("createCommercial.rent") },
+  ];
+
   return (
     <FormField
       control={controll}

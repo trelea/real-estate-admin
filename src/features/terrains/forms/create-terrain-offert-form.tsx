@@ -18,6 +18,7 @@ import { User } from "@/features/auth/types";
 import { MediaField } from "@/components/media-field";
 import { MultilingualItemType } from "@/features/multilingual/types";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   user: {
@@ -27,6 +28,7 @@ interface Props {
 }
 
 export const CreateTerrainOffertForm: React.FC<Props> = ({ user }) => {
+  const { t } = useTranslation();
   const { form, onSubmit, isLoading } = useCreateTerrain({ user });
 
   return (
@@ -36,25 +38,25 @@ export const CreateTerrainOffertForm: React.FC<Props> = ({ user }) => {
         onSubmit={form.handleSubmit(onSubmit)}
       >
         {/* accordion generals */}
-        <AccordionCard trigger="General Info">
+        <AccordionCard trigger={t("createTerrain.general_info")}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-6 gap-6 w-full justify-between items-center">
             <OffertField
               controll={form.control}
               name="offert"
-              label="Offert Type"
+              label={t("createTerrain.offert_type")}
             />
 
             <UserField
               control={form.control}
               name="user"
-              label="Select Agent"
+              label={t("createTerrain.select_agent")}
               disabled={user.role !== "ADMIN"}
             />
 
             <Field
               control={form.control}
               name="price"
-              label="Price"
+              label={t("createTerrain.price")}
               placeholder="24 000$"
               type="number"
               className="w-full"
@@ -66,7 +68,8 @@ export const CreateTerrainOffertForm: React.FC<Props> = ({ user }) => {
               name="hot"
               label={
                 <span className="flex items-center gap-1">
-                  Hot Offert <Flame className="size-5 text-destructive" />
+                  {t("createTerrain.hot_offert")}{" "}
+                  <Flame className="size-5 text-destructive" />
                 </span>
               }
               type="check"
@@ -80,7 +83,10 @@ export const CreateTerrainOffertForm: React.FC<Props> = ({ user }) => {
               className="flex flex-row-reverse justify-end items-center w-full"
               label={
                 <span className="flex items-center gap-1">
-                  Status: {form.watch("status") ? "Public" : "Private"}{" "}
+                  {t("createTerrain.status")}:{" "}
+                  {form.watch("status")
+                    ? t("createTerrain.public")
+                    : t("createTerrain.private")}{" "}
                   <Eye className="size-5" />
                 </span>
               }
@@ -97,9 +103,9 @@ export const CreateTerrainOffertForm: React.FC<Props> = ({ user }) => {
                 })()}
               >
                 <TabsList className="w-full">
-                  <TabsTrigger value="ro">Ro</TabsTrigger>
-                  <TabsTrigger value="ru">Ru</TabsTrigger>
-                  <TabsTrigger value="en">En</TabsTrigger>
+                  <TabsTrigger value="ro">{t("createTerrain.ro")}</TabsTrigger>
+                  <TabsTrigger value="ru">{t("createTerrain.ru")}</TabsTrigger>
+                  <TabsTrigger value="en">{t("createTerrain.en")}</TabsTrigger>
                 </TabsList>
                 <TabsContent value="ro">
                   <Field
@@ -107,8 +113,8 @@ export const CreateTerrainOffertForm: React.FC<Props> = ({ user }) => {
                     name="desc_ro"
                     type="tip-tap"
                     className="w-full"
-                    placeholder="Description Romanian"
-                    label={"Description"}
+                    placeholder={t("createTerrain.description_ro")}
+                    label={t("createTerrain.description")}
                     displayErrorMessage
                   />
                 </TabsContent>
@@ -118,8 +124,8 @@ export const CreateTerrainOffertForm: React.FC<Props> = ({ user }) => {
                     name="desc_ru"
                     type="tip-tap"
                     className="w-full"
-                    placeholder="Description Russian"
-                    label={"Description"}
+                    placeholder={t("createTerrain.description_ru")}
+                    label={t("createTerrain.description")}
                     displayErrorMessage
                   />
                 </TabsContent>
@@ -129,8 +135,8 @@ export const CreateTerrainOffertForm: React.FC<Props> = ({ user }) => {
                     name="desc_en"
                     type="tip-tap"
                     className="w-full"
-                    placeholder="Description English"
-                    label={"Description"}
+                    placeholder={t("createTerrain.description_en")}
+                    label={t("createTerrain.description")}
                     displayErrorMessage
                   />
                 </TabsContent>
@@ -140,20 +146,20 @@ export const CreateTerrainOffertForm: React.FC<Props> = ({ user }) => {
         </AccordionCard>
 
         {/* accordion location */}
-        <AccordionCard trigger="Location">
+        <AccordionCard trigger={t("createTerrain.location")}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-6 gap-6 w-full justify-between items-start">
             <LocationField
               category={{
                 controll: form.control,
                 name: "location_category",
-                label: "Location Category",
+                label: t("createTerrain.location_category"),
                 onSelect: (data: MultilingualItemType<{}>) =>
                   form.setValue("location_category", data.id),
               }}
               subcategory={{
                 controll: form.control,
                 name: "location_subcategory",
-                label: "Location Subcategory",
+                label: t("createTerrain.location_subcategory"),
                 onSelect: (data: MultilingualItemType<{}>) =>
                   form.setValue("location_subcategory", data.id),
                 category: form.watch().location_category,
@@ -161,9 +167,9 @@ export const CreateTerrainOffertForm: React.FC<Props> = ({ user }) => {
             />
             <PlaceField
               control={form.control}
-              label="Street"
+              label={t("createTerrain.street")}
               name="place"
-              placeholder="Street"
+              placeholder={t("createTerrain.street")}
               map={{
                 className: "w-full h-[500px] md:col-span-2 lg:col-span-3",
                 mapId: "49ae42fed52588c3",
@@ -195,13 +201,13 @@ export const CreateTerrainOffertForm: React.FC<Props> = ({ user }) => {
         </AccordionCard>
 
         {/* caracteristics */}
-        <AccordionCard trigger="Caracteristics">
+        <AccordionCard trigger={t("createTerrain.caracteristics")}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-6 gap-6 w-full justify-between items-start">
             <Field
               control={form.control}
               name="area"
-              label="Area (m²)"
-              placeholder="500"
+              label={t("createTerrain.area")}
+              placeholder={t("createTerrain.area")}
               type="number"
               className="w-full"
               displayErrorMessage
@@ -210,26 +216,26 @@ export const CreateTerrainOffertForm: React.FC<Props> = ({ user }) => {
             <TerrainUsabilitiesField
               control={form.control}
               name="usability"
-              label="Terrain Usabilities"
+              label={t("createTerrain.terrain_usabilities")}
             />
 
             <TerrainFeaturesField
               control={form.control}
               name="features"
-              label="Terrain Features"
+              label={t("createTerrain.terrain_features")}
             />
           </div>
         </AccordionCard>
 
         {/* media */}
-        <AccordionCard trigger="Media">
+        <AccordionCard trigger={t("createTerrain.media")}>
           <MediaField
             control={form.control}
             name="media"
-            label="Terrain Images"
+            label={t("createTerrain.terrain_images")}
           />
         </AccordionCard>
-        <Button type="submit">Submit</Button>
+        <Button type="submit">{t("createTerrain.submit")}</Button>
       </form>
       {isLoading && (
         <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-black/20">
