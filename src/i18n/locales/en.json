@@ -1073,6 +1073,38 @@
       "garden": "Garden",
       "terrace": "Terrace",
       "balcony": "Balcony"
+    },
+    "users": {
+      "title": "Users",
+      "badge": "users",
+      "createUser": "Create User",
+      "createUserTitle": "Create User",
+      "createUserDescription": "Fill in the user details to create a new user account. After submission, the user will be added to the system.",
+      "updateUserTitle": "Update User",
+      "updateUserDescription": "Modify the user details. You can update personal information, contact details, and user permissions.",
+      "name": "Name",
+      "namePlaceholder": "Enter first name",
+      "surname": "Surname",
+      "surnamePlaceholder": "Enter last name",
+      "email": "Email",
+      "emailPlaceholder": "Enter email address",
+      "password": "Password",
+      "passwordPlaceholder": "Enter password",
+      "contact": "Phone",
+      "contactPlaceholder": "Enter phone number",
+      "role": "Role",
+      "posts": "Posts",
+      "thumbnail": "Profile Picture",
+      "socialContacts": "Social Contacts",
+      "viber": "Viber",
+      "viberPlaceholder": "Enter Viber number",
+      "whatsapp": "WhatsApp",
+      "whatsappPlaceholder": "Enter WhatsApp number",
+      "telegram": "Telegram",
+      "telegramPlaceholder": "Enter Telegram username",
+      "create": "Create User",
+      "update": "Update User",
+      "clickToUpload": "Click to upload profile picture"
     }
   }
 }

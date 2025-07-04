@@ -187,7 +187,7 @@ export const UpdateTerrainOffertForm: React.FC<Props> = ({ user, terrain }) => {
         </AccordionCard>
 
         {/* Characteristics */}
-        <AccordionCard trigger="Caracteristics">
+        <AccordionCard trigger={t("updateTerrain.caracteristics")}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-6 gap-6 w-full justify-between items-start">
             <Field
               control={form.control}

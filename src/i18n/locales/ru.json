@@ -1083,6 +1083,38 @@
       "garden": "Сад",
       "terrace": "Тераса",
       "balcony": "Балкон"
+    },
+    "users": {
+      "title": "Пользователи",
+      "badge": "пользователей",
+      "createUser": "Создать пользователя",
+      "createUserTitle": "Создать пользователя",
+      "createUserDescription": "Заполните данные пользователя для создания новой учетной записи. После отправки пользователь будет добавлен в систему.",
+      "updateUserTitle": "Обновить пользователя",
+      "updateUserDescription": "Измените данные пользователя. Вы можете обновить личную информацию, контактные данные и разрешения пользователя.",
+      "name": "Имя",
+      "namePlaceholder": "Введите имя",
+      "surname": "Фамилия",
+      "surnamePlaceholder": "Введите фамилию",
+      "email": "Email",
+      "emailPlaceholder": "Введите адрес электронной почты",
+      "password": "Пароль",
+      "passwordPlaceholder": "Введите пароль",
+      "contact": "Телефон",
+      "contactPlaceholder": "Введите номер телефона",
+      "role": "Роль",
+      "posts": "Посты",
+      "thumbnail": "Фото профиля",
+      "socialContacts": "Социальные контакты",
+      "viber": "Viber",
+      "viberPlaceholder": "Введите номер Viber",
+      "whatsapp": "WhatsApp",
+      "whatsappPlaceholder": "Введите номер WhatsApp",
+      "telegram": "Telegram",
+      "telegramPlaceholder": "Введите имя пользователя Telegram",
+      "create": "Создать пользователя",
+      "update": "Обновить пользователя",
+      "clickToUpload": "Нажмите для загрузки фото профиля"
     }
   }
 }

@@ -66,7 +66,6 @@ import { TerrainUsabilitiesContextProvider } from "@/pages/terrains/usabilites/c
 import { LocationsContextProvider } from "@/pages/locations/context";
 import { LandingContextProvider } from "@/pages/landing/context";
 
-
 interface Props {}
 
 export const Router: React.FC<Props> = ({}) => {
@@ -123,10 +122,10 @@ export const Router: React.FC<Props> = ({}) => {
     /**
      * settings optional
      */
-    {
-      path: "settings",
-      Component: withAuth({ Component: Settings }),
-    },
+    // {
+    //   path: "settings",
+    //   Component: withAuth({ Component: Settings }),
+    // },
     /**
      * locations
      */

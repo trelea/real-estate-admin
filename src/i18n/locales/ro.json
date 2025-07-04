@@ -1037,6 +1037,38 @@
       "garden": "Grădină",
       "terrace": "Terasa",
       "balcony": "Balcăni"
+    },
+    "users": {
+      "title": "Utilizatori",
+      "badge": "utilizatori",
+      "createUser": "Creează utilizator",
+      "createUserTitle": "Creează utilizator",
+      "createUserDescription": "Completează detaliile utilizatorului pentru a crea un cont nou. După trimitere, utilizatorul va fi adăugat în sistem.",
+      "updateUserTitle": "Actualizează utilizator",
+      "updateUserDescription": "Modifică detaliile utilizatorului. Poți actualiza informațiile personale, detaliile de contact și permisiunile utilizatorului.",
+      "name": "Nume",
+      "namePlaceholder": "Introdu prenumele",
+      "surname": "Prenume",
+      "surnamePlaceholder": "Introdu numele de familie",
+      "email": "Email",
+      "emailPlaceholder": "Introdu adresa de email",
+      "password": "Parolă",
+      "passwordPlaceholder": "Introdu parola",
+      "contact": "Telefon",
+      "contactPlaceholder": "Introdu numărul de telefon",
+      "role": "Rol",
+      "posts": "Postări",
+      "thumbnail": "Poză de profil",
+      "socialContacts": "Contacte sociale",
+      "viber": "Viber",
+      "viberPlaceholder": "Introdu numărul Viber",
+      "whatsapp": "WhatsApp",
+      "whatsappPlaceholder": "Introdu numărul WhatsApp",
+      "telegram": "Telegram",
+      "telegramPlaceholder": "Introdu username-ul Telegram",
+      "create": "Creează utilizator",
+      "update": "Actualizează utilizator",
+      "clickToUpload": "Click pentru a încărca poza de profil"
     }
   }
 }

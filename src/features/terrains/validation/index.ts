@@ -7,15 +7,24 @@ export const createTerrainSchema = z.object({
   price: z.coerce.number().positive(),
   hot: z.boolean().optional(),
   status: z.boolean().optional(),
-  desc_ro: z.string().refine((v) => stripHtml(v).length > 0, {
-    message: "Description is required",
-  }),
-  desc_ru: z.string().refine((v) => stripHtml(v).length > 0, {
-    message: "Description is required",
-  }),
-  desc_en: z.string().refine((v) => stripHtml(v).length > 0, {
-    message: "Description is required",
-  }),
+  desc_ro: z
+    .string()
+    .refine((v) => stripHtml(v).length > 0, {
+      message: "Description is required",
+    })
+    .optional(),
+  desc_ru: z
+    .string()
+    .refine((v) => stripHtml(v).length > 0, {
+      message: "Description is required",
+    })
+    .optional(),
+  desc_en: z
+    .string()
+    .refine((v) => stripHtml(v).length > 0, {
+      message: "Description is required",
+    })
+    .optional(),
   location_category: z.number().int().positive(),
   location_subcategory: z.number().int().positive(),
   street_ro: z.string().min(1),

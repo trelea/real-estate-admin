@@ -13,7 +13,6 @@ import {
   Newspaper,
   Plus,
   ReceiptText,
-  Settings,
   ShoppingBag,
   Trees,
   UnfoldVertical,
@@ -306,7 +305,7 @@ export const AppSidebarContent: React.FC<Props> = ({
       />
 
       {/* settings */}
-      <AppSidebarContentGroup
+      {/* <AppSidebarContentGroup
         state={state}
         toggleSidebar={toggleSidebar}
         label={t("sidebar.settings")}
@@ -320,7 +319,7 @@ export const AppSidebarContent: React.FC<Props> = ({
             ),
           },
         ]}
-      />
+      /> */}
     </SidebarContent>
   );
 };

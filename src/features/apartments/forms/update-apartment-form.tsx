@@ -28,6 +28,7 @@ interface Props {
 export const UpdateApartmentForm: React.FC<Props> = ({ user, apartment }) => {
   const { form, onSubmit } = useUpdateApartment({ apartment });
   const { t } = useTranslation();
+
   return (
     <Form {...form}>
       <form

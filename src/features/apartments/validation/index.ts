@@ -13,15 +13,24 @@ export const createApartmentFormSchema = z.object({
   status: z.boolean().optional(),
 
   // descriptions (must contain some non-html text)
-  desc_ro: z.string().refine((v) => stripHtml(v).length > 0, {
-    message: "Description is required",
-  }),
-  desc_ru: z.string().refine((v) => stripHtml(v).length > 0, {
-    message: "Description is required",
-  }),
-  desc_en: z.string().refine((v) => stripHtml(v).length > 0, {
-    message: "Description is required",
-  }),
+  desc_ro: z
+    .string()
+    .refine((v) => stripHtml(v).length > 0, {
+      message: "Description is required",
+    })
+    .optional(),
+  desc_ru: z
+    .string()
+    .refine((v) => stripHtml(v).length > 0, {
+      message: "Description is required",
+    })
+    .optional(),
+  desc_en: z
+    .string()
+    .refine((v) => stripHtml(v).length > 0, {
+      message: "Description is required",
+    })
+    .optional(),
 
   // location
   location_category: z.number().int().positive(),

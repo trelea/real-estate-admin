@@ -19,6 +19,7 @@ import { cn } from "@/lib/utils";
 import { CloudUpload, X } from "lucide-react";
 import React from "react";
 import { UseFormReturn } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   control: UseFormReturn<any>;
@@ -37,6 +38,8 @@ export const FieldItemFile: React.FC<Props> = ({
   displayErrorMessage,
   className,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <FormField
       control={control.control}
@@ -87,7 +90,7 @@ export const FieldItemFile: React.FC<Props> = ({
                 >
                   <CloudUpload />
                   <span className="text-sm text-foreground/50">
-                    Click to upload.
+                    {t("users.clickToUpload")}
                   </span>
                 </FileUploadDropzone>
               )}
