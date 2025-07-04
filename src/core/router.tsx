@@ -1,5 +1,4 @@
 import {
-  Settings,
   SignIn,
   Users,
   Blogs,
