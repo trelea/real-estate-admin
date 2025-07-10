@@ -1,0 +1,1074 @@
+{
+  "translation": {
+    "signin": {
+      "title": "Introduceți adresa de email mai jos pentru a vă conecta la cont",
+      "email": "Email",
+      "password": "Parolă",
+      "login": "Autentificare"
+    },
+    "sidebar": {
+      "content": "Conținut",
+      "filters": "Filtre",
+      "utils": "Unelte",
+      "apartments": "Apartamente",
+      "houses": "Case",
+      "commercials": "Comerciale",
+      "terrains": "Terenuri",
+      "createNew": "Creează Nou",
+      "posts": "Postări",
+      "features": "Facilități",
+      "destinations": "Destinații",
+      "placings": "Amplasamente",
+      "usability": "Utilizabilitate",
+      "housingTypes": "Tipuri de locuințe",
+      "conditions": "Condiții",
+      "locations": "Locații",
+      "blogs": "Bloguri",
+      "services": "Servicii",
+      "aboutUs": "Despre noi",
+      "users": "Utilizatori",
+      "settings": "Setări",
+      "privacyPolicy": "Politica de confidențialitate",
+      "termsAndConditions": "Termeni și condiții",
+      "configure": "Configurare",
+      "access": "Acces",
+      "landing": "Landing"
+    },
+    "pagination": {
+      "previous": "Înapoi",
+      "next": "Înainte",
+      "goToPrevious": "Mergi la pagina anterioară",
+      "goToNext": "Mergi la pagina următoare",
+      "morePages": "Mai multe pagini"
+    },
+    "delete": {
+      "title": "Ești absolut sigur?",
+      "description": "Această acțiune nu poate fi anulată. Aceasta va șterge definitiv contul și va elimina datele tale de pe serverele noastre.",
+      "cancel": "Anulează",
+      "continue": "Continuă"
+    },
+    "search": {
+      "placeholder": "Caută"
+    },
+    "landing": {
+      "agentsCarousel": "Carusel Agenți",
+      "update": "Actualizează",
+      "addNewAgent": "Adaugă agent nou"
+    },
+    "about": {
+      "editAboutUs": "Editează Despre Noi",
+      "romanian": "Română",
+      "russian": "Rusă",
+      "english": "Engleză",
+      "saveContent": "Salvează conținutul"
+    },
+    "privacy": {
+      "edit": "Editează Politica de Confidențialitate",
+      "romanian": "Română",
+      "russian": "Rusă",
+      "english": "Engleză",
+      "saveContent": "Salvează conținutul"
+    },
+    "terms": {
+      "edit": "Editează Termeni și Condiții",
+      "romanian": "Română",
+      "russian": "Rusă",
+      "english": "Engleză",
+      "saveContent": "Salvează conținutul"
+    },
+    "propertiesTable": {
+      "badge": "{{count}} proprietăți",
+      "searchById": "Caută după ID",
+      "createOffert": "Creează ofertă",
+      "actions": "Acțiuni"
+    },
+    "apartments": {
+      "manageTitle": "Gestionare apartamente",
+      "tableHeaders": {
+        "id": "ID",
+        "address": "Adresă",
+        "offert": "Ofertă",
+        "status": "Status",
+        "agent": "Agent",
+        "publishingDate": "Data publicării",
+        "price": "Preț"
+      }
+    },
+    "common": {
+      "close": "Închide",
+      "back": "Înapoi",
+      "next": "Înainte",
+      "create": "Creează",
+      "update": "Actualizează"
+    },
+    "blogs": {
+      "manageTitle": "Bloguri",
+      "badge": "{{count}} bloguri",
+      "tableHeaders": {
+        "title": "Titlu",
+        "status": "Status",
+        "published": "Publicat",
+        "views": "Vizualizări"
+      },
+      "create": {
+        "trigger": "Creează blog",
+        "title": "Creează blog",
+        "description": {
+          "step1": "Alegeți o miniatură pentru articolul de blog. Această imagine va fi afișată ca previzualizare în lista de bloguri.",
+          "step2": "Scrieți titlul, descrierea și conținutul în limba română pentru articolul de blog.",
+          "step3": "Scrieți titlul, descrierea și conținutul în limba rusă pentru articolul de blog.",
+          "step4": "Scrieți titlul, descrierea și conținutul în limba engleză pentru articolul de blog.",
+          "step5": "Alegeți dacă articolul va fi public sau privat.",
+          "makePublic": "Fă postarea publică",
+          "publicDescription": "Dacă este bifat, postarea va fi vizibilă tuturor. Dacă nu, va fi privată și accesibilă doar administratorilor și utilizatorilor cu drepturi."
+        }
+      },
+      "update": {
+        "title": "Actualizează Blog",
+        "description": {
+          "step1": "Actualizați miniatura articolului de blog.",
+          "step2": "Editați titlul și descrierea în limba română.",
+          "step3": "Editați titlul și descrierea în limba rusă.",
+          "step4": "Editați titlul și descrierea în limba engleză și vizibilitatea articolului.",
+          "makePublic": "Fă postarea publică",
+          "publicDescription": "Dacă este bifat, postarea va fi vizibilă tuturor. Dacă nu, va fi privată și accesibilă doar administratorilor și utilizatorilor cu drepturi."
+        }
+      },
+      "status": {
+        "public": "Public",
+        "private": "Privat"
+      },
+      "fieldFile": {
+        "clickToUpload": "Click pentru a încărca."
+      }
+    },
+    "services": {
+      "manageTitle": "Servicii",
+      "badge": "{{count}} servicii",
+      "tableHeaders": {
+        "title": "Titlu",
+        "status": "Status",
+        "published": "Publicat",
+        "views": "Vizualizări"
+      },
+      "create": {
+        "trigger": "Creează serviciu",
+        "title": "Creează serviciu",
+        "description": "Furnizați detaliile necesare pentru a crea un nou serviciu.",
+        "thumbnail": "Miniatură",
+        "makePublic": "Fă serviciul public",
+        "publicDescription": "Dacă este bifat, serviciul va fi disponibil pentru toți utilizatorii. Dacă nu, va fi privat și accesibil doar administratorilor."
+      },
+      "update": {
+        "title": "Actualizează serviciu",
+        "description": {
+          "step1": "Actualizați miniatura serviciului.",
+          "step2": "Editați titlul și descrierea în limba română.",
+          "step3": "Editați titlul și descrierea în limba rusă.",
+          "step4": "Editați titlul și descrierea în limba engleză și vizibilitatea serviciului."
+        },
+        "thumbnail": "Miniatură",
+        "makePublic": "Fă serviciul public",
+        "publicDescription": "Dacă este bifat, serviciul va fi disponibil pentru toți utilizatorii. Dacă nu, va fi privat și accesibil doar administratorilor."
+      },
+      "status": {
+        "public": "Public",
+        "private": "Privat"
+      },
+      "fieldFile": {
+        "clickToUpload": "Click pentru a încărca."
+      }
+    },
+    "locations": {
+      "manageTitle": "Locații",
+      "badge": "{{count}} locații",
+      "tableHeaders": {
+        "id": "ID",
+        "ro": "Română",
+        "ru": "Rusă",
+        "en": "Engleză"
+      },
+      "create": {
+        "trigger": "Creează categorie locație",
+        "title": "Creează categorie locație",
+        "description": "Introduceți informațiile multilingve necesare pentru a crea o nouă categorie de locație."
+      },
+      "update": {
+        "title": "Actualizează categorie locație",
+        "description": "Modificați detaliile multilingve pentru această categorie de locație."
+      },
+      "sub": {
+        "badge": "{{count}} subcategorii",
+        "create": {
+          "trigger": "Creează subcategorie",
+          "title": "Creează subcategorie locație",
+          "description": "Completați detaliile subcategoriei în toate limbile suportate."
+        },
+        "update": {
+          "title": "Actualizează subcategorie locație",
+          "description": "Modificați detaliile multilingve pentru această subcategorie."
+        }
+      },
+      "form": {
+        "category": {
+          "ro": {
+            "label": "Categorie locație (română)",
+            "placeholder": "Ex: Urban, Rural, Suburban"
+          },
+          "ru": {
+            "label": "Категория местоположения (rusă)",
+            "placeholder": "Ex: Oraș, Sat, Suburbie (RU)"
+          },
+          "en": {
+            "label": "Categorie locație (engleză)",
+            "placeholder": "e.g. Urban, Rural, Suburban"
+          }
+        },
+        "subcategory": {
+          "ro": {
+            "label": "Subcategorie locație (română)",
+            "placeholder": "Ex: Centru, Cartier rezidențial, Zonă industrială"
+          },
+          "ru": {
+            "label": "Подкатегория местоположения (rusă)",
+            "placeholder": "Напр: Центр, Жилой район, Промзона"
+          },
+          "en": {
+            "label": "Subcategorie locație (engleză)",
+            "placeholder": "e.g. Downtown, Residential area, Industrial zone"
+          }
+        }
+      }
+    },
+    "conditions": {
+      "manageTitle": "Condiții",
+      "badge": "{{count}} condiții",
+      "tableHeaders": {
+        "id": "ID",
+        "ro": "Română",
+        "ru": "Rusă",
+        "en": "Engleză"
+      },
+      "create": {
+        "trigger": "Creează condiție",
+        "title": "Creează condiție",
+        "description": "Introduceți detaliile condiției locuinței în toate limbile suportate. După trimitere, condiția va fi adăugată în sistem și disponibilă pentru utilizare în modulele relevante."
+      },
+      "update": {
+        "title": "Actualizează condiție",
+        "description": "Editează detaliile unei condiții existente a locuinței. Actualizați denumirile multilingve sau alte câmpuri relevante pentru a menține informațiile corecte și actuale."
+      },
+      "form": {
+        "condition": {
+          "ro": {
+            "label": "Stare (română)",
+            "placeholder": "Ex: Nou, Folosit, De renovat"
+          },
+          "ru": {
+            "label": "Состояние (rusă)",
+            "placeholder": "Ex: Nouă, Second-hand, Necesită renovare (RU)"
+          },
+          "en": {
+            "label": "Condition (engleză)",
+            "placeholder": "e.g. New, Used, Needs renovation"
+          }
+        }
+      }
+    },
+    "housingStocks": {
+      "manageTitle": "Tipuri de locuințe",
+      "badge": "{{count}} tipuri de locuințe",
+      "tableHeaders": {
+        "id": "ID",
+        "ro": "Română",
+        "ru": "Rusă",
+        "en": "Engleză"
+      },
+      "create": {
+        "trigger": "Creează tip locuință",
+        "title": "Creează tip locuință",
+        "description": "Introduceți informațiile necesare pentru a adăuga un nou tip de stoc locativ. După trimitere, înregistrarea va fi salvată și disponibilă în sistem."
+      },
+      "update": {
+        "title": "Actualizează tip locuință",
+        "description": "Modificați detaliile unui tip de stoc locativ existent. Puteți actualiza numele, descrierea și alte câmpuri relevante pentru a reflecta informațiile cele mai precise și actualizate."
+      },
+      "form": {
+        "housingStock": {
+          "ro": {
+            "label": "Tip locuință (română)",
+            "placeholder": "Ex: Bloc, Casă, Vilă"
+          },
+          "ru": {
+            "label": "Тип жилья (rusă)",
+            "placeholder": "Напр: Квартира, Дом, Особняк"
+          },
+          "en": {
+            "label": "Housing stock type (engleză)",
+            "placeholder": "e.g. Apartment, House, Villa"
+          }
+        }
+      }
+    },
+    "apartmentFeatures": {
+      "manageTitle": "Caracteristici apartamente",
+      "badge": "{{count}} caracteristici",
+      "tableHeaders": {
+        "id": "ID",
+        "ro": "Română",
+        "ru": "Rusă",
+        "en": "Engleză"
+      },
+      "create": {
+        "trigger": "Creează caracteristică",
+        "title": "Creează caracteristică apartament",
+        "description": "Completați detaliile caracteristicii apartamentului în toate limbile suportate. După trimitere, caracteristica va fi adăugată în sistem și disponibilă pentru utilizare în modulele relevante."
+      },
+      "update": {
+        "title": "Actualizează caracteristică apartament",
+        "description": "Editați detaliile unei caracteristici existente a apartamentului. Actualizați denumirile multilingve sau alte câmpuri relevante pentru a menține informațiile corecte și actuale."
+      },
+      "form": {
+        "feature": {
+          "ro": {
+            "label": "Caracteristică apartament (română)",
+            "placeholder": "Ex: Balcon, Lift, Parcare"
+          },
+          "ru": {
+            "label": "Особенность квартиры (rusă)",
+            "placeholder": "Напр: Балкон, Лифт, Парковка"
+          },
+          "en": {
+            "label": "Apartment feature (engleză)",
+            "placeholder": "e.g. Balcony, Elevator, Parking"
+          }
+        }
+      }
+    },
+    "commercialDestinations": {
+      "manageTitle": "Destinații comerciale",
+      "badge": "{{count}} destinații",
+      "tableHeaders": {
+        "id": "ID",
+        "ro": "Română",
+        "ru": "Rusă",
+        "en": "Engleză"
+      },
+      "create": {
+        "trigger": "Creează destinație",
+        "title": "Creează destinație comercială",
+        "description": "Completați detaliile destinației comerciale în toate limbile suportate. După trimitere, destinația va fi adăugată în sistem și disponibilă pentru utilizare în modulele relevante."
+      },
+      "update": {
+        "title": "Actualizează destinație comercială",
+        "description": "Editați detaliile unei destinații comerciale existente. Actualizați denumirile multilingve sau alte câmpuri relevante pentru a menține informațiile corecte și actuale."
+      },
+      "form": {
+        "destination": {
+          "ro": {
+            "label": "Destinație comercială (română)",
+            "placeholder": "Ex: Centru comercial, Birouri, Mall"
+          },
+          "ru": {
+            "label": "Коммерческое назначение (rusă)",
+            "placeholder": "Напр: Торговый центр, Офисы, Молл"
+          },
+          "en": {
+            "label": "Commercial destination (engleză)",
+            "placeholder": "e.g. Shopping center, Offices, Mall"
+          }
+        }
+      }
+    },
+    "commercialFeatures": {
+      "manageTitle": "Caracteristici comerciale",
+      "badge": "{{count}} caracteristici",
+      "tableHeaders": {
+        "id": "ID",
+        "ro": "Română",
+        "ru": "Rusă",
+        "en": "Engleză"
+      },
+      "create": {
+        "trigger": "Creează caracteristică",
+        "title": "Creează caracteristică comercială",
+        "description": "Completați detaliile caracteristicii comerciale în toate limbile suportate. După trimitere, caracteristica va fi adăugată în sistem și disponibilă pentru utilizare în modulele relevante."
+      },
+      "update": {
+        "title": "Actualizează caracteristică comercială",
+        "description": "Editați detaliile unei caracteristici comerciale existente. Actualizați denumirile multilingve sau alte câmpuri relevante pentru a menține informațiile corecte și actuale."
+      },
+      "form": {
+        "feature": {
+          "ro": {
+            "label": "Funcționalitate comercială (română)",
+            "placeholder": "Ex: Parcare, Recepție, Sala conferințe"
+          },
+          "ru": {
+            "label": "Коммерческая функция (rusă)",
+            "placeholder": "Напр: Парковка, Ресепшн, Конференц-зал"
+          },
+          "en": {
+            "label": "Commercial feature (engleză)",
+            "placeholder": "e.g. Parking, Reception, Conference room"
+          }
+        }
+      }
+    },
+    "commercialPlacings": {
+      "manageTitle": "Amplasamente comerciale",
+      "badge": "{{count}} amplasamente",
+      "tableHeaders": {
+        "id": "ID",
+        "ro": "Română",
+        "ru": "Rusă",
+        "en": "Engleză"
+      },
+      "create": {
+        "trigger": "Creează amplasament",
+        "title": "Creează amplasament comercial",
+        "description": "Completați detaliile amplasamentului comercial în toate limbile suportate. După trimitere, amplasamentul va fi adăugat în sistem și disponibil pentru utilizare în modulele relevante."
+      },
+      "update": {
+        "title": "Actualizează amplasament comercial",
+        "description": "Editați detaliile unui amplasament comercial existent. Actualizați denumirile multilingve sau alte câmpuri relevante pentru a menține informațiile corecte și actuale."
+      },
+      "form": {
+        "placing": {
+          "ro": {
+            "label": "Amplasare comercială (română)",
+            "placeholder": "Ex: Etaj 1, Parter, Exterior"
+          },
+          "ru": {
+            "label": "Коммерческое размещение (rusă)",
+            "placeholder": "Напр: Первый этаж, Цоколь, Снаружи"
+          },
+          "en": {
+            "label": "Commercial placing (engleză)",
+            "placeholder": "e.g. First floor, Ground floor, Outside"
+          }
+        }
+      }
+    },
+    "houseFeatures": {
+      "manageTitle": "Caracteristici case",
+      "badge": "{{count}} caracteristici",
+      "tableHeaders": {
+        "id": "ID",
+        "ro": "Română",
+        "ru": "Rusă",
+        "en": "Engleză"
+      },
+      "create": {
+        "trigger": "Creează caracteristică",
+        "title": "Creează caracteristică casă",
+        "description": "Completați detaliile caracteristicii casei în toate limbile suportate. După trimitere, caracteristica va fi adăugată în sistem și disponibilă pentru utilizare în modulele relevante."
+      },
+      "update": {
+        "title": "Actualizează caracteristică casă",
+        "description": "Editați detaliile unei caracteristici existente a casei. Actualizați denumirile multilingve sau alte câmpuri relevante pentru a menține informațiile corecte și actuale."
+      },
+      "form": {
+        "feature": {
+          "ro": {
+            "label": "Caracteristică casă (română)",
+            "placeholder": "Ex: Grădină, Garaj, Terasă"
+          },
+          "ru": {
+            "label": "Особенность дома (rusă)",
+            "placeholder": "Напр: Сад, Гараж, Терраса"
+          },
+          "en": {
+            "label": "House feature (engleză)",
+            "placeholder": "e.g. Garden, Garage, Terrace"
+          }
+        }
+      }
+    },
+    "terrainFeatures": {
+      "manageTitle": "Caracteristici terenuri",
+      "badge": "{{count}} caracteristici",
+      "tableHeaders": {
+        "id": "ID",
+        "ro": "Română",
+        "ru": "Rusă",
+        "en": "Engleză"
+      },
+      "create": {
+        "trigger": "Creează caracteristică",
+        "title": "Creează caracteristică teren",
+        "description": "Completați detaliile caracteristicii terenului în toate limbile suportate. După trimitere, caracteristica va fi adăugată în sistem și disponibilă pentru utilizare în modulele relevante."
+      },
+      "update": {
+        "title": "Actualizează caracteristică teren",
+        "description": "Editați detaliile unei caracteristici existente a terenului. Actualizați denumirile multilingve sau alte câmpuri relevante pentru a menține informațiile corecte și actuale."
+      },
+      "form": {
+        "feature": {
+          "ro": {
+            "label": "Caracteristică teren (română)",
+            "placeholder": "Ex: Pădure, Lac, Deal"
+          },
+          "ru": {
+            "label": "Особенность участка (rusă)",
+            "placeholder": "Напр: Лес, Озеро, Холм"
+          },
+          "en": {
+            "label": "Terrain feature (engleză)",
+            "placeholder": "e.g. Forest, Lake, Hill"
+          }
+        }
+      }
+    },
+    "terrainUsabilities": {
+      "manageTitle": "Utilizări terenuri",
+      "badge": "{{count}} utilizări",
+      "tableHeaders": {
+        "id": "ID",
+        "ro": "Română",
+        "ru": "Rusă",
+        "en": "Engleză"
+      },
+      "create": {
+        "trigger": "Creează utilizare",
+        "title": "Creează utilizare teren",
+        "description": "Completați detaliile utilizării terenului în toate limbile suportate. După trimitere, utilizarea va fi adăugată în sistem și disponibilă pentru utilizare în modulele relevante."
+      },
+      "update": {
+        "title": "Actualizează utilizare teren",
+        "description": "Editați detaliile unei utilizări existente a terenului. Actualizați denumirile multilingve sau alte câmpuri relevante pentru a menține informațiile corecte și actuale."
+      },
+      "form": {
+        "usability": {
+          "ro": {
+            "label": "Utilizare teren (română)",
+            "placeholder": "Ex: Agricol, Rezidențial, Industrial"
+          },
+          "ru": {
+            "label": "Использование участка (rusă)",
+            "placeholder": "Напр: Сельское хозяйство, Жилой, Промышленный"
+          },
+          "en": {
+            "label": "Terrain usability (engleză)",
+            "placeholder": "e.g. Agricultural, Residential, Industrial"
+          }
+        }
+      }
+    },
+    "createOffertCardInfo": {
+      "createOffert": "Creează ofertă",
+      "createOffertDescription": "Adaugă o proprietate nouă în platformă, completând formularul de mai jos."
+    },
+    "createApartment": {
+      "general_info": "Informații generale",
+      "location": "Locație",
+      "caracteristics": "Caracteristici",
+      "media": "Media",
+      "housing_type": "Tip locuință",
+      "housing_conditions": "Condiții locuință",
+      "apartment_features": "Caracteristici apartament",
+      "apartment_images": "Imagini apartament",
+      "select_agent": "Selectează agent",
+      "offert_type": "Tip ofertă",
+      "price": "Preț",
+      "hot_offert": "Ofertă caldă",
+      "status": "Status",
+      "description": "Descriere",
+      "description_ro": "Descriere (română)",
+      "description_ru": "Descriere (rusă)",
+      "description_en": "Descriere (engleză)",
+      "submit": "Trimite",
+      "public": "Public",
+      "private": "Privat",
+      "location_category": "Categorie locație",
+      "location_subcategory": "Subcategorie locație",
+      "street": "Stradă",
+      "rooms": "Camere",
+      "sanitaries": "Băi",
+      "surface": "Suprafață",
+      "floor": "Etaj",
+      "floors": "Etaje",
+      "total_floors": "Total etaje",
+      "rent": "Chirie",
+      "sale": "Vânzare"
+    },
+    "updateApartment": {
+      "general_info": "Informații generale",
+      "location": "Locație",
+      "caracteristics": "Caracteristici",
+      "media": "Media",
+      "housing_type": "Tip locuință",
+      "housing_conditions": "Condiții locuință",
+      "apartment_features": "Caracteristici apartament",
+      "apartment_images": "Imagini apartament",
+      "select_agent": "Selectează agent",
+      "offert_type": "Tip ofertă",
+      "price": "Preț",
+      "hot_offert": "Ofertă caldă",
+      "status": "Status",
+      "description": "Descriere",
+      "description_ro": "Descriere (română)",
+      "description_ru": "Descriere (rusă)",
+      "description_en": "Descriere (engleză)",
+      "submit": "Trimite",
+      "public": "Public",
+      "private": "Privat",
+      "location_category": "Categorie locație",
+      "location_subcategory": "Subcategorie locație",
+      "street": "Stradă",
+      "rooms": "Camere",
+      "sanitaries": "Băi",
+      "surface": "Suprafață",
+      "floor": "Etaj",
+      "floors": "Etaje",
+      "total_floors": "Total etaje",
+      "rent": "Chirie",
+      "sale": "Vânzare"
+    },
+    "createCommercial": {
+      "general_info": "Informații generale",
+      "location": "Locație",
+      "caracteristics": "Caracteristici",
+      "media": "Media",
+      "housing_type": "Tip locuință",
+      "housing_conditions": "Condiții locuință",
+      "commercial_features": "Caracteristici comerciale",
+      "commercial_placings": "Amplasamente comerciale",
+      "commercial_destinations": "Destinații comerciale",
+      "commercial_images": "Imagini comerciale",
+      "select_agent": "Selectează agent",
+      "offert_type": "Tip ofertă",
+      "price": "Preț",
+      "hot_offert": "Ofertă caldă",
+      "status": "Status",
+      "description": "Descriere",
+      "description_ro": "Descriere (română)",
+      "description_ru": "Descriere (rusă)",
+      "description_en": "Descriere (engleză)",
+      "submit": "Trimite",
+      "public": "Public",
+      "private": "Privat",
+      "location_category": "Categorie locație",
+      "location_subcategory": "Subcategorie locație",
+      "street": "Stradă",
+      "rooms": "Camere",
+      "sanitaries": "Băi",
+      "surface": "Suprafață",
+      "floor": "Etaj",
+      "floors": "Etaje",
+      "total_floors": "Total etaje",
+      "rent": "Chirie",
+      "sale": "Vânzare",
+      "stock": "Stoc",
+      "search_stock": "Caută stoc",
+      "no_stock_found": "Nu s-a găsit stoc",
+      "select_stock": "Selectează stoc",
+      "selectCategory": "Selectează categorie",
+      "searchCategory": "Caută categorie",
+      "noCategoryFound": "Nu s-a găsit categorie",
+      "selectSubcategory": "Selectează subcategorie",
+      "searchSubcategory": "Caută subcategorie",
+      "noSubcategoryFound": "Nu s-a găsit subcategorie",
+      "search_category": "Caută categorie",
+      "no_category_found": "Nu s-a găsit categorie",
+      "select_subcategory": "Selectează subcategorie",
+      "search_subcategory": "Caută subcategorie",
+      "no_subcategory_found": "Nu s-a găsit subcategorie",
+      "searchConditions": "Caută condiții",
+      "noConditionsFound": "Nu s-a găsit condiții",
+      "selectConditions": "Selectează condiții",
+      "searchFeatures": "Caută caracteristici",
+      "noFeaturesFound": "Nu s-a găsit caracteristici",
+      "selectFeatures": "Selectează caracteristici",
+      "searchPlacings": "Caută amplasamente",
+      "noPlacingsFound": "Nu s-a găsit amplasament",
+      "selectPlacings": "Selectează amplasament",
+      "searchDestinations": "Caută destinații",
+      "noDestinationsFound": "Nu s-a găsit destinație",
+      "selectDestinations": "Selectează destinații",
+      "searchImages": "Caută imagini",
+      "noImagesFound": "Nu s-a găsit imagini",
+      "selectImages": "Selectează imagini",
+      "first_line": "Prima linie"
+    },
+    "updateCommercial": {
+      "general_info": "Informații generale",
+      "general_info_description": "Descriere generală",
+      "location": "Locație",
+      "caracteristics": "Caracteristici",
+      "media": "Media",
+      "housing_type": "Tip locuință",
+      "housing_conditions": "Condiții locuință",
+      "commercial_features": "Caracteristici comerciale",
+      "commercial_placings": "Amplasamente comerciale",
+      "commercial_destinations": "Destinații comerciale",
+      "commercial_images": "Imagini comerciale",
+      "select_agent": "Selectează agent",
+      "offert_type": "Tip ofertă",
+      "price": "Preț",
+      "hot_offert": "Ofertă caldă",
+      "status": "Status",
+      "description": "Descriere",
+      "description_ro": "Descriere (română)",
+      "description_ru": "Descriere (rusă)",
+      "description_en": "Descriere (engleză)",
+      "submit": "Trimite",
+      "public": "Public",
+      "private": "Privat",
+      "location_category": "Categorie locație",
+      "location_subcategory": "Subcategorie locație",
+      "street": "Stradă",
+      "rooms": "Camere",
+      "sanitaries": "Băi",
+      "surface": "Suprafață",
+      "floor": "Etaj",
+      "floors": "Etaje",
+      "total_floors": "Total etaje",
+      "rent": "Chirie",
+      "sale": "Vânzare",
+      "stock": "Stoc",
+      "search_stock": "Caută stoc",
+      "no_stock_found": "Nu s-a găsit stoc",
+      "select_stock": "Selectează stoc",
+      "search_category": "Caută categorie",
+      "no_category_found": "Nu s-a găsit categorie",
+      "select_subcategory": "Selectează subcategorie",
+      "search_subcategory": "Caută subcategorie",
+      "no_subcategory_found": "Nu s-a găsit subcategorie",
+      "searchConditions": "Caută condiții",
+      "noConditionsFound": "Nu s-a găsit condiții",
+      "selectConditions": "Selectează condiții",
+      "searchFeatures": "Caută caracteristici",
+      "noFeaturesFound": "Nu s-a găsit caracteristici",
+      "selectFeatures": "Selectează caracteristici",
+      "searchPlacings": "Caută amplasamente",
+      "noPlacingsFound": "Nu s-a găsit amplasament",
+      "selectPlacings": "Selectează amplasament",
+      "searchDestinations": "Caută destinații",
+      "noDestinationsFound": "Nu s-a găsit destinație",
+      "selectDestinations": "Selectează destinații",
+      "searchImages": "Caută imagini",
+      "noImagesFound": "Nu s-a găsit imagini",
+      "selectImages": "Selectează imagini",
+      "first_line": "Prima linie"
+    },
+    "createHouse": {
+      "general_info": "Informații generale",
+      "location": "Locație",
+      "caracteristics": "Caracteristici",
+      "media": "Media",
+      "housing_type": "Tip locuință",
+      "housing_conditions": "Condiții locuință",
+      "housing_stock": "Stoc locuință",
+      "house_features": "Caracteristici casă",
+      "house_images": "Imagini casă",
+      "submit": "Trimite",
+      "public": "Public",
+      "private": "Privat",
+      "location_category": "Categorie locație",
+      "location_subcategory": "Subcategorie locație",
+      "street": "Stradă",
+      "rooms": "Camere",
+      "sanitaries": "Băi",
+      "surface": "Suprafață",
+      "floor": "Etaj",
+      "floors": "Etaje",
+      "total_floors": "Total etaje",
+      "rent": "Chirie",
+      "sale": "Vânzare",
+      "stock": "Stoc",
+      "search_stock": "Caută stoc",
+      "no_stock_found": "Nu s-a găsit stoc",
+      "select_stock": "Selectează stoc",
+      "search_housing_stock": "Caută stoc locuință",
+      "no_housing_stock_found": "Nu s-a găsit stoc locuință",
+      "select_housing_stock": "Selectează stoc locuință",
+      "search_housing_condition": "Caută condiții locuință",
+      "no_housing_condition_found": "Nu s-a găsit condiții locuință",
+      "select_housing_condition": "Selectează condiții locuință",
+      "search_housing_type": "Caută tip locuință",
+      "no_housing_type_found": "Nu s-a găsit tip locuință",
+      "select_housing_type": "Selectează tip locuință",
+      "search_house_features": "Caută caracteristici casă",
+      "no_house_features_found": "Nu s-a găsit caracteristici casă",
+      "select_house_features": "Selectează caracteristici casă",
+      "search_house_images": "Caută imagini casă",
+      "no_house_images_found": "Nu s-a găsit imagini casă",
+      "select_house_images": "Selectează imagini casă",
+      "search_place": "Caută loc",
+      "no_place_found": "Nu s-a găsit loc",
+      "select_place": "Selectează loc",
+      "search_place_prediction": "Caută loc",
+      "no_place_prediction_found": "Nu s-a găsit loc",
+      "select_place_prediction": "Selectează loc",
+      "offert_type": "Tip ofertă",
+      "select_agent": "Selectează agent",
+      "price": "Preț",
+      "status": "Status",
+      "description": "Descriere",
+      "description_ro": "Descriere (română)",
+      "description_ru": "Descriere (rusă)",
+      "description_en": "Descriere (engleză)",
+      "ro": "Română",
+      "ru": "Rusă",
+      "en": "Engleză",
+      "hot_offert": "Ofertă caldă",
+      "select_category": "Selectează categorie",
+      "search_category": "Caută categorie",
+      "no_category_found": "Nu s-a găsit categorie",
+      "select_subcategory": "Selectează subcategorie",
+      "search_subcategory": "Caută subcategorie",
+      "no_subcategory_found": "Nu s-a găsit subcategorie",
+      "search_conditions": "Caută condiții",
+      "no_conditions_found": "Nu s-a găsit condiții",
+      "select_conditions": "Selectează condiții",
+      "search_features": "Caută caracteristici",
+      "no_features_found": "Nu s-a găsit caracteristici",
+      "select_features": "Selectează caracteristici",
+      "search_placings": "Caută amplasamente",
+      "no_placings_found": "Nu s-a găsit amplasament",
+      "select_placings": "Selectează amplasament",
+      "search_destinations": "Caută destinații",
+      "no_destinations_found": "Nu s-a găsit destinație",
+      "select_destinations": "Selectează destinații",
+      "search_images": "Caută imagini",
+      "no_images_found": "Nu s-a găsit imagini",
+      "select_images": "Selectează imagini",
+      "area": "Suprafață",
+      "bathrooms": "Băi",
+      "balconies": "Balcoane",
+      "garages": "Garaże",
+      "parking": "Parcare",
+      "pool": "Piscină",
+      "garden": "Grădină",
+      "terrace": "Terasa",
+      "balcony": "Balcăni"
+    },
+    "updateHouse": {
+      "general_info": "Informații generale",
+      "general_info_description": "Descriere generală",
+      "location": "Locație",
+      "caracteristics": "Caracteristici",
+      "media": "Media",
+      "housing_type": "Tip locuință",
+      "housing_conditions": "Condiții locuință",
+      "housing_stock": "Stoc locuință",
+      "house_features": "Caracteristici casă",
+      "house_images": "Imagini casă",
+      "submit": "Trimite",
+      "public": "Public",
+      "private": "Privat",
+      "location_category": "Categorie locație",
+      "location_subcategory": "Subcategorie locație",
+      "street": "Stradă",
+      "rooms": "Camere",
+      "sanitaries": "Băi",
+      "surface": "Suprafață",
+      "floor": "Etaj",
+      "floors": "Etaje",
+      "total_floors": "Total etaje",
+      "rent": "Chirie",
+      "sale": "Vânzare",
+      "stock": "Stoc",
+      "search_stock": "Caută stoc",
+      "no_stock_found": "Nu s-a găsit stoc",
+      "select_stock": "Selectează stoc",
+      "search_housing_stock": "Caută stoc locuință",
+      "no_housing_stock_found": "Nu s-a găsit stoc locuință",
+      "select_housing_stock": "Selectează stoc locuință",
+      "search_housing_condition": "Caută condiții locuință",
+      "no_housing_condition_found": "Nu s-a găsit condiții locuință",
+      "select_housing_condition": "Selectează condiții locuință",
+      "search_housing_type": "Caută tip locuință",
+      "no_housing_type_found": "Nu s-a găsit tip locuință",
+      "select_housing_type": "Selectează tip locuință",
+      "search_house_features": "Caută caracteristici casă",
+      "no_house_features_found": "Nu s-a găsit caracteristici casă",
+      "select_house_features": "Selectează caracteristici casă",
+      "search_house_images": "Caută imagini casă",
+      "no_house_images_found": "Nu s-a găsit imagini casă",
+      "select_house_images": "Selectează imagini casă",
+      "search_place": "Caută loc",
+      "no_place_found": "Nu s-a găsit loc",
+      "select_place": "Selectează loc",
+      "search_place_prediction": "Caută loc",
+      "no_place_prediction_found": "Nu s-a găsit loc",
+      "select_place_prediction": "Selectează loc",
+      "offert_type": "Tip ofertă",
+      "select_agent": "Selectează agent",
+      "price": "Preț",
+      "status": "Status",
+      "description": "Descriere",
+      "description_ro": "Descriere (română)",
+      "description_ru": "Descriere (rusă)",
+      "description_en": "Descriere (engleză)",
+      "ro": "Română",
+      "ru": "Rusă",
+      "en": "Engleză",
+      "hot_offert": "Ofertă caldă",
+      "select_category": "Selectează categorie",
+      "search_category": "Caută categorie",
+      "no_category_found": "Nu s-a găsit categorie",
+      "select_subcategory": "Selectează subcategorie",
+      "search_subcategory": "Caută subcategorie",
+      "no_subcategory_found": "Nu s-a găsit subcategorie",
+      "search_conditions": "Caută condiții",
+      "no_conditions_found": "Nu s-a găsit condiții",
+      "select_conditions": "Selectează condiții",
+      "search_features": "Caută caracteristici",
+      "no_features_found": "Nu s-a găsit caracteristici",
+      "select_features": "Selectează caracteristici",
+      "search_placings": "Caută amplasamente",
+      "no_placings_found": "Nu s-a găsit amplasament",
+      "select_placings": "Selectează amplasament",
+      "search_destinations": "Caută destinații",
+      "no_destinations_found": "Nu s-a găsit destinație",
+      "select_destinations": "Selectează destinații",
+      "search_images": "Caută imagini",
+      "no_images_found": "Nu s-a găsit imagini",
+      "select_images": "Selectează imagini",
+      "area": "Suprafață",
+      "bathrooms": "Băi",
+      "balconies": "Balcoane",
+      "garages": "Garaże",
+      "parking": "Parcare",
+      "pool": "Piscină",
+      "garden": "Grădină",
+      "terrace": "Terasa",
+      "balcony": "Balcăni"
+    },
+    "createTerrain": {
+      "general_info": "Informații generale",
+      "location": "Locație",
+      "caracteristics": "Caracteristici",
+      "media": "Media",
+      "terrain_type": "Tip teren",
+      "terrain_usabilities": "Utilități teren",
+      "terrain_features": "Caracteristici teren",
+      "terrain_images": "Imagini teren",
+      "submit": "Trimite",
+      "public": "Public",
+      "private": "Privat",
+      "location_category": "Categorie locație",
+      "location_subcategory": "Subcategorie locație",
+      "street": "Stradă",
+      "rooms": "Camere",
+      "sanitaries": "Băi",
+      "surface": "Suprafață",
+      "floor": "Etaj",
+      "floors": "Etaje",
+      "total_floors": "Total etaje",
+      "rent": "Chirie",
+      "sale": "Vânzare",
+      "stock": "Stoc",
+      "search_stock": "Caută stoc",
+      "no_stock_found": "Nu s-a găsit stoc",
+      "select_stock": "Selectează stoc",
+      "search_terrain_type": "Caută tip teren",
+      "no_terrain_type_found": "Nu s-a găsit tip teren",
+      "select_terrain_type": "Selectează tip teren",
+      "search_terrain_usabilities": "Caută utilități teren",
+      "no_terrain_usabilities_found": "Nu s-a găsit utilități teren",
+      "select_terrain_usabilities": "Selectează utilități teren",
+      "search_terrain_features": "Caută caracteristici teren",
+      "no_terrain_features_found": "Nu s-a găsit caracteristici teren",
+      "select_terrain_features": "Selectează caracteristici teren",
+      "search_terrain_images": "Caută imagini teren",
+      "no_terrain_images_found": "Nu s-a găsit imagini teren",
+      "select_terrain_images": "Selectează imagini teren",
+      "area": "Suprafață",
+      "bathrooms": "Băi",
+      "balconies": "Balcoane",
+      "garages": "Garaże",
+      "parking": "Parcare",
+      "pool": "Piscină",
+      "garden": "Grădină",
+      "terrace": "Terasa",
+      "balcony": "Balcăni",
+      "ro": "Română",
+      "ru": "Rusă",
+      "en": "Engleză"
+    },
+    "updateTerrain": {
+      "general_info": "Informații generale",
+      "location": "Locație",
+      "caracteristics": "Caracteristici",
+      "media": "Media",
+      "terrain_type": "Tip teren",
+      "terrain_usabilities": "Utilități teren",
+      "terrain_features": "Caracteristici teren",
+      "terrain_images": "Imagini teren",
+      "submit": "Trimite",
+      "public": "Public",
+      "private": "Privat",
+      "location_category": "Categorie locație",
+      "location_subcategory": "Subcategorie locație",
+      "street": "Stradă",
+      "rooms": "Camere",
+      "sanitaries": "Băi",
+      "surface": "Suprafață",
+      "floor": "Etaj",
+      "floors": "Etaje",
+      "total_floors": "Total etaje",
+      "rent": "Chirie",
+      "sale": "Vânzare",
+      "stock": "Stoc",
+      "search_stock": "Caută stoc",
+      "no_stock_found": "Nu s-a găsit stoc",
+      "select_stock": "Selectează stoc",
+      "search_terrain_type": "Caută tip teren",
+      "no_terrain_type_found": "Nu s-a găsit tip teren",
+      "select_terrain_type": "Selectează tip teren",
+      "search_terrain_usabilities": "Caută utilități teren",
+      "no_terrain_usabilities_found": "Nu s-a găsit utilități teren",
+      "select_terrain_usabilities": "Selectează utilități teren",
+      "search_terrain_features": "Caută caracteristici teren",
+      "no_terrain_features_found": "Nu s-a găsit caracteristici teren",
+      "select_terrain_features": "Selectează caracteristici teren",
+      "search_terrain_images": "Caută imagini teren",
+      "no_terrain_images_found": "Nu s-a găsit imagini teren",
+      "select_terrain_images": "Selectează imagini teren",
+      "area": "Suprafață",
+      "bathrooms": "Băi",
+      "balconies": "Balcoane",
+      "garages": "Garaże",
+      "parking": "Parcare",
+      "pool": "Piscină",
+      "garden": "Grădină",
+      "terrace": "Terasa",
+      "balcony": "Balcăni"
+    },
+    "users": {
+      "title": "Utilizatori",
+      "badge": "utilizatori",
+      "createUser": "Creează utilizator",
+      "createUserTitle": "Creează utilizator",
+      "createUserDescription": "Completează detaliile utilizatorului pentru a crea un cont nou. După trimitere, utilizatorul va fi adăugat în sistem.",
+      "updateUserTitle": "Actualizează utilizator",
+      "updateUserDescription": "Modifică detaliile utilizatorului. Poți actualiza informațiile personale, detaliile de contact și permisiunile utilizatorului.",
+      "name": "Nume",
+      "namePlaceholder": "Introdu prenumele",
+      "surname": "Prenume",
+      "surnamePlaceholder": "Introdu numele de familie",
+      "email": "Email",
+      "emailPlaceholder": "Introdu adresa de email",
+      "password": "Parolă",
+      "passwordPlaceholder": "Introdu parola",
+      "contact": "Telefon",
+      "contactPlaceholder": "Introdu numărul de telefon",
+      "role": "Rol",
+      "posts": "Postări",
+      "thumbnail": "Poză de profil",
+      "socialContacts": "Contacte sociale",
+      "viber": "Viber",
+      "viberPlaceholder": "Introdu numărul Viber",
+      "whatsapp": "WhatsApp",
+      "whatsappPlaceholder": "Introdu numărul WhatsApp",
+      "telegram": "Telegram",
+      "telegramPlaceholder": "Introdu username-ul Telegram",
+      "create": "Creează utilizator",
+      "update": "Actualizează utilizator",
+      "clickToUpload": "Click pentru a încărca poza de profil"
+    }
+  }
+}

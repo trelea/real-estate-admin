@@ -1,0 +1,1110 @@
+{
+  "translation": {
+    "signin": {
+      "title": "Enter your email below to login your account",
+      "email": "Email",
+      "password": "Password",
+      "login": "Login"
+    },
+    "sidebar": {
+      "content": "Content",
+      "filters": "Filters",
+      "utils": "Utils",
+      "apartments": "Apartments",
+      "houses": "Houses",
+      "commercials": "Commercials",
+      "terrains": "Terrains",
+      "createNew": "Create New",
+      "posts": "Posts",
+      "features": "Features",
+      "destinations": "Destinations",
+      "placings": "Placings",
+      "usability": "Usability",
+      "housingTypes": "Housing Types",
+      "conditions": "Conditions",
+      "locations": "Locations",
+      "blogs": "Blogs",
+      "services": "Services",
+      "aboutUs": "About Us",
+      "users": "Users",
+      "settings": "Settings",
+      "privacyPolicy": "Privacy Policy",
+      "termsAndConditions": "Terms and Conditions",
+      "configure": "Configure",
+      "access": "Access",
+      "landing": "Landing"
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next",
+      "goToPrevious": "Go to previous page",
+      "goToNext": "Go to next page",
+      "morePages": "More pages"
+    },
+    "delete": {
+      "title": "Are you absolutely sure?",
+      "description": "This action cannot be undone. This will permanently delete your account and remove your data from our servers.",
+      "cancel": "Cancel",
+      "continue": "Continue"
+    },
+    "search": {
+      "placeholder": "Search"
+    },
+    "landing": {
+      "agentsCarousel": "Agents Carousel",
+      "update": "Update",
+      "addNewAgent": "Add new agent"
+    },
+    "about": {
+      "editAboutUs": "Edit About Us",
+      "romanian": "Romanian",
+      "russian": "Russian",
+      "english": "English",
+      "saveContent": "Save content"
+    },
+    "privacy": {
+      "edit": "Edit Privacy Policy",
+      "romanian": "Romanian",
+      "russian": "Russian",
+      "english": "English",
+      "saveContent": "Save content"
+    },
+    "terms": {
+      "edit": "Edit Terms and Conditions",
+      "romanian": "Romanian",
+      "russian": "Russian",
+      "english": "English",
+      "saveContent": "Save content"
+    },
+    "propertiesTable": {
+      "badge": "{{count}} properties",
+      "searchById": "Search by ID",
+      "createOffert": "Create offert",
+      "actions": "Actions"
+    },
+    "apartments": {
+      "manageTitle": "Manage apartments",
+      "tableHeaders": {
+        "id": "ID",
+        "address": "Address",
+        "offert": "Offert",
+        "status": "Status",
+        "agent": "Agent",
+        "publishingDate": "Publishing Date",
+        "price": "Price"
+      }
+    },
+    "common": {
+      "close": "Close",
+      "back": "Back",
+      "next": "Next",
+      "create": "Create",
+      "update": "Update"
+    },
+    "blogs": {
+      "manageTitle": "Blogs",
+      "badge": "{{count}} blogs",
+      "tableHeaders": {
+        "title": "Title",
+        "status": "Status",
+        "published": "Published",
+        "views": "Views"
+      },
+      "create": {
+        "trigger": "Create blog",
+        "title": "Create blog",
+        "description": {
+          "step1": "Choose a thumbnail for the blog post. This image will be displayed as a preview in the blog list.",
+          "step2": "Write the title, description and content in Romanian for the blog post.",
+          "step3": "Write the title, description and content in Russian for the blog post.",
+          "step4": "Write the title, description and content in English for the blog post.",
+          "step5": "Choose whether the post will be public or private.",
+          "makePublic": "Make post public",
+          "publicDescription": "If checked, the post will be visible to everyone. If not, it will be private and accessible only to administrators and users with permissions."
+        }
+      },
+      "update": {
+        "title": "Update Blog",
+        "description": {
+          "step1": "Update the blog post thumbnail.",
+          "step2": "Edit the title and description in Romanian.",
+          "step3": "Edit the title and description in Russian.",
+          "step4": "Edit the title and description in English and post visibility.",
+          "makePublic": "Make post public",
+          "publicDescription": "If checked, the post will be visible to everyone. If not, it will be private and accessible only to administrators and users with permissions."
+        }
+      },
+      "status": {
+        "public": "Public",
+        "private": "Private"
+      },
+      "fieldFile": {
+        "clickToUpload": "Click to upload."
+      }
+    },
+    "services": {
+      "manageTitle": "Services",
+      "badge": "{{count}} services",
+      "tableHeaders": {
+        "title": "Title",
+        "status": "Status",
+        "published": "Published",
+        "views": "Views"
+      },
+      "create": {
+        "trigger": "Create service",
+        "title": "Create service",
+        "description": "Provide the necessary details to create a new service.",
+        "thumbnail": "Thumbnail",
+        "makePublic": "Make service public",
+        "publicDescription": "If checked, the service will be available to all users. If not, it will be private and accessible only to administrators."
+      },
+      "update": {
+        "title": "Update service",
+        "description": {
+          "step1": "Update the service thumbnail.",
+          "step2": "Edit the title and description in Romanian.",
+          "step3": "Edit the title and description in Russian.",
+          "step4": "Edit the title and description in English and service visibility."
+        },
+        "thumbnail": "Thumbnail",
+        "makePublic": "Make service public",
+        "publicDescription": "If checked, the service will be available to all users. If not, it will be private and accessible only to administrators."
+      },
+      "status": {
+        "public": "Public",
+        "private": "Private"
+      },
+      "fieldFile": {
+        "clickToUpload": "Click to upload."
+      }
+    },
+    "locations": {
+      "manageTitle": "Locations",
+      "badge": "{{count}} locations",
+      "tableHeaders": {
+        "id": "ID",
+        "ro": "Romanian",
+        "ru": "Russian",
+        "en": "English"
+      },
+      "create": {
+        "trigger": "Create location category",
+        "title": "Create location category",
+        "description": "Enter the multilingual information needed to create a new location category."
+      },
+      "update": {
+        "title": "Update location category",
+        "description": "Modify the multilingual details for this location category."
+      },
+      "sub": {
+        "badge": "{{count}} subcategories",
+        "create": {
+          "trigger": "Create subcategory",
+          "title": "Create location subcategory",
+          "description": "Fill in the subcategory details in all supported languages."
+        },
+        "update": {
+          "title": "Update location subcategory",
+          "description": "Modify the multilingual details for this subcategory."
+        }
+      },
+      "form": {
+        "category": {
+          "ro": {
+            "label": "Location category (Romanian)",
+            "placeholder": "Ex: Urban, Rural, Suburban (RO)"
+          },
+          "ru": {
+            "label": "Location category (Russian)",
+            "placeholder": "Ex: Urban, Rural, Suburban (RU)"
+          },
+          "en": {
+            "label": "Location category (English)",
+            "placeholder": "e.g. Urban, Rural, Suburban"
+          }
+        },
+        "subcategory": {
+          "ro": {
+            "label": "Location subcategory (Romanian)",
+            "placeholder": "Ex: Downtown, Residential area, Industrial zone (RO)"
+          },
+          "ru": {
+            "label": "Location subcategory (Russian)",
+            "placeholder": "Ex: Downtown, Residential area, Industrial zone (RU)"
+          },
+          "en": {
+            "label": "Location subcategory (English)",
+            "placeholder": "e.g. Downtown, Residential area, Industrial zone"
+          }
+        }
+      }
+    },
+    "conditions": {
+      "manageTitle": "Conditions",
+      "badge": "{{count}} conditions",
+      "tableHeaders": {
+        "id": "ID",
+        "ro": "Romanian",
+        "ru": "Russian",
+        "en": "English"
+      },
+      "create": {
+        "trigger": "Create condition",
+        "title": "Create condition",
+        "description": "Enter the housing condition details in all supported languages. After submission, the condition will be added to the system and available for use in relevant modules."
+      },
+      "update": {
+        "title": "Update condition",
+        "description": "Edit the details of an existing housing condition. Update multilingual names or other relevant fields to keep information accurate and current."
+      },
+      "form": {
+        "condition": {
+          "ro": {
+            "label": "Condition (Romanian)",
+            "placeholder": "Ex: New, Used, Needs renovation (RO)"
+          },
+          "ru": {
+            "label": "Condition (Russian)",
+            "placeholder": "Ex: New, Used, Needs renovation (RU)"
+          },
+          "en": {
+            "label": "Condition (English)",
+            "placeholder": "e.g. New, Used, Needs renovation"
+          }
+        }
+      }
+    },
+    "housingStocks": {
+      "manageTitle": "Housing Types",
+      "badge": "{{count}} housing types",
+      "tableHeaders": {
+        "id": "ID",
+        "ro": "Romanian",
+        "ru": "Russian",
+        "en": "English"
+      },
+      "create": {
+        "trigger": "Create housing type",
+        "title": "Create housing type",
+        "description": "Enter the necessary information to add a new housing stock type. After submission, the record will be saved and available in the system."
+      },
+      "update": {
+        "title": "Update housing type",
+        "description": "Modify the details of an existing housing stock type. You can update the name, description, and other relevant fields to reflect the most accurate and up-to-date information."
+      },
+      "form": {
+        "housingStock": {
+          "ro": {
+            "label": "Housing type (Romanian)",
+            "placeholder": "Ex: Block, House, Villa (RO)"
+          },
+          "ru": {
+            "label": "Housing type (Russian)",
+            "placeholder": "Ex: Block, House, Villa (RU)"
+          },
+          "en": {
+            "label": "Housing type (English)",
+            "placeholder": "e.g. Block, House, Villa"
+          }
+        }
+      }
+    },
+    "apartmentFeatures": {
+      "manageTitle": "Apartment Features",
+      "badge": "{{count}} features",
+      "tableHeaders": {
+        "id": "ID",
+        "ro": "Romanian",
+        "ru": "Russian",
+        "en": "English"
+      },
+      "create": {
+        "trigger": "Create feature",
+        "title": "Create apartment feature",
+        "description": "Fill in the apartment feature details in all supported languages. After submission, the feature will be added to the system and available for use in relevant modules."
+      },
+      "update": {
+        "title": "Update apartment feature",
+        "description": "Edit the details of an existing apartment feature. Update multilingual names or other relevant fields to keep information accurate and current."
+      },
+      "form": {
+        "feature": {
+          "ro": {
+            "label": "Apartment feature (Romanian)",
+            "placeholder": "Ex: Balcony, Elevator, Parking (RO)"
+          },
+          "ru": {
+            "label": "Apartment feature (Russian)",
+            "placeholder": "Ex: Balcony, Elevator, Parking (RU)"
+          },
+          "en": {
+            "label": "Apartment feature (English)",
+            "placeholder": "e.g. Balcony, Elevator, Parking"
+          }
+        }
+      }
+    },
+    "commercialDestinations": {
+      "manageTitle": "Commercial Destinations",
+      "badge": "{{count}} destinations",
+      "tableHeaders": {
+        "id": "ID",
+        "ro": "Romanian",
+        "ru": "Russian",
+        "en": "English"
+      },
+      "create": {
+        "trigger": "Create destination",
+        "title": "Create commercial destination",
+        "description": "Fill in the commercial destination details in all supported languages. After submission, the destination will be added to the system and available for use in relevant modules."
+      },
+      "update": {
+        "title": "Update commercial destination",
+        "description": "Edit the details of an existing commercial destination. Update multilingual names or other relevant fields to keep information accurate and current."
+      },
+      "form": {
+        "destination": {
+          "ro": {
+            "label": "Commercial destination (Romanian)",
+            "placeholder": "Ex: Shopping center, Offices, Mall (RO)"
+          },
+          "ru": {
+            "label": "Commercial destination (Russian)",
+            "placeholder": "Ex: Shopping center, Offices, Mall (RU)"
+          },
+          "en": {
+            "label": "Commercial destination (English)",
+            "placeholder": "e.g. Shopping center, Offices, Mall"
+          }
+        }
+      }
+    },
+    "commercialFeatures": {
+      "manageTitle": "Commercial Features",
+      "badge": "{{count}} features",
+      "tableHeaders": {
+        "id": "ID",
+        "ro": "Romanian",
+        "ru": "Russian",
+        "en": "English"
+      },
+      "create": {
+        "trigger": "Create feature",
+        "title": "Create commercial feature",
+        "description": "Fill in the commercial feature details in all supported languages. After submission, the feature will be added to the system and available for use in relevant modules."
+      },
+      "update": {
+        "title": "Update commercial feature",
+        "description": "Edit the details of an existing commercial feature. Update multilingual names or other relevant fields to keep information accurate and current."
+      },
+      "form": {
+        "feature": {
+          "ro": {
+            "label": "Commercial feature (Romanian)",
+            "placeholder": "Ex: Parking, Reception, Conference room (RO)"
+          },
+          "ru": {
+            "label": "Commercial feature (Russian)",
+            "placeholder": "Ex: Parking, Reception, Conference room (RU)"
+          },
+          "en": {
+            "label": "Commercial feature (English)",
+            "placeholder": "e.g. Parking, Reception, Conference room"
+          }
+        }
+      }
+    },
+    "commercialPlacings": {
+      "manageTitle": "Commercial Placings",
+      "badge": "{{count}} placings",
+      "tableHeaders": {
+        "id": "ID",
+        "ro": "Romanian",
+        "ru": "Russian",
+        "en": "English"
+      },
+      "create": {
+        "trigger": "Create placing",
+        "title": "Create commercial placing",
+        "description": "Fill in the commercial placing details in all supported languages. After submission, the placing will be added to the system and available for use in relevant modules."
+      },
+      "update": {
+        "title": "Update commercial placing",
+        "description": "Edit the details of an existing commercial placing. Update multilingual names or other relevant fields to keep information accurate and current."
+      },
+      "form": {
+        "placing": {
+          "ro": {
+            "label": "Commercial placing (Romanian)",
+            "placeholder": "Ex: First floor, Ground floor, Outside (RO)"
+          },
+          "ru": {
+            "label": "Commercial placing (Russian)",
+            "placeholder": "Ex: First floor, Ground floor, Outside (RU)"
+          },
+          "en": {
+            "label": "Commercial placing (English)",
+            "placeholder": "e.g. First floor, Ground floor, Outside"
+          }
+        }
+      }
+    },
+    "houseFeatures": {
+      "manageTitle": "House Features",
+      "badge": "{{count}} features",
+      "tableHeaders": {
+        "id": "ID",
+        "ro": "Romanian",
+        "ru": "Russian",
+        "en": "English"
+      },
+      "create": {
+        "trigger": "Create feature",
+        "title": "Create house feature",
+        "description": "Fill in the house feature details in all supported languages. After submission, the feature will be added to the system and available for use in relevant modules."
+      },
+      "update": {
+        "title": "Update house feature",
+        "description": "Edit the details of an existing house feature. Update multilingual names or other relevant fields to keep information accurate and current."
+      },
+      "form": {
+        "feature": {
+          "ro": {
+            "label": "House feature (Romanian)",
+            "placeholder": "Ex: Garden, Garage, Terrace (RO)"
+          },
+          "ru": {
+            "label": "House feature (Russian)",
+            "placeholder": "Ex: Garden, Garage, Terrace (RU)"
+          },
+          "en": {
+            "label": "House feature (English)",
+            "placeholder": "e.g. Garden, Garage, Terrace"
+          }
+        }
+      }
+    },
+    "terrainFeatures": {
+      "manageTitle": "Terrain Features",
+      "badge": "{{count}} features",
+      "tableHeaders": {
+        "id": "ID",
+        "ro": "Romanian",
+        "ru": "Russian",
+        "en": "English"
+      },
+      "create": {
+        "trigger": "Create feature",
+        "title": "Create terrain feature",
+        "description": "Fill in the terrain feature details in all supported languages. After submission, the feature will be added to the system and available for use in relevant modules."
+      },
+      "update": {
+        "title": "Update terrain feature",
+        "description": "Edit the details of an existing terrain feature. Update multilingual names or other relevant fields to keep information accurate and current."
+      },
+      "form": {
+        "feature": {
+          "ro": {
+            "label": "Terrain feature (Romanian)",
+            "placeholder": "Ex: Forest, Lake, Hill (RO)"
+          },
+          "ru": {
+            "label": "Terrain feature (Russian)",
+            "placeholder": "Ex: Forest, Lake, Hill (RU)"
+          },
+          "en": {
+            "label": "Terrain feature (English)",
+            "placeholder": "e.g. Forest, Lake, Hill"
+          }
+        }
+      }
+    },
+    "terrainUsabilities": {
+      "manageTitle": "Terrain Usabilities",
+      "badge": "{{count}} usabilities",
+      "tableHeaders": {
+        "id": "ID",
+        "ro": "Romanian",
+        "ru": "Russian",
+        "en": "English"
+      },
+      "create": {
+        "trigger": "Create usability",
+        "title": "Create terrain usability",
+        "description": "Fill in the terrain usability details in all supported languages. After submission, the usability will be added to the system and available for use in relevant modules."
+      },
+      "update": {
+        "title": "Update terrain usability",
+        "description": "Edit the details of an existing terrain usability. Update multilingual names or other relevant fields to keep information accurate and current."
+      },
+      "form": {
+        "usability": {
+          "ro": {
+            "label": "Terrain usability (Romanian)",
+            "placeholder": "Ex: Agricultural, Residential, Industrial (RO)"
+          },
+          "ru": {
+            "label": "Terrain usability (Russian)",
+            "placeholder": "Ex: Agricultural, Residential, Industrial (RU)"
+          },
+          "en": {
+            "label": "Terrain usability (English)",
+            "placeholder": "e.g. Agricultural, Residential, Industrial"
+          }
+        }
+      }
+    },
+    "createOffertCardInfo": {
+      "createOffert": "Create Offert",
+      "createOffertDescription": "Add a new property to the platform by filling out the form below."
+    },
+    "createApartment": {
+      "general_info": "General Info",
+      "location": "Location",
+      "caracteristics": "Caracteristics",
+      "media": "Media",
+      "housing_type": "Housing Type",
+      "housing_conditions": "Housing Conditions",
+      "apartment_features": "Apartment Features",
+      "apartment_images": "Apartment Images",
+      "select_agent": "Select Agent",
+      "offert_type": "Offert Type",
+      "price": "Price",
+      "hot_offert": "Hot Offert",
+      "status": "Status",
+      "description": "Description",
+      "description_ro": "Description (Romanian)",
+      "description_ru": "Description (Russian)",
+      "description_en": "Description (English)",
+      "submit": "Submit",
+      "public": "Public",
+      "private": "Private",
+      "location_category": "Location Category",
+      "location_subcategory": "Location Subcategory",
+      "street": "Street",
+      "rooms": "Rooms",
+      "sanitaries": "Sanitaries",
+      "surface": "Surface",
+      "floor": "Floor",
+      "floors": "Floors",
+      "total_floors": "Total Floors",
+      "rent": "Rent",
+      "sale": "Sale"
+    },
+    "updateApartment": {
+      "general_info": "General Info",
+      "location": "Location",
+      "caracteristics": "Caracteristics",
+      "media": "Media",
+      "housing_type": "Housing Type",
+      "housing_conditions": "Housing Conditions",
+      "apartment_features": "Apartment Features",
+      "apartment_images": "Apartment Images",
+      "select_agent": "Select Agent",
+      "offert_type": "Offert Type",
+      "price": "Price",
+      "hot_offert": "Hot Offert",
+      "status": "Status",
+      "description": "Description",
+      "description_ro": "Description (Romanian)",
+      "description_ru": "Description (Russian)",
+      "description_en": "Description (English)",
+      "submit": "Submit",
+      "public": "Public",
+      "private": "Private",
+      "location_category": "Location Category",
+      "location_subcategory": "Location Subcategory",
+      "street": "Street",
+      "rooms": "Rooms",
+      "sanitaries": "Sanitaries",
+      "surface": "Surface",
+      "floor": "Floor",
+      "floors": "Floors",
+      "total_floors": "Total Floors",
+      "rent": "Rent",
+      "sale": "Sale"
+    },
+    "createCommercial": {
+      "general_info": "General Info",
+      "location": "Location",
+      "caracteristics": "Caracteristics",
+      "media": "Media",
+      "housing_type": "Housing Type",
+      "housing_conditions": "Housing Conditions",
+      "commercial_features": "Commercial Features",
+      "commercial_placings": "Commercial Placings",
+      "commercial_destinations": "Commercial Destinations",
+      "commercial_images": "Commercial Images",
+      "select_agent": "Select Agent",
+      "offert_type": "Offert Type",
+      "price": "Price",
+      "hot_offert": "Hot Offert",
+      "status": "Status",
+      "description": "Description",
+      "description_ro": "Description (Romanian)",
+      "description_ru": "Description (Russian)",
+      "description_en": "Description (English)",
+      "submit": "Submit",
+      "public": "Public",
+      "private": "Private",
+      "location_category": "Location Category",
+      "location_subcategory": "Location Subcategory",
+      "street": "Street",
+      "rooms": "Rooms",
+      "sanitaries": "Sanitaries",
+      "surface": "Surface",
+      "floor": "Floor",
+      "floors": "Floors",
+      "total_floors": "Total Floors",
+      "rent": "Rent",
+      "sale": "Sale",
+      "stock": "Stock",
+      "search_stock": "Search stock",
+      "no_stock_found": "No stock found",
+      "select_stock": "Select stock",
+      "search_category": "Search category",
+      "no_category_found": "No category found",
+      "selectCategory": "Select category",
+      "searchCategory": "Search category",
+      "noCategoryFound": "No category found",
+      "selectSubcategory": "Select subcategory",
+      "searchSubcategory": "Search subcategory",
+      "noSubcategoryFound": "No subcategory found",
+      "searchConditions": "Search conditions",
+      "noConditionsFound": "No conditions found",
+      "selectConditions": "Select conditions",
+      "searchFeatures": "Search features",
+      "noFeaturesFound": "No features found",
+      "selectFeatures": "Select features",
+      "searchPlacings": "Search placings",
+      "noPlacingsFound": "No placings found",
+      "selectPlacings": "Select placings",
+      "searchDestinations": "Search destinations",
+      "noDestinationsFound": "No destinations found",
+      "selectDestinations": "Select destinations",
+      "searchImages": "Search images",
+      "noImagesFound": "No images found",
+      "selectImages": "Select images",
+      "first_line": "First line"
+    },
+    "updateCommercial": {
+      "general_info": "General Info",
+      "general_info_description": "General info description",
+      "location": "Location",
+      "caracteristics": "Caracteristics",
+      "media": "Media",
+      "housing_type": "Housing Type",
+      "housing_conditions": "Housing Conditions",
+      "commercial_features": "Commercial Features",
+      "commercial_placings": "Commercial Placings",
+      "commercial_destinations": "Commercial Destinations",
+      "commercial_images": "Commercial Images",
+      "select_agent": "Select Agent",
+      "offert_type": "Offert Type",
+      "price": "Price",
+      "hot_offert": "Hot Offert",
+      "status": "Status",
+      "description": "Description",
+      "description_ro": "Description (Romanian)",
+      "description_ru": "Description (Russian)",
+      "description_en": "Description (English)",
+      "submit": "Submit",
+      "public": "Public",
+      "private": "Private",
+      "location_category": "Location Category",
+      "location_subcategory": "Location Subcategory",
+      "street": "Street",
+      "rooms": "Rooms",
+      "sanitaries": "Sanitaries",
+      "surface": "Surface",
+      "floor": "Floor",
+      "floors": "Floors",
+      "total_floors": "Total Floors",
+      "rent": "Rent",
+      "sale": "Sale",
+      "stock": "Stock",
+      "search_stock": "Search stock",
+      "no_stock_found": "No stock found",
+      "select_stock": "Select stock",
+      "search_category": "Search category",
+      "no_category_found": "No category found",
+      "select_subcategory": "Select subcategory",
+      "search_subcategory": "Search subcategory",
+      "no_subcategory_found": "No subcategory found",
+      "searchConditions": "Search conditions",
+      "noConditionsFound": "No conditions found",
+      "selectConditions": "Select conditions",
+      "searchFeatures": "Search features",
+      "noFeaturesFound": "No features found",
+      "selectFeatures": "Select features",
+      "searchPlacings": "Search placings",
+      "noPlacingsFound": "No placings found",
+      "selectPlacings": "Select placings",
+      "searchDestinations": "Search destinations",
+      "noDestinationsFound": "No destinations found",
+      "selectDestinations": "Select destinations",
+      "searchImages": "Search images",
+      "noImagesFound": "No images found",
+      "selectImages": "Select images",
+      "first_line": "First line"
+    },
+    "createHouse": {
+      "general_info": "General Info",
+      "location": "Location",
+      "caracteristics": "Caracteristics",
+      "media": "Media",
+      "housing_type": "Housing Type",
+      "housing_conditions": "Housing Conditions",
+      "housing_stock": "Housing Stock",
+      "house_features": "House Features",
+      "house_images": "House Images",
+      "submit": "Submit",
+      "public": "Public",
+      "private": "Private",
+      "location_category": "Location Category",
+      "location_subcategory": "Location Subcategory",
+      "street": "Street",
+      "rooms": "Rooms",
+      "sanitaries": "Sanitaries",
+      "surface": "Surface",
+      "floor": "Floor",
+      "floors": "Floors",
+      "total_floors": "Total Floors",
+      "rent": "Rent",
+      "sale": "Sale",
+      "stock": "Stock",
+      "search_stock": "Search stock",
+      "no_stock_found": "No stock found",
+      "select_stock": "Select stock",
+      "search_housing_stock": "Search housing stock",
+      "no_housing_stock_found": "No housing stock found",
+      "select_housing_stock": "Select housing stock",
+      "search_housing_condition": "Search housing condition",
+      "no_housing_condition_found": "No housing condition found",
+      "select_housing_condition": "Select housing condition",
+      "search_housing_type": "Search housing type",
+      "no_housing_type_found": "No housing type found",
+      "select_housing_type": "Select housing type",
+      "search_house_features": "Search house features",
+      "no_house_features_found": "No house features found",
+      "select_house_features": "Select house features",
+      "search_house_images": "Search house images",
+      "no_house_images_found": "No house images found",
+      "select_house_images": "Select house images",
+      "offert_type": "Offert Type",
+      "select_agent": "Select Agent",
+      "price": "Price",
+      "status": "Status",
+      "description": "Description",
+      "description_ro": "Description (Romanian)",
+      "description_ru": "Description (Russian)",
+      "description_en": "Description (English)",
+      "ro": "Romanian",
+      "ru": "Russian",
+      "en": "English",
+      "hot_offert": "Hot Offert",
+      "select_category": "Select Category",
+      "search_category": "Search Category",
+      "no_category_found": "No category found",
+      "select_subcategory": "Select Subcategory",
+      "search_subcategory": "Search Subcategory",
+      "no_subcategory_found": "No subcategory found",
+      "search_conditions": "Search Conditions",
+      "no_conditions_found": "No conditions found",
+      "select_conditions": "Select Conditions",
+      "search_features": "Search Features",
+      "no_features_found": "No features found",
+      "select_features": "Select Features",
+      "search_placings": "Search Placings",
+      "no_placings_found": "No placings found",
+      "select_placings": "Select Placings",
+      "search_destinations": "Search Destinations",
+      "no_destinations_found": "No destinations found",
+      "select_destinations": "Select Destinations",
+      "search_images": "Search Images",
+      "no_images_found": "No images found",
+      "select_images": "Select Images",
+      "area": "Area",
+      "bathrooms": "Bathrooms",
+      "balconies": "Balconies",
+      "garages": "Garages",
+      "parking": "Parking",
+      "pool": "Pool",
+      "garden": "Garden",
+      "terrace": "Terrace",
+      "balcony": "Balcony"
+    },
+    "updateHouse": {
+      "general_info": "General Info",
+      "general_info_description": "General info description",
+      "location": "Location",
+      "caracteristics": "Caracteristics",
+      "media": "Media",
+      "housing_type": "Housing Type",
+      "housing_conditions": "Housing Conditions",
+      "housing_stock": "Housing Stock",
+      "house_features": "House Features",
+      "house_images": "House Images",
+      "submit": "Submit",
+      "public": "Public",
+      "private": "Private",
+      "location_category": "Location Category",
+      "location_subcategory": "Location Subcategory",
+      "street": "Street",
+      "rooms": "Rooms",
+      "sanitaries": "Sanitaries",
+      "surface": "Surface",
+      "floor": "Floor",
+      "floors": "Floors",
+      "total_floors": "Total Floors",
+      "rent": "Rent",
+      "sale": "Sale",
+      "stock": "Stock",
+      "search_stock": "Search stock",
+      "no_stock_found": "No stock found",
+      "select_stock": "Select stock",
+      "search_housing_stock": "Search housing stock",
+      "no_housing_stock_found": "No housing stock found",
+      "select_housing_stock": "Select housing stock",
+      "search_housing_condition": "Search housing condition",
+      "no_housing_condition_found": "No housing condition found",
+      "select_housing_condition": "Select housing condition",
+      "search_housing_type": "Search housing type",
+      "no_housing_type_found": "No housing type found",
+      "select_housing_type": "Select housing type",
+      "search_house_features": "Search house features",
+      "no_house_features_found": "No house features found",
+      "select_house_features": "Select house features",
+      "search_house_images": "Search house images",
+      "no_house_images_found": "No house images found",
+      "select_house_images": "Select house images",
+      "search_place": "Search place",
+      "no_place_found": "No place found",
+      "select_place": "Select place",
+      "search_place_prediction": "Search place prediction",
+      "no_place_prediction_found": "No place prediction found",
+      "select_place_prediction": "Select place prediction",
+      "offert_type": "Offert Type",
+      "select_agent": "Select Agent",
+      "price": "Price",
+      "status": "Status",
+      "description": "Description",
+      "description_ro": "Description (Romanian)",
+      "description_ru": "Description (Russian)",
+      "description_en": "Description (English)",
+      "ro": "Romanian",
+      "ru": "Russian",
+      "en": "English",
+      "hot_offert": "Hot Offert",
+      "select_category": "Select Category",
+      "search_category": "Search Category",
+      "no_category_found": "No category found",
+      "select_subcategory": "Select Subcategory",
+      "search_subcategory": "Search Subcategory",
+      "no_subcategory_found": "No subcategory found",
+      "search_conditions": "Search Conditions",
+      "no_conditions_found": "No conditions found",
+      "select_conditions": "Select Conditions",
+      "search_features": "Search Features",
+      "no_features_found": "No features found",
+      "select_features": "Select Features",
+      "search_placings": "Search Placings",
+      "no_placings_found": "No placings found",
+      "select_placings": "Select Placings",
+      "search_destinations": "Search Destinations",
+      "no_destinations_found": "No destinations found",
+      "select_destinations": "Select Destinations",
+      "search_images": "Search Images",
+      "no_images_found": "No images found",
+      "select_images": "Select Images",
+      "area": "Area",
+      "bathrooms": "Bathrooms",
+      "balconies": "Balconies",
+      "garages": "Garages",
+      "parking": "Parking",
+      "pool": "Pool",
+      "garden": "Garden",
+      "terrace": "Terrace",
+      "balcony": "Balcony"
+    },
+    "createTerrain": {
+      "general_info": "General Info",
+      "location": "Location",
+      "caracteristics": "Caracteristics",
+      "media": "Media",
+      "terrain_type": "Terrain Type",
+      "terrain_usabilities": "Terrain Usabilities",
+      "terrain_features": "Terrain Features",
+      "terrain_images": "Terrain Images",
+      "submit": "Submit",
+      "public": "Public",
+      "private": "Private",
+      "location_category": "Location Category",
+      "location_subcategory": "Location Subcategory",
+      "street": "Street",
+      "rooms": "Rooms",
+      "sanitaries": "Sanitaries",
+      "surface": "Surface",
+      "floor": "Floor",
+      "floors": "Floors",
+      "total_floors": "Total Floors",
+      "rent": "Rent",
+      "sale": "Sale",
+      "stock": "Stock",
+      "search_stock": "Search stock",
+      "no_stock_found": "No stock found",
+      "select_stock": "Select stock",
+      "search_terrain_type": "Search terrain type",
+      "no_terrain_type_found": "No terrain type found",
+      "select_terrain_type": "Select terrain type",
+      "offert_type": "Offert Type",
+      "select_agent": "Select Agent",
+      "price": "Price",
+      "hot_offert": "Hot Offert",
+      "status": "Status",
+      "description": "Description",
+      "description_ro": "Description (Romanian)",
+      "description_ru": "Description (Russian)",
+      "description_en": "Description (English)",
+      "ro": "Romanian",
+      "ru": "Russian",
+      "en": "English",
+      "select_category": "Select Category",
+      "search_category": "Search Category",
+      "no_category_found": "No category found",
+      "select_subcategory": "Select Subcategory",
+      "search_subcategory": "Search Subcategory",
+      "no_subcategory_found": "No subcategory found",
+      "search_conditions": "Search Conditions",
+      "no_conditions_found": "No conditions found",
+      "select_conditions": "Select Conditions",
+      "search_features": "Search Features",
+      "no_features_found": "No features found",
+      "select_features": "Select Features",
+      "search_placings": "Search Placings",
+      "no_placings_found": "No placings found",
+      "select_placings": "Select Placings",
+      "search_destinations": "Search Destinations",
+      "no_destinations_found": "No destinations found",
+      "select_destinations": "Select Destinations",
+      "search_images": "Search Images",
+      "no_images_found": "No images found",
+      "select_images": "Select Images",
+      "area": "Area",
+      "bathrooms": "Bathrooms",
+      "balconies": "Balconies",
+      "garages": "Garages",
+      "parking": "Parking",
+      "pool": "Pool",
+      "garden": "Garden",
+      "terrace": "Terrace",
+      "balcony": "Balcony"
+    },
+    "updateTerrain": {
+      "general_info": "General Info",
+      "location": "Location",
+      "caracteristics": "Caracteristics",
+      "media": "Media",
+      "terrain_type": "Terrain Type",
+      "terrain_usabilities": "Terrain Usabilities",
+      "terrain_features": "Terrain Features",
+      "terrain_images": "Terrain Images",
+      "submit": "Submit",
+      "public": "Public",
+      "private": "Private",
+      "location_category": "Location Category",
+      "location_subcategory": "Location Subcategory",
+      "street": "Street",
+      "rooms": "Rooms",
+      "sanitaries": "Sanitaries",
+      "surface": "Surface",
+      "floor": "Floor",
+      "floors": "Floors",
+      "total_floors": "Total Floors",
+      "rent": "Rent",
+      "sale": "Sale",
+      "stock": "Stock",
+      "search_stock": "Search stock",
+      "no_stock_found": "No stock found",
+      "select_stock": "Select stock",
+      "search_terrain_type": "Search terrain type",
+      "no_terrain_type_found": "No terrain type found",
+      "select_terrain_type": "Select terrain type",
+      "offert_type": "Offert Type",
+      "select_agent": "Select Agent",
+      "price": "Price",
+      "hot_offert": "Hot Offert",
+      "status": "Status",
+      "description": "Description",
+      "description_ro": "Description (Romanian)",
+      "description_ru": "Description (Russian)",
+      "description_en": "Description (English)",
+      "ro": "Romanian",
+      "ru": "Russian",
+      "en": "English",
+      "select_category": "Select Category",
+      "search_category": "Search Category",
+      "no_category_found": "No category found",
+      "select_subcategory": "Select Subcategory",
+      "search_subcategory": "Search Subcategory",
+      "no_subcategory_found": "No subcategory found",
+      "search_conditions": "Search Conditions",
+      "no_conditions_found": "No conditions found",
+      "select_conditions": "Select Conditions",
+      "search_features": "Search Features",
+      "no_features_found": "No features found",
+      "select_features": "Select Features",
+      "search_placings": "Search Placings",
+      "no_placings_found": "No placings found",
+      "select_placings": "Select Placings",
+      "search_destinations": "Search Destinations",
+      "no_destinations_found": "No destinations found",
+      "select_destinations": "Select Destinations",
+      "search_images": "Search Images",
+      "no_images_found": "No images found",
+      "select_images": "Select Images",
+      "area": "Area",
+      "bathrooms": "Bathrooms",
+      "balconies": "Balconies",
+      "garages": "Garages",
+      "parking": "Parking",
+      "pool": "Pool",
+      "garden": "Garden",
+      "terrace": "Terrace",
+      "balcony": "Balcony"
+    },
+    "users": {
+      "title": "Users",
+      "badge": "users",
+      "createUser": "Create User",
+      "createUserTitle": "Create User",
+      "createUserDescription": "Fill in the user details to create a new user account. After submission, the user will be added to the system.",
+      "updateUserTitle": "Update User",
+      "updateUserDescription": "Modify the user details. You can update personal information, contact details, and user permissions.",
+      "name": "Name",
+      "namePlaceholder": "Enter first name",
+      "surname": "Surname",
+      "surnamePlaceholder": "Enter last name",
+      "email": "Email",
+      "emailPlaceholder": "Enter email address",
+      "password": "Password",
+      "passwordPlaceholder": "Enter password",
+      "contact": "Phone",
+      "contactPlaceholder": "Enter phone number",
+      "role": "Role",
+      "posts": "Posts",
+      "thumbnail": "Profile Picture",
+      "socialContacts": "Social Contacts",
+      "viber": "Viber",
+      "viberPlaceholder": "Enter Viber number",
+      "whatsapp": "WhatsApp",
+      "whatsappPlaceholder": "Enter WhatsApp number",
+      "telegram": "Telegram",
+      "telegramPlaceholder": "Enter Telegram username",
+      "create": "Create User",
+      "update": "Update User",
+      "clickToUpload": "Click to upload profile picture"
+    }
+  }
+}
