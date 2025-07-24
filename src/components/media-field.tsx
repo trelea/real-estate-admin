@@ -32,8 +32,8 @@ export const MediaField: React.FC<MediaFieldProps> = ({
   control,
   name,
   label = "Media",
-  maxFiles = 10,
-  maxSizeMB = 5,
+  maxFiles = 100,
+  maxSizeMB = 100,
 }) => {
   const [previewFile, setPreviewFile] = React.useState<File | null>(null);
 

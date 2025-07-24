@@ -56,9 +56,9 @@ export const createApartmentFormSchema = z.object({
   media: z
     .array(z.custom<File>())
     .min(1, "Please select at least one file")
-    .max(20, "Please select up to 20 files")
-    .refine((files) => files.every((f) => f.size <= 5 * 1024 * 1024), {
-      message: "File size must be less than 5MB",
+    .max(100, "Please select up to 100 files")
+    .refine((files) => files.every((f) => f.size <= 100 * 1024 * 1024), {
+      message: "File size must be less than 100MB",
       path: ["files"],
     }),
 });
