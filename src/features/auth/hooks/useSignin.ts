@@ -22,6 +22,7 @@ export const useSignin = () => {
         toasts: [(err) => err.data.message, (err) => err.message],
       });
     }
+    console.log(response);
 
     /**
      * dev stage stuff

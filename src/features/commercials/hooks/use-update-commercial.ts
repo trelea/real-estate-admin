@@ -194,6 +194,9 @@ export const useUpdateCommercial = ({ commercial }: Props) => {
       )
         payload.features = val.features;
 
+      // user
+      if (isDifferent(val.user, commercial.user)) payload.user = val.user;
+
       /* -------------------- MEDIA CHANGES -------------------- */
       const originalMediaIds = commercial.media.map((m) => m.id);
 

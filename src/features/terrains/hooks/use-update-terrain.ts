@@ -144,6 +144,8 @@ export const useUpdateTerrain = ({ terrain }: Props) => {
         )
       )
         diff.features = val.features;
+      // user
+      if (isDifferent(val.user, terrain.user)) diff.user = val.user;
 
       /* media diff */
       const originalIds = terrain.media.map((m) => m.id);

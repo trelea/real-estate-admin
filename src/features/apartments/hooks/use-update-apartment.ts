@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import { updateApartmentFormSchema } from "../validation";
 import { z } from "zod";
 import { useEffect } from "react";
+import { data } from "react-router";
 
 interface Props {
   apartment: Apartment;
@@ -185,6 +186,9 @@ export const useUpdateApartment = ({ apartment }: Props) => {
       )
         payload.features = val.features;
 
+      // user
+      if (isDifferent(val.user, apartment.user)) payload.user = val.user;
+
       /* -------------------- MEDIA CHANGES -------------------- */
       const originalMediaIds = apartment.media.map((m) => m.id);
 
@@ -227,7 +231,6 @@ export const useUpdateApartment = ({ apartment }: Props) => {
       }
 
       /* -------------------- UPDATE DATA -------------------- */
-
       if (hasUpdatePayload) {
         // @ts-ignore
         await updateApartment({ id: apartment.id, data: payload }).unwrap();

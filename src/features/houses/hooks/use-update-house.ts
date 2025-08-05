@@ -156,6 +156,8 @@ export const useUpdateHouse = ({ house }: Props) => {
       )
     )
       payload.features = val.features;
+    // user
+    if (isDifferent(val.user, house.user)) payload.user = val.user;
 
     /* media diff */
     const origIds = house.media.map((m) => m.id);
