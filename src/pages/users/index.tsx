@@ -87,8 +87,11 @@ export const Users: React.FC<Props> = ({ status }) => {
             posts,
           }) => [
             <div className="flex items-center gap-3 lg:py-1 xl:py-1.5">
-              <Avatar className="size-10">
-                <AvatarImage src={thumbnail as string} />
+              <Avatar className="size-10 object-cover object-center">
+                <AvatarImage
+                  src={thumbnail as string}
+                  className="object-cover object-top"
+                />
                 <AvatarFallback>{surname.at(0)?.toUpperCase()}</AvatarFallback>
               </Avatar>
               <span className="font-medium text-sm">

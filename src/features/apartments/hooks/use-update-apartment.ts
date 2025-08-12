@@ -10,7 +10,6 @@ import { toast } from "sonner";
 import { updateApartmentFormSchema } from "../validation";
 import { z } from "zod";
 import { useEffect } from "react";
-import { data } from "react-router";
 
 interface Props {
   apartment: Apartment;
