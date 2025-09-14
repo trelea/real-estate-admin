@@ -10,6 +10,7 @@ import {
 } from "../api";
 import { toast } from "sonner";
 import { useEffect } from "react";
+import { axiosInstance } from "@/services";
 
 interface Props {
   commercial: Commercial;
@@ -67,19 +68,25 @@ export const useUpdateCommercial = ({ commercial }: Props) => {
       try {
         if (!commercial.media?.length) return;
 
-        const current = form.getValues("media") as
-          | (File | string)[]
-          | undefined;
+        const current = form.getValues("media") as File[] | undefined;
         if (current && current.length) return;
 
         const files: File[] = await Promise.all(
           commercial.media.map(async (m) => {
-            const resp = await fetch(m.url);
-            const blob = await resp.blob();
+            const response = await axiosInstance.get("/proxy-media", {
+              params: {
+                url: m.url,
+              },
+              responseType: "blob", // Add this!
+            });
+
+            // response.data is now the blob directly
+            const blob = response.data;
             const ext = blob.type.split("/").pop() ?? "jpg";
             const file = new File([blob], `existing-${m.id}.${ext}`, {
               type: blob.type,
             });
+
             (file as any).existingId = m.id;
             return file;
           })

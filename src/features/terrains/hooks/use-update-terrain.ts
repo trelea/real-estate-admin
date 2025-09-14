@@ -10,6 +10,7 @@ import {
 } from "../api";
 import { toast } from "sonner";
 import { useEffect } from "react";
+import { axiosInstance } from "@/services";
 
 interface Props {
   terrain: Terrain;
@@ -52,25 +53,41 @@ export const useUpdateTerrain = ({ terrain }: Props) => {
 
   /* preload existing media into file input */
   useEffect(() => {
-    const loadMedia = async () => {
-      if (!terrain.media?.length) return;
-      const current = form.getValues("media") as (File | string)[] | undefined;
-      if (current && current.length) return;
-      const files: File[] = await Promise.all(
-        terrain.media.map(async (m) => {
-          const resp = await fetch(m.url);
-          const blob = await resp.blob();
-          const ext = blob.type.split("/").pop() ?? "jpg";
-          const file = new File([blob], `existing-${m.id}.${ext}`, {
-            type: blob.type,
-          });
-          (file as any).existingId = m.id;
-          return file;
-        })
-      );
-      form.setValue("media", files, { shouldDirty: false });
+    const loadExistingMedia = async () => {
+      try {
+        if (!terrain.media?.length) return;
+
+        const current = form.getValues("media") as File[] | undefined;
+        if (current && current.length) return;
+
+        const files: File[] = await Promise.all(
+          terrain.media.map(async (m) => {
+            const response = await axiosInstance.get("/proxy-media", {
+              params: {
+                url: m.url,
+              },
+              responseType: "blob", // Add this!
+            });
+
+            // response.data is the blob directly
+            const blob = response.data;
+            const extension = blob.type.split("/").pop() ?? "jpg";
+            const file = new File([blob], `existing-${m.id}.${extension}`, {
+              type: blob.type,
+            });
+
+            (file as any).existingId = m.id;
+            return file;
+          })
+        );
+
+        form.setValue("media", files, { shouldDirty: false });
+      } catch (err) {
+        console.error("Failed to load existing media", err);
+      }
     };
-    loadMedia();
+
+    loadExistingMedia();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [terrain.id]);
 

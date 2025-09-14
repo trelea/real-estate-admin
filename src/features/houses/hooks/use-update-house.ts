@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import { createHouseSchema } from "../validation";
 import { z } from "zod";
 import { useEffect } from "react";
+import { axiosInstance } from "@/services";
 
 // derive an update schema where all fields optional
 const updateHouseFormSchema = createHouseSchema.partial();
@@ -63,27 +64,37 @@ export const useUpdateHouse = ({ house }: Props) => {
     const loadExistingMedia = async () => {
       try {
         if (!house.media?.length) return;
-        const current = form.getValues("media") as
-          | (File | string)[]
-          | undefined;
+
+        const current = form.getValues("media") as File[] | undefined;
         if (current && current.length) return;
+
         const files: File[] = await Promise.all(
           house.media.map(async (m) => {
-            const response = await fetch(m.url);
-            const blob = await response.blob();
+            const response = await axiosInstance.get("/proxy-media", {
+              params: {
+                url: m.url,
+              },
+              responseType: "blob", // Add this!
+            });
+
+            // response.data is the blob directly
+            const blob = response.data;
             const extension = blob.type.split("/").pop() ?? "jpg";
             const file = new File([blob], `existing-${m.id}.${extension}`, {
               type: blob.type,
             });
+
             (file as any).existingId = m.id;
             return file;
           })
         );
+
         form.setValue("media", files, { shouldDirty: false });
       } catch (err) {
         console.error("Failed to load existing media", err);
       }
     };
+
     loadExistingMedia();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [house.id]);

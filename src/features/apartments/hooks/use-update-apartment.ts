@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import { updateApartmentFormSchema } from "../validation";
 import { z } from "zod";
 import { useEffect } from "react";
+import { axiosInstance } from "@/services";
 
 interface Props {
   apartment: Apartment;
@@ -64,19 +65,26 @@ export const useUpdateApartment = ({ apartment }: Props) => {
         if (!apartment.media?.length) return;
 
         // avoid re-adding if already set
-        const current = form.getValues("media") as
-          | (File | string)[]
-          | undefined;
+        const current = form.getValues("media") as File[] | undefined;
         if (current && current.length) return;
 
         const files: File[] = await Promise.all(
           apartment.media.map(async (m) => {
-            const response = await fetch(m.url);
-            const blob = await response.blob();
+            // Tell axios to get binary data as blob
+            const response = await axiosInstance.get("/proxy-media", {
+              params: {
+                url: m.url,
+              },
+              responseType: "blob", // This is crucial!
+            });
+
+            // response.data is already the blob
+            const blob = response.data;
             const extension = blob.type.split("/").pop() ?? "jpg";
             const file = new File([blob], `existing-${m.id}.${extension}`, {
               type: blob.type,
             });
+
             // attach the original id so we can discriminate later
             (file as any).existingId = m.id;
             return file;
@@ -93,6 +101,23 @@ export const useUpdateApartment = ({ apartment }: Props) => {
     loadExistingMedia();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [apartment.id]);
+
+  // useEffect(() => {
+  //   if (!apartment.media?.length) return;
+
+  //   // Check if already set
+  //   const current = form.getValues("media");
+  //   if (current && current.length) return;
+
+  //   // Store existing media as objects with id and url - NO FETCHING!
+  //   const existingMedia = apartment.media.map((m) => ({
+  //     id: m.id,
+  //     url: m.url,
+  //     existingId: m.id, // Keep this for compatibility with your submit logic
+  //   }));
+
+  //   form.setValue("media", existingMedia as any, { shouldDirty: false });
+  // }, [apartment.media]);
 
   const onSubmit = async (values: FormValues) => {
     try {
@@ -185,9 +210,6 @@ export const useUpdateApartment = ({ apartment }: Props) => {
       )
         payload.features = val.features;
 
-      // user
-      if (isDifferent(val.user, apartment.user)) payload.user = val.user;
-
       /* -------------------- MEDIA CHANGES -------------------- */
       const originalMediaIds = apartment.media.map((m) => m.id);
 
@@ -230,6 +252,7 @@ export const useUpdateApartment = ({ apartment }: Props) => {
       }
 
       /* -------------------- UPDATE DATA -------------------- */
+
       if (hasUpdatePayload) {
         // @ts-ignore
         await updateApartment({ id: apartment.id, data: payload }).unwrap();
