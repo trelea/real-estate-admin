@@ -2,7 +2,7 @@ import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
 
 export const axiosInstance: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL || "http://localhost:3000/api/v1",
-  timeout: 10000,
+  timeout: 120000, // 2 minutes for media uploads and heavy operations
   headers: {
     "Content-Type": "application/json",
   },

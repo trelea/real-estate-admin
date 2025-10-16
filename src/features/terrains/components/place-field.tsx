@@ -26,7 +26,6 @@ import {
   fetchPlaceDetails,
   PlaceDeletailRes,
 } from "@/utils/fetch-place-details";
-import { useChangeLanguage } from "@/hooks/useChangeLanguage";
 import { useTranslation } from "react-i18next";
 
 interface Props {
@@ -39,11 +38,11 @@ interface Props {
     location,
     address,
   }: {
-    location: PlaceDeletailRes["location"];
+    location?: PlaceDeletailRes["location"];
     address: {
-      en: Pick<PlaceDeletailRes, "name" | "address">;
-      ro: Pick<PlaceDeletailRes, "name" | "address">;
-      ru: Pick<PlaceDeletailRes, "name" | "address">;
+      en?: Pick<PlaceDeletailRes, "name" | "address">;
+      ro?: Pick<PlaceDeletailRes, "name" | "address">;
+      ru?: Pick<PlaceDeletailRes, "name" | "address">;
     };
   }) => void;
   defaultCoordinates?: PlaceDeletailRes["location"];
@@ -58,12 +57,13 @@ export const PlaceField: React.FC<Props> = ({
   onSelectStreet,
   defaultCoordinates,
 }) => {
-  const { t } = useTranslation();
-  const { currentLang: language } = useChangeLanguage();
+  const { t, i18n } = useTranslation();
+  const currentLanguage = (i18n.language || "en") as "ro" | "ru" | "en";
   const [place, setPlace] = React.useState<undefined | PlaceDeletailRes>(
     undefined
   );
   const [search, setSearch] = React.useState<string | null>("");
+  const [isAutocompleteSelected, setIsAutocompleteSelected] = React.useState(false);
   const { suggestions, isLoading, reset } = useAutocompleteSuggestions(
     search as string
   );
@@ -77,10 +77,10 @@ export const PlaceField: React.FC<Props> = ({
         place.placePrediction?.placeId as string
       );
       setSearch("");
+      setIsAutocompleteSelected(true);
       // @ts-ignore
       setPlace(details);
-      // @ts-ignore
-      field.onChange(details.translations[language].address);
+      field.onChange(details.translations.en.address);
       onSelectStreet &&
         onSelectStreet({
           location: details.location,
@@ -88,7 +88,25 @@ export const PlaceField: React.FC<Props> = ({
         });
       reset();
     },
-    []
+    [onSelectStreet, reset]
+  );
+
+  // Handle manual entry when user types but doesn't select autocomplete
+  const handleManualEntry = React.useCallback(
+    (value: string) => {
+      if (!value || isAutocompleteSelected) return;
+
+      // Update only the current active language field
+      onSelectStreet?.({
+        location: undefined,
+        address: {
+          en: currentLanguage === "en" ? { address: value, name: "" } : undefined,
+          ro: currentLanguage === "ro" ? { address: value, name: "" } : undefined,
+          ru: currentLanguage === "ru" ? { address: value, name: "" } : undefined,
+        },
+      });
+    },
+    [currentLanguage, isAutocompleteSelected, onSelectStreet]
   );
 
   return (
@@ -106,10 +124,14 @@ export const PlaceField: React.FC<Props> = ({
             >
               <CommandInput
                 value={field.value || search}
-                placeholder={placeholder || t("createTerrain.search_place")}
+                placeholder={placeholder || t("createHouse.search_place")}
                 onValueChange={(value) => {
                   setSearch(value);
                   field.onChange(value);
+                  setIsAutocompleteSelected(false);
+                }}
+                onBlur={() => {
+                  handleManualEntry(field.value);
                 }}
               />
               {suggestions && suggestions.length !== 0 && !isLoading && (
@@ -121,8 +143,10 @@ export const PlaceField: React.FC<Props> = ({
                         value={place.placePrediction?.placeId}
                         onSelect={() => handleSelect(place, field)}
                       >
+                        {/* @ts-ignore */}
                         {place.placePrediction?.mainText?.text}
                         {", "}
+                        {/* @ts-ignore */}
                         {place.placePrediction?.secondaryText?.text}
                       </CommandItem>
                     ))}
@@ -157,11 +181,11 @@ export const PlaceField: React.FC<Props> = ({
             <div className="bg-white p-2 m-2 rounded shadow-md max-w-xs">
               <h3 className="font-medium text-sm">
                 {/* @ts-ignore */}
-                {place.translations[language].name}
+                {place.translations.en.name}
               </h3>
               <p className="text-xs text-gray-600">
                 {/* @ts-ignore */}
-                {place.translations[language].address}
+                {place.translations.en.address}
               </p>
               <p className="text-xs text-gray-400 mt-1">
                 {place.location.lat.toFixed(6)}, {place.location.lng.toFixed(6)}

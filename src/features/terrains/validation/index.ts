@@ -37,7 +37,7 @@ export const createTerrainSchema = z.object({
   media: z
     .array(z.custom<File>())
     .min(1, "Please select at least one file")
-    .max(100, "Please select up to 100 files")
+    .max(50, "Please select up to 50 files")
     .refine((files) => files.every((file) => file.size <= 100 * 1024 * 1024), {
       message: "File size must be less than 100MB",
       path: ["files"],
@@ -74,7 +74,7 @@ export const updateTerrainSchema = z.object({
   media: z
     .array(z.custom<File>())
     .min(1, "Please select at least one file")
-    .max(100, "Please select up to 100 files")
+    .max(50, "Please select up to 50 files")
     .refine((files) => files.every((file) => file.size <= 100 * 1024 * 1024), {
       message: "File size must be less than 100MB",
       path: ["files"],

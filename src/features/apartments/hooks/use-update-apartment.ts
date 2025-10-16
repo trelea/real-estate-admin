@@ -11,6 +11,7 @@ import { updateApartmentFormSchema } from "../validation";
 import { z } from "zod";
 import { useEffect } from "react";
 import { axiosInstance } from "@/services";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   apartment: Apartment;
@@ -19,9 +20,18 @@ interface Props {
 type FormValues = z.infer<typeof updateApartmentFormSchema>;
 
 export const useUpdateApartment = ({ apartment }: Props) => {
+  const { i18n } = useTranslation();
+  const currentLanguage = (i18n.language || "en") as "ro" | "ru" | "en";
   const [updateApartment] = useUpdateApartmentMutation();
   const [uploadApartmentMedia] = useUploadApartmentMediaMutation();
   const [removeApartmentMedia] = useRemoveApartmentMediaMutation();
+
+  // Get street value based on current admin language
+  const getStreetForCurrentLanguage = () => {
+    if (currentLanguage === "ro") return apartment.location.street_ro;
+    if (currentLanguage === "ru") return apartment.location.street_ru;
+    return apartment.location.street_en;
+  };
 
   const form = useForm<FormValues>({
     resolver: zodResolver(updateApartmentFormSchema),
@@ -51,8 +61,7 @@ export const useUpdateApartment = ({ apartment }: Props) => {
       housing_stock: apartment.housing_stock.id,
       housing_conditions: apartment.housing_conditions.map((c) => c.id),
       features: apartment.features.map((f) => f.id),
-      // hui snim
-      place: apartment.location.street_ro,
+      place: getStreetForCurrentLanguage(),
     },
   });
 
@@ -209,6 +218,9 @@ export const useUpdateApartment = ({ apartment }: Props) => {
         )
       )
         payload.features = val.features;
+
+      // user
+      if (isDifferent(val.user, apartment.user.id)) payload.user = val.user;
 
       /* -------------------- MEDIA CHANGES -------------------- */
       const originalMediaIds = apartment.media.map((m) => m.id);

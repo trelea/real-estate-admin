@@ -175,22 +175,18 @@ export const CreateTerrainOffertForm: React.FC<Props> = ({ user }) => {
                 mapId: "49ae42fed52588c3",
                 defaultZoom: 10,
               }}
-              onSelectStreet={({
-                location,
-                address,
-              }: {
-                location: { lat: number; lng: number };
-                address: {
-                  en: { address: string };
-                  ro: { address: string };
-                  ru: { address: string };
-                };
-              }) => {
-                form.setValue("lat", location.lat);
-                form.setValue("lng", location.lng);
-                form.setValue("street_en", address.en.address);
-                form.setValue("street_ro", address.ro.address);
-                form.setValue("street_ru", address.ru.address);
+              onSelectStreet={({ location, address }) => {
+                if (location) {
+                  form.setValue("lat", location.lat);
+                  form.setValue("lng", location.lng);
+                  form.setValue("street_en", address.en!.address);
+                  form.setValue("street_ro", address.ro!.address);
+                  form.setValue("street_ru", address.ru!.address);
+                } else {
+                  if (address.en) form.setValue("street_en", address.en.address);
+                  if (address.ro) form.setValue("street_ro", address.ro.address);
+                  if (address.ru) form.setValue("street_ru", address.ru.address);
+                }
               }}
               defaultCoordinates={{
                 lat: form.getValues("lat"),

@@ -11,6 +11,7 @@ import {
 import { toast } from "sonner";
 import { useEffect } from "react";
 import { axiosInstance } from "@/services";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   terrain: Terrain;
@@ -19,12 +20,21 @@ interface Props {
 type FormValues = z.infer<typeof updateTerrainSchema>;
 
 export const useUpdateTerrain = ({ terrain }: Props) => {
+  const { i18n } = useTranslation();
+  const currentLanguage = (i18n.language || "en") as "ro" | "ru" | "en";
   const [updateTerrain, { isLoading: isLoadingUpdate }] =
     useUpdateTerrainMutation();
   const [uploadTerrainMedia, { isLoading: isLoadingUpload }] =
     useUploadTerrainMediaMutation();
   const [removeTerrainMedia, { isLoading: isLoadingRemove }] =
     useRemoveTerrainMediaMutation();
+
+  // Get street value based on current admin language
+  const getStreetForCurrentLanguage = () => {
+    if (currentLanguage === "ro") return terrain.location.street_ro;
+    if (currentLanguage === "ru") return terrain.location.street_ru;
+    return terrain.location.street_en;
+  };
 
   const form = useForm<FormValues>({
     resolver: zodResolver(updateTerrainSchema),
@@ -47,7 +57,7 @@ export const useUpdateTerrain = ({ terrain }: Props) => {
       area: terrain.area,
       usability: terrain.usability.map((u) => u.id),
       features: terrain.features.map((f) => f.id),
-      place: terrain.location.street_ro,
+      place: getStreetForCurrentLanguage(),
     },
   });
 
@@ -162,7 +172,7 @@ export const useUpdateTerrain = ({ terrain }: Props) => {
       )
         diff.features = val.features;
       // user
-      if (isDifferent(val.user, terrain.user)) diff.user = val.user;
+      if (isDifferent(val.user, terrain.user.id)) diff.user = val.user;
 
       /* media diff */
       const originalIds = terrain.media.map((m) => m.id);

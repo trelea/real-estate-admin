@@ -38,11 +38,11 @@ interface Props {
     location,
     address,
   }: {
-    location: PlaceDeletailRes["location"];
+    location?: PlaceDeletailRes["location"];
     address: {
-      en: Pick<PlaceDeletailRes, "name" | "address">;
-      ro: Pick<PlaceDeletailRes, "name" | "address">;
-      ru: Pick<PlaceDeletailRes, "name" | "address">;
+      en?: Pick<PlaceDeletailRes, "name" | "address">;
+      ro?: Pick<PlaceDeletailRes, "name" | "address">;
+      ru?: Pick<PlaceDeletailRes, "name" | "address">;
     };
   }) => void;
   defaultCoordinates?: PlaceDeletailRes["location"];
@@ -57,11 +57,13 @@ export const PlaceField: React.FC<Props> = ({
   onSelectStreet,
   defaultCoordinates,
 }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const currentLanguage = (i18n.language || "en") as "ro" | "ru" | "en";
   const [place, setPlace] = React.useState<undefined | PlaceDeletailRes>(
     undefined
   );
   const [search, setSearch] = React.useState<string | null>("");
+  const [isAutocompleteSelected, setIsAutocompleteSelected] = React.useState(false);
   const { suggestions, isLoading, reset } = useAutocompleteSuggestions(
     search as string
   );
@@ -75,6 +77,7 @@ export const PlaceField: React.FC<Props> = ({
         place.placePrediction?.placeId as string
       );
       setSearch("");
+      setIsAutocompleteSelected(true);
       // @ts-ignore
       setPlace(details);
       field.onChange(details.translations.en.address);
@@ -85,7 +88,25 @@ export const PlaceField: React.FC<Props> = ({
         });
       reset();
     },
-    []
+    [onSelectStreet, reset]
+  );
+
+  // Handle manual entry when user types but doesn't select autocomplete
+  const handleManualEntry = React.useCallback(
+    (value: string) => {
+      if (!value || isAutocompleteSelected) return;
+
+      // Update only the current active language field
+      onSelectStreet?.({
+        location: undefined,
+        address: {
+          en: currentLanguage === "en" ? { address: value, name: "" } : undefined,
+          ro: currentLanguage === "ro" ? { address: value, name: "" } : undefined,
+          ru: currentLanguage === "ru" ? { address: value, name: "" } : undefined,
+        },
+      });
+    },
+    [currentLanguage, isAutocompleteSelected, onSelectStreet]
   );
 
   return (
@@ -107,6 +128,10 @@ export const PlaceField: React.FC<Props> = ({
                 onValueChange={(value) => {
                   setSearch(value);
                   field.onChange(value);
+                  setIsAutocompleteSelected(false);
+                }}
+                onBlur={() => {
+                  handleManualEntry(field.value);
                 }}
               />
               {suggestions && suggestions.length !== 0 && !isLoading && (

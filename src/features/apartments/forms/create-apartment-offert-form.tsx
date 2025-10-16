@@ -170,15 +170,18 @@ export const CreateApartmentOffertForm: React.FC<Props> = ({ user }) => {
                 mapId: "49ae42fed52588c3",
                 defaultZoom: 10,
               }}
-              onSelectStreet={({
-                location: { lat, lng },
-                address: { en, ro, ru },
-              }) => {
-                form.setValue("lat", lat);
-                form.setValue("lng", lng);
-                form.setValue("street_en", en.address);
-                form.setValue("street_ro", ro.address);
-                form.setValue("street_ru", ru.address);
+              onSelectStreet={({ location, address }) => {
+                if (location) {
+                  form.setValue("lat", location.lat);
+                  form.setValue("lng", location.lng);
+                  form.setValue("street_en", address.en!.address);
+                  form.setValue("street_ro", address.ro!.address);
+                  form.setValue("street_ru", address.ru!.address);
+                } else {
+                  if (address.en) form.setValue("street_en", address.en.address);
+                  if (address.ro) form.setValue("street_ro", address.ro.address);
+                  if (address.ru) form.setValue("street_ru", address.ru.address);
+                }
               }}
               defaultCoordinates={{
                 lat: form.getValues("lat"),

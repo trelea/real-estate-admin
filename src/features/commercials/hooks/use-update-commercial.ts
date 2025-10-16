@@ -11,6 +11,7 @@ import {
 import { toast } from "sonner";
 import { useEffect } from "react";
 import { axiosInstance } from "@/services";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   commercial: Commercial;
@@ -19,12 +20,21 @@ interface Props {
 type FormValues = z.infer<typeof updateCommercialSchema>;
 
 export const useUpdateCommercial = ({ commercial }: Props) => {
+  const { i18n } = useTranslation();
+  const currentLanguage = (i18n.language || "en") as "ro" | "ru" | "en";
   const [updateCommercial, { isLoading: isLoadingUpdateCommercial }] =
     useUpdateCommercialMutation();
   const [uploadCommercialMedia, { isLoading: isLoadingUpdateCommercialMedia }] =
     useUploadCommercialMediaMutation();
   const [removeCommercialMedia, { isLoading: isLoadingRemoveCommercialMedia }] =
     useRemoveCommercialMediaMutation();
+
+  // Get street value based on current admin language
+  const getStreetForCurrentLanguage = () => {
+    if (currentLanguage === "ro") return commercial.location.street_ro;
+    if (currentLanguage === "ru") return commercial.location.street_ru;
+    return commercial.location.street_en;
+  };
 
   const form = useForm<FormValues>({
     resolver: zodResolver(updateCommercialSchema),
@@ -56,7 +66,7 @@ export const useUpdateCommercial = ({ commercial }: Props) => {
       commercial_placings: commercial.commercial_placings.map((p) => p.id),
       housing_conditions: commercial.housing_conditions.map((c) => c.id),
       features: commercial.features.map((f) => f.id),
-      place: commercial.location.street_ro,
+      place: getStreetForCurrentLanguage(),
     },
   });
 
@@ -202,7 +212,7 @@ export const useUpdateCommercial = ({ commercial }: Props) => {
         payload.features = val.features;
 
       // user
-      if (isDifferent(val.user, commercial.user)) payload.user = val.user;
+      if (isDifferent(val.user, commercial.user.id)) payload.user = val.user;
 
       /* -------------------- MEDIA CHANGES -------------------- */
       const originalMediaIds = commercial.media.map((m) => m.id);
