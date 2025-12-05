@@ -64,14 +64,14 @@ export const UpdateUserForm: React.FC<Props> = ({ user }) => {
           displayErrorMessage
         />
 
-        {/* <FieldItem
+        <FieldItem
           name="password"
           type="password"
           control={form}
-          label="Password"
-          placeholder="*************"
+          label={t("users.password")}
+          placeholder={t("users.passwordPlaceholder")}
           displayErrorMessage
-        /> */}
+        />
 
         <FieldItem
           name="contact"

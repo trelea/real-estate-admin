@@ -41,7 +41,7 @@ export const useUpdateUser = ({ user }: Props) => {
       name: user.profile.name,
       surname: user.profile.surname,
       email: user.email,
-      // password: undefined,
+      password: "",
       contact: user.profile.contact || "",
       role: user.role,
       thumbnail: user.profile.thumbnail || undefined,
@@ -56,6 +56,7 @@ export const useUpdateUser = ({ user }: Props) => {
 
   const onSubmit = async ({
     thumbnail,
+    password,
     ..._user
   }: z.infer<typeof updateUserSchema>) => {
     const {
@@ -64,10 +65,13 @@ export const useUpdateUser = ({ user }: Props) => {
       profile: { contact, name, surname },
     } = user;
 
-    if (_user && !isEqual(_user, { email, role, contact, name, surname })) {
+    const userPayload = password ? { ..._user, password } : _user;
+    const hasChanges = password || !isEqual(_user, { email, role, contact, name, surname });
+
+    if (userPayload && hasChanges) {
       const response = await updateUser({
         id: user.id,
-        user: _user,
+        user: userPayload,
         params: { page, limit: DEFAULT_PAGINATION_LIMIT, search },
       });
       if (response.error) {

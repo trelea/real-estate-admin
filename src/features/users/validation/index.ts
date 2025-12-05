@@ -54,7 +54,7 @@ export const updateUserSchema = z.object({
   name: z.string().min(1).max(25).optional(),
   surname: z.string().min(1).max(25).optional(),
   email: z.string().email().optional(),
-  // password: z.string().min(8).max(25).optional(),
+  password: z.string().min(6).max(25).optional().or(z.literal("")),
   contact: z
     .string()
     .refine(isValidPhoneNumber, { message: "Invalid phone number" })

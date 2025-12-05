@@ -27,6 +27,7 @@ export type UpdateUserReqType = {
     name: string;
     surname: string;
     email: string;
+    password: string;
   }>;
   thumbnail?: FormData;
   params?: GetUsersReqType;
