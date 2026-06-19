@@ -47,8 +47,15 @@ import {
   Location,
   Landing,
 } from "@/pages";
+import { useStatusQuery } from "@/features/auth/api";
 import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
+
+const RootRedirect: React.FC = () => {
+  const { isSuccess, isLoading, isFetching } = useStatusQuery(null);
+  if (isLoading || isFetching) return null;
+  return <Navigate to={isSuccess ? "/dashboard/users" : "/signin"} replace />;
+};
 import withAuth from "./with-auth";
 import { UsersContextProvider } from "@/pages/users/context";
 import { BlogsContextProvider } from "@/pages/blogs/context";
@@ -301,6 +308,10 @@ export const Router: React.FC<Props> = ({}) => {
     },
   ];
   const baseRoutes = [
+    {
+      index: true,
+      Component: RootRedirect,
+    },
     {
       path: "signin",
       Component: SignIn,
