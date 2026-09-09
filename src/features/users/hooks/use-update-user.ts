@@ -25,11 +25,9 @@ export const useUpdateUser = ({ user }: Props) => {
 
   React.useEffect(() => {
     (async () => {
-      if (
-        user.profile.thumbnail !== null &&
-        user.profile.thumbnail !== undefined
-      ) {
-        const image = await ImageUrlToBlob(user.profile.thumbnail as string);
+      const thumb = user.profile.thumbnail;
+      if (thumb && thumb !== "undefined") {
+        const image = await ImageUrlToBlob(thumb);
         form.setValue("thumbnail", image as File[]);
       }
     })();
@@ -44,7 +42,10 @@ export const useUpdateUser = ({ user }: Props) => {
       password: "",
       contact: user.profile.contact || "",
       role: user.role,
-      thumbnail: user.profile.thumbnail || undefined,
+      thumbnail:
+        user.profile.thumbnail && user.profile.thumbnail !== "undefined"
+          ? user.profile.thumbnail
+          : undefined,
       /**
        * social contacts
        */

@@ -37,6 +37,14 @@ import {
   EditTerrain,
   TerrainFeatures,
   TerrainUsabilities,
+  /**
+   * Garages
+   */
+  IndexGarages,
+  ShowGarage,
+  CreateGarage,
+  EditGarage,
+  GarageFeatures,
   Services,
   HousingStocks,
   Conditions,
@@ -47,8 +55,15 @@ import {
   Location,
   Landing,
 } from "@/pages";
+import { useStatusQuery } from "@/features/auth/api";
 import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
+
+const RootRedirect: React.FC = () => {
+  const { isSuccess, isLoading, isFetching } = useStatusQuery(null);
+  if (isLoading || isFetching) return null;
+  return <Navigate to={isSuccess ? "/dashboard/users" : "/signin"} replace />;
+};
 import withAuth from "./with-auth";
 import { UsersContextProvider } from "@/pages/users/context";
 import { BlogsContextProvider } from "@/pages/blogs/context";
@@ -62,6 +77,7 @@ import { CommercialFeaturesContextProvider } from "@/pages/commercials/features/
 import { CommercialPlacingsContextProvider } from "@/pages/commercials/placings/context";
 import { TerrainFeaturesContextProvider } from "@/pages/terrains/features/context";
 import { TerrainUsabilitiesContextProvider } from "@/pages/terrains/usabilites/context";
+import { GarageFeaturesContextProvider } from "@/pages/garages/features/context";
 import { LocationsContextProvider } from "@/pages/locations/context";
 import { LandingContextProvider } from "@/pages/landing/context";
 
@@ -299,8 +315,43 @@ export const Router: React.FC<Props> = ({}) => {
         },
       ],
     },
+    /**
+     * Garages
+     */
+    {
+      path: "garages",
+      children: [
+        {
+          index: true,
+          Component: withAuth({ Component: IndexGarages }),
+        },
+        {
+          path: "features",
+          Component: withAuth({
+            Component: GarageFeatures,
+            Context: GarageFeaturesContextProvider,
+          }),
+        },
+        {
+          path: "create",
+          Component: withAuth({ Component: CreateGarage }),
+        },
+        {
+          path: ":id",
+          Component: withAuth({ Component: ShowGarage }),
+        },
+        {
+          path: ":id/edit",
+          Component: withAuth({ Component: EditGarage }),
+        },
+      ],
+    },
   ];
   const baseRoutes = [
+    {
+      index: true,
+      Component: RootRedirect,
+    },
     {
       path: "signin",
       Component: SignIn,
@@ -357,6 +408,13 @@ export const Router: React.FC<Props> = ({}) => {
  * /dashboard/terrains/{:id}
  * /dashboard/terrains/{:id}/edit
  * /dashboard/terrains/{stare,features,fond-locativ,...}
+ *
+ * GARAGE ROUTES:
+ * /dashboard/garages
+ * /dashboard/garages/create
+ * /dashboard/garages/{:id}
+ * /dashboard/garages/{:id}/edit
+ * /dashboard/garages/features
  *
  * COMMERCIALS
  * /dashboard/commercials

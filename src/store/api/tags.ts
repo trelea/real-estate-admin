@@ -17,6 +17,7 @@ export default [
   "commercials-placings",
   "terrains-usabilities",
   "terrains-features",
+  "garages-features",
   /**
    * costumizable stuff
    */
@@ -35,4 +36,5 @@ export default [
   "houses",
   "terrains",
   "commercials",
+  "garages",
 ] satisfies string[];

@@ -17,6 +17,7 @@ import {
   Trees,
   UnfoldVertical,
   Users,
+  Warehouse,
 } from "lucide-react";
 import { Badge } from "../ui/badge";
 import { useChangeLanguage } from "@/hooks/useChangeLanguage";
@@ -204,6 +205,38 @@ export const AppSidebarContent: React.FC<Props> = ({
                 title: t("sidebar.features"),
                 url: withLangPrefix(
                   { pathname: "/dashboard/terrains/features" },
+                  langPrefix
+                ),
+              },
+            ],
+          },
+          {
+            title: t("sidebar.garages"),
+            icon: Warehouse,
+            collapsible: [
+              {
+                title: (
+                  <Badge>
+                    <Plus />
+                    {t("sidebar.createNew")}
+                  </Badge>
+                ),
+                url: withLangPrefix(
+                  { pathname: "/dashboard/garages/create" },
+                  langPrefix
+                ),
+              },
+              {
+                title: t("sidebar.posts"),
+                url: withLangPrefix(
+                  { pathname: "/dashboard/garages" },
+                  langPrefix
+                ),
+              },
+              {
+                title: t("sidebar.features"),
+                url: withLangPrefix(
+                  { pathname: "/dashboard/garages/features" },
                   langPrefix
                 ),
               },
