@@ -27,6 +27,11 @@ export * from "./commercials";
 export * from "./terrains";
 
 /**
+ * Garages
+ */
+export * from "./garages";
+
+/**
  * costumizable stuff
  */
 export * from "./privacy-policy";
